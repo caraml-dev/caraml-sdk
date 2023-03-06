@@ -21,4 +21,4 @@ build: version
 
 .PHONY: test
 test:
-	@python -m pytest tests/
+	@python -m pytest --cov=caraml_auth tests/

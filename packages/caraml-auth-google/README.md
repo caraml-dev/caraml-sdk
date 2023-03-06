@@ -17,3 +17,10 @@ To specify this in a `requirements.txt` file:
 # Other dependencies...
 caraml-auth-google @ git+https://github.com/caraml-dev/caraml-sdk.git@main#egg=caraml-auth-google&subdirectory=packages/caraml-auth-google
 ```
+
+## Unit Tests
+
+To run the unit tests, run the following command:
+```shell
+make test
+```
