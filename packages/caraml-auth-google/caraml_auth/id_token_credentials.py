@@ -17,7 +17,7 @@
 
 # This utils package is drawn from Airflow's Google utils to connect to Google related client libraries. Refer
 # to the following link for the original file:
-# https://github.com/apache/airflow/blob/9ab1a6a3e70b32a3cddddf0adede5d2f3f7e29ea/airflow/providers/google/common/utils/id_token_credentials.py#L43
+# https://github.com/apache/airflow/blob/47ab0ca6295f301d393dbb29e134fa90be0ad7df/airflow/providers/google/common/utils/id_token_credentials.py#L43
 
 from __future__ import annotations
 
