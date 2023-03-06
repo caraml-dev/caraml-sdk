@@ -14,7 +14,6 @@ pip install git+https://github.com/caraml-dev/caraml-sdk.git@main#egg=caraml-aut
 
 To specify this in a `requirements.txt` file:
 ```txt
-# Other dependencies...
 caraml-auth-google @ git+https://github.com/caraml-dev/caraml-sdk.git@main#egg=caraml-auth-google&subdirectory=packages/caraml-auth-google
 ```
 
