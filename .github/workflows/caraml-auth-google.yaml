@@ -69,7 +69,7 @@ jobs:
       - id: release-rules
         uses: ./.github/actions/release-rules
         with:
-          prefix: pyfunc-ensembler-service/
+          prefix: packages/caraml-auth-google/
 
   publish:
     # Automatically publish release and pre-release artifacts.
