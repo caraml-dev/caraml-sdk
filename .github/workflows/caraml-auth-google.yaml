@@ -5,12 +5,12 @@ on:
   # (except changes to non-relevant paths)
   push:
     tags:
-      - 'v[0-9]+.[0-9]+.[0-9]+*'
+      - "packages/caraml-auth-google/v[0-9]+.[0-9]+.[0-9]+*"
     branches:
       - main
     paths:
       - "packages/caraml-auth-google/**"
-      - ".github/workflows/caraml-sdk.yaml"
+      - ".github/workflows/caraml-auth-google.yaml"
 
   # Automatically run CI on branches, that have active PR opened
   pull_request:
@@ -18,13 +18,7 @@ on:
       - main
     paths:
       - "packages/caraml-auth-google/**"
-      - ".github/workflows/caraml-sdk.yaml"
-
-  # To make it possible to trigger e2e CI workflow for any arbitrary git ref
-  workflow_dispatch:
-
-env:
-  ARTIFACT_RETENTION_DAYS: 7
+      - ".github/workflows/caraml-auth-google.yaml"
 
 jobs:
   test:
@@ -33,32 +27,31 @@ jobs:
       matrix:
         python-version: [ "3.7", "3.8", "3.9", "3.10" ]
 
+    defaults:
+      run:
+        working-directory: ./packages/caraml-auth-google
     steps:
-      - uses: actions/checkout@v2
+      - name: Check out code
+        uses: actions/checkout@v2
 
       - name: Setup Python ${{ matrix.python-version }}
         uses: actions/setup-python@v2
         with:
           python-version: ${{ matrix.python-version }}
-
-      - name: Setup Conda
-        uses: conda-incubator/setup-miniconda@v2
-        with:
-          auto-update-conda: true
-
-      - name: Cache Conda environment
+          
+      - name: Cache pip dependencies
         uses: actions/cache@v2
         with:
-          path: packages/caraml-auth-google/env
+          path: ~/.cache/pip
           key: |
-            conda-${{ hashFiles('packages/caraml-auth-google/env-${{ matrix.python-version }}.yaml') }}-${{ hashFiles('packages/caraml-auth-google/requirements.txt') }}-${{ hashFiles('packages/caraml-auth-google/requirements.dev.txt') }}
-          restore-keys: conda-
+            pip-${{ hashFiles('packages/caraml-auth-google/requirements.txt') }}-${{ hashFiles('packages/caraml-auth-google/requirements.dev.txt') }}-${{ matrix.python-version }}
+          restore-keys: pip-
 
-      - name: Run Tests
-        working-directory: packages/caraml-auth-google
-        run: |
-          make setup
-          make test
+      - name: Install dependencies
+        run: make setup
+
+      - name: Run unit tests
+        run: make test
 
   release-rules:
     runs-on: ubuntu-latest
