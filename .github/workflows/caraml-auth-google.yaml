@@ -1,0 +1,112 @@
+name: packages/caraml-auth-google
+
+on:
+  # Automatically run CI on Release and Pre-Release tags and main branch
+  # (except changes to non-relevant paths)
+  push:
+    tags:
+      - "packages/caraml-auth-google/v[0-9]+.[0-9]+.[0-9]+*"
+    branches:
+      - main
+    paths:
+      - "packages/caraml-auth-google/**"
+      - ".github/workflows/caraml-auth-google.yaml"
+
+  # Automatically run CI on branches, that have active PR opened
+  pull_request:
+    branches:
+      - main
+    paths:
+      - "packages/caraml-auth-google/**"
+      - ".github/workflows/caraml-auth-google.yaml"
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [ "3.7", "3.8", "3.9", "3.10" ]
+
+    defaults:
+      run:
+        working-directory: ./packages/caraml-auth-google
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+          
+      - name: Cache pip dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: |
+            pip-${{ hashFiles('packages/caraml-auth-google/requirements.txt') }}-${{ hashFiles('packages/caraml-auth-google/requirements.dev.txt') }}-${{ matrix.python-version }}
+          restore-keys: pip-
+
+      - name: Install dependencies
+        run: make setup
+
+      - name: Run unit tests
+        run: make test
+
+  release-rules:
+    runs-on: ubuntu-latest
+    outputs:
+      release-type: ${{ steps.release-rules.outputs.release-type }}
+    steps:
+      - uses: actions/checkout@v2
+      - id: release-rules
+        uses: ./.github/actions/release-rules
+        with:
+          prefix: packages/caraml-auth-google/
+
+  publish:
+    # Automatically publish release and pre-release artifacts.
+    #
+    # Dev builds can be released from the 'main' branch by
+    # approving 'deployment' into the 'manual' environment
+    if: >-
+      contains('release,pre-release', needs.release-rules.outputs.release-type)
+        || ( github.event_name != 'pull_request' )
+        || ( github.event.pull_request.head.repo.full_name == github.repository )
+    runs-on: ubuntu-latest
+    needs:
+      - release-rules
+      - test
+    environment: ${{ needs.release-rules.outputs.release-type == 'dev' && 'manual' || '' }}
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+        with:
+          # fetch full history for a proper version number assignment
+          fetch-depth: 0
+
+      - name: Setup Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: 3.7
+
+      - name: Cache pip dependencies
+        uses: actions/cache@v2
+        with:
+          path: ~/.cache/pip
+          key: |
+            pip-${{ hashFiles('packages/caraml-auth-google/requirements.txt') }}-${{ hashFiles('packages/caraml-auth-google/requirements.dev.txt') }}
+          restore-keys: pip-
+
+      - name: Build
+        working-directory: ./packages/caraml-auth-google
+        run: |
+          make setup
+          make build
+
+      - name: Publish
+        uses: pypa/gh-action-pypi-publish@release/v1
+        with:
+          user: __token__
+          password: ${{ secrets.PYPI_API_TOKEN }}
+          packages_dir: packages/caraml-auth-google/dist
