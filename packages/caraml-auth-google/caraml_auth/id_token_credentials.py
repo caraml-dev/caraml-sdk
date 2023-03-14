@@ -96,7 +96,7 @@ def _load_credentials_from_file(
 
     if credential_type == _AUTHORIZED_USER_TYPE:
         current_credentials = oauth2_credentials.Credentials.from_authorized_user_info(
-            info, scopes=["openid", "email"]
+            info, scopes=["openid", "https://www.googleapis.com/auth/userinfo.email"]
         )
         current_credentials = IDTokenCredentialsAdapter(credentials=current_credentials)
 
