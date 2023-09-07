@@ -1,1 +1,1 @@
-google-auth>=2.17.3
+google-auth>=2.18.0
