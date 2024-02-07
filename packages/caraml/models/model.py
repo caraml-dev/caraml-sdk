@@ -39,31 +39,31 @@ from client import (
 )
 from docker import APIClient
 from docker.models.containers import Container
-from merlin import pyfunc
-from merlin.autoscaling import (
+from caraml.models import pyfunc
+from caraml.models.autoscaling import (
     RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
     SERVERLESS_DEFAULT_AUTOSCALING_POLICY,
     AutoscalingPolicy,
 )
-from merlin.batch.config import PredictionJobConfig
-from merlin.batch.job import PredictionJob
-from merlin.batch.sink import BigQuerySink
-from merlin.batch.source import BigQuerySource
-from merlin.deployment_mode import DeploymentMode
-from merlin.docker.docker import copy_standard_dockerfile, wait_build_complete
-from merlin.endpoint import ModelEndpoint, Status, VersionEndpoint
-from merlin.logger import Logger
-from merlin.protocol import Protocol
-from merlin.pyfunc import run_pyfunc_local_server
-from merlin.resource_request import ResourceRequest
-from merlin.transformer import Transformer
-from merlin.util import (
+from caraml.models.batch.config import PredictionJobConfig
+from caraml.models.batch.job import PredictionJob
+from caraml.models.batch.sink import BigQuerySink
+from caraml.models.batch.source import BigQuerySource
+from caraml.models.deployment_mode import DeploymentMode
+from caraml.models.docker.docker import copy_standard_dockerfile, wait_build_complete
+from caraml.models.endpoint import ModelEndpoint, Status, VersionEndpoint
+from caraml.models.logger import Logger
+from caraml.models.protocol import Protocol
+from caraml.models.pyfunc import run_pyfunc_local_server
+from caraml.models.resource_request import ResourceRequest
+from caraml.models.transformer import Transformer
+from caraml.models.util import (
     autostr,
     download_files_from_gcs,
     guess_mlp_ui_url,
     valid_name_check,
 )
-from merlin.validation import validate_model_dir
+from caraml.models.validation import validate_model_dir
 from mlflow.entities import Run, RunData
 from mlflow.exceptions import MlflowException
 from mlflow.pyfunc import PythonModel

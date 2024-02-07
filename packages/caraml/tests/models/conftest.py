@@ -23,7 +23,7 @@ from urllib3_mock import Responses
 
 import client as cl
 from client import ApiClient, Configuration
-from merlin.model import Model, ModelType, ModelVersion, Project
+from caraml.models.model import Model, ModelType, ModelVersion, Project
 
 
 # From the documentation (https://docs.pytest.org/en/7.1.x/reference/reference.html#pytest.hookspec.pytest_configure):

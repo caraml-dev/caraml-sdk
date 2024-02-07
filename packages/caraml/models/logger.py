@@ -14,7 +14,7 @@
 
 from enum import Enum
 import client
-from merlin.util import autostr
+from caraml.models.util import autostr
 from typing import Optional
 
 class LoggerMode(Enum):

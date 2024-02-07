@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from merlin.util import guess_mlp_ui_url, valid_name_check, get_bucket_name, get_gcs_path
+from caraml.models.util import guess_mlp_ui_url, valid_name_check, get_bucket_name, get_gcs_path
 import pytest
 
 

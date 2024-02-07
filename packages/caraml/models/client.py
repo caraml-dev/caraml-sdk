@@ -32,17 +32,17 @@ from generated.merlin_client import (
 )
 from google.auth.transport.requests import Request
 from google.auth.transport.urllib3 import AuthorizedHttp
-from merlin.autoscaling import AutoscalingPolicy
-from merlin.deployment_mode import DeploymentMode
-from merlin.endpoint import VersionEndpoint
-from merlin.environment import Environment
-from merlin.logger import Logger
-from merlin.model import Model, ModelType, ModelVersion, Project
-from merlin.protocol import Protocol
-from merlin.resource_request import ResourceRequest
-from merlin.transformer import Transformer
-from merlin.util import valid_name_check
-from merlin.version import VERSION
+from caraml.models.autoscaling import AutoscalingPolicy
+from caraml.models.deployment_mode import DeploymentMode
+from caraml.models.endpoint import VersionEndpoint
+from caraml.models.environment import Environment
+from caraml.models.logger import Logger
+from caraml.models.model import Model, ModelType, ModelVersion, Project
+from caraml.models.protocol import Protocol
+from caraml.models.resource_request import ResourceRequest
+from caraml.models.transformer import Transformer
+from caraml.models.util import valid_name_check
+from caraml.models.version import VERSION
 
 
 class MerlinClient:

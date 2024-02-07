@@ -16,11 +16,11 @@ import os
 import traceback
 from models.utils import undeploy_all_version
 
-import merlin
+import caraml.models as merlin
 import pytest
 from click.testing import CliRunner
-from merlin.merlin import cli
-from merlin.model import ModelType
+from caraml.models.merlin import cli
+from caraml.models.model import ModelType
 
 
 @pytest.fixture()

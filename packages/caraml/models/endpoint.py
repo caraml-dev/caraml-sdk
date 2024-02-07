@@ -16,16 +16,16 @@ from enum import Enum
 from typing import Dict
 
 import client
-from merlin.autoscaling import (RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
+from caraml.models.autoscaling import (RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
                                 SERVERLESS_DEFAULT_AUTOSCALING_POLICY,
                                 AutoscalingPolicy, MetricsType)
-from merlin.deployment_mode import DeploymentMode
-from merlin.environment import Environment
-from merlin.logger import Logger
-from merlin.protocol import Protocol
-from merlin.util import autostr, get_url
-from merlin.resource_request import ResourceRequest
-from merlin.transformer import Transformer
+from caraml.models.deployment_mode import DeploymentMode
+from caraml.models.environment import Environment
+from caraml.models.logger import Logger
+from caraml.models.protocol import Protocol
+from caraml.models.util import autostr, get_url
+from caraml.models.resource_request import ResourceRequest
+from caraml.models.transformer import Transformer
 
 
 class Status(Enum):

@@ -14,7 +14,7 @@
 
 from abc import ABC, abstractmethod
 from typing import Iterable, MutableMapping, Mapping, Any, Optional
-from merlin.batch.big_query_util import valid_table_id, valid_columns
+from caraml.models.batch.big_query_util import valid_table_id, valid_columns
 
 
 class Source(ABC):

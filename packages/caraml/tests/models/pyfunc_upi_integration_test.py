@@ -5,17 +5,17 @@ from time import sleep
 from typing import List
 
 import grpc
-import merlin
+import caraml.models as merlin
 import pandas as pd
 import pytest
 import xgboost as xgb
 from caraml.upi.utils import df_to_table, table_to_df
 from caraml.upi.v1 import type_pb2, upi_pb2, upi_pb2_grpc, variable_pb2
-from merlin.deployment_mode import DeploymentMode
-from merlin.endpoint import Status
-from merlin.model import ModelType, PyFuncModel
-from merlin.protocol import Protocol
-from merlin.transformer import StandardTransformer
+from caraml.models.deployment_mode import DeploymentMode
+from caraml.models.endpoint import Status
+from caraml.models.model import ModelType, PyFuncModel
+from caraml.models.protocol import Protocol
+from caraml.models.transformer import StandardTransformer
 from sklearn.datasets import load_iris
 
 

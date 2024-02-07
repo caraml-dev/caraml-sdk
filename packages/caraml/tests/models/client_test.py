@@ -21,11 +21,11 @@ import pytest
 
 import client as cl
 from client import ApiClient, Configuration
-from merlin.client import MerlinClient
-from merlin.endpoint import Status
-from merlin.model import Model, ModelType, Project
-from merlin.util import guess_mlp_ui_url
-from merlin.version import VERSION
+from caraml.models.client import MerlinClient
+from caraml.models.endpoint import Status
+from caraml.models.model import Model, ModelType, Project
+from caraml.models.util import guess_mlp_ui_url
+from caraml.models.version import VERSION
 
 # get global mock responses that configured in conftest
 responses = pytest.responses

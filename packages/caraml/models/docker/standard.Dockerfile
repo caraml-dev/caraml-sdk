@@ -12,17 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import os
-from caraml.models.docker.docker import copy_pyfunc_dockerfile, copy_standard_dockerfile
+ARG BASE_IMAGE
+ARG MODEL_PATH
 
+FROM ${BASE_IMAGE}
 
-def test_copy_pyfunc_dockerfile():
-    path = copy_pyfunc_dockerfile(".")
-    assert os.path.isfile(path) == True
-    assert os.path.basename(path) == "pyfunc.Dockerfile"
-
-
-def test_copy_standard_dockerfile():
-    path = copy_standard_dockerfile(".")
-    assert os.path.isfile(path) == True
-    assert os.path.basename(path) == "standard.Dockerfile"
+COPY ${MODEL_PATH} /mnt/models

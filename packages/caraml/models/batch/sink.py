@@ -16,7 +16,7 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from typing import MutableMapping, Mapping, Any, Optional
 
-from merlin.batch.big_query_util import valid_table_id, valid_column
+from caraml.models.batch.big_query_util import valid_table_id, valid_column
 
 
 class Sink(ABC):

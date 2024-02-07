@@ -11,10 +11,10 @@ import pandas
 from caraml.upi.v1 import upi_pb2
 from docker import APIClient
 from git import Repo
-from merlin.docker.docker import copy_pyfunc_dockerfile, wait_build_complete
-from merlin.protocol import Protocol
-from merlin.version import VERSION
-from mlflow.pyfunc import PythonModel
+from caraml.models.docker.docker import copy_pyfunc_dockerfile, wait_build_complete
+from caraml.models.protocol import Protocol
+from caraml.models.version import VERSION
+from caraml.models.pyfunc import PythonModel
 
 import mlflow
 

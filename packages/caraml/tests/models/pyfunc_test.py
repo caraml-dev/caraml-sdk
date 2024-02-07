@@ -5,11 +5,11 @@ import numpy as np
 import pandas as pd
 
 from caraml.upi.v1 import upi_pb2, table_pb2, type_pb2
-from mlflow.pyfunc import PythonModelContext
+from caraml.models.pyfunc import PythonModelContext
 
-from merlin.model import PyFuncModel, PyFuncV3Model, PYFUNC_MODEL_INPUT_KEY, PYFUNC_EXTRA_ARGS_KEY
-from merlin.protocol import Protocol
-from merlin.pyfunc import PYFUNC_PROTOCOL_KEY, PYFUNC_GRPC_CONTEXT, ModelInput, ModelOutput, PyFuncOutput, Values
+from caraml.models.model import PyFuncModel, PyFuncV3Model, PYFUNC_MODEL_INPUT_KEY, PYFUNC_EXTRA_ARGS_KEY
+from caraml.models.protocol import Protocol
+from caraml.models.pyfunc import PYFUNC_PROTOCOL_KEY, PYFUNC_GRPC_CONTEXT, ModelInput, ModelOutput, PyFuncOutput, Values
 
 request = {
     "instances": [[1, 2, 3, 4]]

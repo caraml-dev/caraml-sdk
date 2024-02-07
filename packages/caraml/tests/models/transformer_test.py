@@ -14,8 +14,8 @@
 
 import pytest
 import os
-from merlin.transformer import StandardTransformer, TransformerType
-from merlin.resource_request import ResourceRequest
+from caraml.models.transformer import StandardTransformer, TransformerType
+from caraml.models.resource_request import ResourceRequest
 
 
 @pytest.mark.unit

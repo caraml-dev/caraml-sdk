@@ -1,4 +1,4 @@
-from merlin.model import PyFuncModel
+from caraml.models.model import PyFuncModel
 
 
 class EchoModel(PyFuncModel):

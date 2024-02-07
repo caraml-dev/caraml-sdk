@@ -15,7 +15,7 @@
 import client
 from enum import Enum
 
-from merlin.util import autostr
+from caraml.models.util import autostr
 
 
 class JobStatus(Enum):

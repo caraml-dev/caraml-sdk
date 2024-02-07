@@ -23,13 +23,13 @@ import pytest
 from sklearn import svm
 from sklearn.datasets import load_iris
 
-import merlin
-from merlin.batch.config import PredictionJobConfig
-from merlin.batch.job import JobStatus
-from merlin.batch.sink import BigQuerySink, SaveMode
-from merlin.batch.source import BigQuerySource
-from merlin.model import ModelType, PyFuncV2Model
-from merlin.resource_request import ResourceRequest
+import caraml.models as merlin
+from caraml.models.batch.config import PredictionJobConfig
+from caraml.models.batch.job import JobStatus
+from caraml.models.batch.sink import BigQuerySink, SaveMode
+from caraml.models.batch.source import BigQuerySource
+from caraml.models.model import ModelType, PyFuncV2Model
+from caraml.models.resource_request import ResourceRequest
 
 MODEL_PATH_ARTIFACT_KEY = "model_path"
 MODEL_DIR = "test/batch/model"

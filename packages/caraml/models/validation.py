@@ -25,7 +25,7 @@ def validate_model_dir(model_type, model_dir):
     :param model_type: type of given model
     :param model_dir: directory containing serialised model file
     """
-    from merlin.model import ModelType
+    from caraml.models.model import ModelType
 
     if not isdir(model_dir):
         raise ValueError(f"{model_dir} is not a directory")

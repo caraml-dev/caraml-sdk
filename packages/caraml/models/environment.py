@@ -14,7 +14,7 @@
 
 import client
 
-from merlin.resource_request import ResourceRequest
+from caraml.models.resource_request import ResourceRequest
 
 
 class Environment:

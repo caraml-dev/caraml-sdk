@@ -18,8 +18,8 @@ import mlflow
 import pytest
 
 import client as cl
-import merlin
-from merlin.model import ModelVersion
+import caraml.models as merlin
+from caraml.models.model import ModelVersion
 
 # get global mock responses that configured in conftest
 responses = pytest.responses

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from merlin.validation import validate_model_dir
-from merlin.model import ModelType
+from caraml.models.validation import validate_model_dir
+from caraml.models.model import ModelType
 import pytest
 import re
 

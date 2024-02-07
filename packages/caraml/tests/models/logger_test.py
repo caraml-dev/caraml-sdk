@@ -14,7 +14,7 @@
 
 import pytest
 import client
-from merlin.logger import Logger,LoggerMode,LoggerConfig,PredictionLoggerConfig
+from caraml.models.logger import Logger,LoggerMode,LoggerConfig,PredictionLoggerConfig
 
 
 @pytest.mark.unit
