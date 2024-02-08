@@ -17,7 +17,7 @@ import json
 import mlflow
 import pytest
 
-import caraml.generated.merlin_client as cl
+import caraml.generated.model as cl
 import caraml.models as merlin
 from caraml.models.model import ModelVersion
 

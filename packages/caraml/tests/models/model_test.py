@@ -16,8 +16,8 @@ import json
 import types
 from unittest.mock import patch
 
-import caraml.generated.merlin_client as client
-import caraml.generated.merlin_client as cl
+import caraml.generated.model as client
+import caraml.generated.model as cl
 import caraml.models as merlin
 import pytest
 from caraml.models import AutoscalingPolicy, DeploymentMode, MetricsType

@@ -19,8 +19,8 @@ from unittest import mock
 
 import pytest
 
-import caraml.generated.merlin_client as cl
-from caraml.generated.merlin_client import ApiClient, Configuration
+import caraml.generated.model as cl
+from caraml.generated.model import ApiClient, Configuration
 from caraml.models.client import MerlinClient
 from caraml.models.endpoint import Status
 from caraml.models.model import Model, ModelType, Project

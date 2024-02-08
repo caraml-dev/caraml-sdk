@@ -13,7 +13,7 @@
 # limitations under the License.
 
 from enum import Enum
-import caraml.generated.merlin_client as client
+import caraml.generated.model as client
 from caraml.models.util import autostr
 from typing import Optional
 

@@ -1,0 +1,64 @@
+# This workflow tries to pull generated clients' changes from given repo
+
+name: Remote Generated Client Sync
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      module:
+        required: true
+        description: 'module name'
+      git_https:
+        required: true
+        description: 'value for https to git repo'      
+      sdk_client_dir:
+        required: true
+        description: 'folder to copy over'
+        default: 'python/sdk/client'
+      ref_name:
+        required: true
+        description: 'the branch or tag to copy from'
+      ref_type:
+        required: true
+        description: 'the type of ref. Valid values are branch or tag'
+  repository_dispatch:
+
+jobs:
+  sync-sdk-client:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout caraml-dev/caraml-sdk repo
+        uses: actions/checkout@v3
+        with:
+          ref: main
+
+      - name: Sync changes from ${{ github.event.inputs.module }} repos
+        run: |
+          if [ -d "packages/caraml/generated/${{ github.event.inputs.module }}" ] 
+          then
+            git rm -rf packages/caraml/generated/${{ github.event.inputs.module }}
+          fi
+          if [ ${{ github.event.inputs.ref_type }} = 'branch' ]; then
+            git remote add -f -t ${{ github.event.inputs.ref_name }} --no-tags ${{ github.event.inputs.module }} ${{ github.event.inputs.git_https }}
+            git read-tree --prefix=packages/caraml/generated/${{ github.event.inputs.module }} -u ${{ github.event.inputs.module }}/${{ github.event.inputs.ref_name }}:${{ github.event.inputs.sdk_client_dir }}
+          elif [ ${{ github.event.inputs.ref_type }} = 'tag' ]; then
+            git remote add -f -t main --tags ${{ github.event.inputs.module }} ${{ github.event.inputs.git_https }}         
+            git read-tree --packages/caraml/generated=module/${{ github.event.inputs.module }} -u tags/${{ github.event.inputs.ref_name }}:${{ github.event.inputs.sdk_client_dir }}
+          fi
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "feat: sync generated client sdk"
+          title: "chore: sync ${{ github.event.inputs.module }} client sdk from Ref: ${{ github.event.inputs.ref_name }}"
+          body: |
+            Automatic sync of generated sdk clients from caraml app repositories.
+            
+            module: ${{ github.event.inputs.module }}
+            repo: ${{ github.event.inputs.git_https }}
+            ref: ${{ github.event.inputs.ref_name }}
+            ref_type: ${{ github.event.inputs.ref_type }}
+          branch: copy-caraml-generated-client-sdk
+          base: main

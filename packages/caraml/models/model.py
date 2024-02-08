@@ -24,12 +24,12 @@ from sys import version_info
 from time import sleep
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-import caraml.generated.merlin_client as client
+import caraml.generated.model as client
 import docker
 import mlflow
 import pyprind
 import yaml
-from caraml.generated.merlin_client import (
+from caraml.generated.model import (
     EndpointApi,
     EnvironmentApi,
     ModelEndpointsApi,
