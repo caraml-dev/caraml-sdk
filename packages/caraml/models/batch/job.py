@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import client
+import caraml.generated.merlin_client as client
 from enum import Enum
 
 from caraml.models.util import autostr

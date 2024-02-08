@@ -18,7 +18,7 @@ from typing import Any, Dict, List, Optional
 
 import urllib3
 from caraml_auth.id_token_credentials import get_default_id_token_credentials
-from generated.merlin_client import (
+from caraml.generated.merlin_client import (
     ApiClient,
     Configuration,
     EndpointApi,

@@ -16,7 +16,8 @@
 from contextlib import contextmanager
 from typing import Any, Dict, List, Optional
 
-from client import PredictionJob
+from caraml.generated.merlin_client import PredictionJob
+
 from caraml.models.autoscaling import AutoscalingPolicy
 from caraml.models.batch.config import PredictionJobConfig
 from caraml.models.client import MerlinClient

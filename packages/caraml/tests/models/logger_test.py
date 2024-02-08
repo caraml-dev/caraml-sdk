@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import pytest
-import client
+import caraml.generated.merlin_client as client
 from caraml.models.logger import Logger,LoggerMode,LoggerConfig,PredictionLoggerConfig
 
 

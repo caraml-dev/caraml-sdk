@@ -21,7 +21,6 @@ from caraml.models import fluent
 
 from enum import Enum
 
-import client
 import yaml
 import json
 

@@ -21,8 +21,8 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from urllib3_mock import Responses
 
-import client as cl
-from client import ApiClient, Configuration
+import caraml.generated.merlin_client as cl
+from caraml.generated.merlin_client import ApiClient, Configuration
 from caraml.models.model import Model, ModelType, ModelVersion, Project
 
 

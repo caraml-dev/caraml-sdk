@@ -15,7 +15,7 @@
 from enum import Enum
 from typing import Dict
 
-import client
+import caraml.generated.merlin_client as client
 from caraml.models.autoscaling import (RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
                                 SERVERLESS_DEFAULT_AUTOSCALING_POLICY,
                                 AutoscalingPolicy, MetricsType)
