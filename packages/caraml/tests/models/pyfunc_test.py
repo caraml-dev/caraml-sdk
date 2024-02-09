@@ -5,7 +5,7 @@ import numpy as np
 import pandas as pd
 
 from caraml.upi.v1 import upi_pb2, table_pb2, type_pb2
-from models.pyfunc import PythonModelContext
+from mlflow.pyfunc import PythonModelContext
 
 from models.model import PyFuncModel, PyFuncV3Model, PYFUNC_MODEL_INPUT_KEY, PYFUNC_EXTRA_ARGS_KEY
 from models.protocol import Protocol
