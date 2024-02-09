@@ -53,12 +53,15 @@ jobs:
           generator-tag: v7.1.0
           openapi-file: ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_schema }}
           config-file: ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_config }}
-          command-args: "--model-package ${{ github.event.inputs.module }}/client"
+          command-args: "--package-name ${{ github.event.inputs.module }}.client"
 
       - name: Sync changes from ${{ github.event.inputs.module }} 
         run: |
           ls
-          ls packages/caraml/models/client
+          ls packages/caraml/${{ github.event.inputs.module }}/client
+          tree python-client
+          cat python-client/models/__init__.py
+          cat python-client/models/client/__init__.py
           rm -rf packages/caraml/${{ github.event.inputs.module }}/client/*
           cp -r python-client/${{ github.event.inputs.module }}/client packages/caraml/${{ github.event.inputs.module }}/client
           rm -rf ${{ github.event.inputs.module }}
