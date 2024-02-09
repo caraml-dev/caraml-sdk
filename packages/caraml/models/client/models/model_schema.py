@@ -18,21 +18,22 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List, Optional, Union
-from pydantic import BaseModel
-from models.client.models.operation_tracing import OperationTracing
+from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, StrictInt
+from models.client.models.schema_spec import SchemaSpec
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class StandardTransformerSimulationResponse(BaseModel):
+class ModelSchema(BaseModel):
     """
-    StandardTransformerSimulationResponse
+    ModelSchema
     """ # noqa: E501
-    response: Optional[Union[str, Any]] = None
-    operation_tracing: Optional[OperationTracing] = None
-    __properties: ClassVar[List[str]] = ["response", "operation_tracing"]
+    id: Optional[StrictInt] = None
+    model_id: Optional[StrictInt] = None
+    spec: SchemaSpec
+    __properties: ClassVar[List[str]] = ["id", "model_id", "spec"]
 
     model_config = {
         "populate_by_name": True,
@@ -51,7 +52,7 @@ class StandardTransformerSimulationResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of StandardTransformerSimulationResponse from a JSON string"""
+        """Create an instance of ModelSchema from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,14 +71,14 @@ class StandardTransformerSimulationResponse(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of operation_tracing
-        if self.operation_tracing:
-            _dict['operation_tracing'] = self.operation_tracing.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of spec
+        if self.spec:
+            _dict['spec'] = self.spec.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of StandardTransformerSimulationResponse from a dict"""
+        """Create an instance of ModelSchema from a dict"""
         if obj is None:
             return None
 
@@ -85,8 +86,9 @@ class StandardTransformerSimulationResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "response": obj.get("response"),
-            "operation_tracing": OperationTracing.from_dict(obj.get("operation_tracing")) if obj.get("operation_tracing") is not None else None
+            "id": obj.get("id"),
+            "model_id": obj.get("model_id"),
+            "spec": SchemaSpec.from_dict(obj.get("spec")) if obj.get("spec") is not None else None
         })
         return _obj
 

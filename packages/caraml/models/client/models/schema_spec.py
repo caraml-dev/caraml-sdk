@@ -18,21 +18,24 @@ import re  # noqa: F401
 import json
 
 
-from typing import Any, ClassVar, Dict, List, Optional, Union
-from pydantic import BaseModel
-from models.client.models.operation_tracing import OperationTracing
+from typing import Any, ClassVar, Dict, List, Optional
+from pydantic import BaseModel, StrictStr
+from models.client.models.model_prediction_output import ModelPredictionOutput
+from models.client.models.value_type import ValueType
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class StandardTransformerSimulationResponse(BaseModel):
+class SchemaSpec(BaseModel):
     """
-    StandardTransformerSimulationResponse
+    SchemaSpec
     """ # noqa: E501
-    response: Optional[Union[str, Any]] = None
-    operation_tracing: Optional[OperationTracing] = None
-    __properties: ClassVar[List[str]] = ["response", "operation_tracing"]
+    prediction_id_column: StrictStr
+    model_prediction_output: ModelPredictionOutput
+    tag_columns: Optional[List[StrictStr]] = None
+    feature_types: Dict[str, ValueType]
+    __properties: ClassVar[List[str]] = ["prediction_id_column", "model_prediction_output", "tag_columns", "feature_types"]
 
     model_config = {
         "populate_by_name": True,
@@ -51,7 +54,7 @@ class StandardTransformerSimulationResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of StandardTransformerSimulationResponse from a JSON string"""
+        """Create an instance of SchemaSpec from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,14 +73,14 @@ class StandardTransformerSimulationResponse(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of operation_tracing
-        if self.operation_tracing:
-            _dict['operation_tracing'] = self.operation_tracing.to_dict()
+        # override the default output from pydantic by calling `to_dict()` of model_prediction_output
+        if self.model_prediction_output:
+            _dict['model_prediction_output'] = self.model_prediction_output.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of StandardTransformerSimulationResponse from a dict"""
+        """Create an instance of SchemaSpec from a dict"""
         if obj is None:
             return None
 
@@ -85,8 +88,10 @@ class StandardTransformerSimulationResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "response": obj.get("response"),
-            "operation_tracing": OperationTracing.from_dict(obj.get("operation_tracing")) if obj.get("operation_tracing") is not None else None
+            "prediction_id_column": obj.get("prediction_id_column"),
+            "model_prediction_output": ModelPredictionOutput.from_dict(obj.get("model_prediction_output")) if obj.get("model_prediction_output") is not None else None,
+            "tag_columns": obj.get("tag_columns"),
+            "feature_types": dict((_k, _v) for _k, _v in obj.get("feature_types").items())
         })
         return _obj
 
