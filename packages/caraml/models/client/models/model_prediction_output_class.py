@@ -26,21 +26,21 @@ except ImportError:
     from typing_extensions import Self
 
 
-class LoggerMode(str, Enum):
+class ModelPredictionOutputClass(str, Enum):
     """
-    LoggerMode
+    ModelPredictionOutputClass
     """
 
     """
     allowed enum values
     """
-    ALL = 'all'
-    REQUEST = 'request'
-    RESPONSE = 'response'
+    BINARYCLASSIFICATIONOUTPUT = 'BinaryClassificationOutput'
+    RANKINGOUTPUT = 'RankingOutput'
+    REGRESSIONOUTPUT = 'RegressionOutput'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of LoggerMode from a JSON string"""
+        """Create an instance of ModelPredictionOutputClass from a JSON string"""
         return cls(json.loads(json_str))
 
 

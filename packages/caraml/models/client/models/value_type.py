@@ -26,21 +26,22 @@ except ImportError:
     from typing_extensions import Self
 
 
-class LoggerMode(str, Enum):
+class ValueType(str, Enum):
     """
-    LoggerMode
+    ValueType
     """
 
     """
     allowed enum values
     """
-    ALL = 'all'
-    REQUEST = 'request'
-    RESPONSE = 'response'
+    FLOAT64 = 'float64'
+    INT64 = 'int64'
+    BOOLEAN = 'boolean'
+    STRING = 'string'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of LoggerMode from a JSON string"""
+        """Create an instance of ValueType from a JSON string"""
         return cls(json.loads(json_str))
 
 

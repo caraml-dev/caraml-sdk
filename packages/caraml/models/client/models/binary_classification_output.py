@@ -19,20 +19,24 @@ import json
 
 
 from typing import Any, ClassVar, Dict, List, Optional, Union
-from pydantic import BaseModel
-from models.client.models.operation_tracing import OperationTracing
+from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
+from models.client.models.model_prediction_output_class import ModelPredictionOutputClass
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-class StandardTransformerSimulationResponse(BaseModel):
+class BinaryClassificationOutput(BaseModel):
     """
-    StandardTransformerSimulationResponse
+    BinaryClassificationOutput
     """ # noqa: E501
-    response: Optional[Union[str, Any]] = None
-    operation_tracing: Optional[OperationTracing] = None
-    __properties: ClassVar[List[str]] = ["response", "operation_tracing"]
+    prediction_score_column: StrictStr
+    actual_label_column: Optional[StrictStr] = None
+    positive_class_label: StrictStr
+    negative_class_label: StrictStr
+    score_threshold: Optional[Union[StrictFloat, StrictInt]] = None
+    output_class: ModelPredictionOutputClass
+    __properties: ClassVar[List[str]] = ["prediction_score_column", "actual_label_column", "positive_class_label", "negative_class_label", "score_threshold", "output_class"]
 
     model_config = {
         "populate_by_name": True,
@@ -51,7 +55,7 @@ class StandardTransformerSimulationResponse(BaseModel):
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
-        """Create an instance of StandardTransformerSimulationResponse from a JSON string"""
+        """Create an instance of BinaryClassificationOutput from a JSON string"""
         return cls.from_dict(json.loads(json_str))
 
     def to_dict(self) -> Dict[str, Any]:
@@ -70,14 +74,11 @@ class StandardTransformerSimulationResponse(BaseModel):
             },
             exclude_none=True,
         )
-        # override the default output from pydantic by calling `to_dict()` of operation_tracing
-        if self.operation_tracing:
-            _dict['operation_tracing'] = self.operation_tracing.to_dict()
         return _dict
 
     @classmethod
     def from_dict(cls, obj: Dict) -> Self:
-        """Create an instance of StandardTransformerSimulationResponse from a dict"""
+        """Create an instance of BinaryClassificationOutput from a dict"""
         if obj is None:
             return None
 
@@ -85,8 +86,12 @@ class StandardTransformerSimulationResponse(BaseModel):
             return cls.model_validate(obj)
 
         _obj = cls.model_validate({
-            "response": obj.get("response"),
-            "operation_tracing": OperationTracing.from_dict(obj.get("operation_tracing")) if obj.get("operation_tracing") is not None else None
+            "prediction_score_column": obj.get("prediction_score_column"),
+            "actual_label_column": obj.get("actual_label_column"),
+            "positive_class_label": obj.get("positive_class_label"),
+            "negative_class_label": obj.get("negative_class_label"),
+            "score_threshold": obj.get("score_threshold"),
+            "output_class": obj.get("output_class")
         })
         return _obj
 
