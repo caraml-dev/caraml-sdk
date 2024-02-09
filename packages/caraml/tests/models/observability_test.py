@@ -1,7 +1,7 @@
 import pytest
 import pandas as pd
 
-from caraml.models.observability.inference import BinaryClassificationOutput, PredictionOutput, ObservationType, RankingOutput
+from models.observability.inference import BinaryClassificationOutput, PredictionOutput, ObservationType, RankingOutput
 
 
 @pytest.fixture

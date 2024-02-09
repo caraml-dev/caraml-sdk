@@ -16,20 +16,20 @@ import json
 import types
 from unittest.mock import patch
 
-import caraml.generated.model as client
-import caraml.generated.model as cl
-import caraml.models as merlin
+import models.client as client
+import models.client as cl
+import models as merlin
 import pytest
-from caraml.models import AutoscalingPolicy, DeploymentMode, MetricsType
-from caraml.models.autoscaling import (RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
+from models import AutoscalingPolicy, DeploymentMode, MetricsType
+from models.autoscaling import (RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
                                 SERVERLESS_DEFAULT_AUTOSCALING_POLICY)
-from caraml.models.batch.config import PredictionJobConfig, ResultType
-from caraml.models.batch.job import JobStatus
-from caraml.models.batch.sink import BigQuerySink, SaveMode
-from caraml.models.batch.source import BigQuerySource
-from caraml.models.endpoint import VersionEndpoint
-from caraml.models.model import ModelType
-from caraml.models.protocol import Protocol
+from models.batch.config import PredictionJobConfig, ResultType
+from models.batch.job import JobStatus
+from models.batch.sink import BigQuerySink, SaveMode
+from models.batch.source import BigQuerySource
+from models.endpoint import VersionEndpoint
+from models.model import ModelType
+from models.protocol import Protocol
 from urllib3_mock import Responses
 
 responses = Responses("requests.packages.urllib3")

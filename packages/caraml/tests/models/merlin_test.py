@@ -17,9 +17,9 @@ import json
 import mlflow
 import pytest
 
-import caraml.generated.model as cl
-import caraml.models as merlin
-from caraml.models.model import ModelVersion
+import models.client as cl
+import models as merlin
+from models.model import ModelVersion
 
 # get global mock responses that configured in conftest
 responses = pytest.responses

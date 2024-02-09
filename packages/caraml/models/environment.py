@@ -12,9 +12,9 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import client
+import models.client as client
 
-from caraml.models.resource_request import ResourceRequest
+from models.resource_request import ResourceRequest
 
 
 class Environment:

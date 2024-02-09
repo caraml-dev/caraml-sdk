@@ -15,17 +15,17 @@
 from enum import Enum
 from typing import Dict
 
-import caraml.generated.model as client
-from caraml.models.autoscaling import (RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
+import models.client as client
+from models.autoscaling import (RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
                                 SERVERLESS_DEFAULT_AUTOSCALING_POLICY,
                                 AutoscalingPolicy, MetricsType)
-from caraml.models.deployment_mode import DeploymentMode
-from caraml.models.environment import Environment
-from caraml.models.logger import Logger
-from caraml.models.protocol import Protocol
-from caraml.models.util import autostr, get_url
-from caraml.models.resource_request import ResourceRequest
-from caraml.models.transformer import Transformer
+from models.deployment_mode import DeploymentMode
+from models.environment import Environment
+from models.logger import Logger
+from models.protocol import Protocol
+from models.util import autostr, get_url
+from models.resource_request import ResourceRequest
+from models.transformer import Transformer
 
 
 class Status(Enum):

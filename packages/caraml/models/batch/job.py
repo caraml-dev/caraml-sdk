@@ -12,10 +12,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import caraml.generated.model as client
+import models.client as client
 from enum import Enum
 
-from caraml.models.util import autostr
+from models.util import autostr
 
 
 class JobStatus(Enum):

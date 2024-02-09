@@ -1,4 +1,4 @@
-from caraml.models.model import PyFuncModel
+from models.model import PyFuncModel
 
 
 class EchoModel(PyFuncModel):

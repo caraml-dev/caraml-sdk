@@ -14,7 +14,7 @@
 
 import pytest
 
-from caraml.models.batch.sink import BigQuerySink, SaveMode
+from models.batch.sink import BigQuerySink, SaveMode
 
 
 @pytest.mark.parametrize(

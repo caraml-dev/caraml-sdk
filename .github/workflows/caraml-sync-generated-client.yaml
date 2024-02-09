@@ -1,3 +1,5 @@
+## TODO: Change this workflow to clone client and generate using open api generator to add it to specific client. 
+
 # This workflow tries to pull generated clients' changes from given repo
 
 name: Remote Generated Client Sync

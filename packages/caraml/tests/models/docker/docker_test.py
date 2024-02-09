@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import os
-from caraml.models.docker.docker import copy_pyfunc_dockerfile, copy_standard_dockerfile
+from models.docker.docker import copy_pyfunc_dockerfile, copy_standard_dockerfile
 
 
 def test_copy_pyfunc_dockerfile():

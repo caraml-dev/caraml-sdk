@@ -13,8 +13,8 @@
 # limitations under the License.
 
 from enum import Enum
-import caraml.generated.model as client
-from caraml.models.util import autostr
+import models.client as client
+from models.util import autostr
 from typing import Optional
 
 class LoggerMode(Enum):

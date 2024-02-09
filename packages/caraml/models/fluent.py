@@ -16,19 +16,19 @@
 from contextlib import contextmanager
 from typing import Any, Dict, List, Optional
 
-from caraml.generated.model import PredictionJob
+from models.client import PredictionJob
 
-from caraml.models.autoscaling import AutoscalingPolicy
-from caraml.models.batch.config import PredictionJobConfig
-from caraml.models.client import MerlinClient
-from caraml.models.deployment_mode import DeploymentMode
-from caraml.models.endpoint import ModelEndpoint, VersionEndpoint
-from caraml.models.environment import Environment
-from caraml.models.logger import Logger
-from caraml.models.model import Model, ModelType, ModelVersion, Project
-from caraml.models.protocol import Protocol
-from caraml.models.resource_request import ResourceRequest
-from caraml.models.transformer import Transformer
+from models.autoscaling import AutoscalingPolicy
+from models.batch.config import PredictionJobConfig
+from models.merlin_client import MerlinClient
+from models.deployment_mode import DeploymentMode
+from models.endpoint import ModelEndpoint, VersionEndpoint
+from models.environment import Environment
+from models.logger import Logger
+from models.model import Model, ModelType, ModelVersion, Project
+from models.protocol import Protocol
+from models.resource_request import ResourceRequest
+from models.transformer import Transformer
 
 _merlin_client: Optional[MerlinClient] = None
 _active_project: Optional[Project]

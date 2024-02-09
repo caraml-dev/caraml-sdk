@@ -20,13 +20,13 @@ from __future__ import absolute_import
 import signal
 import sys
 
-import caraml.models.autoscaling
-import caraml.models.deployment_mode
-import caraml.models.fluent
-import caraml.models.resource_request
-from caraml.models.version import VERSION as __version__
+import models.autoscaling
+import models.deployment_mode
+import models.fluent
+import models.resource_request
+from models.version import VERSION as __version__
 
-import caraml.models as merlin
+import models as merlin
 
 # Merlin URL
 set_url = merlin.fluent.set_url

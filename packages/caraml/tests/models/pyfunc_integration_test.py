@@ -14,16 +14,16 @@
 
 import os
 import warnings
-from models.utils import undeploy_all_version
+from tests.models.utils import undeploy_all_version
 
 import joblib
-import caraml.models as merlin
+import models as merlin
 import numpy as np
 import pytest
 import xgboost as xgb
-from caraml.models.model import ModelType, PyFuncModel, PyFuncV3Model
-from caraml.models.pyfunc import ModelInput, ModelOutput, Values
-from caraml.models.resource_request import ResourceRequest
+from models.model import ModelType, PyFuncModel, PyFuncV3Model
+from models.pyfunc import ModelInput, ModelOutput, Values
+from models.resource_request import ResourceRequest
 from sklearn.datasets import load_iris
 
 warnings.filterwarnings("ignore")

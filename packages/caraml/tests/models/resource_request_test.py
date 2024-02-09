@@ -14,7 +14,7 @@
 
 import pytest
 
-from caraml.models.resource_request import ResourceRequest
+from models.resource_request import ResourceRequest
 
 
 @pytest.mark.unit

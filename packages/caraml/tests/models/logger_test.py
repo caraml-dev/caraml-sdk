@@ -13,8 +13,8 @@
 # limitations under the License.
 
 import pytest
-import caraml.generated.model as client
-from caraml.models.logger import Logger,LoggerMode,LoggerConfig,PredictionLoggerConfig
+import models.client as client
+from models.logger import Logger,LoggerMode,LoggerConfig,PredictionLoggerConfig
 
 
 @pytest.mark.unit

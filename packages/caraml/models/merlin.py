@@ -15,10 +15,10 @@
 import click
 import warnings
 import os
-import caraml.models as merlin
-from caraml.models.model import ModelType
+import models as merlin
+from models.model import ModelType
 from cookiecutter.main import cookiecutter
-from caraml.models.util import valid_name_check
+from models.util import valid_name_check
 
 warnings.filterwarnings("ignore")
 

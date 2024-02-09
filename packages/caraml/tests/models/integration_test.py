@@ -13,19 +13,19 @@
 # limitations under the License.
 import json
 import os
-from models.utils import undeploy_all_version
+from tests.models.utils import undeploy_all_version
 from time import sleep
 
 import pandas as pd
 import pytest
-from caraml.models.logger import Logger, LoggerConfig, LoggerMode
-from caraml.models.model import ModelType
-from caraml.models.resource_request import ResourceRequest
-from caraml.models.transformer import StandardTransformer, Transformer
+from models.logger import Logger, LoggerConfig, LoggerMode
+from models.model import ModelType
+from models.resource_request import ResourceRequest
+from models.transformer import StandardTransformer, Transformer
 from recursive_diff import recursive_eq
 
-import caraml.models as merlin
-from caraml.models import DeploymentMode, MetricsType
+import models as merlin
+from models import DeploymentMode, MetricsType
 
 request_json = {"instances": [[2.8, 1.0, 6.8, 0.4], [3.1, 1.4, 4.5, 1.6]]}
 tensorflow_request_json = {

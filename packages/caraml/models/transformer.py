@@ -14,10 +14,10 @@
 
 from typing import Dict, Optional, Any
 
-from caraml.models.protocol import Protocol
-from caraml.models.resource_request import ResourceRequest
-from caraml.models.util import autostr
-from caraml.models import fluent
+from models.protocol import Protocol
+from models.resource_request import ResourceRequest
+from models.util import autostr
+from models import fluent
 
 from enum import Enum
 

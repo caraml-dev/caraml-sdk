@@ -24,12 +24,12 @@ from sys import version_info
 from time import sleep
 from typing import Any, Dict, List, Optional, Tuple, Union
 
-import caraml.generated.model as client
+import models.client as client
 import docker
 import mlflow
 import pyprind
 import yaml
-from caraml.generated.model import (
+from models.client import (
     EndpointApi,
     EnvironmentApi,
     ModelEndpointsApi,
@@ -39,31 +39,31 @@ from caraml.generated.model import (
 )
 from docker import APIClient
 from docker.models.containers import Container
-from caraml.models import pyfunc
-from caraml.models.autoscaling import (
+from models import pyfunc
+from models.autoscaling import (
     RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
     SERVERLESS_DEFAULT_AUTOSCALING_POLICY,
     AutoscalingPolicy,
 )
-from caraml.models.batch.config import PredictionJobConfig
-from caraml.models.batch.job import PredictionJob
-from caraml.models.batch.sink import BigQuerySink
-from caraml.models.batch.source import BigQuerySource
-from caraml.models.deployment_mode import DeploymentMode
-from caraml.models.docker.docker import copy_standard_dockerfile, wait_build_complete
-from caraml.models.endpoint import ModelEndpoint, Status, VersionEndpoint
-from caraml.models.logger import Logger
-from caraml.models.protocol import Protocol
-from caraml.models.pyfunc import run_pyfunc_local_server
-from caraml.models.resource_request import ResourceRequest
-from caraml.models.transformer import Transformer
-from caraml.models.util import (
+from models.batch.config import PredictionJobConfig
+from models.batch.job import PredictionJob
+from models.batch.sink import BigQuerySink
+from models.batch.source import BigQuerySource
+from models.deployment_mode import DeploymentMode
+from models.docker.docker import copy_standard_dockerfile, wait_build_complete
+from models.endpoint import ModelEndpoint, Status, VersionEndpoint
+from models.logger import Logger
+from models.protocol import Protocol
+from models.pyfunc import run_pyfunc_local_server
+from models.resource_request import ResourceRequest
+from models.transformer import Transformer
+from models.util import (
     autostr,
     download_files_from_gcs,
     guess_mlp_ui_url,
     valid_name_check,
 )
-from caraml.models.validation import validate_model_dir
+from models.validation import validate_model_dir
 from mlflow.entities import Run, RunData
 from mlflow.exceptions import MlflowException
 from mlflow.pyfunc import PythonModel

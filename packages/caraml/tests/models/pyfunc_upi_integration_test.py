@@ -1,21 +1,21 @@
 import os
 import uuid
-from models.utils import undeploy_all_version
+from tests.models.utils import undeploy_all_version
 from time import sleep
 from typing import List
 
 import grpc
-import caraml.models as merlin
+import models as merlin
 import pandas as pd
 import pytest
 import xgboost as xgb
 from caraml.upi.utils import df_to_table, table_to_df
 from caraml.upi.v1 import type_pb2, upi_pb2, upi_pb2_grpc, variable_pb2
-from caraml.models.deployment_mode import DeploymentMode
-from caraml.models.endpoint import Status
-from caraml.models.model import ModelType, PyFuncModel
-from caraml.models.protocol import Protocol
-from caraml.models.transformer import StandardTransformer
+from models.deployment_mode import DeploymentMode
+from models.endpoint import Status
+from models.model import ModelType, PyFuncModel
+from models.protocol import Protocol
+from models.transformer import StandardTransformer
 from sklearn.datasets import load_iris
 
 

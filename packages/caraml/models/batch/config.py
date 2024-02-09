@@ -15,9 +15,9 @@
 from enum import Enum
 from typing import Dict, Optional
 
-from caraml.models.batch.sink import Sink
-from caraml.models.batch.source import Source
-from caraml.models.resource_request import ResourceRequest
+from models.batch.sink import Sink
+from models.batch.source import Source
+from models.resource_request import ResourceRequest
 
 
 class ResultType(Enum):
