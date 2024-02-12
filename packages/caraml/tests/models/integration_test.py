@@ -139,6 +139,7 @@ def test_xgboost(
 
     merlin.undeploy(v)
 
+
 @pytest.mark.integration
 @pytest.mark.dependency()
 @pytest.mark.parametrize(
@@ -156,29 +157,31 @@ def test_model_schema(
     model_dir = "tests/models/xgboost-model"
 
     undeploy_all_version()
-    model_schema = ModelSchema(spec=InferenceSchema(
-        feature_types={
-            "featureA": ValueType.FLOAT64,
-            "featureB": ValueType.INT64,
-            "featureC": ValueType.STRING,
-            "featureD": ValueType.BOOLEAN
-        },
-        prediction_id_column="prediction_id",
-        model_prediction_output=BinaryClassificationOutput(
-            prediction_score_column="score",
-            actual_label_column="actual",
-            positive_class_label="completed",
-            negative_class_label="non_complete",
-            score_threshold=0.7
+    model_schema = ModelSchema(
+        spec=InferenceSchema(
+            feature_types={
+                "featureA": ValueType.FLOAT64,
+                "featureB": ValueType.INT64,
+                "featureC": ValueType.STRING,
+                "featureD": ValueType.BOOLEAN,
+            },
+            prediction_id_column="prediction_id",
+            model_prediction_output=BinaryClassificationOutput(
+                prediction_score_column="score",
+                actual_label_column="actual",
+                positive_class_label="completed",
+                negative_class_label="non_complete",
+                score_threshold=0.7,
+            ),
         )
-    ))
+    )
 
     with merlin.new_model_version(model_schema=model_schema) as v:
         # Upload the serialized model to MLP
         merlin.log_model(model_dir=model_dir)
 
     assert v.model_schema.spec == model_schema.spec
-    
+
     endpoint = merlin.deploy(v, deployment_mode=deployment_mode)
     resp = requests.post(f"{endpoint.url}", json=request_json)
 
@@ -187,7 +190,6 @@ def test_model_schema(
     assert len(resp.json()["predictions"]) == len(request_json["instances"])
 
     merlin.undeploy(v)
-
 
 
 @pytest.mark.integration
@@ -622,7 +624,9 @@ def test_feast_enricher(
     with merlin.new_model_version() as v:
         v.log_custom_model(image="ealen/echo-server:0.5.1", args="--port 8080")
 
-    transformer_config_path = os.path.join("tests/models/transformer", "feast_enricher.yaml")
+    transformer_config_path = os.path.join(
+        "tests/models/transformer", "feast_enricher.yaml"
+    )
     transformer = StandardTransformer(config_file=transformer_config_path, enabled=True)
 
     request_json = {"driver_id": "1000"}
@@ -1123,12 +1127,14 @@ def test_redeploy_model(integration_test_url, project_name, use_google_oauth, re
             metrics_type=merlin.MetricsType.CPU_UTILIZATION, target_value=50
         ),
         deployment_mode=DeploymentMode.RAW_DEPLOYMENT,
-        transformer = Transformer(image="gcr.io/kubeflow-ci/kfserving/image-transformer:latest"),
+        transformer=Transformer(
+            image="gcr.io/kubeflow-ci/kfserving/image-transformer:latest"
+        ),
     )
 
     with open(os.path.join("tests/models/transformer", "input.json"), "r") as f:
         req = json.load(f)
-    
+
     resp = requests.post(f"{endpoint.url}", json=req)
     assert resp.status_code == 200
     assert resp.json() is not None
@@ -1155,8 +1161,10 @@ def test_redeploy_model(integration_test_url, project_name, use_google_oauth, re
             metrics_type=merlin.MetricsType.CPU_UTILIZATION, target_value=90
         ),
         deployment_mode=DeploymentMode.RAW_DEPLOYMENT,
-        transformer = Transformer(image="gcr.io/kubeflow-ci/kfserving/image-transformer:latest",
-                                  resource_request=merlin.ResourceRequest(0, 1, "100m", "250Mi")),
+        transformer=Transformer(
+            image="gcr.io/kubeflow-ci/kfserving/image-transformer:latest",
+            resource_request=merlin.ResourceRequest(0, 1, "100m", "250Mi"),
+        ),
     )
 
     resp = requests.post(f"{new_endpoint.url}", json=req)

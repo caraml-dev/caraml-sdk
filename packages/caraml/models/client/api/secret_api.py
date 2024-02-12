@@ -46,7 +46,6 @@ class SecretApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
 
-
     @validate_call
     def projects_project_id_secrets_get(
         self,
@@ -55,9 +54,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -89,30 +87,25 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_get_serialize(
             project_id=project_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Secret]"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"200": "List[Secret]"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
-
 
     @validate_call
     def projects_project_id_secrets_get_with_http_info(
@@ -122,9 +115,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -156,30 +148,25 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_get_serialize(
             project_id=project_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Secret]"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"200": "List[Secret]"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
-
 
     @validate_call
     def projects_project_id_secrets_get_without_preload_content(
@@ -189,9 +176,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -223,26 +209,21 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_get_serialize(
             project_id=project_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Secret]"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"200": "List[Secret]"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _projects_project_id_secrets_get_serialize(
         self,
@@ -255,9 +236,7 @@ class SecretApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-            
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -268,29 +247,21 @@ class SecretApi:
 
         # process the path parameters
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                '*/*'
-            ]
-        )
-
+        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
 
         # authentication setting
-        _auth_settings: List[str] = [
-            'Bearer'
-        ]
+        _auth_settings: List[str] = ["Bearer"]
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/projects/{project_id}/secrets',
+            method="GET",
+            resource_path="/projects/{project_id}/secrets",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -300,11 +271,8 @@ class SecretApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def projects_project_id_secrets_post(
@@ -315,9 +283,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -351,7 +318,7 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_post_serialize(
             project_id=project_id,
@@ -359,23 +326,18 @@ class SecretApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "Secret"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"201": "Secret"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
-
 
     @validate_call
     def projects_project_id_secrets_post_with_http_info(
@@ -386,9 +348,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -422,7 +383,7 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_post_serialize(
             project_id=project_id,
@@ -430,23 +391,18 @@ class SecretApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "Secret"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"201": "Secret"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
-
 
     @validate_call
     def projects_project_id_secrets_post_without_preload_content(
@@ -457,9 +413,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -493,7 +448,7 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_post_serialize(
             project_id=project_id,
@@ -501,19 +456,14 @@ class SecretApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "Secret"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"201": "Secret"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _projects_project_id_secrets_post_serialize(
         self,
@@ -527,9 +477,7 @@ class SecretApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-            
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -540,7 +488,7 @@ class SecretApi:
 
         # process the path parameters
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -548,23 +496,15 @@ class SecretApi:
         if body is not None:
             _body_params = body
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                '*/*'
-            ]
-        )
-
+        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
 
         # authentication setting
-        _auth_settings: List[str] = [
-            'Bearer'
-        ]
+        _auth_settings: List[str] = ["Bearer"]
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/projects/{project_id}/secrets',
+            method="POST",
+            resource_path="/projects/{project_id}/secrets",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -574,11 +514,8 @@ class SecretApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def projects_project_id_secrets_secret_id_delete(
@@ -589,9 +526,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -625,7 +561,7 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_secret_id_delete_serialize(
             project_id=project_id,
@@ -633,22 +569,18 @@ class SecretApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
-
 
     @validate_call
     def projects_project_id_secrets_secret_id_delete_with_http_info(
@@ -659,9 +591,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -695,7 +626,7 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_secret_id_delete_serialize(
             project_id=project_id,
@@ -703,22 +634,18 @@ class SecretApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
-
 
     @validate_call
     def projects_project_id_secrets_secret_id_delete_without_preload_content(
@@ -729,9 +656,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -765,7 +691,7 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_secret_id_delete_serialize(
             project_id=project_id,
@@ -773,18 +699,14 @@ class SecretApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _projects_project_id_secrets_secret_id_delete_serialize(
         self,
@@ -798,9 +720,7 @@ class SecretApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-            
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -811,25 +731,20 @@ class SecretApi:
 
         # process the path parameters
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         if secret_id is not None:
-            _path_params['secret_id'] = secret_id
+            _path_params["secret_id"] = secret_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
-
-
         # authentication setting
-        _auth_settings: List[str] = [
-            'Bearer'
-        ]
+        _auth_settings: List[str] = ["Bearer"]
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/projects/{project_id}/secrets/{secret_id}',
+            method="DELETE",
+            resource_path="/projects/{project_id}/secrets/{secret_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -839,11 +754,8 @@ class SecretApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def projects_project_id_secrets_secret_id_patch(
@@ -855,9 +767,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -893,7 +804,7 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_secret_id_patch_serialize(
             project_id=project_id,
@@ -902,23 +813,18 @@ class SecretApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Secret"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"200": "Secret"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
-
 
     @validate_call
     def projects_project_id_secrets_secret_id_patch_with_http_info(
@@ -930,9 +836,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -968,7 +873,7 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_secret_id_patch_serialize(
             project_id=project_id,
@@ -977,23 +882,18 @@ class SecretApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Secret"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"200": "Secret"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
-
 
     @validate_call
     def projects_project_id_secrets_secret_id_patch_without_preload_content(
@@ -1005,9 +905,8 @@ class SecretApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1043,7 +942,7 @@ class SecretApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._projects_project_id_secrets_secret_id_patch_serialize(
             project_id=project_id,
@@ -1052,19 +951,14 @@ class SecretApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Secret"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"200": "Secret"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _projects_project_id_secrets_secret_id_patch_serialize(
         self,
@@ -1079,9 +973,7 @@ class SecretApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-            
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1092,9 +984,9 @@ class SecretApi:
 
         # process the path parameters
         if project_id is not None:
-            _path_params['project_id'] = project_id
+            _path_params["project_id"] = project_id
         if secret_id is not None:
-            _path_params['secret_id'] = secret_id
+            _path_params["secret_id"] = secret_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1102,23 +994,15 @@ class SecretApi:
         if body is not None:
             _body_params = body
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                '*/*'
-            ]
-        )
-
+        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
 
         # authentication setting
-        _auth_settings: List[str] = [
-            'Bearer'
-        ]
+        _auth_settings: List[str] = ["Bearer"]
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/projects/{project_id}/secrets/{secret_id}',
+            method="PATCH",
+            resource_path="/projects/{project_id}/secrets/{secret_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1128,7 +1012,5 @@ class SecretApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-

@@ -19,7 +19,6 @@ import re  # noqa: F401
 from enum import Enum
 
 
-
 try:
     from typing import Self
 except ImportError:
@@ -34,12 +33,10 @@ class Protocol(str, Enum):
     """
     allowed enum values
     """
-    HTTP_JSON = 'HTTP_JSON'
-    UPI_V1 = 'UPI_V1'
+    HTTP_JSON = "HTTP_JSON"
+    UPI_V1 = "UPI_V1"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of Protocol from a JSON string"""
         return cls(json.loads(json_str))
-
-

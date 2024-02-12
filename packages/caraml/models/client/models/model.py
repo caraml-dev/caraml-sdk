@@ -21,15 +21,18 @@ from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr, field_validator
 from pydantic import Field
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class Model(BaseModel):
     """
     Model
-    """ # noqa: E501
+    """  # noqa: E501
+
     id: Optional[StrictInt] = None
     project_id: Optional[StrictInt] = None
     mlflow_experiment_id: Optional[StrictInt] = None
@@ -39,23 +42,40 @@ class Model(BaseModel):
     endpoints: Optional[List[ModelEndpoint]] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["id", "project_id", "mlflow_experiment_id", "name", "type", "mlflow_url", "endpoints", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "project_id",
+        "mlflow_experiment_id",
+        "name",
+        "type",
+        "mlflow_url",
+        "endpoints",
+        "created_at",
+        "updated_at",
+    ]
 
-    @field_validator('type')
+    @field_validator("type")
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in ('xgboost', 'tensorflow', 'sklearn', 'pytorch', 'pyfunc', 'pyfunc_v2', 'pyfunc_v3', 'custom'):
-            raise ValueError("must be one of enum values ('xgboost', 'tensorflow', 'sklearn', 'pytorch', 'pyfunc', 'pyfunc_v2', 'pyfunc_v3', 'custom')")
+        if value not in (
+            "xgboost",
+            "tensorflow",
+            "sklearn",
+            "pytorch",
+            "pyfunc",
+            "pyfunc_v2",
+            "pyfunc_v3",
+            "custom",
+        ):
+            raise ValueError(
+                "must be one of enum values ('xgboost', 'tensorflow', 'sklearn', 'pytorch', 'pyfunc', 'pyfunc_v2', 'pyfunc_v3', 'custom')"
+            )
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -83,8 +103,7 @@ class Model(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in endpoints (list)
@@ -93,7 +112,7 @@ class Model(BaseModel):
             for _item in self.endpoints:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['endpoints'] = _items
+            _dict["endpoints"] = _items
         return _dict
 
     @classmethod
@@ -105,20 +124,27 @@ class Model(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "project_id": obj.get("project_id"),
-            "mlflow_experiment_id": obj.get("mlflow_experiment_id"),
-            "name": obj.get("name"),
-            "type": obj.get("type"),
-            "mlflow_url": obj.get("mlflow_url"),
-            "endpoints": [ModelEndpoint.from_dict(_item) for _item in obj.get("endpoints")] if obj.get("endpoints") is not None else None,
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "project_id": obj.get("project_id"),
+                "mlflow_experiment_id": obj.get("mlflow_experiment_id"),
+                "name": obj.get("name"),
+                "type": obj.get("type"),
+                "mlflow_url": obj.get("mlflow_url"),
+                "endpoints": [
+                    ModelEndpoint.from_dict(_item) for _item in obj.get("endpoints")
+                ]
+                if obj.get("endpoints") is not None
+                else None,
+                "created_at": obj.get("created_at"),
+                "updated_at": obj.get("updated_at"),
+            }
+        )
         return _obj
 
+
 from models.client.models.model_endpoint import ModelEndpoint
+
 # TODO: Rewrite to not use raise_errors
 Model.model_rebuild(raise_errors=False)
-

@@ -83,9 +83,9 @@ class PredictionJob:
         :return:
         """
         job_client = client.PredictionJobsApi(self._api_client)
-        job_client.models_model_id_versions_version_id_jobs_job_id_stop_put(model_id=self._model_id,
-                                                                            version_id=self._version_id,
-                                                                            job_id=self._id)
+        job_client.models_model_id_versions_version_id_jobs_job_id_stop_put(
+            model_id=self._model_id, version_id=self._version_id, job_id=self._id
+        )
         try:
             self.refresh()
         except client.rest.ApiException as e:
@@ -104,7 +104,8 @@ class PredictionJob:
         """
         job_client = client.PredictionJobsApi(self._api_client)
         self._status = JobStatus(
-            job_client.models_model_id_versions_version_id_jobs_job_id_get(model_id=self._model_id,
-                                                                           version_id=self._version_id,
-                                                                           job_id=self._id).status)
+            job_client.models_model_id_versions_version_id_jobs_job_id_get(
+                model_id=self._model_id, version_id=self._version_id, job_id=self._id
+            ).status
+        )
         return self

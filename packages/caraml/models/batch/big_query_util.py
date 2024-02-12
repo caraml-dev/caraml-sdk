@@ -14,10 +14,10 @@
 
 import re
 
-GCP_PROJECT_ID_EXPRESSION = r'^[a-z]([-a-z0-9]*[a-z0-9])?'
-WORD_CHARACTER_EXPRESSION = r'^\w+$'
+GCP_PROJECT_ID_EXPRESSION = r"^[a-z]([-a-z0-9]*[a-z0-9])?"
+WORD_CHARACTER_EXPRESSION = r"^\w+$"
 DEFAULT_CHARACTER_LIMIT = 1024
-COLUMN_NAME_PREFIX_EXCLUSIONS = ['_TABLE_', '_FILE_', '_PARTITION']
+COLUMN_NAME_PREFIX_EXCLUSIONS = ["_TABLE_", "_FILE_", "_PARTITION"]
 
 
 def valid_dataset(dataset: str) -> bool:
@@ -51,7 +51,7 @@ def valid_column(column_name: str) -> bool:
             return False
 
     column_name_max_length = 128
-    pattern = r'^[a-zA-Z_]\w*$'
+    pattern = r"^[a-zA-Z_]\w*$"
     return validate_text(column_name, pattern, column_name_max_length)
 
 
@@ -99,7 +99,9 @@ def valid_table_id(table_id: str) -> bool:
     project_id = components[0]
     dataset = components[1]
     table = components[2]
-    if not validate_text(project_id, GCP_PROJECT_ID_EXPRESSION, DEFAULT_CHARACTER_LIMIT):
+    if not validate_text(
+        project_id, GCP_PROJECT_ID_EXPRESSION, DEFAULT_CHARACTER_LIMIT
+    ):
         return False
     if not valid_dataset(dataset):
         return False

@@ -36,14 +36,17 @@ class SaveMode(Enum):
 
 class BigQuerySink(Sink):
     """
-        Sink contract for BigQuery to create prediction job
+    Sink contract for BigQuery to create prediction job
     """
 
-    def __init__(self, table: str,
-                 staging_bucket: str,
-                 result_column: str,
-                 save_mode: SaveMode = SaveMode.ERRORIFEXISTS,
-                 options: MutableMapping[str, str] = None):
+    def __init__(
+        self,
+        table: str,
+        staging_bucket: str,
+        result_column: str,
+        save_mode: SaveMode = SaveMode.ERRORIFEXISTS,
+        options: MutableMapping[str, str] = None,
+    ):
         """
         :param table: table id of destination BQ table in format `gcp-project.dataset.table_name`
         :param staging_bucket: temporary GCS bucket for staging write into BQ table
@@ -127,11 +130,11 @@ class BigQuerySink(Sink):
         if opts is None:
             opts = {}
         return {
-            'table': self._table,
-            'staging_bucket': self._staging_bucket,
-            'result_column': self._result_column,
-            'save_mode': self._save_mode.value,
-            'options': opts
+            "table": self._table,
+            "staging_bucket": self._staging_bucket,
+            "result_column": self._result_column,
+            "save_mode": self._save_mode.value,
+            "options": opts,
         }
 
     def to_client_config(self) -> client.PredictionJobConfigBigquerySink:
@@ -145,5 +148,5 @@ class BigQuerySink(Sink):
             staging_bucket=self._staging_bucket,
             result_column=self._result_column,
             save_mode=client.SaveMode(self._save_mode.value),
-            options=opts
+            options=opts,
         )

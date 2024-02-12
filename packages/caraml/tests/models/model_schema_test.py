@@ -1,7 +1,14 @@
 import pytest
 import models.client as client
 from models.model_schema import ModelSchema
-from models.observability.inference import InferenceSchema, ValueType, BinaryClassificationOutput, RegressionOutput, RankingOutput
+from models.observability.inference import (
+    InferenceSchema,
+    ValueType,
+    BinaryClassificationOutput,
+    RegressionOutput,
+    RankingOutput,
+)
+
 
 @pytest.mark.unit
 @pytest.mark.parametrize(
@@ -18,7 +25,7 @@ from models.observability.inference import InferenceSchema, ValueType, BinaryCla
                         "featureA": client.ValueType.FLOAT64,
                         "featureB": client.ValueType.INT64,
                         "featureC": client.ValueType.BOOLEAN,
-                        "featureD": client.ValueType.STRING
+                        "featureD": client.ValueType.STRING,
                     },
                     model_prediction_output=client.ModelPredictionOutput(
                         client.BinaryClassificationOutput(
@@ -27,10 +34,10 @@ from models.observability.inference import InferenceSchema, ValueType, BinaryCla
                             positive_class_label="positive",
                             negative_class_label="negative",
                             score_threshold=0.5,
-                            output_class=client.ModelPredictionOutputClass.BINARYCLASSIFICATIONOUTPUT
+                            output_class=client.ModelPredictionOutputClass.BINARYCLASSIFICATIONOUTPUT,
                         )
-                    ) 
-                )
+                    ),
+                ),
             ),
             ModelSchema(
                 id=1,
@@ -42,18 +49,18 @@ from models.observability.inference import InferenceSchema, ValueType, BinaryCla
                         "featureA": ValueType.FLOAT64,
                         "featureB": ValueType.INT64,
                         "featureC": ValueType.BOOLEAN,
-                        "featureD": ValueType.STRING
+                        "featureD": ValueType.STRING,
                     },
                     model_prediction_output=BinaryClassificationOutput(
                         prediction_score_column="prediction_score",
                         actual_label_column="actual_label",
                         positive_class_label="positive",
                         negative_class_label="negative",
-                        score_threshold=0.5
-                    )
+                        score_threshold=0.5,
+                    ),
                 ),
             ),
-            None
+            None,
         ),
         (
             client.ModelSchema(
@@ -66,16 +73,16 @@ from models.observability.inference import InferenceSchema, ValueType, BinaryCla
                         "featureA": client.ValueType.FLOAT64,
                         "featureB": client.ValueType.INT64,
                         "featureC": client.ValueType.BOOLEAN,
-                        "featureD": client.ValueType.STRING
+                        "featureD": client.ValueType.STRING,
                     },
                     model_prediction_output=client.ModelPredictionOutput(
                         client.RegressionOutput(
                             prediction_score_column="prediction_score",
                             actual_score_column="actual_score",
-                            output_class=client.ModelPredictionOutputClass.REGRESSIONOUTPUT
+                            output_class=client.ModelPredictionOutputClass.REGRESSIONOUTPUT,
                         )
-                    ) 
-                )
+                    ),
+                ),
             ),
             ModelSchema(
                 id=2,
@@ -87,15 +94,15 @@ from models.observability.inference import InferenceSchema, ValueType, BinaryCla
                         "featureA": ValueType.FLOAT64,
                         "featureB": ValueType.INT64,
                         "featureC": ValueType.BOOLEAN,
-                        "featureD": ValueType.STRING
+                        "featureD": ValueType.STRING,
                     },
                     model_prediction_output=RegressionOutput(
                         prediction_score_column="prediction_score",
-                        actual_score_column="actual_score"
-                    )
+                        actual_score_column="actual_score",
+                    ),
                 ),
             ),
-            None
+            None,
         ),
         (
             client.ModelSchema(
@@ -108,17 +115,17 @@ from models.observability.inference import InferenceSchema, ValueType, BinaryCla
                         "featureA": client.ValueType.FLOAT64,
                         "featureB": client.ValueType.INT64,
                         "featureC": client.ValueType.BOOLEAN,
-                        "featureD": client.ValueType.STRING
+                        "featureD": client.ValueType.STRING,
                     },
                     model_prediction_output=client.ModelPredictionOutput(
                         client.RankingOutput(
                             rank_score_column="score",
                             prediction_group_id_column="session_id",
                             relevance_score_column="relevance_score",
-                            output_class=client.ModelPredictionOutputClass.RANKINGOUTPUT
+                            output_class=client.ModelPredictionOutputClass.RANKINGOUTPUT,
                         )
-                    ) 
-                )
+                    ),
+                ),
             ),
             ModelSchema(
                 id=3,
@@ -130,18 +137,18 @@ from models.observability.inference import InferenceSchema, ValueType, BinaryCla
                         "featureA": ValueType.FLOAT64,
                         "featureB": ValueType.INT64,
                         "featureC": ValueType.BOOLEAN,
-                        "featureD": ValueType.STRING
+                        "featureD": ValueType.STRING,
                     },
                     model_prediction_output=RankingOutput(
                         rank_score_column="score",
                         prediction_group_id_column="session_id",
-                        relevance_score_column="relevance_score"
-                    )
+                        relevance_score_column="relevance_score",
+                    ),
                 ),
-            ), 
-            None
+            ),
+            None,
         ),
-         (
+        (
             client.ModelSchema(
                 id=3,
                 model_id=1,
@@ -152,21 +159,21 @@ from models.observability.inference import InferenceSchema, ValueType, BinaryCla
                         "featureA": client.ValueType.FLOAT64,
                         "featureB": client.ValueType.INT64,
                         "featureC": client.ValueType.BOOLEAN,
-                        "featureD": client.ValueType.STRING
+                        "featureD": client.ValueType.STRING,
                     },
-                    model_prediction_output=client.ModelPredictionOutput()
-                )
+                    model_prediction_output=client.ModelPredictionOutput(),
+                ),
             ),
             None,
-            ValueError
-        )
-    ]
+            ValueError,
+        ),
+    ],
 )
 def test_model_schema_conversion(response, expected, error):
     if error is None:
         got = ModelSchema.from_model_schema_response(response)
         assert got == expected
-        
+
         client_model_schema = got.to_client_model_schema()
         assert client_model_schema == response
     else:

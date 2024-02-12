@@ -157,7 +157,9 @@ def active_model() -> Optional[Model]:
 
 
 @contextmanager
-def new_model_version(labels: Dict[str, str] = None, model_schema: Optional[ModelSchema] = None):
+def new_model_version(
+    labels: Dict[str, str] = None, model_schema: Optional[ModelSchema] = None
+):
     """
     Create new model version under currently active model
 

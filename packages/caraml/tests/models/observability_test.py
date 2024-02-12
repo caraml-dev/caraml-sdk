@@ -1,7 +1,12 @@
 import pytest
 import pandas as pd
 
-from models.observability.inference import BinaryClassificationOutput, PredictionOutput, ObservationType, RankingOutput
+from models.observability.inference import (
+    BinaryClassificationOutput,
+    PredictionOutput,
+    ObservationType,
+    RankingOutput,
+)
 
 
 @pytest.fixture
@@ -16,8 +21,12 @@ def binary_classification_output() -> BinaryClassificationOutput:
 
 
 @pytest.mark.unit
-def test_prediction_output_encoding(binary_classification_output: BinaryClassificationOutput):
-    encoded_output = PredictionOutput.encode_with_discriminator(binary_classification_output)
+def test_prediction_output_encoding(
+    binary_classification_output: BinaryClassificationOutput,
+):
+    encoded_output = PredictionOutput.encode_with_discriminator(
+        binary_classification_output
+    )
     assert encoded_output == {
         "output_class": "BinaryClassificationOutput",
         "prediction_score_column": "prediction_score",
@@ -32,28 +41,24 @@ def test_prediction_output_encoding(binary_classification_output: BinaryClassifi
 
 
 @pytest.mark.unit
-def test_binary_classification_preprocessing(binary_classification_output: BinaryClassificationOutput):
+def test_binary_classification_preprocessing(
+    binary_classification_output: BinaryClassificationOutput,
+):
     input_df = pd.DataFrame.from_records(
-        [
-            [0.8, "ACCEPTED"],
-            [0.5, "ACCEPTED"],
-            [1.0, "REJECTED"],
-            [0.4, "ACCEPTED"]
-        ],
-        columns=[
-            "prediction_score",
-            "target"
-        ],
+        [[0.8, "ACCEPTED"], [0.5, "ACCEPTED"], [1.0, "REJECTED"], [0.4, "ACCEPTED"]],
+        columns=["prediction_score", "target"],
     )
-    processed_df = binary_classification_output.preprocess(input_df, [ObservationType.PREDICTION, ObservationType.GROUND_TRUTH])
+    processed_df = binary_classification_output.preprocess(
+        input_df, [ObservationType.PREDICTION, ObservationType.GROUND_TRUTH]
+    )
     pd.testing.assert_frame_equal(
         processed_df,
         pd.DataFrame.from_records(
             [
-                [0.8, "ACCEPTED" , "ACCEPTED", 1.0],
+                [0.8, "ACCEPTED", "ACCEPTED", 1.0],
                 [0.5, "ACCEPTED", "ACCEPTED", 1.0],
                 [1.0, "REJECTED", "ACCEPTED", 0.0],
-                [0.4, "ACCEPTED", "REJECTED", 1.0]
+                [0.4, "ACCEPTED", "REJECTED", 1.0],
             ],
             columns=[
                 "prediction_score",
@@ -90,7 +95,9 @@ def test_ranking_preprocessing(ranking_prediction_output: RankingOutput):
             "order_id",
         ],
     )
-    processed_df = ranking_prediction_output.preprocess(input_df, [ObservationType.PREDICTION])
+    processed_df = ranking_prediction_output.preprocess(
+        input_df, [ObservationType.PREDICTION]
+    )
     pd.testing.assert_frame_equal(
         processed_df,
         pd.DataFrame.from_records(
@@ -108,5 +115,5 @@ def test_ranking_preprocessing(ranking_prediction_output: RankingOutput):
                 "_rank",
             ],
         ),
-        check_like=True
+        check_like=True,
     )

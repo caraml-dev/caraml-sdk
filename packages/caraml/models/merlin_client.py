@@ -47,7 +47,6 @@ from models.version import VERSION
 from models.model_schema import ModelSchema
 
 
-
 class MerlinClient:
     def __init__(self, merlin_url: str, use_google_oauth: bool = True):
         self._merlin_url = merlin_url
@@ -215,7 +214,7 @@ class MerlinClient:
         m_list = self._model_api.projects_project_id_models_get(
             project_id=int(prj.id), name=model_name
         )
-        
+
         model = None
         for mdl in m_list:
             if mdl.name == model_name:
@@ -229,13 +228,17 @@ class MerlinClient:
                 )
             model = self._model_api.projects_project_id_models_post(
                 project_id=int(prj.id),
-                body=client.Model(name=model_name, type=model_type.value)
+                body=client.Model(name=model_name, type=model_type.value),
             )
 
         return Model(model, prj, self._api_client)
 
     def new_model_version(
-        self, model_name: str, project_name: str, labels: Dict[str, str] = None, model_schema: Optional[ModelSchema] = None
+        self,
+        model_name: str,
+        project_name: str,
+        labels: Dict[str, str] = None,
+        model_schema: Optional[ModelSchema] = None,
     ) -> ModelVersion:
         """
         Create new model version for the given model and project
@@ -262,7 +265,7 @@ class MerlinClient:
         deployment_mode: DeploymentMode = None,
         autoscaling_policy: AutoscalingPolicy = None,
         protocol: Protocol = None,
-        enable_model_observability: bool = False
+        enable_model_observability: bool = False,
     ) -> VersionEndpoint:
         return model_version.deploy(
             environment_name,
@@ -274,7 +277,7 @@ class MerlinClient:
             deployment_mode,
             autoscaling_policy,
             protocol,
-            enable_model_observability
+            enable_model_observability,
         )
 
     def undeploy(self, model_version: ModelVersion, environment_name: str = None):
@@ -288,7 +291,11 @@ class MerlinClient:
         model_prediction_config: Dict = None,
         protocol: str = "HTTP_JSON",
     ):
-        prediction_config = client.ModelPredictionConfig.from_dict(model_prediction_config) if model_prediction_config is not None else None
+        prediction_config = (
+            client.ModelPredictionConfig.from_dict(model_prediction_config)
+            if model_prediction_config is not None
+            else None
+        )
         request = StandardTransformerSimulationRequest(
             payload=payload,
             headers=headers,

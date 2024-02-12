@@ -47,7 +47,9 @@ mlflow_tracking_url = "http://mlflow.api.merlin.dev"
 created_at = "2019-08-29T08:13:12.377Z"
 updated_at = "2019-08-29T08:13:12.377Z"
 
-default_resource_request = cl.ResourceRequest(min_replica=1, max_replica=1, cpu_request="100m", memory_request="128Mi")
+default_resource_request = cl.ResourceRequest(
+    min_replica=1, max_replica=1, cpu_request="100m", memory_request="128Mi"
+)
 env_1 = cl.Environment(
     id=1,
     name="dev",
@@ -80,6 +82,7 @@ def serialize_datetime(obj):
     if isinstance(obj, datetime.datetime):
         return obj.isoformat()
     raise TypeError("Type is not serializable")
+
 
 @responses.activate
 def test_get_project(mock_url, mock_oauth, use_google_oauth):
@@ -161,11 +164,11 @@ def test_create_model(mock_url, api_client, mock_oauth, use_google_oauth):
 
     client = MerlinClient(mock_url, use_google_oauth=use_google_oauth)
     prj = cl.Project(
-       id=project_id, 
-       name=project_name, 
-       mlflow_tracking_url=mlflow_tracking_url, 
-       created_at=created_at, 
-       updated_at=updated_at
+        id=project_id,
+        name=project_name,
+        mlflow_tracking_url=mlflow_tracking_url,
+        created_at=created_at,
+        updated_at=updated_at,
     )
     project = Project(prj, mock_url, api_client)
     with mock.patch.object(client, "get_project", return_value=project):
@@ -249,11 +252,11 @@ def test_get_model(mock_url, api_client, mock_oauth, use_google_oauth):
 
     client = MerlinClient(mock_url, use_google_oauth=use_google_oauth)
     prj = cl.Project(
-        id=project_id, 
-        name=project_name, 
-        mlflow_tracking_url=mlflow_tracking_url, 
-        created_at=created_at, 
-        updated_at=updated_at
+        id=project_id,
+        name=project_name,
+        mlflow_tracking_url=mlflow_tracking_url,
+        created_at=created_at,
+        updated_at=updated_at,
     )
     project = Project(prj, mock_url, api_client)
     with mock.patch.object(client, "get_project", return_value=project):
@@ -310,11 +313,11 @@ def test_new_model_version(mock_url, api_client, mock_oauth, use_google_oauth):
 
     client = MerlinClient(mock_url, use_google_oauth=use_google_oauth)
     prj = cl.Project(
-        id=project_id, 
-        name=project_name, 
-        mlflow_tracking_url=mlflow_tracking_url, 
-        created_at=created_at, 
-        updated_at=updated_at
+        id=project_id,
+        name=project_name,
+        mlflow_tracking_url=mlflow_tracking_url,
+        created_at=created_at,
+        updated_at=updated_at,
     )
     project = Project(prj, mock_url, api_client)
     mdl = cl.Model(

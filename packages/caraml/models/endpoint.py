@@ -16,9 +16,12 @@ from enum import Enum
 from typing import Dict, Optional
 
 import models.client as client
-from models.autoscaling import (RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
-                                SERVERLESS_DEFAULT_AUTOSCALING_POLICY,
-                                AutoscalingPolicy, MetricsType)
+from models.autoscaling import (
+    RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
+    SERVERLESS_DEFAULT_AUTOSCALING_POLICY,
+    AutoscalingPolicy,
+    MetricsType,
+)
 from models.deployment_mode import DeploymentMode
 from models.environment import Environment
 from models.logger import Logger
@@ -29,11 +32,11 @@ from models.transformer import Transformer
 
 
 class Status(Enum):
-    PENDING = 'pending'
-    RUNNING = 'running'
-    SERVING = 'serving'
-    FAILED = 'failed'
-    TERMINATED = 'terminated'
+    PENDING = "pending"
+    RUNNING = "running"
+    SERVING = "serving"
+    FAILED = "failed"
+    TERMINATED = "terminated"
 
 
 @autostr
@@ -44,18 +47,33 @@ class VersionEndpoint:
             self._protocol = Protocol(endpoint.protocol)
 
         self._url = endpoint.url
-        if self._protocol == Protocol.HTTP_JSON and endpoint.url is not None and ":predict" not in endpoint.url:
+        if (
+            self._protocol == Protocol.HTTP_JSON
+            and endpoint.url is not None
+            and ":predict" not in endpoint.url
+        ):
             self._url = f"{endpoint.url}:predict"
 
         self._status = Status(endpoint.status)
         self._id = endpoint.id
         self._environment_name = endpoint.environment_name
-        self._environment = Environment(endpoint.environment) if endpoint.environment is not None else None
+        self._environment = (
+            Environment(endpoint.environment)
+            if endpoint.environment is not None
+            else None
+        )
         self._env_vars = endpoint.env_vars
         self._logger = Logger.from_logger_response(endpoint.logger)
-        self._resource_request = ResourceRequest.from_response(endpoint.resource_request) if endpoint.resource_request is not None else None
-        self._deployment_mode = DeploymentMode.SERVERLESS if not endpoint.deployment_mode \
+        self._resource_request = (
+            ResourceRequest.from_response(endpoint.resource_request)
+            if endpoint.resource_request is not None
+            else None
+        )
+        self._deployment_mode = (
+            DeploymentMode.SERVERLESS
+            if not endpoint.deployment_mode
             else DeploymentMode(endpoint.deployment_mode)
+        )
 
         if endpoint.autoscaling_policy is None:
             if self._deployment_mode == DeploymentMode.SERVERLESS:
@@ -63,22 +81,26 @@ class VersionEndpoint:
             else:
                 self._autoscaling_policy = RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY
         else:
-            self._autoscaling_policy = AutoscalingPolicy(metrics_type=MetricsType(endpoint.autoscaling_policy.metrics_type),
-                                                         target_value=endpoint.autoscaling_policy.target_value)
+            self._autoscaling_policy = AutoscalingPolicy(
+                metrics_type=MetricsType(endpoint.autoscaling_policy.metrics_type),
+                target_value=endpoint.autoscaling_policy.target_value,
+            )
 
         transformer = endpoint.transformer
         if transformer is not None:
             image = transformer.image if transformer.image is not None else ""
-            transformer_type_value = extract_optional_value_with_default(transformer.transformer_type, TransformerType.STANDARD_TRANSFORMER.value)
+            transformer_type_value = extract_optional_value_with_default(
+                transformer.transformer_type, TransformerType.STANDARD_TRANSFORMER.value
+            )
             transformer_type = TransformerType(transformer_type_value)
-            
+
             transformer_request = None
             if transformer.resource_request is not None:
                 transformer_request = ResourceRequest(
                     min_replica=transformer.resource_request.min_replica,
                     max_replica=transformer.resource_request.max_replica,
                     cpu_request=transformer.resource_request.cpu_request,
-                    memory_request=transformer.resource_request.memory_request
+                    memory_request=transformer.resource_request.memory_request,
                 )
 
             env_vars: Dict[str, str] = {}
@@ -89,20 +111,22 @@ class VersionEndpoint:
                         env_vars[env_var.name] = env_var.value
 
             self._transformer = Transformer(
-                image, 
+                image,
                 id=extract_optional_value_with_default(transformer.id, ""),
-                enabled=extract_optional_value_with_default(transformer.enabled, False), 
+                enabled=extract_optional_value_with_default(transformer.enabled, False),
                 command=transformer.command,
-                args=transformer.args, 
+                args=transformer.args,
                 transformer_type=transformer_type,
-                resource_request=transformer_request, 
+                resource_request=transformer_request,
                 env_vars=env_vars,
             )
 
         if log_url is not None:
             self._log_url = log_url
 
-        self._enable_model_observability = extract_optional_value_with_default(endpoint.enable_model_observability, False)
+        self._enable_model_observability = extract_optional_value_with_default(
+            endpoint.enable_model_observability, False
+        )
 
     @property
     def url(self):
@@ -152,15 +176,15 @@ class VersionEndpoint:
     @property
     def protocol(self) -> Protocol:
         return self._protocol
-    
+
     @property
     def resource_request(self) -> Optional[ResourceRequest]:
         return self._resource_request
-    
+
     @property
     def transformer(self) -> Optional[Transformer]:
         return self._transformer
-    
+
     @property
     def enable_model_observability(self) -> bool:
         return self._enable_model_observability
@@ -183,8 +207,11 @@ class ModelEndpoint:
         self._status = Status(endpoint.status)
         self._id = extract_optional_value_with_default(endpoint.id, 0)
         self._environment_name = endpoint.environment_name
-        self._environment = Environment(endpoint.environment) if endpoint.environment is not None else None
-
+        self._environment = (
+            Environment(endpoint.environment)
+            if endpoint.environment is not None
+            else None
+        )
 
     @property
     def url(self):

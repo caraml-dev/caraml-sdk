@@ -26,7 +26,7 @@ def guess_mlp_ui_url(mlp_api_url: str) -> str:
     return get_url(raw_url)
 
 
-def get_url(raw_url, scheme='http'):
+def get_url(raw_url, scheme="http"):
     """
     Get url or prefix with default scheme if it doesn't have one
     """
@@ -39,9 +39,9 @@ def get_url(raw_url, scheme='http'):
 
 def autostr(cls):
     def __str__(self):
-        return '%s(%s)' % (
+        return "%s(%s)" % (
             type(self).__name__,
-            ', '.join('%s=%s' % item for item in vars(self).items())
+            ", ".join("%s=%s" % item for item in vars(self).items()),
         )
 
     cls.__str__ = __str__
@@ -56,7 +56,7 @@ def valid_name_check(input_name: str) -> bool:
         - can only contain character (a-z) number (0-9) and some limited symbols
     """
     # allowed characters to be included in pattern after backslash
-    pattern = r'[-a-z0-9]+'
+    pattern = r"[-a-z0-9]+"
 
     matching_group = None
     if re.search(pattern, input_name):
@@ -95,6 +95,7 @@ def download_files_from_gcs(gcs_uri: str, destination_path: str):
         dir = os.path.join(destination_path, dirname(artifact_path))
         makedirs(dir, exist_ok=True)
         blob.download_to_filename(os.path.join(destination_path, artifact_path))
+
 
 def extract_optional_value_with_default(opt: Optional[Any], default: Any) -> Any:
     if opt is not None:

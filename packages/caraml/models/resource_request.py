@@ -16,6 +16,7 @@ from typing import Optional
 
 import models.client as client
 
+
 class ResourceRequest:
     """
     The resource requirement and replicas requests for Merlin components (e.g. version endpoint, batch prediction job, image builder).
@@ -46,7 +47,7 @@ class ResourceRequest:
             cpu_request=response.cpu_request,
             memory_request=response.memory_request,
             gpu_request=response.gpu_request,
-            gpu_name=response.gpu_name
+            gpu_name=response.gpu_name,
         )
 
     @property
@@ -99,7 +100,7 @@ class ResourceRequest:
 
     def validate(self):
         if self._min_replica is None and self._max_replica is None:
-            return 
+            return
 
         if self._min_replica > self._max_replica:
             raise Exception("Min replica must be less or equal to max replica")

@@ -26,70 +26,93 @@ from models.client.models.regression_output import RegressionOutput
 from typing import Union, Any, List, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal
 from pydantic import StrictStr, Field
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-MODELPREDICTIONOUTPUT_ONE_OF_SCHEMAS = ["BinaryClassificationOutput", "RankingOutput", "RegressionOutput"]
+MODELPREDICTIONOUTPUT_ONE_OF_SCHEMAS = [
+    "BinaryClassificationOutput",
+    "RankingOutput",
+    "RegressionOutput",
+]
+
 
 class ModelPredictionOutput(BaseModel):
     """
     ModelPredictionOutput
     """
+
     # data type: BinaryClassificationOutput
     oneof_schema_1_validator: Optional[BinaryClassificationOutput] = None
     # data type: RankingOutput
     oneof_schema_2_validator: Optional[RankingOutput] = None
     # data type: RegressionOutput
     oneof_schema_3_validator: Optional[RegressionOutput] = None
-    actual_instance: Optional[Union[BinaryClassificationOutput, RankingOutput, RegressionOutput]] = None
-    one_of_schemas: List[str] = Literal["BinaryClassificationOutput", "RankingOutput", "RegressionOutput"]
+    actual_instance: Optional[
+        Union[BinaryClassificationOutput, RankingOutput, RegressionOutput]
+    ] = None
+    one_of_schemas: List[str] = Literal[
+        "BinaryClassificationOutput", "RankingOutput", "RegressionOutput"
+    ]
 
-    model_config = {
-        "validate_assignment": True
-    }
+    model_config = {"validate_assignment": True}
 
-
-    discriminator_value_class_map: Dict[str, str] = {
-    }
+    discriminator_value_class_map: Dict[str, str] = {}
 
     def __init__(self, *args, **kwargs) -> None:
         if args:
             if len(args) > 1:
-                raise ValueError("If a position argument is used, only 1 is allowed to set `actual_instance`")
+                raise ValueError(
+                    "If a position argument is used, only 1 is allowed to set `actual_instance`"
+                )
             if kwargs:
-                raise ValueError("If a position argument is used, keyword arguments cannot be used.")
+                raise ValueError(
+                    "If a position argument is used, keyword arguments cannot be used."
+                )
             super().__init__(actual_instance=args[0])
         else:
             super().__init__(**kwargs)
 
-    @field_validator('actual_instance')
+    @field_validator("actual_instance")
     def actual_instance_must_validate_oneof(cls, v):
         instance = ModelPredictionOutput.model_construct()
         error_messages = []
         match = 0
         # validate data type: BinaryClassificationOutput
         if not isinstance(v, BinaryClassificationOutput):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `BinaryClassificationOutput`")
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `BinaryClassificationOutput`"
+            )
         else:
             match += 1
         # validate data type: RankingOutput
         if not isinstance(v, RankingOutput):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `RankingOutput`")
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `RankingOutput`"
+            )
         else:
             match += 1
         # validate data type: RegressionOutput
         if not isinstance(v, RegressionOutput):
-            error_messages.append(f"Error! Input type `{type(v)}` is not `RegressionOutput`")
+            error_messages.append(
+                f"Error! Input type `{type(v)}` is not `RegressionOutput`"
+            )
         else:
             match += 1
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when setting `actual_instance` in ModelPredictionOutput with oneOf schemas: BinaryClassificationOutput, RankingOutput, RegressionOutput. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when setting `actual_instance` in ModelPredictionOutput with oneOf schemas: BinaryClassificationOutput, RankingOutput, RegressionOutput. Details: "
+                + ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
-            raise ValueError("No match found when setting `actual_instance` in ModelPredictionOutput with oneOf schemas: BinaryClassificationOutput, RankingOutput, RegressionOutput. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when setting `actual_instance` in ModelPredictionOutput with oneOf schemas: BinaryClassificationOutput, RankingOutput, RegressionOutput. Details: "
+                + ", ".join(error_messages)
+            )
         else:
             return v
 
@@ -107,7 +130,9 @@ class ModelPredictionOutput(BaseModel):
         # use oneOf discriminator to lookup the data type
         _data_type = json.loads(json_str).get("output_class")
         if not _data_type:
-            raise ValueError("Failed to lookup data type from the field `output_class` in the input.")
+            raise ValueError(
+                "Failed to lookup data type from the field `output_class` in the input."
+            )
 
         # check if data type is `BinaryClassificationOutput`
         if _data_type == "BinaryClassificationOutput":
@@ -145,10 +170,16 @@ class ModelPredictionOutput(BaseModel):
 
         if match > 1:
             # more than 1 match
-            raise ValueError("Multiple matches found when deserializing the JSON string into ModelPredictionOutput with oneOf schemas: BinaryClassificationOutput, RankingOutput, RegressionOutput. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "Multiple matches found when deserializing the JSON string into ModelPredictionOutput with oneOf schemas: BinaryClassificationOutput, RankingOutput, RegressionOutput. Details: "
+                + ", ".join(error_messages)
+            )
         elif match == 0:
             # no match
-            raise ValueError("No match found when deserializing the JSON string into ModelPredictionOutput with oneOf schemas: BinaryClassificationOutput, RankingOutput, RegressionOutput. Details: " + ", ".join(error_messages))
+            raise ValueError(
+                "No match found when deserializing the JSON string into ModelPredictionOutput with oneOf schemas: BinaryClassificationOutput, RankingOutput, RegressionOutput. Details: "
+                + ", ".join(error_messages)
+            )
         else:
             return instance
 
@@ -178,5 +209,3 @@ class ModelPredictionOutput(BaseModel):
     def to_str(self) -> str:
         """Returns the string representation of the actual instance"""
         return pprint.pformat(self.model_dump())
-
-

@@ -21,17 +21,22 @@ from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
 from models.client.models.gpu_config import GPUConfig
-from models.client.models.prediction_job_resource_request import PredictionJobResourceRequest
+from models.client.models.prediction_job_resource_request import (
+    PredictionJobResourceRequest,
+)
 from models.client.models.resource_request import ResourceRequest
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class Environment(BaseModel):
     """
     Environment
-    """ # noqa: E501
+    """  # noqa: E501
+
     id: Optional[StrictInt] = None
     name: StrictStr
     cluster: StrictStr
@@ -40,17 +45,28 @@ class Environment(BaseModel):
     gcp_project: Optional[StrictStr] = None
     default_resource_request: Optional[ResourceRequest] = None
     default_transformer_resource_request: Optional[ResourceRequest] = None
-    default_prediction_job_resource_request: Optional[PredictionJobResourceRequest] = None
+    default_prediction_job_resource_request: Optional[
+        PredictionJobResourceRequest
+    ] = None
     gpus: Optional[List[GPUConfig]] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "cluster", "is_default", "region", "gcp_project", "default_resource_request", "default_transformer_resource_request", "default_prediction_job_resource_request", "gpus", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "name",
+        "cluster",
+        "is_default",
+        "region",
+        "gcp_project",
+        "default_resource_request",
+        "default_transformer_resource_request",
+        "default_prediction_job_resource_request",
+        "gpus",
+        "created_at",
+        "updated_at",
+    ]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -78,26 +94,29 @@ class Environment(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of default_resource_request
         if self.default_resource_request:
-            _dict['default_resource_request'] = self.default_resource_request.to_dict()
+            _dict["default_resource_request"] = self.default_resource_request.to_dict()
         # override the default output from pydantic by calling `to_dict()` of default_transformer_resource_request
         if self.default_transformer_resource_request:
-            _dict['default_transformer_resource_request'] = self.default_transformer_resource_request.to_dict()
+            _dict[
+                "default_transformer_resource_request"
+            ] = self.default_transformer_resource_request.to_dict()
         # override the default output from pydantic by calling `to_dict()` of default_prediction_job_resource_request
         if self.default_prediction_job_resource_request:
-            _dict['default_prediction_job_resource_request'] = self.default_prediction_job_resource_request.to_dict()
+            _dict[
+                "default_prediction_job_resource_request"
+            ] = self.default_prediction_job_resource_request.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in gpus (list)
         _items = []
         if self.gpus:
             for _item in self.gpus:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['gpus'] = _items
+            _dict["gpus"] = _items
         return _dict
 
     @classmethod
@@ -109,20 +128,34 @@ class Environment(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "cluster": obj.get("cluster"),
-            "is_default": obj.get("is_default"),
-            "region": obj.get("region"),
-            "gcp_project": obj.get("gcp_project"),
-            "default_resource_request": ResourceRequest.from_dict(obj.get("default_resource_request")) if obj.get("default_resource_request") is not None else None,
-            "default_transformer_resource_request": ResourceRequest.from_dict(obj.get("default_transformer_resource_request")) if obj.get("default_transformer_resource_request") is not None else None,
-            "default_prediction_job_resource_request": PredictionJobResourceRequest.from_dict(obj.get("default_prediction_job_resource_request")) if obj.get("default_prediction_job_resource_request") is not None else None,
-            "gpus": [GPUConfig.from_dict(_item) for _item in obj.get("gpus")] if obj.get("gpus") is not None else None,
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "name": obj.get("name"),
+                "cluster": obj.get("cluster"),
+                "is_default": obj.get("is_default"),
+                "region": obj.get("region"),
+                "gcp_project": obj.get("gcp_project"),
+                "default_resource_request": ResourceRequest.from_dict(
+                    obj.get("default_resource_request")
+                )
+                if obj.get("default_resource_request") is not None
+                else None,
+                "default_transformer_resource_request": ResourceRequest.from_dict(
+                    obj.get("default_transformer_resource_request")
+                )
+                if obj.get("default_transformer_resource_request") is not None
+                else None,
+                "default_prediction_job_resource_request": PredictionJobResourceRequest.from_dict(
+                    obj.get("default_prediction_job_resource_request")
+                )
+                if obj.get("default_prediction_job_resource_request") is not None
+                else None,
+                "gpus": [GPUConfig.from_dict(_item) for _item in obj.get("gpus")]
+                if obj.get("gpus") is not None
+                else None,
+                "created_at": obj.get("created_at"),
+                "updated_at": obj.get("updated_at"),
+            }
+        )
         return _obj
-
-

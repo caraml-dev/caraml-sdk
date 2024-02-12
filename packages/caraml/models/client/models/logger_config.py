@@ -21,24 +21,23 @@ import json
 from typing import Any, ClassVar, Dict, List
 from pydantic import BaseModel, StrictBool
 from models.client.models.logger_mode import LoggerMode
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class LoggerConfig(BaseModel):
     """
     LoggerConfig
-    """ # noqa: E501
+    """  # noqa: E501
+
     enabled: StrictBool
     mode: LoggerMode
     __properties: ClassVar[List[str]] = ["enabled", "mode"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -66,8 +65,7 @@ class LoggerConfig(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         return _dict
@@ -81,10 +79,7 @@ class LoggerConfig(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "enabled": obj.get("enabled"),
-            "mode": obj.get("mode")
-        })
+        _obj = cls.model_validate(
+            {"enabled": obj.get("enabled"), "mode": obj.get("mode")}
+        )
         return _obj
-
-

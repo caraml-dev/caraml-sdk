@@ -25,10 +25,12 @@ class Environment:
         self._is_default = env.is_default if env.is_default is not None else False
         self._default_resource_request = None
         if env.default_resource_request is not None:
-            self._default_resource_request = ResourceRequest(env.default_resource_request.min_replica,
-                                                            env.default_resource_request.max_replica,
-                                                            env.default_resource_request.cpu_request,
-                                                            env.default_resource_request.memory_request)
+            self._default_resource_request = ResourceRequest(
+                env.default_resource_request.min_replica,
+                env.default_resource_request.max_replica,
+                env.default_resource_request.cpu_request,
+                env.default_resource_request.memory_request,
+            )
 
     @property
     def name(self) -> str:

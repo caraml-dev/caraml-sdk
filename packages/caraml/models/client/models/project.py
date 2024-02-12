@@ -21,15 +21,18 @@ from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr
 from models.client.models.label import Label
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class Project(BaseModel):
     """
     Project
-    """ # noqa: E501
+    """  # noqa: E501
+
     id: StrictInt
     name: StrictStr
     mlflow_tracking_url: Optional[StrictStr] = None
@@ -40,13 +43,20 @@ class Project(BaseModel):
     labels: Optional[List[Label]] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "mlflow_tracking_url", "administrators", "readers", "team", "stream", "labels", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "name",
+        "mlflow_tracking_url",
+        "administrators",
+        "readers",
+        "team",
+        "stream",
+        "labels",
+        "created_at",
+        "updated_at",
+    ]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -74,8 +84,7 @@ class Project(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in labels (list)
@@ -84,7 +93,7 @@ class Project(BaseModel):
             for _item in self.labels:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict['labels'] = _items
+            _dict["labels"] = _items
         return _dict
 
     @classmethod
@@ -96,18 +105,20 @@ class Project(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "mlflow_tracking_url": obj.get("mlflow_tracking_url"),
-            "administrators": obj.get("administrators"),
-            "readers": obj.get("readers"),
-            "team": obj.get("team"),
-            "stream": obj.get("stream"),
-            "labels": [Label.from_dict(_item) for _item in obj.get("labels")] if obj.get("labels") is not None else None,
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "name": obj.get("name"),
+                "mlflow_tracking_url": obj.get("mlflow_tracking_url"),
+                "administrators": obj.get("administrators"),
+                "readers": obj.get("readers"),
+                "team": obj.get("team"),
+                "stream": obj.get("stream"),
+                "labels": [Label.from_dict(_item) for _item in obj.get("labels")]
+                if obj.get("labels") is not None
+                else None,
+                "created_at": obj.get("created_at"),
+                "updated_at": obj.get("updated_at"),
+            }
+        )
         return _obj
-
-

@@ -12,19 +12,20 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from models.util import guess_mlp_ui_url, valid_name_check, get_bucket_name, get_gcs_path
+from models.util import (
+    guess_mlp_ui_url,
+    valid_name_check,
+    get_bucket_name,
+    get_gcs_path,
+)
 import pytest
 
 
 @pytest.mark.unit
 def test_name_check():
-    invalid_names = [
-        'test-name,', 'test,name', 'test.name'
-    ]
+    invalid_names = ["test-name,", "test,name", "test.name"]
 
-    valid_names = [
-        'test-name', 'testname'
-    ]
+    valid_names = ["test-name", "testname"]
 
     for name in invalid_names:
         result = valid_name_check(name)
@@ -36,24 +37,33 @@ def test_name_check():
 
 @pytest.mark.unit
 def test_get_bucket_name():
-    gcs_uri = 'gs://some-bucket/mlflow/81/ddd'
-    assert get_bucket_name(gcs_uri) == 'some-bucket'
+    gcs_uri = "gs://some-bucket/mlflow/81/ddd"
+    assert get_bucket_name(gcs_uri) == "some-bucket"
 
 
 @pytest.mark.unit
 def test_get_gcs_path():
-    gcs_uri = 'gs://some-bucket/mlflow/81/ddd'
-    assert get_gcs_path(gcs_uri) == 'mlflow/81/ddd'
+    gcs_uri = "gs://some-bucket/mlflow/81/ddd"
+    assert get_gcs_path(gcs_uri) == "mlflow/81/ddd"
 
-    double_slash_uri_path = 'gs://some-bucket//mlflow/81/ddd'
-    assert get_gcs_path(double_slash_uri_path) == 'mlflow/81/ddd'
+    double_slash_uri_path = "gs://some-bucket//mlflow/81/ddd"
+    assert get_gcs_path(double_slash_uri_path) == "mlflow/81/ddd"
 
 
-@pytest.mark.parametrize("mlp_api_url,expected", [
-    ("http://console.mydomain.com/merlin/api", "http://console.mydomain.com/merlin"),
-    ("https://console.mydomain.com/merlin/api", "https://console.mydomain.com/merlin"),
-    ("console.mydomain.com/merlin/api", "http://console.mydomain.com/merlin"),
-])
+@pytest.mark.parametrize(
+    "mlp_api_url,expected",
+    [
+        (
+            "http://console.mydomain.com/merlin/api",
+            "http://console.mydomain.com/merlin",
+        ),
+        (
+            "https://console.mydomain.com/merlin/api",
+            "https://console.mydomain.com/merlin",
+        ),
+        ("console.mydomain.com/merlin/api", "http://console.mydomain.com/merlin"),
+    ],
+)
 @pytest.mark.unit
 def test_guess_mlp_ui_url(mlp_api_url, expected):
     assert guess_mlp_ui_url(mlp_api_url) == expected

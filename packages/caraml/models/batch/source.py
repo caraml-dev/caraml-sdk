@@ -17,6 +17,7 @@ from typing import Iterable, MutableMapping, Mapping, Any, Optional
 from models.batch.big_query_util import valid_table_id, valid_columns
 import models.client as client
 
+
 class Source(ABC):
     @abstractmethod
     def to_dict(self) -> Mapping[str, Any]:
@@ -25,11 +26,15 @@ class Source(ABC):
 
 class BigQuerySource(Source):
     """
-        Source contract for BigQuery to create prediction job
+    Source contract for BigQuery to create prediction job
     """
 
-    def __init__(self, table: str, features: Iterable[str],
-                 options: MutableMapping[str, str] = None):
+    def __init__(
+        self,
+        table: str,
+        features: Iterable[str],
+        options: MutableMapping[str, str] = None,
+    ):
         """
 
         :param table: table id if the source in format of `gcp-project.dataset.table_name`
@@ -77,8 +82,7 @@ class BigQuerySource(Source):
             return False
         if not isinstance(self._features, list):
             return False
-        if self._options is not None and not isinstance(self._options,
-                                                        MutableMapping):
+        if self._options is not None and not isinstance(self._options, MutableMapping):
             return False
 
         for feature in self._features:
@@ -93,11 +97,7 @@ class BigQuerySource(Source):
         opts = self.options
         if opts is None:
             opts = {}
-        return {
-            'table': self._table,
-            'features': self._features,
-            'options': opts
-        }
+        return {"table": self._table, "features": self._features, "options": opts}
 
     def to_client_bq_source(self) -> client.PredictionJobConfigBigquerySource:
         opts = {}
@@ -106,7 +106,5 @@ class BigQuerySource(Source):
                 opts[k] = v
 
         return client.PredictionJobConfigBigquerySource(
-            table=self._table,
-            features=list(self._features),
-            options=opts
+            table=self._table, features=list(self._features), options=opts
         )
