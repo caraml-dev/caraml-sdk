@@ -76,8 +76,8 @@ def test_deploy(integration_test_url, project_name, use_google_oauth, requests):
         xgb_path, xgb_model = train_xgboost_model()
 
         v.log_pyfunc_model(model_instance=IrisClassifier(),
-                           conda_env="test/pyfunc/env.yaml",
-                           code_dir=["test"],
+                           conda_env="tests/models/pyfunc/env.yaml",
+                           code_dir=["tests/models"],
                            artifacts={"xgb_model": xgb_path})
 
     endpoint = merlin.deploy(v, protocol=Protocol.UPI_V1)
@@ -143,8 +143,8 @@ def test_serve_traffic(integration_test_url, project_name, use_google_oauth, req
         xgb_path, xgb_model = train_xgboost_model()
 
         v.log_pyfunc_model(model_instance=IrisClassifier(),
-                           conda_env="test/pyfunc/env.yaml",
-                           code_dir=["test"],
+                           conda_env="tests/models/pyfunc/env.yaml",
+                           code_dir=["tests/models"],
                            artifacts={"xgb_model": xgb_path})
 
     endpoint = merlin.deploy(v, protocol=Protocol.UPI_V1)
@@ -195,7 +195,7 @@ def validate_iris_upi(model, stub):
 
 
 def train_xgboost_model():
-    model_dir = "test/pyfunc/"
+    model_dir = "tests/models/pyfunc/"
     BST_FILE = "model_1.bst"
 
     iris = load_iris()

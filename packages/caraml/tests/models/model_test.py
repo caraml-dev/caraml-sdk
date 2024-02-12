@@ -995,8 +995,8 @@ class TestModelVersion:
         )
         assert actual_req["config"]["service_account_name"] == "my-service-account"
 
-    @patch("merlin.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
-    @patch("merlin.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
+    @patch("models.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
+    @patch("models.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
     @responses.activate
     def test_create_prediction_job_with_retry_failed(self, version):
         job_1.status = "pending"
@@ -1045,8 +1045,8 @@ class TestModelVersion:
             assert j.name == job_1.name
             assert len(responses.calls) == 6
 
-    @patch("merlin.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
-    @patch("merlin.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
+    @patch("models.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
+    @patch("models.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
     @responses.activate
     def test_create_prediction_job_with_retry_success(self, version):
         job_1.status = "pending"
@@ -1148,8 +1148,8 @@ class TestModelVersion:
         # unpatch
         responses._find_match = types.MethodType(_find_match, responses)
 
-    @patch("merlin.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
-    @patch("merlin.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
+    @patch("models.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
+    @patch("models.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
     @responses.activate
     def test_create_prediction_job_with_retry_pending_then_failed(self, version):
         job_1.status = "pending"
@@ -1734,6 +1734,6 @@ def test_process_conda_env():
     assert "python=3.7.*" in new_conda["dependencies"]
 
     # test file version
-    conda = "test/pyfunc/env.yaml"
+    conda = "tests/models/pyfunc/env.yaml"
     new_conda = merlin.model._process_conda_env(conda_env=conda, python_version="3.7.*")
     assert "python=3.7.*" in new_conda["dependencies"]

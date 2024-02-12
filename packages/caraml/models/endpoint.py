@@ -23,7 +23,7 @@ from models.deployment_mode import DeploymentMode
 from models.environment import Environment
 from models.logger import Logger
 from models.protocol import Protocol
-from models.util import autostr, get_url
+from models.util import autostr, get_url, extract_optional_value_with_default
 from models.resource_request import ResourceRequest
 from models.transformer import Transformer
 

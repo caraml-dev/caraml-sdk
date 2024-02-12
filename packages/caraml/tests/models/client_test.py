@@ -24,7 +24,7 @@ from models.client import ApiClient, Configuration
 from models.merlin_client import MerlinClient
 from models.endpoint import Status
 from models.model import Model, ModelType, Project
-from models.util import guess_mlp_ui_url
+from models.util import guess_mlp_ui_url, extract_optional_value_with_default
 from models.version import VERSION
 
 # get global mock responses that configured in conftest
