@@ -20,9 +20,11 @@ def test_copy_pyfunc_dockerfile():
     path = copy_pyfunc_dockerfile(".")
     assert os.path.isfile(path) == True
     assert os.path.basename(path) == "pyfunc.Dockerfile"
+    os.remove(path) # remove created file after assertion
 
 
 def test_copy_standard_dockerfile():
     path = copy_standard_dockerfile(".")
     assert os.path.isfile(path) == True
     assert os.path.basename(path) == "standard.Dockerfile"
+    os.remove(path) # remove created file after assertion
