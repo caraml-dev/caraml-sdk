@@ -14,6 +14,14 @@ on:
       repository:
         required: true
         description: "caraml app repo : `caraml-dev/merlin` or `caraml-dev/turing`"
+      ref:
+        required: true
+        description: "the branch or tag to generate from"
+        default: "main"
+      openapi_generator_version:
+        required: true
+        description: "Open Api Generator cli version tag"
+        default: v7.1.0
       openapi_schema:
         required: true
         description: "Open Api schema yaml file in the repo"
@@ -21,11 +29,7 @@ on:
       openapi_config:
         required: true
         description: "openapi generator config file"
-        default: "openapi-sdk-codegen.yaml"
-      ref:
-        required: true
-        description: "the branch or tag to generate from"
-        default: "main"
+        default: "openapi-sdk-codegen.yaml"      
   repository_dispatch:
 
 jobs:
@@ -50,7 +54,7 @@ jobs:
         with:
           generator: python
           docker-image: openapitools/openapi-generator-cli
-          generator-tag: v7.1.0
+          generator-tag: ${{ github.event.inputs.openapi_generator_version }}
           openapi-file: ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_schema }}
           config-file: ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_config }}
           command-args: "--package-name ${{ github.event.inputs.module }}.client"
@@ -66,7 +70,7 @@ jobs:
         uses: peter-evans/create-pull-request@v6
         with:
           commit-message: "feat: sync generated client sdk"
-          title: "chore: sync ${{ github.event.inputs.module }} client sdk from Ref: ${{ github.event.inputs.ref_name }}"
+          title: "chore: sync ${{ github.event.inputs.module }} client sdk from Ref: ${{ github.event.inputs.ref }}"
           body: |
             Automatic sync of generated sdk clients from caraml app repositories.
 
