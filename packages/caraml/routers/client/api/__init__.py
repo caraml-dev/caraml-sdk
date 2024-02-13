@@ -1,8 +1,3 @@
-# flake8: noqa
-
-# import apis into api package
-from routers.client.api.ensembler_api import EnsemblerApi
-from routers.client.api.ensembling_job_api import EnsemblingJobApi
-from routers.client.api.project_api import ProjectApi
-from routers.client.api.router_api import RouterApi
-
+# do not import all apis into this module because that uses a lot of memory and stack frames
+# if you need the ability to import all apis from one package, import them with
+# from routers.client.apis import EnsemblerApi
