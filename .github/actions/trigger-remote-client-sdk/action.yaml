@@ -1,5 +1,3 @@
-# This action triggers a workflow in docs repository to pull and copy file changes from a given repository.
-
 name: Trigger Remote Generated Client SDK
 description: Triggers a workflow in caraml-dev/caraml-sdk to sync generated client sdk from a remote repository.
 
