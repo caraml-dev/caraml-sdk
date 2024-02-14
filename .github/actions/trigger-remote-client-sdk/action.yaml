@@ -1,0 +1,54 @@
+# This action triggers a workflow in docs repository to pull and copy file changes from a given repository.
+
+name: Trigger Remote Generated Client SDK
+description: Triggers a workflow in caraml-dev/caraml-sdk to sync generated client sdk from a remote repository.
+
+inputs:
+  module:
+    required: true
+    description: "module name"
+  repository:
+    required: true
+    description: "caraml app repo : `caraml-dev/merlin` or `caraml-dev/turing`"
+  ref:
+    required: true
+    description: "the branch or tag to generate from"
+    default: "main"
+  openapi_generator_version:
+    required: true
+    description: "Open Api Generator cli version tag"
+    default: v7.1.0
+  openapi_schema:
+    required: true
+    description: "Open Api schema yaml file in the repo"
+    default: "swagger.yaml"
+  openapi_config:
+    required: true
+    description: "openapi generator config file"
+    default: "openapi-sdk-codegen.yaml"      
+  credentials:
+    required: true
+    description: 'Github Personal Access Token for write access to caraml-dev/caraml-sdk'
+
+runs:
+  using: composite
+  steps:
+  - name: Trigger Remote Docs Sync Workflow
+    uses: actions/github-script@v6
+    with:
+      github-token: ${{ inputs.credentials }}
+      script: |
+        await github.rest.actions.createWorkflowDispatch({
+          owner: 'caraml-dev',
+          repo: 'caraml-sdk',
+          workflow_id: 'remote_docs_sync.yml',
+          ref: 'main',
+          inputs: {
+            module: '${{ inputs.module }}',
+            repository: '${{ inputs.repository }}',
+            ref: '${{ inputs.ref }}',
+            openapi_generator_version: '${{ inputs.openapi_generator_version }}',
+            openapi_schema: '${{ inputs.openapi_schema }}',
+            openapi_config: '${{ inputs.openapi_config }}',
+          },
+        })
