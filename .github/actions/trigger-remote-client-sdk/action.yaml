@@ -31,7 +31,7 @@ inputs:
 runs:
   using: composite
   steps:
-  - name: Trigger Remote Docs Sync Workflow
+  - name: Trigger Remote Generated Client Sync Workflow
     uses: actions/github-script@v6
     with:
       github-token: ${{ inputs.credentials }}
@@ -39,7 +39,7 @@ runs:
         await github.rest.actions.createWorkflowDispatch({
           owner: 'caraml-dev',
           repo: 'caraml-sdk',
-          workflow_id: 'remote_docs_sync.yml',
+          workflow_id: 'caraml-sync-generated-client.yaml',
           ref: 'main',
           inputs: {
             module: '${{ inputs.module }}',
