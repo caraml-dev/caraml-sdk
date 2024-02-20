@@ -1,0 +1,82 @@
+## TODO: Change this workflow to clone client and generate using open api generator to add it to specific client.
+
+# This workflow tries to pull generated clients' changes from given repo
+
+name: Remote Generated Client Sync
+
+on:
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+    inputs:
+      module:
+        required: true
+        description: "module name"
+      repository:
+        required: true
+        description: "caraml app repo : `caraml-dev/merlin` or `caraml-dev/turing`"
+      ref:
+        required: true
+        description: "the branch or tag to generate from"
+        default: "main"
+      openapi_generator_version:
+        required: true
+        description: "Open Api Generator cli version tag"
+        default: v7.1.0
+      openapi_schema:
+        required: true
+        description: "Open Api schema yaml file in the repo"
+        default: "swagger.yaml"
+      openapi_config:
+        required: true
+        description: "openapi generator config file"
+        default: "openapi-sdk-codegen.yaml"      
+  repository_dispatch:
+
+jobs:
+  sync-sdk-client:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout caraml-dev/caraml-sdk repo
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout ${{ github.event.inputs.repository }} repo
+        uses: actions/checkout@v4
+        with:
+          repository: ${{ github.event.inputs.repository }}
+          path: ${{ github.event.inputs.module }}
+          ref: ${{ github.event.inputs.ref }}
+
+      - name: Generate client code
+        uses: openapi-generators/openapitools-generator-action@v1
+        with:
+          generator: python
+          docker-image: openapitools/openapi-generator-cli
+          generator-tag: ${{ github.event.inputs.openapi_generator_version }}
+          openapi-file: ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_schema }}
+          config-file: ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_config }}
+          command-args: "--package-name ${{ github.event.inputs.module }}.client"
+
+      - name: Sync changes to ${{ github.event.inputs.module }}/client
+        run: |
+          rm -rf packages/caraml/${{ github.event.inputs.module }}/client
+          cp -r python-client/${{ github.event.inputs.module }}/client packages/caraml/${{ github.event.inputs.module }}
+          @echo 'APP_VERSION = "${{ github.event.inputs.ref }}"' > packages/caraml/${{ github.event.inputs.module }}/version.py
+          rm -rf ${{ github.event.inputs.module }}
+          rm -rf python-client
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v6
+        with:
+          commit-message: "feat: sync generated client sdk for ${{ github.event.inputs.module }}"
+          title: "chore: sync ${{ github.event.inputs.module }} client sdk from ${{ github.event.inputs.repository }}:${{ github.event.inputs.ref }}"
+          body: |
+            Automatic sync of generated sdk clients from caraml app repositories.
+
+            module: ${{ github.event.inputs.module }}
+            repo: ${{ github.event.inputs.repository }}
+            ref: ${{ github.event.inputs.ref }}
+          branch: generate-caraml-client-sdk
+          base: main

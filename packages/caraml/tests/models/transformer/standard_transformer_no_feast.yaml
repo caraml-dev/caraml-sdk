@@ -1,0 +1,66 @@
+transformerConfig:
+  preprocess:
+    inputs:
+      - variables:
+          - name: customer_id
+            jsonPath: $.customer.id
+      - tables:
+          - name: driver_table
+            baseTable:
+              fromJson:
+                jsonPath: $.drivers[*]
+                addRowNumber: true
+      - encoders:
+        - name: "vehicle_mapping"
+          ordinalEncoderConfig:
+            defaultValue: "0"
+            targetValueType: "INT"
+            mapping:
+              suv: "1"
+              sedan: "2"
+              mpv: "3"
+        - name: "daily_cycle"
+          cyclicalEncoderConfig:
+            byEpochTime:
+              periodType: "DAY"
+    transformations:
+      - tableTransformation:
+          inputTable: driver_table
+          outputTable: transformed_driver_table
+          steps:
+            - dropColumns: ["id"]
+            - sort:
+                - column: "row_number"
+                  order: DESC
+            - renameColumns:
+                row_number: rank
+            - updateColumns:
+                - column: customer_id
+                  expression: customer_id
+            - scaleColumns:
+              - column: rank
+                standardScalerConfig:
+                  mean: 0.5
+                  std: 0.2
+            - scaleColumns:
+              - column: rating
+                minMaxScalerConfig:
+                  min: 1
+                  max: 5
+            - encodeColumns:
+              - columns:
+                  - vehicle
+                  - previous_vehicle
+                encoder: vehicle_mapping
+              - columns:
+                  - ep_time
+                encoder: daily_cycle
+            - selectColumns: ["customer_id", "name", "rank", "rating", "vehicle", "previous_vehicle", "ep_time_x", "ep_time_y"]
+    outputs:
+      - jsonOutput:
+          jsonTemplate:
+            fields:
+              - fieldName: instances
+                fromTable:
+                  tableName: transformed_driver_table
+                  format: "SPLIT"
