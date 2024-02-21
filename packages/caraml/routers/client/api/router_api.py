@@ -19,7 +19,7 @@ from routers.client.model_utils import (  # noqa: F401
     datetime,
     file_type,
     none_type,
-    validate_and_convert_types
+    validate_and_convert_types,
 )
 from routers.client.model.id_object import IdObject
 from routers.client.model.router_config import RouterConfig
@@ -44,11 +44,7 @@ class RouterApi(object):
             api_client = ApiClient()
         self.api_client = api_client
 
-        def __projects_project_id_router_versions_get(
-            self,
-            project_id,
-            **kwargs
-        ):
+        def __projects_project_id_router_versions_get(self, project_id, **kwargs):
             """Returns Router Version with related parameters  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -89,101 +85,75 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_router_versions_get = _Endpoint(
             settings={
-                'response_type': ([RouterVersion],),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/router-versions',
-                'operation_id': 'projects_project_id_router_versions_get',
-                'http_method': 'GET',
-                'servers': None,
+                "response_type": ([RouterVersion],),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/router-versions",
+                "operation_id": "projects_project_id_router_versions_get",
+                "http_method": "GET",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'ensembler_id',
-                    'is_current',
-                    'status',
+                "all": [
+                    "project_id",
+                    "ensembler_id",
+                    "is_current",
+                    "status",
                 ],
-                'required': [
-                    'project_id',
+                "required": [
+                    "project_id",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "ensembler_id": (int,),
+                    "is_current": (bool,),
+                    "status": ([RouterVersionStatus],),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "ensembler_id": "ensembler_id",
+                    "is_current": "is_current",
+                    "status": "status",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'ensembler_id':
-                        (int,),
-                    'is_current':
-                        (bool,),
-                    'status':
-                        ([RouterVersionStatus],),
+                "location_map": {
+                    "project_id": "path",
+                    "ensembler_id": "query",
+                    "is_current": "query",
+                    "status": "query",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'ensembler_id': 'ensembler_id',
-                    'is_current': 'is_current',
-                    'status': 'status',
+                "collection_format_map": {
+                    "status": "multi",
                 },
-                'location_map': {
-                    'project_id': 'path',
-                    'ensembler_id': 'query',
-                    'is_current': 'query',
-                    'status': 'query',
-                },
-                'collection_format_map': {
-                    'status': 'multi',
-                }
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__projects_project_id_router_versions_get
+            callable=__projects_project_id_router_versions_get,
         )
 
-        def __projects_project_id_routers_get(
-            self,
-            project_id,
-            **kwargs
-        ):
+        def __projects_project_id_routers_get(self, project_id, **kwargs):
             """List routers belonging to project  # noqa: E501
 
             This method makes a synchronous HTTP request by default. To make an
@@ -221,85 +191,62 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_get = _Endpoint(
             settings={
-                'response_type': ([RouterDetails],),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers',
-                'operation_id': 'projects_project_id_routers_get',
-                'http_method': 'GET',
-                'servers': None,
+                "response_type": ([RouterDetails],),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers",
+                "operation_id": "projects_project_id_routers_get",
+                "http_method": "GET",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
+                "all": [
+                    "project_id",
                 ],
-                'required': [
-                    'project_id',
+                "required": [
+                    "project_id",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
+                "location_map": {
+                    "project_id": "path",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_get
+            callable=__projects_project_id_routers_get,
         )
 
         def __projects_project_id_routers_post(
-            self,
-            project_id,
-            router_config,
-            **kwargs
+            self, project_id, router_config, **kwargs
         ):
             """Create new router in project  # noqa: E501
 
@@ -339,94 +286,67 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_config'] = \
-                router_config
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_config"] = router_config
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_post = _Endpoint(
             settings={
-                'response_type': (RouterDetails,),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers',
-                'operation_id': 'projects_project_id_routers_post',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (RouterDetails,),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers",
+                "operation_id": "projects_project_id_routers_post",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_config',
+                "all": [
+                    "project_id",
+                    "router_config",
                 ],
-                'required': [
-                    'project_id',
-                    'router_config',
+                "required": [
+                    "project_id",
+                    "router_config",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_config": (RouterConfig,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_config':
-                        (RouterConfig,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_config": "body",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_config': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_post
+            callable=__projects_project_id_routers_post,
         )
 
         def __projects_project_id_routers_router_id_delete(
-            self,
-            project_id,
-            router_id,
-            **kwargs
+            self, project_id, router_id, **kwargs
         ):
             """Delete router  # noqa: E501
 
@@ -466,93 +386,68 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_id'] = \
-                router_id
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_id"] = router_id
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_router_id_delete = _Endpoint(
             settings={
-                'response_type': (IdObject,),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers/{router_id}',
-                'operation_id': 'projects_project_id_routers_router_id_delete',
-                'http_method': 'DELETE',
-                'servers': None,
+                "response_type": (IdObject,),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers/{router_id}",
+                "operation_id": "projects_project_id_routers_router_id_delete",
+                "http_method": "DELETE",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_id',
+                "all": [
+                    "project_id",
+                    "router_id",
                 ],
-                'required': [
-                    'project_id',
-                    'router_id',
+                "required": [
+                    "project_id",
+                    "router_id",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_id": (int,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "router_id": "router_id",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_id':
-                        (int,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_id": "path",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'router_id': 'router_id',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_id': 'path',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_router_id_delete
+            callable=__projects_project_id_routers_router_id_delete,
         )
 
         def __projects_project_id_routers_router_id_deploy_post(
-            self,
-            project_id,
-            router_id,
-            **kwargs
+            self, project_id, router_id, **kwargs
         ):
             """Deploy the current router configuration  # noqa: E501
 
@@ -592,93 +487,68 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_id'] = \
-                router_id
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_id"] = router_id
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_router_id_deploy_post = _Endpoint(
             settings={
-                'response_type': (RouterIdAndVersion,),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers/{router_id}/deploy',
-                'operation_id': 'projects_project_id_routers_router_id_deploy_post',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (RouterIdAndVersion,),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers/{router_id}/deploy",
+                "operation_id": "projects_project_id_routers_router_id_deploy_post",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_id',
+                "all": [
+                    "project_id",
+                    "router_id",
                 ],
-                'required': [
-                    'project_id',
-                    'router_id',
+                "required": [
+                    "project_id",
+                    "router_id",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_id": (int,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "router_id": "router_id",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_id':
-                        (int,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_id": "path",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'router_id': 'router_id',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_id': 'path',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_router_id_deploy_post
+            callable=__projects_project_id_routers_router_id_deploy_post,
         )
 
         def __projects_project_id_routers_router_id_events_get(
-            self,
-            project_id,
-            router_id,
-            **kwargs
+            self, project_id, router_id, **kwargs
         ):
             """Get deployment events associated with this router  # noqa: E501
 
@@ -718,93 +588,68 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_id'] = \
-                router_id
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_id"] = router_id
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_router_id_events_get = _Endpoint(
             settings={
-                'response_type': (RouterEvents,),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers/{router_id}/events',
-                'operation_id': 'projects_project_id_routers_router_id_events_get',
-                'http_method': 'GET',
-                'servers': None,
+                "response_type": (RouterEvents,),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers/{router_id}/events",
+                "operation_id": "projects_project_id_routers_router_id_events_get",
+                "http_method": "GET",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_id',
+                "all": [
+                    "project_id",
+                    "router_id",
                 ],
-                'required': [
-                    'project_id',
-                    'router_id',
+                "required": [
+                    "project_id",
+                    "router_id",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_id": (int,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "router_id": "router_id",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_id':
-                        (int,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_id": "path",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'router_id': 'router_id',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_id': 'path',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_router_id_events_get
+            callable=__projects_project_id_routers_router_id_events_get,
         )
 
         def __projects_project_id_routers_router_id_get(
-            self,
-            project_id,
-            router_id,
-            **kwargs
+            self, project_id, router_id, **kwargs
         ):
             """Get router belonging to project by ID  # noqa: E501
 
@@ -844,94 +689,68 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_id'] = \
-                router_id
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_id"] = router_id
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_router_id_get = _Endpoint(
             settings={
-                'response_type': (RouterDetails,),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers/{router_id}',
-                'operation_id': 'projects_project_id_routers_router_id_get',
-                'http_method': 'GET',
-                'servers': None,
+                "response_type": (RouterDetails,),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers/{router_id}",
+                "operation_id": "projects_project_id_routers_router_id_get",
+                "http_method": "GET",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_id',
+                "all": [
+                    "project_id",
+                    "router_id",
                 ],
-                'required': [
-                    'project_id',
-                    'router_id',
+                "required": [
+                    "project_id",
+                    "router_id",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_id": (int,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "router_id": "router_id",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_id':
-                        (int,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_id": "path",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'router_id': 'router_id',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_id': 'path',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_router_id_get
+            callable=__projects_project_id_routers_router_id_get,
         )
 
         def __projects_project_id_routers_router_id_put(
-            self,
-            project_id,
-            router_id,
-            router_config,
-            **kwargs
+            self, project_id, router_id, router_config, **kwargs
         ):
             """Update router  # noqa: E501
 
@@ -972,102 +791,73 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_id'] = \
-                router_id
-            kwargs['router_config'] = \
-                router_config
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_id"] = router_id
+            kwargs["router_config"] = router_config
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_router_id_put = _Endpoint(
             settings={
-                'response_type': (RouterDetails,),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers/{router_id}',
-                'operation_id': 'projects_project_id_routers_router_id_put',
-                'http_method': 'PUT',
-                'servers': None,
+                "response_type": (RouterDetails,),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers/{router_id}",
+                "operation_id": "projects_project_id_routers_router_id_put",
+                "http_method": "PUT",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_id',
-                    'router_config',
+                "all": [
+                    "project_id",
+                    "router_id",
+                    "router_config",
                 ],
-                'required': [
-                    'project_id',
-                    'router_id',
-                    'router_config',
+                "required": [
+                    "project_id",
+                    "router_id",
+                    "router_config",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_id": (int,),
+                    "router_config": (RouterConfig,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "router_id": "router_id",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_id':
-                        (int,),
-                    'router_config':
-                        (RouterConfig,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_id": "path",
+                    "router_config": "body",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'router_id': 'router_id',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_id': 'path',
-                    'router_config': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_router_id_put
+            callable=__projects_project_id_routers_router_id_put,
         )
 
         def __projects_project_id_routers_router_id_undeploy_post(
-            self,
-            project_id,
-            router_id,
-            **kwargs
+            self, project_id, router_id, **kwargs
         ):
             """Undeploy router configuration  # noqa: E501
 
@@ -1107,93 +897,68 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_id'] = \
-                router_id
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_id"] = router_id
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_router_id_undeploy_post = _Endpoint(
             settings={
-                'response_type': (RouterIdObject,),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers/{router_id}/undeploy',
-                'operation_id': 'projects_project_id_routers_router_id_undeploy_post',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (RouterIdObject,),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers/{router_id}/undeploy",
+                "operation_id": "projects_project_id_routers_router_id_undeploy_post",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_id',
+                "all": [
+                    "project_id",
+                    "router_id",
                 ],
-                'required': [
-                    'project_id',
-                    'router_id',
+                "required": [
+                    "project_id",
+                    "router_id",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_id": (int,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "router_id": "router_id",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_id':
-                        (int,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_id": "path",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'router_id': 'router_id',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_id': 'path',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_router_id_undeploy_post
+            callable=__projects_project_id_routers_router_id_undeploy_post,
         )
 
         def __projects_project_id_routers_router_id_versions_get(
-            self,
-            project_id,
-            router_id,
-            **kwargs
+            self, project_id, router_id, **kwargs
         ):
             """List router config versions  # noqa: E501
 
@@ -1233,94 +998,68 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_id'] = \
-                router_id
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_id"] = router_id
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_router_id_versions_get = _Endpoint(
             settings={
-                'response_type': ([RouterVersion],),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers/{router_id}/versions',
-                'operation_id': 'projects_project_id_routers_router_id_versions_get',
-                'http_method': 'GET',
-                'servers': None,
+                "response_type": ([RouterVersion],),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers/{router_id}/versions",
+                "operation_id": "projects_project_id_routers_router_id_versions_get",
+                "http_method": "GET",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_id',
+                "all": [
+                    "project_id",
+                    "router_id",
                 ],
-                'required': [
-                    'project_id',
-                    'router_id',
+                "required": [
+                    "project_id",
+                    "router_id",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_id": (int,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "router_id": "router_id",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_id':
-                        (int,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_id": "path",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'router_id': 'router_id',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_id': 'path',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_router_id_versions_get
+            callable=__projects_project_id_routers_router_id_versions_get,
         )
 
         def __projects_project_id_routers_router_id_versions_post(
-            self,
-            project_id,
-            router_id,
-            router_version_config,
-            **kwargs
+            self, project_id, router_id, router_version_config, **kwargs
         ):
             """Create router version without deploying it  # noqa: E501
 
@@ -1361,103 +1100,73 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_id'] = \
-                router_id
-            kwargs['router_version_config'] = \
-                router_version_config
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_id"] = router_id
+            kwargs["router_version_config"] = router_version_config
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_router_id_versions_post = _Endpoint(
             settings={
-                'response_type': (RouterVersion,),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers/{router_id}/versions',
-                'operation_id': 'projects_project_id_routers_router_id_versions_post',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (RouterVersion,),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers/{router_id}/versions",
+                "operation_id": "projects_project_id_routers_router_id_versions_post",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_id',
-                    'router_version_config',
+                "all": [
+                    "project_id",
+                    "router_id",
+                    "router_version_config",
                 ],
-                'required': [
-                    'project_id',
-                    'router_id',
-                    'router_version_config',
+                "required": [
+                    "project_id",
+                    "router_id",
+                    "router_version_config",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_id": (int,),
+                    "router_version_config": (RouterVersionConfig,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "router_id": "router_id",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_id':
-                        (int,),
-                    'router_version_config':
-                        (RouterVersionConfig,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_id": "path",
+                    "router_version_config": "body",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'router_id': 'router_id',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_id': 'path',
-                    'router_version_config': 'body',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [
-                    'application/json'
-                ]
+                "accept": ["application/json"],
+                "content_type": ["application/json"],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_router_id_versions_post
+            callable=__projects_project_id_routers_router_id_versions_post,
         )
 
         def __projects_project_id_routers_router_id_versions_version_delete(
-            self,
-            project_id,
-            router_id,
-            version,
-            **kwargs
+            self, project_id, router_id, version, **kwargs
         ):
             """Delete router version  # noqa: E501
 
@@ -1498,102 +1207,74 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_id'] = \
-                router_id
-            kwargs['version'] = \
-                version
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_id"] = router_id
+            kwargs["version"] = version
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_router_id_versions_version_delete = _Endpoint(
             settings={
-                'response_type': (RouterIdAndVersion,),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers/{router_id}/versions/{version}',
-                'operation_id': 'projects_project_id_routers_router_id_versions_version_delete',
-                'http_method': 'DELETE',
-                'servers': None,
+                "response_type": (RouterIdAndVersion,),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers/{router_id}/versions/{version}",
+                "operation_id": "projects_project_id_routers_router_id_versions_version_delete",
+                "http_method": "DELETE",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_id',
-                    'version',
+                "all": [
+                    "project_id",
+                    "router_id",
+                    "version",
                 ],
-                'required': [
-                    'project_id',
-                    'router_id',
-                    'version',
+                "required": [
+                    "project_id",
+                    "router_id",
+                    "version",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_id": (int,),
+                    "version": (int,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "router_id": "router_id",
+                    "version": "version",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_id':
-                        (int,),
-                    'version':
-                        (int,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_id": "path",
+                    "version": "path",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'router_id': 'router_id',
-                    'version': 'version',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_id': 'path',
-                    'version': 'path',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_router_id_versions_version_delete
+            callable=__projects_project_id_routers_router_id_versions_version_delete,
         )
 
         def __projects_project_id_routers_router_id_versions_version_deploy_post(
-            self,
-            project_id,
-            router_id,
-            version,
-            **kwargs
+            self, project_id, router_id, version, **kwargs
         ):
             """Deploy specified version of router configuration  # noqa: E501
 
@@ -1634,102 +1315,74 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_id'] = \
-                router_id
-            kwargs['version'] = \
-                version
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_id"] = router_id
+            kwargs["version"] = version
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_router_id_versions_version_deploy_post = _Endpoint(
             settings={
-                'response_type': (RouterIdAndVersion,),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers/{router_id}/versions/{version}/deploy',
-                'operation_id': 'projects_project_id_routers_router_id_versions_version_deploy_post',
-                'http_method': 'POST',
-                'servers': None,
+                "response_type": (RouterIdAndVersion,),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers/{router_id}/versions/{version}/deploy",
+                "operation_id": "projects_project_id_routers_router_id_versions_version_deploy_post",
+                "http_method": "POST",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_id',
-                    'version',
+                "all": [
+                    "project_id",
+                    "router_id",
+                    "version",
                 ],
-                'required': [
-                    'project_id',
-                    'router_id',
-                    'version',
+                "required": [
+                    "project_id",
+                    "router_id",
+                    "version",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_id": (int,),
+                    "version": (int,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "router_id": "router_id",
+                    "version": "version",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_id':
-                        (int,),
-                    'version':
-                        (int,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_id": "path",
+                    "version": "path",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'router_id': 'router_id',
-                    'version': 'version',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_id': 'path',
-                    'version': 'path',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_router_id_versions_version_deploy_post
+            callable=__projects_project_id_routers_router_id_versions_version_deploy_post,
         )
 
         def __projects_project_id_routers_router_id_versions_version_get(
-            self,
-            project_id,
-            router_id,
-            version,
-            **kwargs
+            self, project_id, router_id, version, **kwargs
         ):
             """Get specific router config version  # noqa: E501
 
@@ -1770,92 +1423,68 @@ class RouterApi(object):
                     If the method is called asynchronously, returns the request
                     thread.
             """
-            kwargs['async_req'] = kwargs.get(
-                'async_req', False
+            kwargs["async_req"] = kwargs.get("async_req", False)
+            kwargs["_return_http_data_only"] = kwargs.get(
+                "_return_http_data_only", True
             )
-            kwargs['_return_http_data_only'] = kwargs.get(
-                '_return_http_data_only', True
-            )
-            kwargs['_preload_content'] = kwargs.get(
-                '_preload_content', True
-            )
-            kwargs['_request_timeout'] = kwargs.get(
-                '_request_timeout', None
-            )
-            kwargs['_check_input_type'] = kwargs.get(
-                '_check_input_type', True
-            )
-            kwargs['_check_return_type'] = kwargs.get(
-                '_check_return_type', True
-            )
-            kwargs['_host_index'] = kwargs.get('_host_index')
-            kwargs['project_id'] = \
-                project_id
-            kwargs['router_id'] = \
-                router_id
-            kwargs['version'] = \
-                version
+            kwargs["_preload_content"] = kwargs.get("_preload_content", True)
+            kwargs["_request_timeout"] = kwargs.get("_request_timeout", None)
+            kwargs["_check_input_type"] = kwargs.get("_check_input_type", True)
+            kwargs["_check_return_type"] = kwargs.get("_check_return_type", True)
+            kwargs["_host_index"] = kwargs.get("_host_index")
+            kwargs["project_id"] = project_id
+            kwargs["router_id"] = router_id
+            kwargs["version"] = version
             return self.call_with_http_info(**kwargs)
 
         self.projects_project_id_routers_router_id_versions_version_get = _Endpoint(
             settings={
-                'response_type': (RouterVersion,),
-                'auth': [],
-                'endpoint_path': '/projects/{project_id}/routers/{router_id}/versions/{version}',
-                'operation_id': 'projects_project_id_routers_router_id_versions_version_get',
-                'http_method': 'GET',
-                'servers': None,
+                "response_type": (RouterVersion,),
+                "auth": [],
+                "endpoint_path": "/projects/{project_id}/routers/{router_id}/versions/{version}",
+                "operation_id": "projects_project_id_routers_router_id_versions_version_get",
+                "http_method": "GET",
+                "servers": None,
             },
             params_map={
-                'all': [
-                    'project_id',
-                    'router_id',
-                    'version',
+                "all": [
+                    "project_id",
+                    "router_id",
+                    "version",
                 ],
-                'required': [
-                    'project_id',
-                    'router_id',
-                    'version',
+                "required": [
+                    "project_id",
+                    "router_id",
+                    "version",
                 ],
-                'nullable': [
-                ],
-                'enum': [
-                ],
-                'validation': [
-                ]
+                "nullable": [],
+                "enum": [],
+                "validation": [],
             },
             root_map={
-                'validations': {
+                "validations": {},
+                "allowed_values": {},
+                "openapi_types": {
+                    "project_id": (int,),
+                    "router_id": (int,),
+                    "version": (int,),
                 },
-                'allowed_values': {
+                "attribute_map": {
+                    "project_id": "project_id",
+                    "router_id": "router_id",
+                    "version": "version",
                 },
-                'openapi_types': {
-                    'project_id':
-                        (int,),
-                    'router_id':
-                        (int,),
-                    'version':
-                        (int,),
+                "location_map": {
+                    "project_id": "path",
+                    "router_id": "path",
+                    "version": "path",
                 },
-                'attribute_map': {
-                    'project_id': 'project_id',
-                    'router_id': 'router_id',
-                    'version': 'version',
-                },
-                'location_map': {
-                    'project_id': 'path',
-                    'router_id': 'path',
-                    'version': 'path',
-                },
-                'collection_format_map': {
-                }
+                "collection_format_map": {},
             },
             headers_map={
-                'accept': [
-                    'application/json'
-                ],
-                'content_type': [],
+                "accept": ["application/json"],
+                "content_type": [],
             },
             api_client=api_client,
-            callable=__projects_project_id_routers_router_id_versions_version_get
+            callable=__projects_project_id_routers_router_id_versions_version_get,
         )

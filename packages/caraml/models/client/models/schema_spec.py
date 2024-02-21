@@ -22,26 +22,30 @@ from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
 from models.client.models.model_prediction_output import ModelPredictionOutput
 from models.client.models.value_type import ValueType
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class SchemaSpec(BaseModel):
     """
     SchemaSpec
-    """ # noqa: E501
+    """  # noqa: E501
+
     prediction_id_column: StrictStr
     model_prediction_output: ModelPredictionOutput
     tag_columns: Optional[List[StrictStr]] = None
     feature_types: Dict[str, ValueType]
-    __properties: ClassVar[List[str]] = ["prediction_id_column", "model_prediction_output", "tag_columns", "feature_types"]
+    __properties: ClassVar[List[str]] = [
+        "prediction_id_column",
+        "model_prediction_output",
+        "tag_columns",
+        "feature_types",
+    ]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -69,13 +73,12 @@ class SchemaSpec(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of model_prediction_output
         if self.model_prediction_output:
-            _dict['model_prediction_output'] = self.model_prediction_output.to_dict()
+            _dict["model_prediction_output"] = self.model_prediction_output.to_dict()
         return _dict
 
     @classmethod
@@ -87,12 +90,18 @@ class SchemaSpec(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "prediction_id_column": obj.get("prediction_id_column"),
-            "model_prediction_output": ModelPredictionOutput.from_dict(obj.get("model_prediction_output")) if obj.get("model_prediction_output") is not None else None,
-            "tag_columns": obj.get("tag_columns"),
-            "feature_types": dict((_k, _v) for _k, _v in obj.get("feature_types").items())
-        })
+        _obj = cls.model_validate(
+            {
+                "prediction_id_column": obj.get("prediction_id_column"),
+                "model_prediction_output": ModelPredictionOutput.from_dict(
+                    obj.get("model_prediction_output")
+                )
+                if obj.get("model_prediction_output") is not None
+                else None,
+                "tag_columns": obj.get("tag_columns"),
+                "feature_types": dict(
+                    (_k, _v) for _k, _v in obj.get("feature_types").items()
+                ),
+            }
+        )
         return _obj
-
-

@@ -19,7 +19,6 @@ import re  # noqa: F401
 from enum import Enum
 
 
-
 try:
     from typing import Self
 except ImportError:
@@ -44,5 +43,3 @@ class SaveMode(int, Enum):
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of SaveMode from a JSON string"""
         return cls(json.loads(json_str))
-
-

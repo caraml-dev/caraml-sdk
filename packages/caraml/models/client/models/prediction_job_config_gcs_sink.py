@@ -22,27 +22,32 @@ from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
 from models.client.models.file_format import FileFormat
 from models.client.models.save_mode import SaveMode
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class PredictionJobConfigGcsSink(BaseModel):
     """
     PredictionJobConfigGcsSink
-    """ # noqa: E501
+    """  # noqa: E501
+
     format: Optional[FileFormat] = None
     uri: Optional[StrictStr] = None
     result_column: Optional[StrictStr] = None
     save_mode: Optional[SaveMode] = None
     options: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = ["format", "uri", "result_column", "save_mode", "options"]
+    __properties: ClassVar[List[str]] = [
+        "format",
+        "uri",
+        "result_column",
+        "save_mode",
+        "options",
+    ]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,8 +75,7 @@ class PredictionJobConfigGcsSink(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         return _dict
@@ -85,13 +89,13 @@ class PredictionJobConfigGcsSink(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "format": obj.get("format"),
-            "uri": obj.get("uri"),
-            "result_column": obj.get("result_column"),
-            "save_mode": obj.get("save_mode"),
-            "options": obj.get("options")
-        })
+        _obj = cls.model_validate(
+            {
+                "format": obj.get("format"),
+                "uri": obj.get("uri"),
+                "result_column": obj.get("result_column"),
+                "save_mode": obj.get("save_mode"),
+                "options": obj.get("options"),
+            }
+        )
         return _obj
-
-

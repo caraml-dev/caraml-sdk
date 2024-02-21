@@ -20,37 +20,50 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr, field_validator
-from models.client.models.prediction_job_config_model_result import PredictionJobConfigModelResult
+from models.client.models.prediction_job_config_model_result import (
+    PredictionJobConfigModelResult,
+)
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class PredictionJobConfigModel(BaseModel):
     """
     PredictionJobConfigModel
-    """ # noqa: E501
-    type: Optional[StrictStr] = 'INVALID_MODEL_TYPE'
+    """  # noqa: E501
+
+    type: Optional[StrictStr] = "INVALID_MODEL_TYPE"
     uri: Optional[StrictStr] = None
     result: Optional[PredictionJobConfigModelResult] = None
     options: Optional[Dict[str, StrictStr]] = None
     __properties: ClassVar[List[str]] = ["type", "uri", "result", "options"]
 
-    @field_validator('type')
+    @field_validator("type")
     def type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in ('INVALID_MODEL_TYPE', 'XGBOOST', 'TENSORFLOW', 'SKLEARN', 'PYTORCH', 'ONNX', 'PYFUNC', 'PYFUNC_V2', 'CUSTOM'):
-            raise ValueError("must be one of enum values ('INVALID_MODEL_TYPE', 'XGBOOST', 'TENSORFLOW', 'SKLEARN', 'PYTORCH', 'ONNX', 'PYFUNC', 'PYFUNC_V2', 'CUSTOM')")
+        if value not in (
+            "INVALID_MODEL_TYPE",
+            "XGBOOST",
+            "TENSORFLOW",
+            "SKLEARN",
+            "PYTORCH",
+            "ONNX",
+            "PYFUNC",
+            "PYFUNC_V2",
+            "CUSTOM",
+        ):
+            raise ValueError(
+                "must be one of enum values ('INVALID_MODEL_TYPE', 'XGBOOST', 'TENSORFLOW', 'SKLEARN', 'PYTORCH', 'ONNX', 'PYFUNC', 'PYFUNC_V2', 'CUSTOM')"
+            )
         return value
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -78,13 +91,12 @@ class PredictionJobConfigModel(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of result
         if self.result:
-            _dict['result'] = self.result.to_dict()
+            _dict["result"] = self.result.to_dict()
         return _dict
 
     @classmethod
@@ -96,12 +108,16 @@ class PredictionJobConfigModel(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "type": obj.get("type") if obj.get("type") is not None else 'INVALID_MODEL_TYPE',
-            "uri": obj.get("uri"),
-            "result": PredictionJobConfigModelResult.from_dict(obj.get("result")) if obj.get("result") is not None else None,
-            "options": obj.get("options")
-        })
+        _obj = cls.model_validate(
+            {
+                "type": obj.get("type")
+                if obj.get("type") is not None
+                else "INVALID_MODEL_TYPE",
+                "uri": obj.get("uri"),
+                "result": PredictionJobConfigModelResult.from_dict(obj.get("result"))
+                if obj.get("result") is not None
+                else None,
+                "options": obj.get("options"),
+            }
+        )
         return _obj
-
-

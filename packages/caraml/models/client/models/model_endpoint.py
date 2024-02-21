@@ -24,15 +24,18 @@ from models.client.models.endpoint_status import EndpointStatus
 from models.client.models.environment import Environment
 from models.client.models.model_endpoint_rule import ModelEndpointRule
 from models.client.models.protocol import Protocol
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class ModelEndpoint(BaseModel):
     """
     ModelEndpoint
-    """ # noqa: E501
+    """  # noqa: E501
+
     id: Optional[StrictInt] = None
     model_id: Optional[StrictInt] = None
     model: Optional[Model] = None
@@ -44,13 +47,21 @@ class ModelEndpoint(BaseModel):
     protocol: Optional[Protocol] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["id", "model_id", "model", "status", "url", "rule", "environment_name", "environment", "protocol", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "model_id",
+        "model",
+        "status",
+        "url",
+        "rule",
+        "environment_name",
+        "environment",
+        "protocol",
+        "created_at",
+        "updated_at",
+    ]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -78,19 +89,18 @@ class ModelEndpoint(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of model
         if self.model:
-            _dict['model'] = self.model.to_dict()
+            _dict["model"] = self.model.to_dict()
         # override the default output from pydantic by calling `to_dict()` of rule
         if self.rule:
-            _dict['rule'] = self.rule.to_dict()
+            _dict["rule"] = self.rule.to_dict()
         # override the default output from pydantic by calling `to_dict()` of environment
         if self.environment:
-            _dict['environment'] = self.environment.to_dict()
+            _dict["environment"] = self.environment.to_dict()
         return _dict
 
     @classmethod
@@ -102,22 +112,31 @@ class ModelEndpoint(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "model_id": obj.get("model_id"),
-            "model": Model.from_dict(obj.get("model")) if obj.get("model") is not None else None,
-            "status": obj.get("status"),
-            "url": obj.get("url"),
-            "rule": ModelEndpointRule.from_dict(obj.get("rule")) if obj.get("rule") is not None else None,
-            "environment_name": obj.get("environment_name"),
-            "environment": Environment.from_dict(obj.get("environment")) if obj.get("environment") is not None else None,
-            "protocol": obj.get("protocol"),
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "model_id": obj.get("model_id"),
+                "model": Model.from_dict(obj.get("model"))
+                if obj.get("model") is not None
+                else None,
+                "status": obj.get("status"),
+                "url": obj.get("url"),
+                "rule": ModelEndpointRule.from_dict(obj.get("rule"))
+                if obj.get("rule") is not None
+                else None,
+                "environment_name": obj.get("environment_name"),
+                "environment": Environment.from_dict(obj.get("environment"))
+                if obj.get("environment") is not None
+                else None,
+                "protocol": obj.get("protocol"),
+                "created_at": obj.get("created_at"),
+                "updated_at": obj.get("updated_at"),
+            }
+        )
         return _obj
 
+
 from models.client.models.model import Model
+
 # TODO: Rewrite to not use raise_errors
 ModelEndpoint.model_rebuild(raise_errors=False)
-

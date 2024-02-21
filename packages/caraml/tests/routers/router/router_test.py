@@ -489,9 +489,7 @@ def test_wait_for_version_status(
     turing.set_project(active_project.name)
 
     base_router = turing.Router.from_open_api(generic_router)
-    generic_router_version.status = routers.client.models.RouterVersionStatus(
-        "pending"
-    )
+    generic_router_version.status = routers.client.models.RouterVersionStatus("pending")
 
     responses.add(
         method="GET",

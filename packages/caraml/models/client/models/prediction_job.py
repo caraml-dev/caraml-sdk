@@ -22,15 +22,18 @@ from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr
 from models.client.models.config import Config
 from models.client.models.environment import Environment
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class PredictionJob(BaseModel):
     """
     PredictionJob
-    """ # noqa: E501
+    """  # noqa: E501
+
     id: Optional[StrictInt] = None
     name: Optional[StrictStr] = None
     version_id: Optional[StrictInt] = None
@@ -43,13 +46,22 @@ class PredictionJob(BaseModel):
     error: Optional[StrictStr] = None
     created_at: Optional[datetime] = None
     updated_at: Optional[datetime] = None
-    __properties: ClassVar[List[str]] = ["id", "name", "version_id", "model_id", "project_id", "environment_name", "environment", "config", "status", "error", "created_at", "updated_at"]
+    __properties: ClassVar[List[str]] = [
+        "id",
+        "name",
+        "version_id",
+        "model_id",
+        "project_id",
+        "environment_name",
+        "environment",
+        "config",
+        "status",
+        "error",
+        "created_at",
+        "updated_at",
+    ]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -77,16 +89,15 @@ class PredictionJob(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of environment
         if self.environment:
-            _dict['environment'] = self.environment.to_dict()
+            _dict["environment"] = self.environment.to_dict()
         # override the default output from pydantic by calling `to_dict()` of config
         if self.config:
-            _dict['config'] = self.config.to_dict()
+            _dict["config"] = self.config.to_dict()
         return _dict
 
     @classmethod
@@ -98,20 +109,24 @@ class PredictionJob(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "id": obj.get("id"),
-            "name": obj.get("name"),
-            "version_id": obj.get("version_id"),
-            "model_id": obj.get("model_id"),
-            "project_id": obj.get("project_id"),
-            "environment_name": obj.get("environment_name"),
-            "environment": Environment.from_dict(obj.get("environment")) if obj.get("environment") is not None else None,
-            "config": Config.from_dict(obj.get("config")) if obj.get("config") is not None else None,
-            "status": obj.get("status"),
-            "error": obj.get("error"),
-            "created_at": obj.get("created_at"),
-            "updated_at": obj.get("updated_at")
-        })
+        _obj = cls.model_validate(
+            {
+                "id": obj.get("id"),
+                "name": obj.get("name"),
+                "version_id": obj.get("version_id"),
+                "model_id": obj.get("model_id"),
+                "project_id": obj.get("project_id"),
+                "environment_name": obj.get("environment_name"),
+                "environment": Environment.from_dict(obj.get("environment"))
+                if obj.get("environment") is not None
+                else None,
+                "config": Config.from_dict(obj.get("config"))
+                if obj.get("config") is not None
+                else None,
+                "status": obj.get("status"),
+                "error": obj.get("error"),
+                "created_at": obj.get("created_at"),
+                "updated_at": obj.get("updated_at"),
+            }
+        )
         return _obj
-
-

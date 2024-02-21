@@ -21,24 +21,23 @@ import json
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel
 from models.client.models.operation_tracing import OperationTracing
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class StandardTransformerSimulationResponse(BaseModel):
     """
     StandardTransformerSimulationResponse
-    """ # noqa: E501
+    """  # noqa: E501
+
     response: Optional[Union[str, Any]] = None
     operation_tracing: Optional[OperationTracing] = None
     __properties: ClassVar[List[str]] = ["response", "operation_tracing"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -66,13 +65,12 @@ class StandardTransformerSimulationResponse(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of operation_tracing
         if self.operation_tracing:
-            _dict['operation_tracing'] = self.operation_tracing.to_dict()
+            _dict["operation_tracing"] = self.operation_tracing.to_dict()
         return _dict
 
     @classmethod
@@ -84,10 +82,14 @@ class StandardTransformerSimulationResponse(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "response": obj.get("response"),
-            "operation_tracing": OperationTracing.from_dict(obj.get("operation_tracing")) if obj.get("operation_tracing") is not None else None
-        })
+        _obj = cls.model_validate(
+            {
+                "response": obj.get("response"),
+                "operation_tracing": OperationTracing.from_dict(
+                    obj.get("operation_tracing")
+                )
+                if obj.get("operation_tracing") is not None
+                else None,
+            }
+        )
         return _obj
-
-

@@ -37,24 +37,42 @@ from models.client.models.mock_response import MockResponse
 from models.client.models.model import Model
 from models.client.models.model_endpoint import ModelEndpoint
 from models.client.models.model_endpoint_alert import ModelEndpointAlert
-from models.client.models.model_endpoint_alert_condition import ModelEndpointAlertCondition
+from models.client.models.model_endpoint_alert_condition import (
+    ModelEndpointAlertCondition,
+)
 from models.client.models.model_endpoint_rule import ModelEndpointRule
-from models.client.models.model_endpoint_rule_destination import ModelEndpointRuleDestination
+from models.client.models.model_endpoint_rule_destination import (
+    ModelEndpointRuleDestination,
+)
 from models.client.models.model_prediction_config import ModelPredictionConfig
 from models.client.models.model_prediction_output import ModelPredictionOutput
-from models.client.models.model_prediction_output_class import ModelPredictionOutputClass
+from models.client.models.model_prediction_output_class import (
+    ModelPredictionOutputClass,
+)
 from models.client.models.model_schema import ModelSchema
 from models.client.models.operation_tracing import OperationTracing
 from models.client.models.pipeline_tracing import PipelineTracing
 from models.client.models.prediction_job import PredictionJob
 from models.client.models.prediction_job_config import PredictionJobConfig
-from models.client.models.prediction_job_config_bigquery_sink import PredictionJobConfigBigquerySink
-from models.client.models.prediction_job_config_bigquery_source import PredictionJobConfigBigquerySource
-from models.client.models.prediction_job_config_gcs_sink import PredictionJobConfigGcsSink
-from models.client.models.prediction_job_config_gcs_source import PredictionJobConfigGcsSource
+from models.client.models.prediction_job_config_bigquery_sink import (
+    PredictionJobConfigBigquerySink,
+)
+from models.client.models.prediction_job_config_bigquery_source import (
+    PredictionJobConfigBigquerySource,
+)
+from models.client.models.prediction_job_config_gcs_sink import (
+    PredictionJobConfigGcsSink,
+)
+from models.client.models.prediction_job_config_gcs_source import (
+    PredictionJobConfigGcsSource,
+)
 from models.client.models.prediction_job_config_model import PredictionJobConfigModel
-from models.client.models.prediction_job_config_model_result import PredictionJobConfigModelResult
-from models.client.models.prediction_job_resource_request import PredictionJobResourceRequest
+from models.client.models.prediction_job_config_model_result import (
+    PredictionJobConfigModelResult,
+)
+from models.client.models.prediction_job_resource_request import (
+    PredictionJobResourceRequest,
+)
 from models.client.models.prediction_logger_config import PredictionLoggerConfig
 from models.client.models.project import Project
 from models.client.models.protocol import Protocol
@@ -65,8 +83,12 @@ from models.client.models.result_type import ResultType
 from models.client.models.save_mode import SaveMode
 from models.client.models.schema_spec import SchemaSpec
 from models.client.models.secret import Secret
-from models.client.models.standard_transformer_simulation_request import StandardTransformerSimulationRequest
-from models.client.models.standard_transformer_simulation_response import StandardTransformerSimulationResponse
+from models.client.models.standard_transformer_simulation_request import (
+    StandardTransformerSimulationRequest,
+)
+from models.client.models.standard_transformer_simulation_response import (
+    StandardTransformerSimulationResponse,
+)
 from models.client.models.transformer import Transformer
 from models.client.models.value_type import ValueType
 from models.client.models.version import Version
