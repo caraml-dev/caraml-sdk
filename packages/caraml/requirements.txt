@@ -16,5 +16,13 @@ PyYAML>=5.4
 six>=1.10
 urllib3>=1.26
 numpy<=1.23.5  # Temporary pin numpy due to https://numpy.org/doc/stable/release/1.20.0-notes.html#numpy-1-20-0-release-notes
+# Numpy >= v1.24.0 is incompatible with our pinned versions of mlflow due to the deprecation of several common numpy
+# aliases (see the last bullet point here: https://numpy.org/doc/stable/release/1.24.0-notes.html#expired-deprecations).
+# numpy<1.24.0
 caraml-auth-google==0.0.0.post7
 cookiecutter==2.1.1
+pydantic==2.5.3
+deprecation==2.1.0
+pandas
+requests
+fire

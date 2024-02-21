@@ -145,6 +145,7 @@ def requests():
 
     return req
 
+
 @pytest.fixture
 def gpu_config():
     gpu_request = os.environ.get("E2E_GPU_REQUEST", default="1")

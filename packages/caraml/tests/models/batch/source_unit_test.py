@@ -18,76 +18,77 @@ from models.batch.source import BigQuerySource
 
 
 @pytest.mark.parametrize(
-    "table,features,options,expected_dict,expected_valid", [
+    "table,features,options,expected_dict,expected_valid",
+    [
         pytest.param(
-            'project.dataset.table',
-            ['driver_id', 'completed_orders'],
-            {'project': 'project'},
+            "project.dataset.table",
+            ["driver_id", "completed_orders"],
+            {"project": "project"},
             {
-                'table': 'project.dataset.table',
-                'features': ['driver_id', 'completed_orders'],
-                'options': {'project': 'project'}
+                "table": "project.dataset.table",
+                "features": ["driver_id", "completed_orders"],
+                "options": {"project": "project"},
             },
             True,
-            id="Should valid if source has valid_types and valid property values"
+            id="Should valid if source has valid_types and valid property values",
         ),
         pytest.param(
-            'project.dataset.table',
-            ['driver_id', 'completed_orders'],
+            "project.dataset.table",
+            ["driver_id", "completed_orders"],
             {},
             {
-                'table': 'project.dataset.table',
-                'features': ['driver_id', 'completed_orders'],
-                'options': {}
+                "table": "project.dataset.table",
+                "features": ["driver_id", "completed_orders"],
+                "options": {},
             },
             True,
-            id="Should valid if source has valid_types and valid property value(2)"
+            id="Should valid if source has valid_types and valid property value(2)",
         ),
         pytest.param(
-            'project.dataset.table',
-            ['driver_id', 'completed_orders'],
+            "project.dataset.table",
+            ["driver_id", "completed_orders"],
             None,
             {
-                'table': 'project.dataset.table',
-                'features': ['driver_id', 'completed_orders'],
-                'options': {}
+                "table": "project.dataset.table",
+                "features": ["driver_id", "completed_orders"],
+                "options": {},
             },
             True,
-            id="Should valid if source has valid_types and valid property value(3)"
+            id="Should valid if source has valid_types and valid property value(3)",
         ),
         pytest.param(
-            'project.dataset',
-            ['driver_id', 'completed_orders'],
+            "project.dataset",
+            ["driver_id", "completed_orders"],
             None,
             {},
             False,
-            id="Should not valid and return empty dictionary if source table is not valid"
+            id="Should not valid and return empty dictionary if source table is not valid",
         ),
         pytest.param(
             1,
-            ['driver_id', 'completed_orders'],
+            ["driver_id", "completed_orders"],
             None,
             {},
             False,
-            id="Should not valid and return empty dictionary if source table doesn't have valid data type, it should be string"
+            id="Should not valid and return empty dictionary if source table doesn't have valid data type, it should be string",
         ),
         pytest.param(
-            'project.dataset.table',
+            "project.dataset.table",
             [1, 2, 3],
             None,
             {},
             False,
-            id="Should not valid and return empty dictionary if features doesn't have valid data type, it should be array of string"
+            id="Should not valid and return empty dictionary if features doesn't have valid data type, it should be array of string",
         ),
         pytest.param(
-            'project.dataset.table',
-            'driver_id',
+            "project.dataset.table",
+            "driver_id",
             None,
             {},
             False,
-            id="Should not valid and return empty dictionary if features doesn't have valid data type, it should be array of string(2)"
-        )
-    ]
+            id="Should not valid and return empty dictionary if features doesn't have valid data type, it should be array of string(2)",
+        ),
+    ],
 )
 def test_dictionary_generated(table, features, options, expected_dict, expected_valid):
     biq_query_source = BigQuerySource(table, features, options)
@@ -99,44 +100,72 @@ def test_dictionary_generated(table, features, options, expected_dict, expected_
 
 
 @pytest.mark.parametrize(
-    "table,features,options,expected", [
+    "table,features,options,expected",
+    [
         pytest.param(
-            'project.dataset.table', ['driver_id', 'completed_orders'], {'project': 'project'}, True,
-            id="Should valid if source has valid_types and valid property value"
+            "project.dataset.table",
+            ["driver_id", "completed_orders"],
+            {"project": "project"},
+            True,
+            id="Should valid if source has valid_types and valid property value",
         ),
         pytest.param(
-            'project.dataset.table', ['driver_id', 'completed_orders'], None, True,
-            id="Should valid if source has valid_types and valid property value(2)"
+            "project.dataset.table",
+            ["driver_id", "completed_orders"],
+            None,
+            True,
+            id="Should valid if source has valid_types and valid property value(2)",
         ),
         pytest.param(
-            'project.dataset.table', ['driver_id', 'completed_orders'], ['project', 'environment'], False,
-            id="Should not valid if options has wrong data type, it should be dictionary"
+            "project.dataset.table",
+            ["driver_id", "completed_orders"],
+            ["project", "environment"],
+            False,
+            id="Should not valid if options has wrong data type, it should be dictionary",
         ),
         pytest.param(
-            'project', ['driver_id', 'completed_orders'], {'project': 'project'}, False,
-            id="Should not valid if source_table is not valid"
+            "project",
+            ["driver_id", "completed_orders"],
+            {"project": "project"},
+            False,
+            id="Should not valid if source_table is not valid",
         ),
         pytest.param(
-            'project.dataset', ['driver_id', 'completed_orders'], {'project': 'project'}, False,
-            id="Should not valid if source_table is not valid(2)"
+            "project.dataset",
+            ["driver_id", "completed_orders"],
+            {"project": "project"},
+            False,
+            id="Should not valid if source_table is not valid(2)",
         ),
         pytest.param(
-            'project.dataset.table', [1, 2, 3], {'project': 'project'}, False,
-            id="Should not valid if features doesn't have correct data types, it should be array of string"
+            "project.dataset.table",
+            [1, 2, 3],
+            {"project": "project"},
+            False,
+            id="Should not valid if features doesn't have correct data types, it should be array of string",
         ),
         pytest.param(
-            'project.dataset.table', 'driver_id', {'project': 'project'}, False,
-            id="Should not valid if features doesn't have correct data types, it should be array of string"
+            "project.dataset.table",
+            "driver_id",
+            {"project": "project"},
+            False,
+            id="Should not valid if features doesn't have correct data types, it should be array of string",
         ),
         pytest.param(
-            'project.dataset.table', 14, {'project': 'project'}, False,
-            id="Should not valid, features doesn't have correct data types, it should be array of string"
+            "project.dataset.table",
+            14,
+            {"project": "project"},
+            False,
+            id="Should not valid, features doesn't have correct data types, it should be array of string",
         ),
         pytest.param(
-            'project.dataset.table', ['driver_id', '_TABLE_driver'], {'project': 'project'}, False,
-            id="Should not valid if features contains invalid column name"
+            "project.dataset.table",
+            ["driver_id", "_TABLE_driver"],
+            {"project": "project"},
+            False,
+            id="Should not valid if features contains invalid column name",
         ),
-    ]
+    ],
 )
 def test_valid(table, features, options, expected):
     biq_query_source = BigQuerySource(table, features, options)

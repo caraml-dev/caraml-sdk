@@ -23,13 +23,14 @@ from models.client import (
     Configuration,
     EndpointApi,
     EnvironmentApi,
-    FreeFormObject,
     ModelsApi,
     ProjectApi,
     StandardTransformerApi,
     StandardTransformerSimulationRequest,
     VersionApi,
 )
+
+import models.client as client
 from google.auth.transport.requests import Request
 from google.auth.transport.urllib3 import AuthorizedHttp
 from models.autoscaling import AutoscalingPolicy
@@ -43,6 +44,7 @@ from models.resource_request import ResourceRequest
 from models.transformer import Transformer
 from models.util import valid_name_check
 from models.version import VERSION
+from models.model_schema import ModelSchema
 
 
 class MerlinClient:
@@ -94,7 +96,7 @@ class MerlinClient:
         env_list = self._env_api.environments_get()
         for env in env_list:
             if env.name == env_name:
-                return env
+                return Environment(env)
         return None
 
     def get_default_environment(self) -> Optional[Environment]:
@@ -226,13 +228,17 @@ class MerlinClient:
                 )
             model = self._model_api.projects_project_id_models_post(
                 project_id=int(prj.id),
-                body={"name": model_name, "type": model_type.value},
+                body=client.Model(name=model_name, type=model_type.value),
             )
 
         return Model(model, prj, self._api_client)
 
     def new_model_version(
-        self, model_name: str, project_name: str, labels: Dict[str, str] = None
+        self,
+        model_name: str,
+        project_name: str,
+        labels: Dict[str, str] = None,
+        model_schema: Optional[ModelSchema] = None,
     ) -> ModelVersion:
         """
         Create new model version for the given model and project
@@ -245,7 +251,7 @@ class MerlinClient:
         mdl = self.get_model(model_name, project_name)
         if mdl is None:
             raise ValueError(f"Model with name: {model_name} is not found")
-        return mdl.new_model_version(labels=labels)
+        return mdl.new_model_version(labels=labels, model_schema=model_schema)
 
     def deploy(
         self,
@@ -259,7 +265,7 @@ class MerlinClient:
         deployment_mode: DeploymentMode = None,
         autoscaling_policy: AutoscalingPolicy = None,
         protocol: Protocol = None,
-        enable_model_observability: bool = False
+        enable_model_observability: bool = False,
     ) -> VersionEndpoint:
         return model_version.deploy(
             environment_name,
@@ -271,7 +277,7 @@ class MerlinClient:
             deployment_mode,
             autoscaling_policy,
             protocol,
-            enable_model_observability
+            enable_model_observability,
         )
 
     def undeploy(self, model_version: ModelVersion, environment_name: str = None):
@@ -285,14 +291,19 @@ class MerlinClient:
         model_prediction_config: Dict = None,
         protocol: str = "HTTP_JSON",
     ):
+        prediction_config = (
+            client.ModelPredictionConfig.from_dict(model_prediction_config)
+            if model_prediction_config is not None
+            else None
+        )
         request = StandardTransformerSimulationRequest(
             payload=payload,
             headers=headers,
             config=config,
-            model_prediction_config=model_prediction_config,
-            protocol=protocol,
+            model_prediction_config=prediction_config,
+            protocol=client.Protocol(protocol),
         )
 
         return self._standard_transformer_api.standard_transformer_simulate_post(
-            body=request.to_dict()
+            body=request
         )

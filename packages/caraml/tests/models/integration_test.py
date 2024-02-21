@@ -56,7 +56,7 @@ def test_model_version_with_labels(
     merlin.set_project(project_name)
     merlin.set_model("sklearn-labels", ModelType.SKLEARN)
 
-    model_dir = "test/sklearn-model"
+    model_dir = "tests/models/sklearn-model"
 
     undeploy_all_version()
 
@@ -91,7 +91,7 @@ def test_sklearn(
         f"sklearn-sample-{deployment_mode_suffix(deployment_mode)}", ModelType.SKLEARN
     )
 
-    model_dir = "test/sklearn-model"
+    model_dir = "tests/models/sklearn-model"
 
     undeploy_all_version()
 
@@ -122,13 +122,65 @@ def test_xgboost(
         f"xgboost-sample-{deployment_mode_suffix(deployment_mode)}", ModelType.XGBOOST
     )
 
-    model_dir = "test/xgboost-model"
+    model_dir = "tests/models/xgboost-model"
 
     undeploy_all_version()
 
     with merlin.new_model_version() as v:
         # Upload the serialized model to MLP
         merlin.log_model(model_dir=model_dir)
+
+    endpoint = merlin.deploy(v, deployment_mode=deployment_mode)
+    resp = requests.post(f"{endpoint.url}", json=request_json)
+
+    assert resp.status_code == 200
+    assert resp.json() is not None
+    assert len(resp.json()["predictions"]) == len(request_json["instances"])
+
+    merlin.undeploy(v)
+
+
+@pytest.mark.integration
+@pytest.mark.dependency()
+@pytest.mark.parametrize(
+    "deployment_mode", [DeploymentMode.RAW_DEPLOYMENT, DeploymentMode.SERVERLESS]
+)
+def test_model_schema(
+    integration_test_url, project_name, deployment_mode, use_google_oauth, requests
+):
+    merlin.set_url(integration_test_url, use_google_oauth=use_google_oauth)
+    merlin.set_project(project_name)
+    merlin.set_model(
+        f"model-schema-{deployment_mode_suffix(deployment_mode)}", ModelType.XGBOOST
+    )
+
+    model_dir = "tests/models/xgboost-model"
+
+    undeploy_all_version()
+    model_schema = ModelSchema(
+        spec=InferenceSchema(
+            feature_types={
+                "featureA": ValueType.FLOAT64,
+                "featureB": ValueType.INT64,
+                "featureC": ValueType.STRING,
+                "featureD": ValueType.BOOLEAN,
+            },
+            prediction_id_column="prediction_id",
+            model_prediction_output=BinaryClassificationOutput(
+                prediction_score_column="score",
+                actual_label_column="actual",
+                positive_class_label="completed",
+                negative_class_label="non_complete",
+                score_threshold=0.7,
+            ),
+        )
+    )
+
+    with merlin.new_model_version(model_schema=model_schema) as v:
+        # Upload the serialized model to MLP
+        merlin.log_model(model_dir=model_dir)
+
+    assert v.model_schema.spec == model_schema.spec
 
     endpoint = merlin.deploy(v, deployment_mode=deployment_mode)
     resp = requests.post(f"{endpoint.url}", json=request_json)
@@ -148,7 +200,7 @@ def test_mlflow_tracking(
     merlin.set_project(project_name)
     merlin.set_model("mlflow-test", ModelType.XGBOOST)
 
-    model_dir = "test/xgboost-model"
+    model_dir = "tests/models/xgboost-model"
 
     undeploy_all_version()
 
@@ -183,8 +235,8 @@ def test_mlflow_tracking(
         }
 
         # TODO: Support downloading artifacts from S3 or S3-compatible alternative (such as MinIO)
-        # merlin.download_artifact("test/downloaded_artifact")
-        # artifact_dir = os.listdir('test/downloaded_artifact')
+        # merlin.download_artifact("tests/models/downloaded_artifact")
+        # artifact_dir = os.listdir('tests/models/downloaded_artifact')
         # assert len(artifact_dir) > 0  # not empty directory
 
 
@@ -203,7 +255,7 @@ def test_tensorflow(
         ModelType.TENSORFLOW,
     )
 
-    model_dir = "test/tensorflow-model"
+    model_dir = "tests/models/tensorflow-model"
 
     undeploy_all_version()
 
@@ -228,7 +280,7 @@ def test_pytorch(integration_test_url, project_name, use_google_oauth, requests)
     merlin.set_project(project_name)
     merlin.set_model("pytorch-sample", ModelType.PYTORCH)
 
-    model_dir = "test/pytorch-model/pytorch-sample"
+    model_dir = "tests/models/pytorch-model/pytorch-sample"
 
     undeploy_all_version()
 
@@ -252,7 +304,7 @@ def test_set_traffic(integration_test_url, project_name, use_google_oauth, reque
     merlin.set_project(project_name)
     merlin.set_model("set-traffic-sample", ModelType.SKLEARN)
 
-    model_dir = "test/sklearn-model"
+    model_dir = "tests/models/sklearn-model"
 
     undeploy_all_version()
 
@@ -293,7 +345,7 @@ def test_serve_traffic(integration_test_url, project_name, use_google_oauth, req
     merlin.set_project(project_name)
     merlin.set_model("serve-traffic-sample", ModelType.SKLEARN)
 
-    model_dir = "test/sklearn-model"
+    model_dir = "tests/models/sklearn-model"
 
     undeploy_all_version()
 
@@ -333,7 +385,7 @@ def test_multi_env(integration_test_url, project_name, use_google_oauth, request
     merlin.set_project(project_name)
     merlin.set_model("multi-env", ModelType.XGBOOST)
 
-    model_dir = "test/xgboost-model"
+    model_dir = "tests/models/xgboost-model"
 
     envs = merlin.list_environment()
     assert len(envs) >= 1
@@ -370,7 +422,7 @@ def test_resource_request(
         f"resource-request-{deployment_mode_suffix(deployment_mode)}", ModelType.XGBOOST
     )
 
-    model_dir = "test/xgboost-model"
+    model_dir = "tests/models/xgboost-model"
 
     envs = merlin.list_environment()
     assert len(envs) >= 1
@@ -419,7 +471,7 @@ def test_resource_request_with_gpu(
         f"gpu-{deployment_mode_suffix(deployment_mode)}", ModelType.XGBOOST
     )
 
-    model_dir = "test/xgboost-model"
+    model_dir = "tests/models/xgboost-model"
 
     envs = merlin.list_environment()
     assert len(envs) >= 1
@@ -463,7 +515,7 @@ def test_logger(
     merlin.set_model(
         f"logger-{deployment_mode_suffix(deployment_mode)}", ModelType.TENSORFLOW
     )
-    model_dir = "test/tensorflow-model"
+    model_dir = "tests/models/tensorflow-model"
 
     undeploy_all_version()
 
@@ -542,7 +594,7 @@ def test_custom_transformer(
     assert transformer_config.enabled
     assert transformer_config.mode == LoggerMode.ALL
 
-    with open(os.path.join("test/transformer", "input.json"), "r") as f:
+    with open(os.path.join("tests/models/transformer", "input.json"), "r") as f:
         req = json.load(f)
 
     resp = requests.post(f"{endpoint.url}", json=req)
@@ -572,7 +624,9 @@ def test_feast_enricher(
     with merlin.new_model_version() as v:
         v.log_custom_model(image="ealen/echo-server:0.5.1", args="--port 8080")
 
-    transformer_config_path = os.path.join("test/transformer", "feast_enricher.yaml")
+    transformer_config_path = os.path.join(
+        "tests/models/transformer", "feast_enricher.yaml"
+    )
     transformer = StandardTransformer(config_file=transformer_config_path, enabled=True)
 
     request_json = {"driver_id": "1000"}
@@ -608,7 +662,7 @@ def test_standard_transformer_without_feast(
         v.log_custom_model(image="ealen/echo-server:0.5.1", args="--port 8080")
 
     transformer_config_path = os.path.join(
-        "test/transformer", "standard_transformer_no_feast.yaml"
+        "tests/models/transformer", "standard_transformer_no_feast.yaml"
     )
     transformer = StandardTransformer(
         config_file=transformer_config_path,
@@ -692,7 +746,7 @@ def test_standard_transformer_with_feast(
         v.log_custom_model(image="ealen/echo-server:0.5.1", args="--port 8080")
 
     transformer_config_path = os.path.join(
-        "test/transformer", "standard_transformer_with_feast.yaml"
+        "tests/models/transformer", "standard_transformer_with_feast.yaml"
     )
     transformer = StandardTransformer(config_file=transformer_config_path, enabled=True)
 
@@ -753,10 +807,10 @@ def test_standard_transformer_with_multiple_feast(
         v.log_custom_model(image="ealen/echo-server:0.5.1", args="--port 8080")
 
     config_template_file_path = os.path.join(
-        "test/transformer", "standard_transformer_multiple_feast.yaml.tmpl"
+        "tests/models/transformer", "standard_transformer_multiple_feast.yaml.tmpl"
     )
     config_file_path = os.path.join(
-        "test/transformer", "standard_transformer_multiple_feast.yaml"
+        "tests/models/transformer", "standard_transformer_multiple_feast.yaml"
     )
 
     from string import Template
@@ -836,10 +890,10 @@ def test_standard_transformer_with_multiple_feast_with_source(
         v.log_custom_model(image="ealen/echo-server:0.5.1", args="--port 8080")
 
     config_template_file_path = os.path.join(
-        "test/transformer", "standard_transformer_feast_with_source.yaml.tmpl"
+        "tests/models/transformer", "standard_transformer_feast_with_source.yaml.tmpl"
     )
     config_file_path = os.path.join(
-        "test/transformer", "standard_transformer_multiple_feast.yaml"
+        "tests/models/transformer", "standard_transformer_multiple_feast.yaml"
     )
 
     from string import Template
@@ -939,7 +993,7 @@ def test_custom_model_with_artifact(
     )
     undeploy_all_version()
 
-    model_dir = "test/custom-model"
+    model_dir = "tests/models/custom-model"
     BST_FILE = "model.bst"
 
     with merlin.new_model_version() as v:
@@ -973,7 +1027,7 @@ def test_deployment_mode_for_serving_model(
     merlin.set_url(integration_test_url, use_google_oauth=use_google_oauth)
     merlin.set_project(project_name)
     merlin.set_model("serve-raw-deployment", ModelType.TENSORFLOW)
-    model_dir = "test/tensorflow-model"
+    model_dir = "tests/models/tensorflow-model"
 
     undeploy_all_version()
 
@@ -1073,12 +1127,14 @@ def test_redeploy_model(integration_test_url, project_name, use_google_oauth, re
             metrics_type=merlin.MetricsType.CPU_UTILIZATION, target_value=50
         ),
         deployment_mode=DeploymentMode.RAW_DEPLOYMENT,
-        transformer = Transformer(image="gcr.io/kubeflow-ci/kfserving/image-transformer:latest"),
+        transformer=Transformer(
+            image="gcr.io/kubeflow-ci/kfserving/image-transformer:latest"
+        ),
     )
 
-    with open(os.path.join("test/transformer", "input.json"), "r") as f:
+    with open(os.path.join("tests/models/transformer", "input.json"), "r") as f:
         req = json.load(f)
-    
+
     resp = requests.post(f"{endpoint.url}", json=req)
     assert resp.status_code == 200
     assert resp.json() is not None
@@ -1105,8 +1161,10 @@ def test_redeploy_model(integration_test_url, project_name, use_google_oauth, re
             metrics_type=merlin.MetricsType.CPU_UTILIZATION, target_value=90
         ),
         deployment_mode=DeploymentMode.RAW_DEPLOYMENT,
-        transformer = Transformer(image="gcr.io/kubeflow-ci/kfserving/image-transformer:latest",
-                                  resource_request=merlin.ResourceRequest(0, 1, "100m", "250Mi")),
+        transformer=Transformer(
+            image="gcr.io/kubeflow-ci/kfserving/image-transformer:latest",
+            resource_request=merlin.ResourceRequest(0, 1, "100m", "250Mi"),
+        ),
     )
 
     resp = requests.post(f"{new_endpoint.url}", json=req)
@@ -1144,7 +1202,7 @@ def test_standard_transformer_simulate(integration_test_url, use_google_oauth):
     merlin.set_url(integration_test_url, use_google_oauth=use_google_oauth)
 
     transformer_config_path = os.path.join(
-        "test/transformer", "standard_transformer_no_feast.yaml"
+        "tests/models/transformer", "standard_transformer_no_feast.yaml"
     )
     transformer = StandardTransformer(
         config_file=transformer_config_path, enabled=False
@@ -1177,11 +1235,14 @@ def test_standard_transformer_simulate(integration_test_url, use_google_oauth):
     resp_wo_tracing = transformer.simulate(payload=payload, exclude_tracing=True)
     resp_w_tracing = transformer.simulate(payload=payload, exclude_tracing=False)
 
-    with open("test/transformer/sim_exp_resp_valid_wo_tracing.json", "r") as f:
-        exp_resp_valid_wo_tracing = json.load(f)
+    def remove_nulls(d):
+        return {k: v for k, v in d.items() if v is not None}
 
-    with open("test/transformer/sim_exp_resp_valid_w_tracing.json", "r") as f:
-        exp_resp_valid_w_tracing = json.load(f)
+    with open("tests/models/transformer/sim_exp_resp_valid_wo_tracing.json", "r") as f:
+        exp_resp_valid_wo_tracing = json.load(f, object_hook=remove_nulls)
+
+    with open("tests/models/transformer/sim_exp_resp_valid_w_tracing.json", "r") as f:
+        exp_resp_valid_w_tracing = json.load(f, object_hook=remove_nulls)
 
     assert isinstance(resp_wo_tracing, dict)
     assert isinstance(resp_w_tracing, dict)
@@ -1202,7 +1263,7 @@ def test_standard_transformer_simulate_feast(integration_test_url, use_google_oa
     merlin.set_url(integration_test_url, use_google_oauth=use_google_oauth)
 
     transformer_config_path = os.path.join(
-        "test/transformer", "standard_transformer_with_feast.yaml"
+        "tests/models/transformer", "standard_transformer_with_feast.yaml"
     )
     transformer = StandardTransformer(config_file=transformer_config_path, enabled=True)
 
@@ -1221,10 +1282,10 @@ def test_standard_transformer_simulate_feast(integration_test_url, use_google_oa
         payload=request_json, exclude_tracing=False
     )
 
-    with open("test/transformer/sim_exp_resp_feast_w_tracing.json", "r") as f:
+    with open("tests/models/transformer/sim_exp_resp_feast_w_tracing.json", "r") as f:
         exp_resp_w_tracing = json.load(f)
 
-    with open("test/transformer/sim_exp_resp_feast_wo_tracing.json", "r") as f:
+    with open("tests/models/transformer/sim_exp_resp_feast_wo_tracing.json", "r") as f:
         exp_resp_wo_tracing = json.load(f)
 
     assert isinstance(response_w_tracing, dict)

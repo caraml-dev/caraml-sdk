@@ -98,6 +98,14 @@ class PredictionOutput(abc.ABC):
     def prediction_types(self) -> Dict[str, ValueType]:
         raise NotImplementedError
 
+    """
+    Return a dictionary mapping the name of the ground truth output column to its value type.
+    """
+
+    @abc.abstractmethod
+    def ground_truth_types(self) -> Dict[str, ValueType]:
+        raise NotImplementedError
+
 
 @dataclass_json
 @dataclass
@@ -120,6 +128,10 @@ class RegressionOutput(PredictionOutput):
     def prediction_types(self) -> Dict[str, ValueType]:
         return {
             self.prediction_score_column: ValueType.FLOAT64,
+        }
+
+    def ground_truth_types(self) -> Dict[str, ValueType]:
+        return {
             self.actual_score_column: ValueType.FLOAT64,
         }
 
@@ -194,6 +206,10 @@ class BinaryClassificationOutput(PredictionOutput):
         return {
             self.prediction_score_column: ValueType.FLOAT64,
             self.prediction_label_column: ValueType.STRING,
+        }
+
+    def ground_truth_types(self) -> Dict[str, ValueType]:
+        return {
             self.actual_score_column: ValueType.FLOAT64,
             self.actual_label_column: ValueType.STRING,
         }
@@ -221,15 +237,21 @@ class RankingOutput(PredictionOutput):
         self, df: pd.DataFrame, observation_types: List[ObservationType]
     ) -> pd.DataFrame:
         if ObservationType.PREDICTION in observation_types:
-            df[self.rank_column] = df.groupby(self.prediction_group_id_column)[
-                self.rank_score_column
-            ].rank(method="first", ascending=False).astype(np.int_)
+            df[self.rank_column] = (
+                df.groupby(self.prediction_group_id_column)[self.rank_score_column]
+                .rank(method="first", ascending=False)
+                .astype(np.int_)
+            )
         return df
 
     def prediction_types(self) -> Dict[str, ValueType]:
         return {
             self.rank_column: ValueType.INT64,
             self.prediction_group_id_column: ValueType.STRING,
+        }
+
+    def ground_truth_types(self) -> Dict[str, ValueType]:
+        return {
             self.relevance_score_column: ValueType.FLOAT64,
         }
 
@@ -250,3 +272,11 @@ class InferenceSchema:
     @property
     def feature_columns(self) -> List[str]:
         return list(self.feature_types.keys())
+
+    @property
+    def prediction_columns(self) -> List[str]:
+        return list(self.model_prediction_output.prediction_types().keys())
+
+    @property
+    def ground_truth_columns(self) -> List[str]:
+        return list(self.model_prediction_output.ground_truth_types().keys())

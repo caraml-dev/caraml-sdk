@@ -11,8 +11,10 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-
+from __future__ import annotations
 from typing import Optional
+
+import models.client as client
 
 
 class ResourceRequest:
@@ -22,12 +24,12 @@ class ResourceRequest:
 
     def __init__(
         self,
-        min_replica: int = None,
-        max_replica: int = None,
-        cpu_request: str = None,
-        memory_request: str = None,
-        gpu_request: str = None,
-        gpu_name: str = None,
+        min_replica: Optional[int] = None,
+        max_replica: Optional[int] = None,
+        cpu_request: Optional[str] = None,
+        memory_request: Optional[str] = None,
+        gpu_request: Optional[str] = None,
+        gpu_name: Optional[str] = None,
     ):
         self._min_replica = min_replica
         self._max_replica = max_replica
@@ -36,6 +38,17 @@ class ResourceRequest:
         self._gpu_request = gpu_request
         self._gpu_name = gpu_name
         self.validate()
+
+    @classmethod
+    def from_response(cls, response: client.ResourceRequest) -> ResourceRequest:
+        return ResourceRequest(
+            min_replica=response.min_replica,
+            max_replica=response.max_replica,
+            cpu_request=response.cpu_request,
+            memory_request=response.memory_request,
+            gpu_request=response.gpu_request,
+            gpu_name=response.gpu_name,
+        )
 
     @property
     def min_replica(self) -> Optional[int]:
@@ -87,7 +100,7 @@ class ResourceRequest:
 
     def validate(self):
         if self._min_replica is None and self._max_replica is None:
-            return 
+            return
 
         if self._min_replica > self._max_replica:
             raise Exception("Min replica must be less or equal to max replica")

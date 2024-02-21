@@ -51,8 +51,8 @@ wheels/
 .installed.cfg
 *.egg
 
-test/downloaded_artifact/
-test/mlflow/
+tests/models/downloaded_artifact/
+tests/models/mlflow/
 mlflow/
 
 version.txt

@@ -26,21 +26,21 @@ from models.model import ModelType
 @pytest.fixture()
 def deployment_info():
     dirname = os.path.dirname(os.path.dirname(__file__))
-    filename = os.path.join(dirname, 'test/sklearn-model')
+    filename = os.path.join(dirname, "test/sklearn-model")
     url = os.environ.get("E2E_MERLIN_URL", default="http://127.0.0.1:8080")
     project = os.environ.get("E2E_PROJECT_NAME", default="integration-test")
     env = os.environ.get("E2E_MERLIN_ENVIRONMENT", default="id-dev")
 
     info = {
-        'env': env,
-        'model_dir': filename,
-        'model_type': "sklearn",
-        'project': project,
-        'url': url,
-        'min_replica': '1',
-        'max_replica': '1',
-        'cpu_request': '100m',
-        'memory_request': '128Mi',
+        "env": env,
+        "model_dir": filename,
+        "model_type": "sklearn",
+        "project": project,
+        "url": url,
+        "min_replica": "1",
+        "max_replica": "1",
+        "cpu_request": "100m",
+        "memory_request": "128Mi",
     }
     return info
 
@@ -54,34 +54,41 @@ def runner():
 @pytest.mark.integration
 def test_cli_deployment_undeployment(deployment_info, runner, use_google_oauth):
 
-    model_name = 'cli-test'
-    merlin.set_url(deployment_info['url'], use_google_oauth=use_google_oauth)
-    merlin.set_project(deployment_info['project'])
+    model_name = "cli-test"
+    merlin.set_url(deployment_info["url"], use_google_oauth=use_google_oauth)
+    merlin.set_project(deployment_info["project"])
     merlin.set_model(model_name, ModelType.SKLEARN)
 
     undeploy_all_version()
 
     # Deployment
     result = runner.invoke(
-        cli, [
-            'deploy',
-            '--env', deployment_info['env'],
-            '--model-type', deployment_info['model_type'],
-            '--model-dir', deployment_info['model_dir'],
-            '--model-name', model_name,
-            '--project', deployment_info['project'],
-            '--url', deployment_info['url']
-            ]
-        )
+        cli,
+        [
+            "deploy",
+            "--env",
+            deployment_info["env"],
+            "--model-type",
+            deployment_info["model_type"],
+            "--model-dir",
+            deployment_info["model_dir"],
+            "--model-name",
+            model_name,
+            "--project",
+            deployment_info["project"],
+            "--url",
+            deployment_info["url"],
+        ],
+    )
 
     if result.exception:
         traceback.print_exception(*result.exc_info)
 
-    test_deployed_model_version = result.output.split('\n')[0].split(' ')[-1]
+    test_deployed_model_version = result.output.split("\n")[0].split(" ")[-1]
 
     # Get latest deployed model's version
-    merlin.set_url(deployment_info['url'], use_google_oauth=use_google_oauth)
-    merlin.set_project(deployment_info['project'])
+    merlin.set_url(deployment_info["url"], use_google_oauth=use_google_oauth)
+    merlin.set_project(deployment_info["project"])
     merlin.set_model(model_name, ModelType.SKLEARN)
 
     merlin_active_model = merlin.active_model()
@@ -91,22 +98,26 @@ def test_cli_deployment_undeployment(deployment_info, runner, use_google_oauth):
 
     # Undeployment
     undeploy_result = runner.invoke(
-        cli, [
-            'undeploy',
-            '--model-version', test_deployed_model_version,
-            '--model-name', model_name,
-            '--project', deployment_info['project'],
-            '--url', deployment_info['url']
-            ]
-        )
+        cli,
+        [
+            "undeploy",
+            "--model-version",
+            test_deployed_model_version,
+            "--model-name",
+            model_name,
+            "--project",
+            deployment_info["project"],
+            "--url",
+            deployment_info["url"],
+        ],
+    )
     if result.exception:
         traceback.print_exception(*result.exc_info)
 
     planned_output = "Deleting deployment of model {} version {}".format(
-        model_name,
-        test_deployed_model_version
+        model_name, test_deployed_model_version
     )
-    received_output = undeploy_result.output.split(' from')[0]
+    received_output = undeploy_result.output.split(" from")[0]
 
     assert latest_version._id == int(test_deployed_model_version)
     assert received_output == planned_output
@@ -114,40 +125,53 @@ def test_cli_deployment_undeployment(deployment_info, runner, use_google_oauth):
 
 @pytest.mark.cli
 @pytest.mark.integration
-def test_cli_deployment_undeployment_with_resource_request(deployment_info, runner, use_google_oauth):
+def test_cli_deployment_undeployment_with_resource_request(
+    deployment_info, runner, use_google_oauth
+):
 
-    model_name = 'cli-resource-request-test'
-    merlin.set_url(deployment_info['url'], use_google_oauth=use_google_oauth)
-    merlin.set_project(deployment_info['project'])
+    model_name = "cli-resource-request-test"
+    merlin.set_url(deployment_info["url"], use_google_oauth=use_google_oauth)
+    merlin.set_project(deployment_info["project"])
     merlin.set_model(model_name, ModelType.SKLEARN)
 
     undeploy_all_version()
 
     # Deployment
     result = runner.invoke(
-        cli, [
-            'deploy',
-            '--env', deployment_info['env'],
-            '--model-type', deployment_info['model_type'],
-            '--model-dir', deployment_info['model_dir'],
-            '--model-name', model_name,
-            '--project', deployment_info['project'],
-            '--url', deployment_info['url'],
-            '--min-replica', deployment_info['min_replica'],
-            '--max-replica', deployment_info['max_replica'],
-            '--cpu-request', deployment_info['cpu_request'],
-            '--memory-request', deployment_info['memory_request'],
-            ]
-        )
+        cli,
+        [
+            "deploy",
+            "--env",
+            deployment_info["env"],
+            "--model-type",
+            deployment_info["model_type"],
+            "--model-dir",
+            deployment_info["model_dir"],
+            "--model-name",
+            model_name,
+            "--project",
+            deployment_info["project"],
+            "--url",
+            deployment_info["url"],
+            "--min-replica",
+            deployment_info["min_replica"],
+            "--max-replica",
+            deployment_info["max_replica"],
+            "--cpu-request",
+            deployment_info["cpu_request"],
+            "--memory-request",
+            deployment_info["memory_request"],
+        ],
+    )
 
     if result.exception:
         traceback.print_exception(*result.exc_info)
 
-    test_deployed_model_version = result.output.split('\n')[0].split(' ')[-1]
+    test_deployed_model_version = result.output.split("\n")[0].split(" ")[-1]
 
     # Get latest deployed model's version
-    merlin.set_url(deployment_info['url'], use_google_oauth=use_google_oauth)
-    merlin.set_project(deployment_info['project'])
+    merlin.set_url(deployment_info["url"], use_google_oauth=use_google_oauth)
+    merlin.set_project(deployment_info["project"])
     merlin.set_model(model_name, ModelType.SKLEARN)
 
     merlin_active_model = merlin.active_model()
@@ -157,22 +181,26 @@ def test_cli_deployment_undeployment_with_resource_request(deployment_info, runn
 
     # Undeployment
     undeploy_result = runner.invoke(
-        cli, [
-            'undeploy',
-            '--model-version', test_deployed_model_version,
-            '--model-name', model_name,
-            '--project', deployment_info['project'],
-            '--url', deployment_info['url']
-            ]
-        )
+        cli,
+        [
+            "undeploy",
+            "--model-version",
+            test_deployed_model_version,
+            "--model-name",
+            model_name,
+            "--project",
+            deployment_info["project"],
+            "--url",
+            deployment_info["url"],
+        ],
+    )
     if result.exception:
         traceback.print_exception(*result.exc_info)
 
     planned_output = "Deleting deployment of model {} version {}".format(
-        model_name,
-        test_deployed_model_version
+        model_name, test_deployed_model_version
     )
-    received_output = undeploy_result.output.split(' from')[0]
+    received_output = undeploy_result.output.split(" from")[0]
 
     assert latest_version._id == int(test_deployed_model_version)
     assert received_output == planned_output
@@ -182,39 +210,47 @@ def test_cli_deployment_undeployment_with_resource_request(deployment_info, runn
 @pytest.mark.integration
 def test_cli_scaffold_with_invalid_project(runner):
     result = runner.invoke(
-        cli, [
-            'scaffold',
-            '--env', 'id',
-            '--project', 'sample_project',
-            '--model-name', 'pyfunc-prediction',
-        ]
+        cli,
+        [
+            "scaffold",
+            "--env",
+            "id",
+            "--project",
+            "sample_project",
+            "--model-name",
+            "pyfunc-prediction",
+        ],
     )
-    expected_output = '''Your project/model name contains invalid characters.\
+    expected_output = """Your project/model name contains invalid characters.\
                 \nUse only the following characters\
                 \n- Characters: a-z (Lowercase ONLY)\
                 \n- Numbers: 0-9\
                 \n- Symbols: -
-            '''
+            """
     assert result.output.strip() == expected_output.strip()
-    assert not os.path.exists('./pyfunc_prediction')
+    assert not os.path.exists("./pyfunc_prediction")
 
 
 @pytest.mark.cli
 @pytest.mark.integration
 def test_cli_scaffold_with_invalid_model(runner):
     result = runner.invoke(
-        cli, [
-            'scaffold',
-            '--env', 'id',
-            '--project', 'project',
-            '--model-name', 'pyfunc_prediction',
-        ]
+        cli,
+        [
+            "scaffold",
+            "--env",
+            "id",
+            "--project",
+            "project",
+            "--model-name",
+            "pyfunc_prediction",
+        ],
     )
-    expected_output = '''Your project/model name contains invalid characters.\
+    expected_output = """Your project/model name contains invalid characters.\
                 \nUse only the following characters\
                 \n- Characters: a-z (Lowercase ONLY)\
                 \n- Numbers: 0-9\
                 \n- Symbols: -
-            '''
+            """
     assert result.output.strip() == expected_output.strip()
-    assert not os.path.exists('./pyfunc_prediction')
+    assert not os.path.exists("./pyfunc_prediction")

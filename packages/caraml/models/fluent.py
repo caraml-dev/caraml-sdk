@@ -29,6 +29,7 @@ from models.model import Model, ModelType, ModelVersion, Project
 from models.protocol import Protocol
 from models.resource_request import ResourceRequest
 from models.transformer import Transformer
+from models.model_schema import ModelSchema
 
 _merlin_client: Optional[MerlinClient] = None
 _active_project: Optional[Project]
@@ -156,7 +157,9 @@ def active_model() -> Optional[Model]:
 
 
 @contextmanager
-def new_model_version(labels: Dict[str, str] = None):
+def new_model_version(
+    labels: Dict[str, str] = None, model_schema: Optional[ModelSchema] = None
+):
     """
     Create new model version under currently active model
 
@@ -168,7 +171,7 @@ def new_model_version(labels: Dict[str, str] = None):
         _check_active_client()
         _check_active_project()
         _check_active_model()
-        v = _merlin_client.new_model_version(_active_model.name, _active_project.name, labels)  # type: ignore
+        v = _merlin_client.new_model_version(_active_model.name, _active_project.name, labels, model_schema)  # type: ignore
         v.start()
         global _active_model_version
         _active_model_version = v

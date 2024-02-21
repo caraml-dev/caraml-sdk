@@ -23,5 +23,7 @@ def test_resource_request_validate():
     resource_request.validate()
 
     resource_request.min_replica = 10
-    with pytest.raises(Exception, match="Min replica must be less or equal to max replica"):
+    with pytest.raises(
+        Exception, match="Min replica must be less or equal to max replica"
+    ):
         resource_request.validate()

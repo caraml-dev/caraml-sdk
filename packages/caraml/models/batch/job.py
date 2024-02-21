@@ -14,6 +14,7 @@
 
 import models.client as client
 from enum import Enum
+from typing import Optional
 
 from models.util import autostr
 
@@ -40,7 +41,7 @@ class PredictionJob:
         self._error = job.error
 
     @property
-    def id(self) -> int:
+    def id(self) -> Optional[int]:
         """
         ID of prediction job
 
@@ -49,7 +50,7 @@ class PredictionJob:
         return self._id
 
     @property
-    def name(self) -> str:
+    def name(self) -> Optional[str]:
         """
         Prediction job name
 
@@ -67,7 +68,7 @@ class PredictionJob:
         return JobStatus(self._status)
 
     @property
-    def error(self) -> str:
+    def error(self) -> Optional[str]:
         """
         Error message containing the reason of failed job
 
@@ -82,9 +83,9 @@ class PredictionJob:
         :return:
         """
         job_client = client.PredictionJobsApi(self._api_client)
-        job_client.models_model_id_versions_version_id_jobs_job_id_stop_put(model_id=self._model_id,
-                                                                            version_id=self._version_id,
-                                                                            job_id=self._id)
+        job_client.models_model_id_versions_version_id_jobs_job_id_stop_put(
+            model_id=self._model_id, version_id=self._version_id, job_id=self._id
+        )
         try:
             self.refresh()
         except client.rest.ApiException as e:
@@ -103,7 +104,8 @@ class PredictionJob:
         """
         job_client = client.PredictionJobsApi(self._api_client)
         self._status = JobStatus(
-            job_client.models_model_id_versions_version_id_jobs_job_id_get(model_id=self._model_id,
-                                                                           version_id=self._version_id,
-                                                                           job_id=self._id).status)
+            job_client.models_model_id_versions_version_id_jobs_job_id_get(
+                model_id=self._model_id, version_id=self._version_id, job_id=self._id
+            ).status
+        )
         return self
