@@ -8,9 +8,7 @@ import routers as turing
 def json_serializer(o):
     if isinstance(o, (date, datetime)):
         return o.isoformat()
-    if isinstance(
-        o, (model_utils.ModelNormal, model_utils.ModelComposed)
-    ):
+    if isinstance(o, (model_utils.ModelNormal, model_utils.ModelComposed)):
         return o.to_dict()
 
 

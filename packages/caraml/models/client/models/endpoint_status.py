@@ -19,7 +19,6 @@ import re  # noqa: F401
 from enum import Enum
 
 
-
 try:
     from typing import Self
 except ImportError:
@@ -34,15 +33,13 @@ class EndpointStatus(str, Enum):
     """
     allowed enum values
     """
-    PENDING = 'pending'
-    RUNNING = 'running'
-    SERVING = 'serving'
-    FAILED = 'failed'
-    TERMINATED = 'terminated'
+    PENDING = "pending"
+    RUNNING = "running"
+    SERVING = "serving"
+    FAILED = "failed"
+    TERMINATED = "terminated"
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of EndpointStatus from a JSON string"""
         return cls(json.loads(json_str))
-
-

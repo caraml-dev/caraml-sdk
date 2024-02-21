@@ -21,24 +21,23 @@ import json
 from typing import Any, ClassVar, Dict, List, Union
 from pydantic import BaseModel, StrictFloat, StrictInt
 from models.client.models.metrics_type import MetricsType
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class AutoscalingPolicy(BaseModel):
     """
     AutoscalingPolicy
-    """ # noqa: E501
+    """  # noqa: E501
+
     metrics_type: MetricsType
     target_value: Union[StrictFloat, StrictInt]
     __properties: ClassVar[List[str]] = ["metrics_type", "target_value"]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -66,8 +65,7 @@ class AutoscalingPolicy(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         return _dict
@@ -81,10 +79,10 @@ class AutoscalingPolicy(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "metrics_type": obj.get("metrics_type"),
-            "target_value": obj.get("target_value")
-        })
+        _obj = cls.model_validate(
+            {
+                "metrics_type": obj.get("metrics_type"),
+                "target_value": obj.get("target_value"),
+            }
+        )
         return _obj
-
-

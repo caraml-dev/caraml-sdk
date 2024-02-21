@@ -20,28 +20,34 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr
+
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
+
 class ResourceRequest(BaseModel):
     """
     ResourceRequest
-    """ # noqa: E501
+    """  # noqa: E501
+
     min_replica: Optional[StrictInt] = None
     max_replica: Optional[StrictInt] = None
     cpu_request: Optional[StrictStr] = None
     memory_request: Optional[StrictStr] = None
     gpu_name: Optional[StrictStr] = None
     gpu_request: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = ["min_replica", "max_replica", "cpu_request", "memory_request", "gpu_name", "gpu_request"]
+    __properties: ClassVar[List[str]] = [
+        "min_replica",
+        "max_replica",
+        "cpu_request",
+        "memory_request",
+        "gpu_name",
+        "gpu_request",
+    ]
 
-    model_config = {
-        "populate_by_name": True,
-        "validate_assignment": True
-    }
-
+    model_config = {"populate_by_name": True, "validate_assignment": True}
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -69,8 +75,7 @@ class ResourceRequest(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={
-            },
+            exclude={},
             exclude_none=True,
         )
         return _dict
@@ -84,14 +89,14 @@ class ResourceRequest(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({
-            "min_replica": obj.get("min_replica"),
-            "max_replica": obj.get("max_replica"),
-            "cpu_request": obj.get("cpu_request"),
-            "memory_request": obj.get("memory_request"),
-            "gpu_name": obj.get("gpu_name"),
-            "gpu_request": obj.get("gpu_request")
-        })
+        _obj = cls.model_validate(
+            {
+                "min_replica": obj.get("min_replica"),
+                "max_replica": obj.get("max_replica"),
+                "cpu_request": obj.get("cpu_request"),
+                "memory_request": obj.get("memory_request"),
+                "gpu_name": obj.get("gpu_name"),
+                "gpu_request": obj.get("gpu_request"),
+            }
+        )
         return _obj
-
-

@@ -161,7 +161,10 @@ class RouterEnsemblerConfig(DataObject):
         elif isinstance(standard_config, dict):
             openapi_standard_config = standard_config.copy()
             openapi_standard_config["experiment_mappings"] = None
-            if "experiment_mappings" in standard_config and standard_config["experiment_mappings"] is not None:
+            if (
+                "experiment_mappings" in standard_config
+                and standard_config["experiment_mappings"] is not None
+            ):
                 openapi_standard_config["experiment_mappings"] = [
                     routers.client.models.EnsemblerStandardConfigExperimentMappings(
                         **mapping
@@ -177,9 +180,7 @@ class RouterEnsemblerConfig(DataObject):
         return self._docker_config
 
     @docker_config.setter
-    def docker_config(
-        self, docker_config: routers.client.models.EnsemblerDockerConfig
-    ):
+    def docker_config(self, docker_config: routers.client.models.EnsemblerDockerConfig):
         if isinstance(docker_config, routers.client.models.EnsemblerDockerConfig):
             self._docker_config = docker_config
         elif isinstance(docker_config, dict):
@@ -211,9 +212,7 @@ class RouterEnsemblerConfig(DataObject):
         return self._pyfunc_config
 
     @pyfunc_config.setter
-    def pyfunc_config(
-        self, pyfunc_config: routers.client.models.EnsemblerPyfuncConfig
-    ):
+    def pyfunc_config(self, pyfunc_config: routers.client.models.EnsemblerPyfuncConfig):
         if isinstance(pyfunc_config, routers.client.models.EnsemblerPyfuncConfig):
             self._pyfunc_config = pyfunc_config
         elif isinstance(pyfunc_config, dict):

@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-import routers 
+import routers
 import dataclasses
 from enum import Enum
 

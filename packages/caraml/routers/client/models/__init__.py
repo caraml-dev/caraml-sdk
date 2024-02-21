@@ -29,19 +29,37 @@ from routers.client.model.ensembler_infra_config import EnsemblerInfraConfig
 from routers.client.model.ensembler_job_status import EnsemblerJobStatus
 from routers.client.model.ensembler_pyfunc_config import EnsemblerPyfuncConfig
 from routers.client.model.ensembler_standard_config import EnsemblerStandardConfig
-from routers.client.model.ensembler_standard_config_experiment_mappings import EnsemblerStandardConfigExperimentMappings
+from routers.client.model.ensembler_standard_config_experiment_mappings import (
+    EnsemblerStandardConfigExperimentMappings,
+)
 from routers.client.model.ensembler_type import EnsemblerType
 from routers.client.model.ensemblers_paginated_results import EnsemblersPaginatedResults
-from routers.client.model.ensemblers_paginated_results_all_of import EnsemblersPaginatedResultsAllOf
-from routers.client.model.ensemblers_paginated_results_all_of1 import EnsemblersPaginatedResultsAllOf1
+from routers.client.model.ensemblers_paginated_results_all_of import (
+    EnsemblersPaginatedResultsAllOf,
+)
+from routers.client.model.ensemblers_paginated_results_all_of1 import (
+    EnsemblersPaginatedResultsAllOf1,
+)
 from routers.client.model.ensembling_job import EnsemblingJob
-from routers.client.model.ensembling_job_ensembler_spec import EnsemblingJobEnsemblerSpec
-from routers.client.model.ensembling_job_ensembler_spec_result import EnsemblingJobEnsemblerSpecResult
+from routers.client.model.ensembling_job_ensembler_spec import (
+    EnsemblingJobEnsemblerSpec,
+)
+from routers.client.model.ensembling_job_ensembler_spec_result import (
+    EnsemblingJobEnsemblerSpecResult,
+)
 from routers.client.model.ensembling_job_meta import EnsemblingJobMeta
-from routers.client.model.ensembling_job_paginated_results import EnsemblingJobPaginatedResults
-from routers.client.model.ensembling_job_paginated_results_all_of import EnsemblingJobPaginatedResultsAllOf
-from routers.client.model.ensembling_job_prediction_source import EnsemblingJobPredictionSource
-from routers.client.model.ensembling_job_prediction_source_all_of import EnsemblingJobPredictionSourceAllOf
+from routers.client.model.ensembling_job_paginated_results import (
+    EnsemblingJobPaginatedResults,
+)
+from routers.client.model.ensembling_job_paginated_results_all_of import (
+    EnsemblingJobPaginatedResultsAllOf,
+)
+from routers.client.model.ensembling_job_prediction_source import (
+    EnsemblingJobPredictionSource,
+)
+from routers.client.model.ensembling_job_prediction_source_all_of import (
+    EnsemblingJobPredictionSourceAllOf,
+)
 from routers.client.model.ensembling_job_result_type import EnsemblingJobResultType
 from routers.client.model.ensembling_job_sink import EnsemblingJobSink
 from routers.client.model.ensembling_job_source import EnsemblingJobSource
@@ -79,7 +97,9 @@ from routers.client.model.router_id_object import RouterIdObject
 from routers.client.model.router_status import RouterStatus
 from routers.client.model.router_version import RouterVersion
 from routers.client.model.router_version_config import RouterVersionConfig
-from routers.client.model.router_version_config_log_config import RouterVersionConfigLogConfig
+from routers.client.model.router_version_config_log_config import (
+    RouterVersionConfigLogConfig,
+)
 from routers.client.model.router_version_log_config import RouterVersionLogConfig
 from routers.client.model.router_version_status import RouterVersionStatus
 from routers.client.model.save_mode import SaveMode

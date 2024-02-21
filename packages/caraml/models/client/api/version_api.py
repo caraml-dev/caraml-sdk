@@ -48,21 +48,24 @@ class VersionApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
 
-
     @validate_call
     def models_model_id_versions_get(
         self,
         model_id: StrictInt,
         limit: Optional[StrictInt] = None,
         cursor: Optional[StrictStr] = None,
-        search: Annotated[Optional[StrictStr], Field(description="Search query to filter the model versions. These searches are currently supported: - Search by \"mlflow_run_id\" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by \"environment_name\" e.g `?search=environment_name:myenv` - Search by \"labels\" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by \"environment_name\" and \"labels\" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)` ")] = None,
+        search: Annotated[
+            Optional[StrictStr],
+            Field(
+                description='Search query to filter the model versions. These searches are currently supported: - Search by "mlflow_run_id" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by "environment_name" e.g `?search=environment_name:myenv` - Search by "labels" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by "environment_name" and "labels" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)` '
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -78,7 +81,7 @@ class VersionApi:
         :type limit: int
         :param cursor:
         :type cursor: str
-        :param search: Search query to filter the model versions. These searches are currently supported: - Search by \"mlflow_run_id\" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by \"environment_name\" e.g `?search=environment_name:myenv` - Search by \"labels\" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by \"environment_name\" and \"labels\" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)` 
+        :param search: Search query to filter the model versions. These searches are currently supported: - Search by \"mlflow_run_id\" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by \"environment_name\" e.g `?search=environment_name:myenv` - Search by \"labels\" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by \"environment_name\" and \"labels\" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)`
         :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -100,7 +103,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_get_serialize(
             model_id=model_id,
@@ -110,17 +113,15 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Version]",
-            '404': None
-            
+            "200": "List[Version]",
+            "404": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -128,21 +129,24 @@ class VersionApi:
             response_types_map=_response_types_map,
         ).data
 
-
     @validate_call
     def models_model_id_versions_get_with_http_info(
         self,
         model_id: StrictInt,
         limit: Optional[StrictInt] = None,
         cursor: Optional[StrictStr] = None,
-        search: Annotated[Optional[StrictStr], Field(description="Search query to filter the model versions. These searches are currently supported: - Search by \"mlflow_run_id\" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by \"environment_name\" e.g `?search=environment_name:myenv` - Search by \"labels\" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by \"environment_name\" and \"labels\" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)` ")] = None,
+        search: Annotated[
+            Optional[StrictStr],
+            Field(
+                description='Search query to filter the model versions. These searches are currently supported: - Search by "mlflow_run_id" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by "environment_name" e.g `?search=environment_name:myenv` - Search by "labels" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by "environment_name" and "labels" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)` '
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -158,7 +162,7 @@ class VersionApi:
         :type limit: int
         :param cursor:
         :type cursor: str
-        :param search: Search query to filter the model versions. These searches are currently supported: - Search by \"mlflow_run_id\" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by \"environment_name\" e.g `?search=environment_name:myenv` - Search by \"labels\" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by \"environment_name\" and \"labels\" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)` 
+        :param search: Search query to filter the model versions. These searches are currently supported: - Search by \"mlflow_run_id\" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by \"environment_name\" e.g `?search=environment_name:myenv` - Search by \"labels\" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by \"environment_name\" and \"labels\" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)`
         :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -180,7 +184,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_get_serialize(
             model_id=model_id,
@@ -190,17 +194,15 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Version]",
-            '404': None
-            
+            "200": "List[Version]",
+            "404": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -208,21 +210,24 @@ class VersionApi:
             response_types_map=_response_types_map,
         )
 
-
     @validate_call
     def models_model_id_versions_get_without_preload_content(
         self,
         model_id: StrictInt,
         limit: Optional[StrictInt] = None,
         cursor: Optional[StrictStr] = None,
-        search: Annotated[Optional[StrictStr], Field(description="Search query to filter the model versions. These searches are currently supported: - Search by \"mlflow_run_id\" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by \"environment_name\" e.g `?search=environment_name:myenv` - Search by \"labels\" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by \"environment_name\" and \"labels\" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)` ")] = None,
+        search: Annotated[
+            Optional[StrictStr],
+            Field(
+                description='Search query to filter the model versions. These searches are currently supported: - Search by "mlflow_run_id" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by "environment_name" e.g `?search=environment_name:myenv` - Search by "labels" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by "environment_name" and "labels" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)` '
+            ),
+        ] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -238,7 +243,7 @@ class VersionApi:
         :type limit: int
         :param cursor:
         :type cursor: str
-        :param search: Search query to filter the model versions. These searches are currently supported: - Search by \"mlflow_run_id\" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by \"environment_name\" e.g `?search=environment_name:myenv` - Search by \"labels\" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by \"environment_name\" and \"labels\" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)` 
+        :param search: Search query to filter the model versions. These searches are currently supported: - Search by \"mlflow_run_id\" e.g. `?search=cfca7716b45f4b149479630a98332a13` - Search by \"environment_name\" e.g `?search=environment_name:myenv` - Search by \"labels\" e.g. `?search=labels:app IN (nginx,postgres), country in (SG)` - Search by \"environment_name\" and \"labels\" e.g.   `?search=environment_name:myenv labels:app IN (nginx,postgres), country in (SG)`
         :type search: str
         :param _request_timeout: timeout setting for this request. If one
                                  number provided, it will be total request
@@ -260,7 +265,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_get_serialize(
             model_id=model_id,
@@ -270,20 +275,17 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "List[Version]",
-            '404': None
-            
+            "200": "List[Version]",
+            "404": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _models_model_id_versions_get_serialize(
         self,
@@ -299,9 +301,7 @@ class VersionApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-            
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -312,41 +312,33 @@ class VersionApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params['model_id'] = model_id
+            _path_params["model_id"] = model_id
         # process the query parameters
         if limit is not None:
-            
-            _query_params.append(('limit', limit))
-            
+
+            _query_params.append(("limit", limit))
+
         if cursor is not None:
-            
-            _query_params.append(('cursor', cursor))
-            
+
+            _query_params.append(("cursor", cursor))
+
         if search is not None:
-            
-            _query_params.append(('search', search))
-            
+
+            _query_params.append(("search", search))
+
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                '*/*'
-            ]
-        )
-
+        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
 
         # authentication setting
-        _auth_settings: List[str] = [
-            'Bearer'
-        ]
+        _auth_settings: List[str] = ["Bearer"]
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/models/{model_id}/versions',
+            method="GET",
+            resource_path="/models/{model_id}/versions",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -356,11 +348,8 @@ class VersionApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def models_model_id_versions_post(
@@ -371,9 +360,8 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -407,7 +395,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_post_serialize(
             model_id=model_id,
@@ -415,23 +403,18 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "Version"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"201": "Version"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
-
 
     @validate_call
     def models_model_id_versions_post_with_http_info(
@@ -442,9 +425,8 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -478,7 +460,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_post_serialize(
             model_id=model_id,
@@ -486,23 +468,18 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "Version"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"201": "Version"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
-
 
     @validate_call
     def models_model_id_versions_post_without_preload_content(
@@ -513,9 +490,8 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -549,7 +525,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_post_serialize(
             model_id=model_id,
@@ -557,19 +533,14 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '201': "Version"
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"201": "Version"}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _models_model_id_versions_post_serialize(
         self,
@@ -583,9 +554,7 @@ class VersionApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-            
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -596,7 +565,7 @@ class VersionApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params['model_id'] = model_id
+            _path_params["model_id"] = model_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -604,23 +573,15 @@ class VersionApi:
         if body is not None:
             _body_params = body
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                '*/*'
-            ]
-        )
-
+        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
 
         # authentication setting
-        _auth_settings: List[str] = [
-            'Bearer'
-        ]
+        _auth_settings: List[str] = ["Bearer"]
 
         return self.api_client.param_serialize(
-            method='POST',
-            resource_path='/models/{model_id}/versions',
+            method="POST",
+            resource_path="/models/{model_id}/versions",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -630,11 +591,8 @@ class VersionApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def models_model_id_versions_version_id_delete(
@@ -645,9 +603,8 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -681,7 +638,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_version_id_delete_serialize(
             model_id=model_id,
@@ -689,26 +646,23 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "int",
-            '400': None,
-            '404': None,
-            '500': None
-            
+            "200": "int",
+            "400": None,
+            "404": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
-
 
     @validate_call
     def models_model_id_versions_version_id_delete_with_http_info(
@@ -719,9 +673,8 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -755,7 +708,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_version_id_delete_serialize(
             model_id=model_id,
@@ -763,26 +716,23 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "int",
-            '400': None,
-            '404': None,
-            '500': None
-            
+            "200": "int",
+            "400": None,
+            "404": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
-
 
     @validate_call
     def models_model_id_versions_version_id_delete_without_preload_content(
@@ -793,9 +743,8 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -829,7 +778,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_version_id_delete_serialize(
             model_id=model_id,
@@ -837,22 +786,19 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            '200': "int",
-            '400': None,
-            '404': None,
-            '500': None
-            
+            "200": "int",
+            "400": None,
+            "404": None,
+            "500": None,
         }
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _models_model_id_versions_version_id_delete_serialize(
         self,
@@ -866,9 +812,7 @@ class VersionApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-            
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -879,31 +823,23 @@ class VersionApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params['model_id'] = model_id
+            _path_params["model_id"] = model_id
         if version_id is not None:
-            _path_params['version_id'] = version_id
+            _path_params["version_id"] = version_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                '*/*'
-            ]
-        )
-
+        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
 
         # authentication setting
-        _auth_settings: List[str] = [
-            'Bearer'
-        ]
+        _auth_settings: List[str] = ["Bearer"]
 
         return self.api_client.param_serialize(
-            method='DELETE',
-            resource_path='/models/{model_id}/versions/{version_id}',
+            method="DELETE",
+            resource_path="/models/{model_id}/versions/{version_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -913,11 +849,8 @@ class VersionApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def models_model_id_versions_version_id_get(
@@ -928,9 +861,8 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -964,7 +896,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_version_id_get_serialize(
             model_id=model_id,
@@ -972,24 +904,18 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Version",
-            '404': None
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"200": "Version", "404": None}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
-
 
     @validate_call
     def models_model_id_versions_version_id_get_with_http_info(
@@ -1000,9 +926,8 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1036,7 +961,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_version_id_get_serialize(
             model_id=model_id,
@@ -1044,24 +969,18 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Version",
-            '404': None
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"200": "Version", "404": None}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
-
 
     @validate_call
     def models_model_id_versions_version_id_get_without_preload_content(
@@ -1072,9 +991,8 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1108,7 +1026,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_version_id_get_serialize(
             model_id=model_id,
@@ -1116,20 +1034,14 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            '200': "Version",
-            '404': None
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {"200": "Version", "404": None}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _models_model_id_versions_version_id_get_serialize(
         self,
@@ -1143,9 +1055,7 @@ class VersionApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-            
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1156,31 +1066,23 @@ class VersionApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params['model_id'] = model_id
+            _path_params["model_id"] = model_id
         if version_id is not None:
-            _path_params['version_id'] = version_id
+            _path_params["version_id"] = version_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
-
         # set the HTTP header `Accept`
-        _header_params['Accept'] = self.api_client.select_header_accept(
-            [
-                '*/*'
-            ]
-        )
-
+        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
 
         # authentication setting
-        _auth_settings: List[str] = [
-            'Bearer'
-        ]
+        _auth_settings: List[str] = ["Bearer"]
 
         return self.api_client.param_serialize(
-            method='GET',
-            resource_path='/models/{model_id}/versions/{version_id}',
+            method="GET",
+            resource_path="/models/{model_id}/versions/{version_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1190,11 +1092,8 @@ class VersionApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
-
 
     @validate_call
     def models_model_id_versions_version_id_patch(
@@ -1206,16 +1105,15 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> None:
-        """Patch the version 
+        """Patch the version
 
 
         :param model_id: (required)
@@ -1244,7 +1142,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_version_id_patch_serialize(
             model_id=model_id,
@@ -1253,22 +1151,18 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
-
 
     @validate_call
     def models_model_id_versions_version_id_patch_with_http_info(
@@ -1280,16 +1174,15 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> ApiResponse[None]:
-        """Patch the version 
+        """Patch the version
 
 
         :param model_id: (required)
@@ -1318,7 +1211,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_version_id_patch_serialize(
             model_id=model_id,
@@ -1327,22 +1220,18 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
-
 
     @validate_call
     def models_model_id_versions_version_id_patch_without_preload_content(
@@ -1354,16 +1243,15 @@ class VersionApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)],
-                Annotated[StrictFloat, Field(gt=0)]
-            ]
+                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
+            ],
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
         _headers: Optional[Dict[StrictStr, Any]] = None,
         _host_index: Annotated[StrictInt, Field(ge=0, le=0)] = 0,
     ) -> RESTResponseType:
-        """Patch the version 
+        """Patch the version
 
 
         :param model_id: (required)
@@ -1392,7 +1280,7 @@ class VersionApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """ # noqa: E501
+        """  # noqa: E501
 
         _param = self._models_model_id_versions_version_id_patch_serialize(
             model_id=model_id,
@@ -1401,18 +1289,14 @@ class VersionApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index
+            _host_index=_host_index,
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {
-            
-        }
+        _response_types_map: Dict[str, Optional[str]] = {}
         response_data = self.api_client.call_api(
-            *_param,
-            _request_timeout=_request_timeout
+            *_param, _request_timeout=_request_timeout
         )
         return response_data.response
-
 
     def _models_model_id_versions_version_id_patch_serialize(
         self,
@@ -1427,9 +1311,7 @@ class VersionApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {
-            
-        }
+        _collection_formats: Dict[str, str] = {}
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1440,9 +1322,9 @@ class VersionApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params['model_id'] = model_id
+            _path_params["model_id"] = model_id
         if version_id is not None:
-            _path_params['version_id'] = version_id
+            _path_params["version_id"] = version_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1450,17 +1332,12 @@ class VersionApi:
         if body is not None:
             _body_params = body
 
-
-
-
         # authentication setting
-        _auth_settings: List[str] = [
-            'Bearer'
-        ]
+        _auth_settings: List[str] = ["Bearer"]
 
         return self.api_client.param_serialize(
-            method='PATCH',
-            resource_path='/models/{model_id}/versions/{version_id}',
+            method="PATCH",
+            resource_path="/models/{model_id}/versions/{version_id}",
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1470,7 +1347,5 @@ class VersionApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth
+            _request_auth=_request_auth,
         )
-
-
