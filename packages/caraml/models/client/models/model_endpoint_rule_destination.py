@@ -21,28 +21,25 @@ import json
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr
 from models.client.models.version_endpoint import VersionEndpoint
-
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class ModelEndpointRuleDestination(BaseModel):
     """
     ModelEndpointRuleDestination
-    """  # noqa: E501
-
+    """ # noqa: E501
     version_endpoint_id: Optional[StrictStr] = None
     version_endpoint: Optional[VersionEndpoint] = None
     weight: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = [
-        "version_endpoint_id",
-        "version_endpoint",
-        "weight",
-    ]
+    __properties: ClassVar[List[str]] = ["version_endpoint_id", "version_endpoint", "weight"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -70,12 +67,13 @@ class ModelEndpointRuleDestination(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of version_endpoint
         if self.version_endpoint:
-            _dict["version_endpoint"] = self.version_endpoint.to_dict()
+            _dict['version_endpoint'] = self.version_endpoint.to_dict()
         return _dict
 
     @classmethod
@@ -87,15 +85,11 @@ class ModelEndpointRuleDestination(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "version_endpoint_id": obj.get("version_endpoint_id"),
-                "version_endpoint": VersionEndpoint.from_dict(
-                    obj.get("version_endpoint")
-                )
-                if obj.get("version_endpoint") is not None
-                else None,
-                "weight": obj.get("weight"),
-            }
-        )
+        _obj = cls.model_validate({
+            "version_endpoint_id": obj.get("version_endpoint_id"),
+            "version_endpoint": VersionEndpoint.from_dict(obj.get("version_endpoint")) if obj.get("version_endpoint") is not None else None,
+            "weight": obj.get("weight")
+        })
         return _obj
+
+

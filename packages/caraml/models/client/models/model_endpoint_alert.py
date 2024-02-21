@@ -20,35 +20,28 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr
-from models.client.models.model_endpoint_alert_condition import (
-    ModelEndpointAlertCondition,
-)
-
+from models.client.models.model_endpoint_alert_condition import ModelEndpointAlertCondition
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class ModelEndpointAlert(BaseModel):
     """
     ModelEndpointAlert
-    """  # noqa: E501
-
+    """ # noqa: E501
     model_id: Optional[StrictInt] = None
     model_endpoint_id: Optional[StrictInt] = None
     environment_name: Optional[StrictStr] = None
     team_name: Optional[StrictStr] = None
     alert_conditions: Optional[List[ModelEndpointAlertCondition]] = None
-    __properties: ClassVar[List[str]] = [
-        "model_id",
-        "model_endpoint_id",
-        "environment_name",
-        "team_name",
-        "alert_conditions",
-    ]
+    __properties: ClassVar[List[str]] = ["model_id", "model_endpoint_id", "environment_name", "team_name", "alert_conditions"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -76,7 +69,8 @@ class ModelEndpointAlert(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in alert_conditions (list)
@@ -85,7 +79,7 @@ class ModelEndpointAlert(BaseModel):
             for _item in self.alert_conditions:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["alert_conditions"] = _items
+            _dict['alert_conditions'] = _items
         return _dict
 
     @classmethod
@@ -97,18 +91,13 @@ class ModelEndpointAlert(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "model_id": obj.get("model_id"),
-                "model_endpoint_id": obj.get("model_endpoint_id"),
-                "environment_name": obj.get("environment_name"),
-                "team_name": obj.get("team_name"),
-                "alert_conditions": [
-                    ModelEndpointAlertCondition.from_dict(_item)
-                    for _item in obj.get("alert_conditions")
-                ]
-                if obj.get("alert_conditions") is not None
-                else None,
-            }
-        )
+        _obj = cls.model_validate({
+            "model_id": obj.get("model_id"),
+            "model_endpoint_id": obj.get("model_endpoint_id"),
+            "environment_name": obj.get("environment_name"),
+            "team_name": obj.get("team_name"),
+            "alert_conditions": [ModelEndpointAlertCondition.from_dict(_item) for _item in obj.get("alert_conditions")] if obj.get("alert_conditions") is not None else None
+        })
         return _obj
+
+

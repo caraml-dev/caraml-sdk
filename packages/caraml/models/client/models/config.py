@@ -22,38 +22,30 @@ from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
 from models.client.models.env_var import EnvVar
 from models.client.models.prediction_job_config import PredictionJobConfig
-from models.client.models.prediction_job_resource_request import (
-    PredictionJobResourceRequest,
-)
+from models.client.models.prediction_job_resource_request import PredictionJobResourceRequest
 from models.client.models.resource_request import ResourceRequest
-
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class Config(BaseModel):
     """
     Config
-    """  # noqa: E501
-
+    """ # noqa: E501
     job_config: Optional[PredictionJobConfig] = None
     image_ref: Optional[StrictStr] = None
     service_account_name: Optional[StrictStr] = None
     resource_request: Optional[PredictionJobResourceRequest] = None
     image_builder_resource_request: Optional[ResourceRequest] = None
     env_vars: Optional[List[EnvVar]] = None
-    __properties: ClassVar[List[str]] = [
-        "job_config",
-        "image_ref",
-        "service_account_name",
-        "resource_request",
-        "image_builder_resource_request",
-        "env_vars",
-    ]
+    __properties: ClassVar[List[str]] = ["job_config", "image_ref", "service_account_name", "resource_request", "image_builder_resource_request", "env_vars"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -81,27 +73,26 @@ class Config(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of job_config
         if self.job_config:
-            _dict["job_config"] = self.job_config.to_dict()
+            _dict['job_config'] = self.job_config.to_dict()
         # override the default output from pydantic by calling `to_dict()` of resource_request
         if self.resource_request:
-            _dict["resource_request"] = self.resource_request.to_dict()
+            _dict['resource_request'] = self.resource_request.to_dict()
         # override the default output from pydantic by calling `to_dict()` of image_builder_resource_request
         if self.image_builder_resource_request:
-            _dict[
-                "image_builder_resource_request"
-            ] = self.image_builder_resource_request.to_dict()
+            _dict['image_builder_resource_request'] = self.image_builder_resource_request.to_dict()
         # override the default output from pydantic by calling `to_dict()` of each item in env_vars (list)
         _items = []
         if self.env_vars:
             for _item in self.env_vars:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["env_vars"] = _items
+            _dict['env_vars'] = _items
         return _dict
 
     @classmethod
@@ -113,26 +104,14 @@ class Config(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "job_config": PredictionJobConfig.from_dict(obj.get("job_config"))
-                if obj.get("job_config") is not None
-                else None,
-                "image_ref": obj.get("image_ref"),
-                "service_account_name": obj.get("service_account_name"),
-                "resource_request": PredictionJobResourceRequest.from_dict(
-                    obj.get("resource_request")
-                )
-                if obj.get("resource_request") is not None
-                else None,
-                "image_builder_resource_request": ResourceRequest.from_dict(
-                    obj.get("image_builder_resource_request")
-                )
-                if obj.get("image_builder_resource_request") is not None
-                else None,
-                "env_vars": [EnvVar.from_dict(_item) for _item in obj.get("env_vars")]
-                if obj.get("env_vars") is not None
-                else None,
-            }
-        )
+        _obj = cls.model_validate({
+            "job_config": PredictionJobConfig.from_dict(obj.get("job_config")) if obj.get("job_config") is not None else None,
+            "image_ref": obj.get("image_ref"),
+            "service_account_name": obj.get("service_account_name"),
+            "resource_request": PredictionJobResourceRequest.from_dict(obj.get("resource_request")) if obj.get("resource_request") is not None else None,
+            "image_builder_resource_request": ResourceRequest.from_dict(obj.get("image_builder_resource_request")) if obj.get("image_builder_resource_request") is not None else None,
+            "env_vars": [EnvVar.from_dict(_item) for _item in obj.get("env_vars")] if obj.get("env_vars") is not None else None
+        })
         return _obj
+
+

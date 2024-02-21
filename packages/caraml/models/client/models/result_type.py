@@ -19,6 +19,7 @@ import re  # noqa: F401
 from enum import Enum
 
 
+
 try:
     from typing import Self
 except ImportError:
@@ -33,14 +34,16 @@ class ResultType(str, Enum):
     """
     allowed enum values
     """
-    DOUBLE = "DOUBLE"
-    FLOAT = "FLOAT"
-    INTEGER = "INTEGER"
-    LONG = "LONG"
-    STRING = "STRING"
-    ARRAY = "ARRAY"
+    DOUBLE = 'DOUBLE'
+    FLOAT = 'FLOAT'
+    INTEGER = 'INTEGER'
+    LONG = 'LONG'
+    STRING = 'STRING'
+    ARRAY = 'ARRAY'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of ResultType from a JSON string"""
         return cls(json.loads(json_str))
+
+

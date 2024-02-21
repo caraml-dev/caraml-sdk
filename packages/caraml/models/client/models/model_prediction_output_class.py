@@ -19,6 +19,7 @@ import re  # noqa: F401
 from enum import Enum
 
 
+
 try:
     from typing import Self
 except ImportError:
@@ -33,11 +34,13 @@ class ModelPredictionOutputClass(str, Enum):
     """
     allowed enum values
     """
-    BINARYCLASSIFICATIONOUTPUT = "BinaryClassificationOutput"
-    RANKINGOUTPUT = "RankingOutput"
-    REGRESSIONOUTPUT = "RegressionOutput"
+    BINARYCLASSIFICATIONOUTPUT = 'BinaryClassificationOutput'
+    RANKINGOUTPUT = 'RankingOutput'
+    REGRESSIONOUTPUT = 'RegressionOutput'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of ModelPredictionOutputClass from a JSON string"""
         return cls(json.loads(json_str))
+
+

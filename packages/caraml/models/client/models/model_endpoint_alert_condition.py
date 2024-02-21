@@ -22,34 +22,28 @@ from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel, StrictBool, StrictFloat, StrictInt, StrictStr
 from models.client.models.alert_condition_metric_type import AlertConditionMetricType
 from models.client.models.alert_condition_severity import AlertConditionSeverity
-
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class ModelEndpointAlertCondition(BaseModel):
     """
     ModelEndpointAlertCondition
-    """  # noqa: E501
-
+    """ # noqa: E501
     enabled: Optional[StrictBool] = None
     metric_type: Optional[AlertConditionMetricType] = None
     severity: Optional[AlertConditionSeverity] = None
     target: Optional[Union[StrictFloat, StrictInt]] = None
     percentile: Optional[Union[StrictFloat, StrictInt]] = None
     unit: Optional[StrictStr] = None
-    __properties: ClassVar[List[str]] = [
-        "enabled",
-        "metric_type",
-        "severity",
-        "target",
-        "percentile",
-        "unit",
-    ]
+    __properties: ClassVar[List[str]] = ["enabled", "metric_type", "severity", "target", "percentile", "unit"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -77,7 +71,8 @@ class ModelEndpointAlertCondition(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         return _dict
@@ -91,14 +86,14 @@ class ModelEndpointAlertCondition(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "enabled": obj.get("enabled"),
-                "metric_type": obj.get("metric_type"),
-                "severity": obj.get("severity"),
-                "target": obj.get("target"),
-                "percentile": obj.get("percentile"),
-                "unit": obj.get("unit"),
-            }
-        )
+        _obj = cls.model_validate({
+            "enabled": obj.get("enabled"),
+            "metric_type": obj.get("metric_type"),
+            "severity": obj.get("severity"),
+            "target": obj.get("target"),
+            "percentile": obj.get("percentile"),
+            "unit": obj.get("unit")
+        })
         return _obj
+
+

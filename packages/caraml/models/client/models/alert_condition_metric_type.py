@@ -19,6 +19,7 @@ import re  # noqa: F401
 from enum import Enum
 
 
+
 try:
     from typing import Self
 except ImportError:
@@ -33,13 +34,15 @@ class AlertConditionMetricType(str, Enum):
     """
     allowed enum values
     """
-    THROUGHPUT = "throughput"
-    LATENCY = "latency"
-    ERROR_RATE = "error_rate"
-    CPU = "cpu"
-    MEMORY = "memory"
+    THROUGHPUT = 'throughput'
+    LATENCY = 'latency'
+    ERROR_RATE = 'error_rate'
+    CPU = 'cpu'
+    MEMORY = 'memory'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of AlertConditionMetricType from a JSON string"""
         return cls(json.loads(json_str))
+
+

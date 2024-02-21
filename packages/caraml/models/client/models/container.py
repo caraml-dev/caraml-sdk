@@ -20,18 +20,15 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr, field_validator
-
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class Container(BaseModel):
     """
     Container
-    """  # noqa: E501
-
+    """ # noqa: E501
     name: Optional[StrictStr] = None
     pod_name: Optional[StrictStr] = None
     component_type: Optional[StrictStr] = None
@@ -39,35 +36,23 @@ class Container(BaseModel):
     cluster: Optional[StrictStr] = None
     gcp_project: Optional[StrictStr] = None
     version_endpoint_id: Optional[StrictInt] = None
-    __properties: ClassVar[List[str]] = [
-        "name",
-        "pod_name",
-        "component_type",
-        "namespace",
-        "cluster",
-        "gcp_project",
-        "version_endpoint_id",
-    ]
+    __properties: ClassVar[List[str]] = ["name", "pod_name", "component_type", "namespace", "cluster", "gcp_project", "version_endpoint_id"]
 
-    @field_validator("component_type")
+    @field_validator('component_type')
     def component_type_validate_enum(cls, value):
         """Validates the enum"""
         if value is None:
             return value
 
-        if value not in (
-            "image_builder",
-            "model",
-            "transformer",
-            "batch_job_driver",
-            "batch_job_executor",
-        ):
-            raise ValueError(
-                "must be one of enum values ('image_builder', 'model', 'transformer', 'batch_job_driver', 'batch_job_executor')"
-            )
+        if value not in ('image_builder', 'model', 'transformer', 'batch_job_driver', 'batch_job_executor'):
+            raise ValueError("must be one of enum values ('image_builder', 'model', 'transformer', 'batch_job_driver', 'batch_job_executor')")
         return value
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -95,7 +80,8 @@ class Container(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         return _dict
@@ -109,15 +95,15 @@ class Container(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "name": obj.get("name"),
-                "pod_name": obj.get("pod_name"),
-                "component_type": obj.get("component_type"),
-                "namespace": obj.get("namespace"),
-                "cluster": obj.get("cluster"),
-                "gcp_project": obj.get("gcp_project"),
-                "version_endpoint_id": obj.get("version_endpoint_id"),
-            }
-        )
+        _obj = cls.model_validate({
+            "name": obj.get("name"),
+            "pod_name": obj.get("pod_name"),
+            "component_type": obj.get("component_type"),
+            "namespace": obj.get("namespace"),
+            "cluster": obj.get("cluster"),
+            "gcp_project": obj.get("gcp_project"),
+            "version_endpoint_id": obj.get("version_endpoint_id")
+        })
         return _obj
+
+

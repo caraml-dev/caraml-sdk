@@ -45,6 +45,7 @@ class LogApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
 
+
     @validate_call
     def logs_get(
         self,
@@ -69,8 +70,9 @@ class LogApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -134,7 +136,7 @@ class LogApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._logs_get_serialize(
             cluster=cluster,
@@ -157,18 +159,22 @@ class LogApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
+
 
     @validate_call
     def logs_get_with_http_info(
@@ -194,8 +200,9 @@ class LogApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -259,7 +266,7 @@ class LogApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._logs_get_serialize(
             cluster=cluster,
@@ -282,18 +289,22 @@ class LogApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
+
 
     @validate_call
     def logs_get_without_preload_content(
@@ -319,8 +330,9 @@ class LogApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -384,7 +396,7 @@ class LogApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._logs_get_serialize(
             cluster=cluster,
@@ -407,14 +419,18 @@ class LogApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _logs_get_serialize(
         self,
@@ -443,7 +459,9 @@ class LogApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -455,83 +473,88 @@ class LogApi:
         # process the path parameters
         # process the query parameters
         if project_name is not None:
-
-            _query_params.append(("project_name", project_name))
-
+            
+            _query_params.append(('project_name', project_name))
+            
         if model_id is not None:
-
-            _query_params.append(("model_id", model_id))
-
+            
+            _query_params.append(('model_id', model_id))
+            
         if model_name is not None:
-
-            _query_params.append(("model_name", model_name))
-
+            
+            _query_params.append(('model_name', model_name))
+            
         if version_id is not None:
-
-            _query_params.append(("version_id", version_id))
-
+            
+            _query_params.append(('version_id', version_id))
+            
         if prediction_job_id is not None:
-
-            _query_params.append(("prediction_job_id", prediction_job_id))
-
+            
+            _query_params.append(('prediction_job_id', prediction_job_id))
+            
         if cluster is not None:
-
-            _query_params.append(("cluster", cluster))
-
+            
+            _query_params.append(('cluster', cluster))
+            
         if namespace is not None:
-
-            _query_params.append(("namespace", namespace))
-
+            
+            _query_params.append(('namespace', namespace))
+            
         if component_type is not None:
-
-            _query_params.append(("component_type", component_type))
-
+            
+            _query_params.append(('component_type', component_type))
+            
         if container_name is not None:
-
-            _query_params.append(("container_name", container_name))
-
+            
+            _query_params.append(('container_name', container_name))
+            
         if prefix is not None:
-
-            _query_params.append(("prefix", prefix))
-
+            
+            _query_params.append(('prefix', prefix))
+            
         if follow is not None:
-
-            _query_params.append(("follow", follow))
-
+            
+            _query_params.append(('follow', follow))
+            
         if previous is not None:
-
-            _query_params.append(("previous", previous))
-
+            
+            _query_params.append(('previous', previous))
+            
         if since_seconds is not None:
-
-            _query_params.append(("since_seconds", since_seconds))
-
+            
+            _query_params.append(('since_seconds', since_seconds))
+            
         if since_time is not None:
-
-            _query_params.append(("since_time", since_time))
-
+            
+            _query_params.append(('since_time', since_time))
+            
         if timestamps is not None:
-
-            _query_params.append(("timestamps", timestamps))
-
+            
+            _query_params.append(('timestamps', timestamps))
+            
         if tail_lines is not None:
-
-            _query_params.append(("tail_lines", tail_lines))
-
+            
+            _query_params.append(('tail_lines', tail_lines))
+            
         if limit_bytes is not None:
-
-            _query_params.append(("limit_bytes", limit_bytes))
-
+            
+            _query_params.append(('limit_bytes', limit_bytes))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
+
+
+
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/logs",
+            method='GET',
+            resource_path='/logs',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -541,5 +564,7 @@ class LogApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+

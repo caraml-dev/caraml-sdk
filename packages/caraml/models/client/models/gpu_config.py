@@ -21,18 +21,15 @@ import json
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
 from models.client.models.gpu_toleration import GPUToleration
-
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class GPUConfig(BaseModel):
     """
     GPUConfig
-    """  # noqa: E501
-
+    """ # noqa: E501
     name: Optional[StrictStr] = None
     values: Optional[List[StrictStr]] = None
     resource_type: Optional[StrictStr] = None
@@ -40,17 +37,13 @@ class GPUConfig(BaseModel):
     tolerations: Optional[List[GPUToleration]] = None
     min_monthly_cost_per_gpu: Optional[Union[StrictFloat, StrictInt]] = None
     max_monthly_cost_per_gpu: Optional[Union[StrictFloat, StrictInt]] = None
-    __properties: ClassVar[List[str]] = [
-        "name",
-        "values",
-        "resource_type",
-        "node_selector",
-        "tolerations",
-        "min_monthly_cost_per_gpu",
-        "max_monthly_cost_per_gpu",
-    ]
+    __properties: ClassVar[List[str]] = ["name", "values", "resource_type", "node_selector", "tolerations", "min_monthly_cost_per_gpu", "max_monthly_cost_per_gpu"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -78,7 +71,8 @@ class GPUConfig(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in tolerations (list)
@@ -87,7 +81,7 @@ class GPUConfig(BaseModel):
             for _item in self.tolerations:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["tolerations"] = _items
+            _dict['tolerations'] = _items
         return _dict
 
     @classmethod
@@ -99,19 +93,15 @@ class GPUConfig(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "name": obj.get("name"),
-                "values": obj.get("values"),
-                "resource_type": obj.get("resource_type"),
-                "node_selector": obj.get("node_selector"),
-                "tolerations": [
-                    GPUToleration.from_dict(_item) for _item in obj.get("tolerations")
-                ]
-                if obj.get("tolerations") is not None
-                else None,
-                "min_monthly_cost_per_gpu": obj.get("min_monthly_cost_per_gpu"),
-                "max_monthly_cost_per_gpu": obj.get("max_monthly_cost_per_gpu"),
-            }
-        )
+        _obj = cls.model_validate({
+            "name": obj.get("name"),
+            "values": obj.get("values"),
+            "resource_type": obj.get("resource_type"),
+            "node_selector": obj.get("node_selector"),
+            "tolerations": [GPUToleration.from_dict(_item) for _item in obj.get("tolerations")] if obj.get("tolerations") is not None else None,
+            "min_monthly_cost_per_gpu": obj.get("min_monthly_cost_per_gpu"),
+            "max_monthly_cost_per_gpu": obj.get("max_monthly_cost_per_gpu")
+        })
         return _obj
+
+

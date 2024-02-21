@@ -21,23 +21,24 @@ import json
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel
 from models.client.models.result_type import ResultType
-
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class PredictionJobConfigModelResult(BaseModel):
     """
     PredictionJobConfigModelResult
-    """  # noqa: E501
-
+    """ # noqa: E501
     type: Optional[ResultType] = None
     item_type: Optional[ResultType] = None
     __properties: ClassVar[List[str]] = ["type", "item_type"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -65,7 +66,8 @@ class PredictionJobConfigModelResult(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         return _dict
@@ -79,7 +81,10 @@ class PredictionJobConfigModelResult(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {"type": obj.get("type"), "item_type": obj.get("item_type")}
-        )
+        _obj = cls.model_validate({
+            "type": obj.get("type"),
+            "item_type": obj.get("item_type")
+        })
         return _obj
+
+
