@@ -69,7 +69,7 @@ jobs:
       
       - name: Lint ${{ github.event.inputs.module }}/client
         run: |
-          cd packages/caraml/${{ github.event.inputs.module }}
+          cd packages/caraml
           make lint
 
       - name: Create Pull Request
