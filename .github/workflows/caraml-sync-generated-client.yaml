@@ -63,7 +63,7 @@ jobs:
         run: |
           rm -rf packages/caraml/${{ github.event.inputs.module }}/client
           cp -r python-client/${{ github.event.inputs.module }}/client packages/caraml/${{ github.event.inputs.module }}
-          @echo 'APP_VERSION = "${{ github.event.inputs.ref }}"' > packages/caraml/${{ github.event.inputs.module }}/version.py
+          echo 'VERSION = "${{ github.event.inputs.ref }}"' > packages/caraml/${{ github.event.inputs.module }}/version.py
           rm -rf ${{ github.event.inputs.module }}
           rm -rf python-client
 
