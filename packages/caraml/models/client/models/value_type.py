@@ -19,6 +19,7 @@ import re  # noqa: F401
 from enum import Enum
 
 
+
 try:
     from typing import Self
 except ImportError:
@@ -33,12 +34,14 @@ class ValueType(str, Enum):
     """
     allowed enum values
     """
-    FLOAT64 = "float64"
-    INT64 = "int64"
-    BOOLEAN = "boolean"
-    STRING = "string"
+    FLOAT64 = 'float64'
+    INT64 = 'int64'
+    BOOLEAN = 'boolean'
+    STRING = 'string'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of ValueType from a JSON string"""
         return cls(json.loads(json_str))
+
+

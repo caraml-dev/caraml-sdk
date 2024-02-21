@@ -48,6 +48,7 @@ class ModelEndpointsApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
 
+
     @validate_call
     def models_model_id_endpoints_get(
         self,
@@ -56,8 +57,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -89,25 +91,30 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_get_serialize(
             model_id=model_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "List[ModelEndpoint]"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ModelEndpoint]"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
+
 
     @validate_call
     def models_model_id_endpoints_get_with_http_info(
@@ -117,8 +124,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -150,25 +158,30 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_get_serialize(
             model_id=model_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "List[ModelEndpoint]"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ModelEndpoint]"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
+
 
     @validate_call
     def models_model_id_endpoints_get_without_preload_content(
@@ -178,8 +191,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -211,21 +225,26 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_get_serialize(
             model_id=model_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "List[ModelEndpoint]"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ModelEndpoint]"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _models_model_id_endpoints_get_serialize(
         self,
@@ -238,7 +257,9 @@ class ModelEndpointsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -249,21 +270,29 @@ class ModelEndpointsApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params["model_id"] = model_id
+            _path_params['model_id'] = model_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/models/{model_id}/endpoints",
+            method='GET',
+            resource_path='/models/{model_id}/endpoints',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -273,8 +302,11 @@ class ModelEndpointsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_delete(
@@ -285,8 +317,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -320,7 +353,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_delete_serialize(
             model_id=model_id,
@@ -328,18 +361,22 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_delete_with_http_info(
@@ -350,8 +387,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -385,7 +423,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_delete_serialize(
             model_id=model_id,
@@ -393,18 +431,22 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_delete_without_preload_content(
@@ -415,8 +457,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -450,7 +493,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_delete_serialize(
             model_id=model_id,
@@ -458,14 +501,18 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _models_model_id_endpoints_model_endpoint_id_delete_serialize(
         self,
@@ -479,7 +526,9 @@ class ModelEndpointsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -490,20 +539,25 @@ class ModelEndpointsApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params["model_id"] = model_id
+            _path_params['model_id'] = model_id
         if model_endpoint_id is not None:
-            _path_params["model_endpoint_id"] = model_endpoint_id
+            _path_params['model_endpoint_id'] = model_endpoint_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
+
+
+
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="DELETE",
-            resource_path="/models/{model_id}/endpoints/{model_endpoint_id}",
+            method='DELETE',
+            resource_path='/models/{model_id}/endpoints/{model_endpoint_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -513,8 +567,11 @@ class ModelEndpointsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_get(
@@ -525,8 +582,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -560,7 +618,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_get_serialize(
             model_id=model_id,
@@ -568,18 +626,23 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "ModelEndpoint"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ModelEndpoint"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_get_with_http_info(
@@ -590,8 +653,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -625,7 +689,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_get_serialize(
             model_id=model_id,
@@ -633,18 +697,23 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "ModelEndpoint"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ModelEndpoint"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_get_without_preload_content(
@@ -655,8 +724,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -690,7 +760,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_get_serialize(
             model_id=model_id,
@@ -698,14 +768,19 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "ModelEndpoint"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ModelEndpoint"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _models_model_id_endpoints_model_endpoint_id_get_serialize(
         self,
@@ -719,7 +794,9 @@ class ModelEndpointsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -730,23 +807,31 @@ class ModelEndpointsApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params["model_id"] = model_id
+            _path_params['model_id'] = model_id
         if model_endpoint_id is not None:
-            _path_params["model_endpoint_id"] = model_endpoint_id
+            _path_params['model_endpoint_id'] = model_endpoint_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/models/{model_id}/endpoints/{model_endpoint_id}",
+            method='GET',
+            resource_path='/models/{model_id}/endpoints/{model_endpoint_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -756,8 +841,11 @@ class ModelEndpointsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_put(
@@ -769,8 +857,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -806,7 +895,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_put_serialize(
             model_id=model_id,
@@ -815,18 +904,23 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "ModelEndpoint"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ModelEndpoint"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_put_with_http_info(
@@ -838,8 +932,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -875,7 +970,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_put_serialize(
             model_id=model_id,
@@ -884,18 +979,23 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "ModelEndpoint"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ModelEndpoint"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_put_without_preload_content(
@@ -907,8 +1007,9 @@ class ModelEndpointsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -944,7 +1045,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_put_serialize(
             model_id=model_id,
@@ -953,14 +1054,19 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "ModelEndpoint"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ModelEndpoint"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _models_model_id_endpoints_model_endpoint_id_put_serialize(
         self,
@@ -975,7 +1081,9 @@ class ModelEndpointsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -986,9 +1094,9 @@ class ModelEndpointsApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params["model_id"] = model_id
+            _path_params['model_id'] = model_id
         if model_endpoint_id is not None:
-            _path_params["model_endpoint_id"] = model_endpoint_id
+            _path_params['model_endpoint_id'] = model_endpoint_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -996,15 +1104,23 @@ class ModelEndpointsApi:
         if body is not None:
             _body_params = body
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="PUT",
-            resource_path="/models/{model_id}/endpoints/{model_endpoint_id}",
+            method='PUT',
+            resource_path='/models/{model_id}/endpoints/{model_endpoint_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1014,23 +1130,24 @@ class ModelEndpointsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def models_model_id_endpoints_post(
         self,
         model_id: StrictInt,
-        body: Annotated[
-            ModelEndpoint,
-            Field(description="Model endpoint object that has to be added"),
-        ],
+        body: Annotated[ModelEndpoint, Field(description="Model endpoint object that has to be added")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1064,7 +1181,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_post_serialize(
             model_id=model_id,
@@ -1072,12 +1189,16 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"201": "ModelEndpoint"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "ModelEndpoint"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1085,20 +1206,19 @@ class ModelEndpointsApi:
             response_types_map=_response_types_map,
         ).data
 
+
     @validate_call
     def models_model_id_endpoints_post_with_http_info(
         self,
         model_id: StrictInt,
-        body: Annotated[
-            ModelEndpoint,
-            Field(description="Model endpoint object that has to be added"),
-        ],
+        body: Annotated[ModelEndpoint, Field(description="Model endpoint object that has to be added")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1132,7 +1252,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_post_serialize(
             model_id=model_id,
@@ -1140,12 +1260,16 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"201": "ModelEndpoint"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "ModelEndpoint"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1153,20 +1277,19 @@ class ModelEndpointsApi:
             response_types_map=_response_types_map,
         )
 
+
     @validate_call
     def models_model_id_endpoints_post_without_preload_content(
         self,
         model_id: StrictInt,
-        body: Annotated[
-            ModelEndpoint,
-            Field(description="Model endpoint object that has to be added"),
-        ],
+        body: Annotated[ModelEndpoint, Field(description="Model endpoint object that has to be added")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1200,7 +1323,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_post_serialize(
             model_id=model_id,
@@ -1208,14 +1331,19 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"201": "ModelEndpoint"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '201': "ModelEndpoint"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _models_model_id_endpoints_post_serialize(
         self,
@@ -1229,7 +1357,9 @@ class ModelEndpointsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1240,7 +1370,7 @@ class ModelEndpointsApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params["model_id"] = model_id
+            _path_params['model_id'] = model_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1248,15 +1378,23 @@ class ModelEndpointsApi:
         if body is not None:
             _body_params = body
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="POST",
-            resource_path="/models/{model_id}/endpoints",
+            method='POST',
+            resource_path='/models/{model_id}/endpoints',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1266,30 +1404,24 @@ class ModelEndpointsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def projects_project_id_model_endpoints_get(
         self,
-        project_id: Annotated[
-            StrictInt,
-            Field(
-                description="Filter list of model endpoints by specific `project_id`"
-            ),
-        ],
-        region: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Filter list of model endpoints by specific environment's `region`"
-            ),
-        ] = None,
+        project_id: Annotated[StrictInt, Field(description="Filter list of model endpoints by specific `project_id`")],
+        region: Annotated[Optional[StrictStr], Field(description="Filter list of model endpoints by specific environment's `region`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1323,7 +1455,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_model_endpoints_get_serialize(
             project_id=project_id,
@@ -1331,12 +1463,16 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "List[ModelEndpoint]"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ModelEndpoint]"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1344,27 +1480,19 @@ class ModelEndpointsApi:
             response_types_map=_response_types_map,
         ).data
 
+
     @validate_call
     def projects_project_id_model_endpoints_get_with_http_info(
         self,
-        project_id: Annotated[
-            StrictInt,
-            Field(
-                description="Filter list of model endpoints by specific `project_id`"
-            ),
-        ],
-        region: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Filter list of model endpoints by specific environment's `region`"
-            ),
-        ] = None,
+        project_id: Annotated[StrictInt, Field(description="Filter list of model endpoints by specific `project_id`")],
+        region: Annotated[Optional[StrictStr], Field(description="Filter list of model endpoints by specific environment's `region`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1398,7 +1526,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_model_endpoints_get_serialize(
             project_id=project_id,
@@ -1406,12 +1534,16 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "List[ModelEndpoint]"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ModelEndpoint]"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1419,27 +1551,19 @@ class ModelEndpointsApi:
             response_types_map=_response_types_map,
         )
 
+
     @validate_call
     def projects_project_id_model_endpoints_get_without_preload_content(
         self,
-        project_id: Annotated[
-            StrictInt,
-            Field(
-                description="Filter list of model endpoints by specific `project_id`"
-            ),
-        ],
-        region: Annotated[
-            Optional[StrictStr],
-            Field(
-                description="Filter list of model endpoints by specific environment's `region`"
-            ),
-        ] = None,
+        project_id: Annotated[StrictInt, Field(description="Filter list of model endpoints by specific `project_id`")],
+        region: Annotated[Optional[StrictStr], Field(description="Filter list of model endpoints by specific environment's `region`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1473,7 +1597,7 @@ class ModelEndpointsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_model_endpoints_get_serialize(
             project_id=project_id,
@@ -1481,14 +1605,19 @@ class ModelEndpointsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "List[ModelEndpoint]"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[ModelEndpoint]"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _projects_project_id_model_endpoints_get_serialize(
         self,
@@ -1502,7 +1631,9 @@ class ModelEndpointsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1513,25 +1644,33 @@ class ModelEndpointsApi:
 
         # process the path parameters
         if project_id is not None:
-            _path_params["project_id"] = project_id
+            _path_params['project_id'] = project_id
         # process the query parameters
         if region is not None:
-
-            _query_params.append(("region", region))
-
+            
+            _query_params.append(('region', region))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/projects/{project_id}/model_endpoints",
+            method='GET',
+            resource_path='/projects/{project_id}/model_endpoints',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1541,5 +1680,7 @@ class ModelEndpointsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+

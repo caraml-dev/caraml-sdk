@@ -20,23 +20,24 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
-
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class Label(BaseModel):
     """
     Label
-    """  # noqa: E501
-
+    """ # noqa: E501
     key: Optional[StrictStr] = None
     value: Optional[StrictStr] = None
     __properties: ClassVar[List[str]] = ["key", "value"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -64,7 +65,8 @@ class Label(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         return _dict
@@ -78,5 +80,10 @@ class Label(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate({"key": obj.get("key"), "value": obj.get("value")})
+        _obj = cls.model_validate({
+            "key": obj.get("key"),
+            "value": obj.get("value")
+        })
         return _obj
+
+

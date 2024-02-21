@@ -49,6 +49,7 @@ class ModelsApi:
             api_client = ApiClient.get_default()
         self.api_client = api_client
 
+
     @validate_call
     def alerts_teams_get(
         self,
@@ -56,8 +57,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -87,24 +89,29 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._alerts_teams_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "List[str]"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[str]"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
+
 
     @validate_call
     def alerts_teams_get_with_http_info(
@@ -113,8 +120,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -144,24 +152,29 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._alerts_teams_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "List[str]"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[str]"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
+
 
     @validate_call
     def alerts_teams_get_without_preload_content(
@@ -170,8 +183,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -201,20 +215,25 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._alerts_teams_get_serialize(
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "List[str]"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "List[str]"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _alerts_teams_get_serialize(
         self,
@@ -226,7 +245,9 @@ class ModelsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -241,15 +262,23 @@ class ModelsApi:
         # process the form parameters
         # process the body parameter
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/alerts/teams",
+            method='GET',
+            resource_path='/alerts/teams',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -259,8 +288,11 @@ class ModelsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def models_model_id_alerts_get(
@@ -270,8 +302,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -303,27 +336,30 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_alerts_get_serialize(
             model_id=model_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[ModelEndpointAlert]"
+            '200': "List[ModelEndpointAlert]"
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
+
 
     @validate_call
     def models_model_id_alerts_get_with_http_info(
@@ -333,8 +369,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -366,27 +403,30 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_alerts_get_serialize(
             model_id=model_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[ModelEndpointAlert]"
+            '200': "List[ModelEndpointAlert]"
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
+
 
     @validate_call
     def models_model_id_alerts_get_without_preload_content(
@@ -396,8 +436,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -429,23 +470,26 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_alerts_get_serialize(
             model_id=model_id,
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[ModelEndpointAlert]"
+            '200': "List[ModelEndpointAlert]"
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _models_model_id_alerts_get_serialize(
         self,
@@ -458,7 +502,9 @@ class ModelsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -469,21 +515,29 @@ class ModelsApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params["model_id"] = model_id
+            _path_params['model_id'] = model_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/models/{model_id}/alerts",
+            method='GET',
+            resource_path='/models/{model_id}/alerts',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -493,8 +547,11 @@ class ModelsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_alert_get(
@@ -505,8 +562,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -540,7 +598,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_alert_get_serialize(
             model_id=model_id,
@@ -548,18 +606,23 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "ModelEndpointAlert"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ModelEndpointAlert"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_alert_get_with_http_info(
@@ -570,8 +633,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -605,7 +669,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_alert_get_serialize(
             model_id=model_id,
@@ -613,18 +677,23 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "ModelEndpointAlert"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ModelEndpointAlert"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_alert_get_without_preload_content(
@@ -635,8 +704,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -670,7 +740,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_alert_get_serialize(
             model_id=model_id,
@@ -678,14 +748,19 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {"200": "ModelEndpointAlert"}
+        _response_types_map: Dict[str, Optional[str]] = {
+            '200': "ModelEndpointAlert"
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _models_model_id_endpoints_model_endpoint_id_alert_get_serialize(
         self,
@@ -699,7 +774,9 @@ class ModelsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -710,23 +787,31 @@ class ModelsApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params["model_id"] = model_id
+            _path_params['model_id'] = model_id
         if model_endpoint_id is not None:
-            _path_params["model_endpoint_id"] = model_endpoint_id
+            _path_params['model_endpoint_id'] = model_endpoint_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/models/{model_id}/endpoints/{model_endpoint_id}/alert",
+            method='GET',
+            resource_path='/models/{model_id}/endpoints/{model_endpoint_id}/alert',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -736,8 +821,11 @@ class ModelsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_alert_post(
@@ -749,8 +837,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -786,7 +875,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_alert_post_serialize(
             model_id=model_id,
@@ -795,18 +884,22 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_alert_post_with_http_info(
@@ -818,8 +911,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -855,7 +949,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_alert_post_serialize(
             model_id=model_id,
@@ -864,18 +958,22 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_alert_post_without_preload_content(
@@ -887,8 +985,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -924,7 +1023,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_alert_post_serialize(
             model_id=model_id,
@@ -933,14 +1032,18 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _models_model_id_endpoints_model_endpoint_id_alert_post_serialize(
         self,
@@ -955,7 +1058,9 @@ class ModelsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -966,9 +1071,9 @@ class ModelsApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params["model_id"] = model_id
+            _path_params['model_id'] = model_id
         if model_endpoint_id is not None:
-            _path_params["model_endpoint_id"] = model_endpoint_id
+            _path_params['model_endpoint_id'] = model_endpoint_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -976,12 +1081,17 @@ class ModelsApi:
         if body is not None:
             _body_params = body
 
+
+
+
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="POST",
-            resource_path="/models/{model_id}/endpoints/{model_endpoint_id}/alert",
+            method='POST',
+            resource_path='/models/{model_id}/endpoints/{model_endpoint_id}/alert',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -991,8 +1101,11 @@ class ModelsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_alert_put(
@@ -1004,8 +1117,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1041,7 +1155,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_alert_put_serialize(
             model_id=model_id,
@@ -1050,18 +1164,22 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         ).data
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_alert_put_with_http_info(
@@ -1073,8 +1191,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1110,7 +1229,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_alert_put_serialize(
             model_id=model_id,
@@ -1119,18 +1238,22 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
             response_data=response_data,
             response_types_map=_response_types_map,
         )
+
 
     @validate_call
     def models_model_id_endpoints_model_endpoint_id_alert_put_without_preload_content(
@@ -1142,8 +1265,9 @@ class ModelsApi:
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1179,7 +1303,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._models_model_id_endpoints_model_endpoint_id_alert_put_serialize(
             model_id=model_id,
@@ -1188,14 +1312,18 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
-        _response_types_map: Dict[str, Optional[str]] = {}
+        _response_types_map: Dict[str, Optional[str]] = {
+            
+        }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _models_model_id_endpoints_model_endpoint_id_alert_put_serialize(
         self,
@@ -1210,7 +1338,9 @@ class ModelsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1221,9 +1351,9 @@ class ModelsApi:
 
         # process the path parameters
         if model_id is not None:
-            _path_params["model_id"] = model_id
+            _path_params['model_id'] = model_id
         if model_endpoint_id is not None:
-            _path_params["model_endpoint_id"] = model_endpoint_id
+            _path_params['model_endpoint_id'] = model_endpoint_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -1231,12 +1361,17 @@ class ModelsApi:
         if body is not None:
             _body_params = body
 
+
+
+
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="PUT",
-            resource_path="/models/{model_id}/endpoints/{model_endpoint_id}/alert",
+            method='PUT',
+            resource_path='/models/{model_id}/endpoints/{model_endpoint_id}/alert',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1246,26 +1381,24 @@ class ModelsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def projects_project_id_models_get(
         self,
-        project_id: Annotated[
-            StrictInt,
-            Field(description="Filter list of models by specific `project_id`"),
-        ],
-        name: Annotated[
-            Optional[StrictStr],
-            Field(description="Filter list of models by specific models `name`"),
-        ] = None,
+        project_id: Annotated[StrictInt, Field(description="Filter list of models by specific `project_id`")],
+        name: Annotated[Optional[StrictStr], Field(description="Filter list of models by specific models `name`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1299,7 +1432,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_get_serialize(
             project_id=project_id,
@@ -1307,15 +1440,17 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Model]",
-            "404": None,
+            '200': "List[Model]",
+            '404': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1323,23 +1458,19 @@ class ModelsApi:
             response_types_map=_response_types_map,
         ).data
 
+
     @validate_call
     def projects_project_id_models_get_with_http_info(
         self,
-        project_id: Annotated[
-            StrictInt,
-            Field(description="Filter list of models by specific `project_id`"),
-        ],
-        name: Annotated[
-            Optional[StrictStr],
-            Field(description="Filter list of models by specific models `name`"),
-        ] = None,
+        project_id: Annotated[StrictInt, Field(description="Filter list of models by specific `project_id`")],
+        name: Annotated[Optional[StrictStr], Field(description="Filter list of models by specific models `name`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1373,7 +1504,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_get_serialize(
             project_id=project_id,
@@ -1381,15 +1512,17 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Model]",
-            "404": None,
+            '200': "List[Model]",
+            '404': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1397,23 +1530,19 @@ class ModelsApi:
             response_types_map=_response_types_map,
         )
 
+
     @validate_call
     def projects_project_id_models_get_without_preload_content(
         self,
-        project_id: Annotated[
-            StrictInt,
-            Field(description="Filter list of models by specific `project_id`"),
-        ],
-        name: Annotated[
-            Optional[StrictStr],
-            Field(description="Filter list of models by specific models `name`"),
-        ] = None,
+        project_id: Annotated[StrictInt, Field(description="Filter list of models by specific `project_id`")],
+        name: Annotated[Optional[StrictStr], Field(description="Filter list of models by specific models `name`")] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1447,7 +1576,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_get_serialize(
             project_id=project_id,
@@ -1455,17 +1584,20 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Model]",
-            "404": None,
+            '200': "List[Model]",
+            '404': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _projects_project_id_models_get_serialize(
         self,
@@ -1479,7 +1611,9 @@ class ModelsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1490,25 +1624,33 @@ class ModelsApi:
 
         # process the path parameters
         if project_id is not None:
-            _path_params["project_id"] = project_id
+            _path_params['project_id'] = project_id
         # process the query parameters
         if name is not None:
-
-            _query_params.append(("name", name))
-
+            
+            _query_params.append(('name', name))
+            
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/projects/{project_id}/models",
+            method='GET',
+            resource_path='/projects/{project_id}/models',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1518,24 +1660,24 @@ class ModelsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def projects_project_id_models_model_id_delete(
         self,
-        project_id: Annotated[
-            StrictInt, Field(description="project id of the project to be deleted")
-        ],
-        model_id: Annotated[
-            StrictInt, Field(description="model id of the model to be deleted")
-        ],
+        project_id: Annotated[StrictInt, Field(description="project id of the project to be deleted")],
+        model_id: Annotated[StrictInt, Field(description="model id of the model to be deleted")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1569,7 +1711,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_model_id_delete_serialize(
             project_id=project_id,
@@ -1577,17 +1719,19 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "int",
-            "400": None,
-            "404": None,
-            "500": None,
+            '200': "int",
+            '400': None,
+            '404': None,
+            '500': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1595,21 +1739,19 @@ class ModelsApi:
             response_types_map=_response_types_map,
         ).data
 
+
     @validate_call
     def projects_project_id_models_model_id_delete_with_http_info(
         self,
-        project_id: Annotated[
-            StrictInt, Field(description="project id of the project to be deleted")
-        ],
-        model_id: Annotated[
-            StrictInt, Field(description="model id of the model to be deleted")
-        ],
+        project_id: Annotated[StrictInt, Field(description="project id of the project to be deleted")],
+        model_id: Annotated[StrictInt, Field(description="model id of the model to be deleted")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1643,7 +1785,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_model_id_delete_serialize(
             project_id=project_id,
@@ -1651,17 +1793,19 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "int",
-            "400": None,
-            "404": None,
-            "500": None,
+            '200': "int",
+            '400': None,
+            '404': None,
+            '500': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1669,21 +1813,19 @@ class ModelsApi:
             response_types_map=_response_types_map,
         )
 
+
     @validate_call
     def projects_project_id_models_model_id_delete_without_preload_content(
         self,
-        project_id: Annotated[
-            StrictInt, Field(description="project id of the project to be deleted")
-        ],
-        model_id: Annotated[
-            StrictInt, Field(description="model id of the model to be deleted")
-        ],
+        project_id: Annotated[StrictInt, Field(description="project id of the project to be deleted")],
+        model_id: Annotated[StrictInt, Field(description="model id of the model to be deleted")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1717,7 +1859,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_model_id_delete_serialize(
             project_id=project_id,
@@ -1725,19 +1867,22 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "int",
-            "400": None,
-            "404": None,
-            "500": None,
+            '200': "int",
+            '400': None,
+            '404': None,
+            '500': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _projects_project_id_models_model_id_delete_serialize(
         self,
@@ -1751,7 +1896,9 @@ class ModelsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -1762,23 +1909,31 @@ class ModelsApi:
 
         # process the path parameters
         if project_id is not None:
-            _path_params["project_id"] = project_id
+            _path_params['project_id'] = project_id
         if model_id is not None:
-            _path_params["model_id"] = model_id
+            _path_params['model_id'] = model_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="DELETE",
-            resource_path="/projects/{project_id}/models/{model_id}",
+            method='DELETE',
+            resource_path='/projects/{project_id}/models/{model_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -1788,24 +1943,24 @@ class ModelsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def projects_project_id_models_model_id_get(
         self,
-        project_id: Annotated[
-            StrictInt, Field(description="project id of the project to be retrieved")
-        ],
-        model_id: Annotated[
-            StrictInt, Field(description="model id of the model to be retrieved")
-        ],
+        project_id: Annotated[StrictInt, Field(description="project id of the project to be retrieved")],
+        model_id: Annotated[StrictInt, Field(description="model id of the model to be retrieved")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1839,7 +1994,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_model_id_get_serialize(
             project_id=project_id,
@@ -1847,15 +2002,17 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Model]",
-            "404": None,
+            '200': "List[Model]",
+            '404': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1863,21 +2020,19 @@ class ModelsApi:
             response_types_map=_response_types_map,
         ).data
 
+
     @validate_call
     def projects_project_id_models_model_id_get_with_http_info(
         self,
-        project_id: Annotated[
-            StrictInt, Field(description="project id of the project to be retrieved")
-        ],
-        model_id: Annotated[
-            StrictInt, Field(description="model id of the model to be retrieved")
-        ],
+        project_id: Annotated[StrictInt, Field(description="project id of the project to be retrieved")],
+        model_id: Annotated[StrictInt, Field(description="model id of the model to be retrieved")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1911,7 +2066,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_model_id_get_serialize(
             project_id=project_id,
@@ -1919,15 +2074,17 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Model]",
-            "404": None,
+            '200': "List[Model]",
+            '404': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -1935,21 +2092,19 @@ class ModelsApi:
             response_types_map=_response_types_map,
         )
 
+
     @validate_call
     def projects_project_id_models_model_id_get_without_preload_content(
         self,
-        project_id: Annotated[
-            StrictInt, Field(description="project id of the project to be retrieved")
-        ],
-        model_id: Annotated[
-            StrictInt, Field(description="model id of the model to be retrieved")
-        ],
+        project_id: Annotated[StrictInt, Field(description="project id of the project to be retrieved")],
+        model_id: Annotated[StrictInt, Field(description="model id of the model to be retrieved")],
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -1983,7 +2138,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_model_id_get_serialize(
             project_id=project_id,
@@ -1991,17 +2146,20 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "200": "List[Model]",
-            "404": None,
+            '200': "List[Model]",
+            '404': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _projects_project_id_models_model_id_get_serialize(
         self,
@@ -2015,7 +2173,9 @@ class ModelsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -2026,23 +2186,31 @@ class ModelsApi:
 
         # process the path parameters
         if project_id is not None:
-            _path_params["project_id"] = project_id
+            _path_params['project_id'] = project_id
         if model_id is not None:
-            _path_params["model_id"] = model_id
+            _path_params['model_id'] = model_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
         # process the body parameter
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="GET",
-            resource_path="/projects/{project_id}/models/{model_id}",
+            method='GET',
+            resource_path='/projects/{project_id}/models/{model_id}',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2052,22 +2220,24 @@ class ModelsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+
+
 
     @validate_call
     def projects_project_id_models_post(
         self,
-        project_id: Annotated[
-            StrictInt, Field(description="Create new model in a specific `project_id`")
-        ],
+        project_id: Annotated[StrictInt, Field(description="Create new model in a specific `project_id`")],
         body: Optional[Model] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -2101,7 +2271,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_post_serialize(
             project_id=project_id,
@@ -2109,16 +2279,18 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "201": "Model",
-            "400": None,
-            "404": None,
+            '201': "Model",
+            '400': None,
+            '404': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -2126,19 +2298,19 @@ class ModelsApi:
             response_types_map=_response_types_map,
         ).data
 
+
     @validate_call
     def projects_project_id_models_post_with_http_info(
         self,
-        project_id: Annotated[
-            StrictInt, Field(description="Create new model in a specific `project_id`")
-        ],
+        project_id: Annotated[StrictInt, Field(description="Create new model in a specific `project_id`")],
         body: Optional[Model] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -2172,7 +2344,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_post_serialize(
             project_id=project_id,
@@ -2180,16 +2352,18 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "201": "Model",
-            "400": None,
-            "404": None,
+            '201': "Model",
+            '400': None,
+            '404': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         response_data.read()
         return self.api_client.response_deserialize(
@@ -2197,19 +2371,19 @@ class ModelsApi:
             response_types_map=_response_types_map,
         )
 
+
     @validate_call
     def projects_project_id_models_post_without_preload_content(
         self,
-        project_id: Annotated[
-            StrictInt, Field(description="Create new model in a specific `project_id`")
-        ],
+        project_id: Annotated[StrictInt, Field(description="Create new model in a specific `project_id`")],
         body: Optional[Model] = None,
         _request_timeout: Union[
             None,
             Annotated[StrictFloat, Field(gt=0)],
             Tuple[
-                Annotated[StrictFloat, Field(gt=0)], Annotated[StrictFloat, Field(gt=0)]
-            ],
+                Annotated[StrictFloat, Field(gt=0)],
+                Annotated[StrictFloat, Field(gt=0)]
+            ]
         ] = None,
         _request_auth: Optional[Dict[StrictStr, Any]] = None,
         _content_type: Optional[StrictStr] = None,
@@ -2243,7 +2417,7 @@ class ModelsApi:
                             in the spec for a single request.
         :type _host_index: int, optional
         :return: Returns the result object.
-        """  # noqa: E501
+        """ # noqa: E501
 
         _param = self._projects_project_id_models_post_serialize(
             project_id=project_id,
@@ -2251,18 +2425,21 @@ class ModelsApi:
             _request_auth=_request_auth,
             _content_type=_content_type,
             _headers=_headers,
-            _host_index=_host_index,
+            _host_index=_host_index
         )
 
         _response_types_map: Dict[str, Optional[str]] = {
-            "201": "Model",
-            "400": None,
-            "404": None,
+            '201': "Model",
+            '400': None,
+            '404': None
+            
         }
         response_data = self.api_client.call_api(
-            *_param, _request_timeout=_request_timeout
+            *_param,
+            _request_timeout=_request_timeout
         )
         return response_data.response
+
 
     def _projects_project_id_models_post_serialize(
         self,
@@ -2276,7 +2453,9 @@ class ModelsApi:
 
         _host = None
 
-        _collection_formats: Dict[str, str] = {}
+        _collection_formats: Dict[str, str] = {
+            
+        }
 
         _path_params: Dict[str, str] = {}
         _query_params: List[Tuple[str, str]] = []
@@ -2287,7 +2466,7 @@ class ModelsApi:
 
         # process the path parameters
         if project_id is not None:
-            _path_params["project_id"] = project_id
+            _path_params['project_id'] = project_id
         # process the query parameters
         # process the header parameters
         # process the form parameters
@@ -2295,15 +2474,23 @@ class ModelsApi:
         if body is not None:
             _body_params = body
 
+
         # set the HTTP header `Accept`
-        _header_params["Accept"] = self.api_client.select_header_accept(["*/*"])
+        _header_params['Accept'] = self.api_client.select_header_accept(
+            [
+                '*/*'
+            ]
+        )
+
 
         # authentication setting
-        _auth_settings: List[str] = ["Bearer"]
+        _auth_settings: List[str] = [
+            'Bearer'
+        ]
 
         return self.api_client.param_serialize(
-            method="POST",
-            resource_path="/projects/{project_id}/models",
+            method='POST',
+            resource_path='/projects/{project_id}/models',
             path_params=_path_params,
             query_params=_query_params,
             header_params=_header_params,
@@ -2313,5 +2500,7 @@ class ModelsApi:
             auth_settings=_auth_settings,
             collection_formats=_collection_formats,
             _host=_host,
-            _request_auth=_request_auth,
+            _request_auth=_request_auth
         )
+
+

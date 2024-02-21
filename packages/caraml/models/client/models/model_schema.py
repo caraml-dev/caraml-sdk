@@ -21,24 +21,25 @@ import json
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt
 from models.client.models.schema_spec import SchemaSpec
-
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class ModelSchema(BaseModel):
     """
     ModelSchema
-    """  # noqa: E501
-
+    """ # noqa: E501
     id: Optional[StrictInt] = None
     model_id: Optional[StrictInt] = None
     spec: SchemaSpec
     __properties: ClassVar[List[str]] = ["id", "model_id", "spec"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -66,12 +67,13 @@ class ModelSchema(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of spec
         if self.spec:
-            _dict["spec"] = self.spec.to_dict()
+            _dict['spec'] = self.spec.to_dict()
         return _dict
 
     @classmethod
@@ -83,13 +85,11 @@ class ModelSchema(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "id": obj.get("id"),
-                "model_id": obj.get("model_id"),
-                "spec": SchemaSpec.from_dict(obj.get("spec"))
-                if obj.get("spec") is not None
-                else None,
-            }
-        )
+        _obj = cls.model_validate({
+            "id": obj.get("id"),
+            "model_id": obj.get("model_id"),
+            "spec": SchemaSpec.from_dict(obj.get("spec")) if obj.get("spec") is not None else None
+        })
         return _obj
+
+

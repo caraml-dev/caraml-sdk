@@ -20,27 +20,26 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel
-from models.client.models.model_endpoint_rule_destination import (
-    ModelEndpointRuleDestination,
-)
+from models.client.models.model_endpoint_rule_destination import ModelEndpointRuleDestination
 from models.client.models.version_endpoint import VersionEndpoint
-
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class ModelEndpointRule(BaseModel):
     """
     ModelEndpointRule
-    """  # noqa: E501
-
+    """ # noqa: E501
     destinations: Optional[List[ModelEndpointRuleDestination]] = None
     mirror: Optional[VersionEndpoint] = None
     __properties: ClassVar[List[str]] = ["destinations", "mirror"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -68,7 +67,8 @@ class ModelEndpointRule(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of each item in destinations (list)
@@ -77,10 +77,10 @@ class ModelEndpointRule(BaseModel):
             for _item in self.destinations:
                 if _item:
                     _items.append(_item.to_dict())
-            _dict["destinations"] = _items
+            _dict['destinations'] = _items
         # override the default output from pydantic by calling `to_dict()` of mirror
         if self.mirror:
-            _dict["mirror"] = self.mirror.to_dict()
+            _dict['mirror'] = self.mirror.to_dict()
         return _dict
 
     @classmethod
@@ -92,17 +92,10 @@ class ModelEndpointRule(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "destinations": [
-                    ModelEndpointRuleDestination.from_dict(_item)
-                    for _item in obj.get("destinations")
-                ]
-                if obj.get("destinations") is not None
-                else None,
-                "mirror": VersionEndpoint.from_dict(obj.get("mirror"))
-                if obj.get("mirror") is not None
-                else None,
-            }
-        )
+        _obj = cls.model_validate({
+            "destinations": [ModelEndpointRuleDestination.from_dict(_item) for _item in obj.get("destinations")] if obj.get("destinations") is not None else None,
+            "mirror": VersionEndpoint.from_dict(obj.get("mirror")) if obj.get("mirror") is not None else None
+        })
         return _obj
+
+

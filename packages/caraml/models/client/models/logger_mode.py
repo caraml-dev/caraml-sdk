@@ -19,6 +19,7 @@ import re  # noqa: F401
 from enum import Enum
 
 
+
 try:
     from typing import Self
 except ImportError:
@@ -33,11 +34,13 @@ class LoggerMode(str, Enum):
     """
     allowed enum values
     """
-    ALL = "all"
-    REQUEST = "request"
-    RESPONSE = "response"
+    ALL = 'all'
+    REQUEST = 'request'
+    RESPONSE = 'response'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of LoggerMode from a JSON string"""
         return cls(json.loads(json_str))
+
+

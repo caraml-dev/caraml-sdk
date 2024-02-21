@@ -21,32 +21,27 @@ import json
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
 from models.client.models.save_mode import SaveMode
-
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class PredictionJobConfigBigquerySink(BaseModel):
     """
     PredictionJobConfigBigquerySink
-    """  # noqa: E501
-
+    """ # noqa: E501
     table: Optional[StrictStr] = None
     staging_bucket: Optional[StrictStr] = None
     result_column: Optional[StrictStr] = None
     save_mode: Optional[SaveMode] = None
     options: Optional[Dict[str, StrictStr]] = None
-    __properties: ClassVar[List[str]] = [
-        "table",
-        "staging_bucket",
-        "result_column",
-        "save_mode",
-        "options",
-    ]
+    __properties: ClassVar[List[str]] = ["table", "staging_bucket", "result_column", "save_mode", "options"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -74,7 +69,8 @@ class PredictionJobConfigBigquerySink(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         return _dict
@@ -88,13 +84,13 @@ class PredictionJobConfigBigquerySink(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "table": obj.get("table"),
-                "staging_bucket": obj.get("staging_bucket"),
-                "result_column": obj.get("result_column"),
-                "save_mode": obj.get("save_mode"),
-                "options": obj.get("options"),
-            }
-        )
+        _obj = cls.model_validate({
+            "table": obj.get("table"),
+            "staging_bucket": obj.get("staging_bucket"),
+            "result_column": obj.get("result_column"),
+            "save_mode": obj.get("save_mode"),
+            "options": obj.get("options")
+        })
         return _obj
+
+

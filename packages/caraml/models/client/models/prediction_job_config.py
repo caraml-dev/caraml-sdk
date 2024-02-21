@@ -20,31 +20,20 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
-from models.client.models.prediction_job_config_bigquery_sink import (
-    PredictionJobConfigBigquerySink,
-)
-from models.client.models.prediction_job_config_bigquery_source import (
-    PredictionJobConfigBigquerySource,
-)
-from models.client.models.prediction_job_config_gcs_sink import (
-    PredictionJobConfigGcsSink,
-)
-from models.client.models.prediction_job_config_gcs_source import (
-    PredictionJobConfigGcsSource,
-)
+from models.client.models.prediction_job_config_bigquery_sink import PredictionJobConfigBigquerySink
+from models.client.models.prediction_job_config_bigquery_source import PredictionJobConfigBigquerySource
+from models.client.models.prediction_job_config_gcs_sink import PredictionJobConfigGcsSink
+from models.client.models.prediction_job_config_gcs_source import PredictionJobConfigGcsSource
 from models.client.models.prediction_job_config_model import PredictionJobConfigModel
-
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class PredictionJobConfig(BaseModel):
     """
     PredictionJobConfig
-    """  # noqa: E501
-
+    """ # noqa: E501
     version: Optional[StrictStr] = None
     kind: Optional[StrictStr] = None
     name: Optional[StrictStr] = None
@@ -53,18 +42,13 @@ class PredictionJobConfig(BaseModel):
     model: Optional[PredictionJobConfigModel] = None
     bigquery_sink: Optional[PredictionJobConfigBigquerySink] = None
     gcs_sink: Optional[PredictionJobConfigGcsSink] = None
-    __properties: ClassVar[List[str]] = [
-        "version",
-        "kind",
-        "name",
-        "bigquery_source",
-        "gcs_source",
-        "model",
-        "bigquery_sink",
-        "gcs_sink",
-    ]
+    __properties: ClassVar[List[str]] = ["version", "kind", "name", "bigquery_source", "gcs_source", "model", "bigquery_sink", "gcs_sink"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -92,24 +76,25 @@ class PredictionJobConfig(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         # override the default output from pydantic by calling `to_dict()` of bigquery_source
         if self.bigquery_source:
-            _dict["bigquery_source"] = self.bigquery_source.to_dict()
+            _dict['bigquery_source'] = self.bigquery_source.to_dict()
         # override the default output from pydantic by calling `to_dict()` of gcs_source
         if self.gcs_source:
-            _dict["gcs_source"] = self.gcs_source.to_dict()
+            _dict['gcs_source'] = self.gcs_source.to_dict()
         # override the default output from pydantic by calling `to_dict()` of model
         if self.model:
-            _dict["model"] = self.model.to_dict()
+            _dict['model'] = self.model.to_dict()
         # override the default output from pydantic by calling `to_dict()` of bigquery_sink
         if self.bigquery_sink:
-            _dict["bigquery_sink"] = self.bigquery_sink.to_dict()
+            _dict['bigquery_sink'] = self.bigquery_sink.to_dict()
         # override the default output from pydantic by calling `to_dict()` of gcs_sink
         if self.gcs_sink:
-            _dict["gcs_sink"] = self.gcs_sink.to_dict()
+            _dict['gcs_sink'] = self.gcs_sink.to_dict()
         return _dict
 
     @classmethod
@@ -121,32 +106,16 @@ class PredictionJobConfig(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "version": obj.get("version"),
-                "kind": obj.get("kind"),
-                "name": obj.get("name"),
-                "bigquery_source": PredictionJobConfigBigquerySource.from_dict(
-                    obj.get("bigquery_source")
-                )
-                if obj.get("bigquery_source") is not None
-                else None,
-                "gcs_source": PredictionJobConfigGcsSource.from_dict(
-                    obj.get("gcs_source")
-                )
-                if obj.get("gcs_source") is not None
-                else None,
-                "model": PredictionJobConfigModel.from_dict(obj.get("model"))
-                if obj.get("model") is not None
-                else None,
-                "bigquery_sink": PredictionJobConfigBigquerySink.from_dict(
-                    obj.get("bigquery_sink")
-                )
-                if obj.get("bigquery_sink") is not None
-                else None,
-                "gcs_sink": PredictionJobConfigGcsSink.from_dict(obj.get("gcs_sink"))
-                if obj.get("gcs_sink") is not None
-                else None,
-            }
-        )
+        _obj = cls.model_validate({
+            "version": obj.get("version"),
+            "kind": obj.get("kind"),
+            "name": obj.get("name"),
+            "bigquery_source": PredictionJobConfigBigquerySource.from_dict(obj.get("bigquery_source")) if obj.get("bigquery_source") is not None else None,
+            "gcs_source": PredictionJobConfigGcsSource.from_dict(obj.get("gcs_source")) if obj.get("gcs_source") is not None else None,
+            "model": PredictionJobConfigModel.from_dict(obj.get("model")) if obj.get("model") is not None else None,
+            "bigquery_sink": PredictionJobConfigBigquerySink.from_dict(obj.get("bigquery_sink")) if obj.get("bigquery_sink") is not None else None,
+            "gcs_sink": PredictionJobConfigGcsSink.from_dict(obj.get("gcs_sink")) if obj.get("gcs_sink") is not None else None
+        })
         return _obj
+
+

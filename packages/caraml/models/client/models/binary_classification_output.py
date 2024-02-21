@@ -20,37 +20,29 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
-from models.client.models.model_prediction_output_class import (
-    ModelPredictionOutputClass,
-)
-
+from models.client.models.model_prediction_output_class import ModelPredictionOutputClass
 try:
     from typing import Self
 except ImportError:
     from typing_extensions import Self
 
-
 class BinaryClassificationOutput(BaseModel):
     """
     BinaryClassificationOutput
-    """  # noqa: E501
-
+    """ # noqa: E501
     prediction_score_column: StrictStr
     actual_label_column: Optional[StrictStr] = None
     positive_class_label: StrictStr
     negative_class_label: StrictStr
     score_threshold: Optional[Union[StrictFloat, StrictInt]] = None
     output_class: ModelPredictionOutputClass
-    __properties: ClassVar[List[str]] = [
-        "prediction_score_column",
-        "actual_label_column",
-        "positive_class_label",
-        "negative_class_label",
-        "score_threshold",
-        "output_class",
-    ]
+    __properties: ClassVar[List[str]] = ["prediction_score_column", "actual_label_column", "positive_class_label", "negative_class_label", "score_threshold", "output_class"]
 
-    model_config = {"populate_by_name": True, "validate_assignment": True}
+    model_config = {
+        "populate_by_name": True,
+        "validate_assignment": True
+    }
+
 
     def to_str(self) -> str:
         """Returns the string representation of the model using alias"""
@@ -78,7 +70,8 @@ class BinaryClassificationOutput(BaseModel):
         """
         _dict = self.model_dump(
             by_alias=True,
-            exclude={},
+            exclude={
+            },
             exclude_none=True,
         )
         return _dict
@@ -92,14 +85,14 @@ class BinaryClassificationOutput(BaseModel):
         if not isinstance(obj, dict):
             return cls.model_validate(obj)
 
-        _obj = cls.model_validate(
-            {
-                "prediction_score_column": obj.get("prediction_score_column"),
-                "actual_label_column": obj.get("actual_label_column"),
-                "positive_class_label": obj.get("positive_class_label"),
-                "negative_class_label": obj.get("negative_class_label"),
-                "score_threshold": obj.get("score_threshold"),
-                "output_class": obj.get("output_class"),
-            }
-        )
+        _obj = cls.model_validate({
+            "prediction_score_column": obj.get("prediction_score_column"),
+            "actual_label_column": obj.get("actual_label_column"),
+            "positive_class_label": obj.get("positive_class_label"),
+            "negative_class_label": obj.get("negative_class_label"),
+            "score_threshold": obj.get("score_threshold"),
+            "output_class": obj.get("output_class")
+        })
         return _obj
+
+

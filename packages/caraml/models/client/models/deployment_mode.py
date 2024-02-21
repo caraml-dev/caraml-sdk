@@ -19,6 +19,7 @@ import re  # noqa: F401
 from enum import Enum
 
 
+
 try:
     from typing import Self
 except ImportError:
@@ -33,10 +34,12 @@ class DeploymentMode(str, Enum):
     """
     allowed enum values
     """
-    SERVERLESS = "serverless"
-    RAW_DEPLOYMENT = "raw_deployment"
+    SERVERLESS = 'serverless'
+    RAW_DEPLOYMENT = 'raw_deployment'
 
     @classmethod
     def from_json(cls, json_str: str) -> Self:
         """Create an instance of DeploymentMode from a JSON string"""
         return cls(json.loads(json_str))
+
+
