@@ -49,6 +49,24 @@ jobs:
           path: ${{ github.event.inputs.module }}
           ref: ${{ github.event.inputs.ref }}
 
+      - name: Add default openapi-config if file not exists
+        run: |
+          if ! [ -f ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_config }} ]; then
+            echo "OpenAPI config file doesn't exist, Generating a default config"
+          fi
+          touch ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_config }}
+          cat <<EOT >> ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_config }}
+          projectName: ${{ github.event.inputs.module }}-sdk
+          generateSourceCodeOnly: true
+          useOneOfDiscriminatorLookup: true
+          # Global Properties
+          globalProperties:
+            apiTests: false
+            modelTests: false
+            apiDocs: false
+            modelDocs: false
+          EOT
+
       - name: Generate client code
         uses: openapi-generators/openapitools-generator-action@v1
         with:
