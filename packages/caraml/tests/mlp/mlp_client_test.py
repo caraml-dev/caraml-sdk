@@ -16,11 +16,11 @@ updated_at = "2019-08-29T08:13:12.377Z"
 def test_get_project(mock_url, mock_oauth, use_google_oauth):
     responses.add(
         "GET",
-        "/api/v1/projects",
+        "/v1/projects",
         body=f"""[{{
                         "id": 0,
                         "name": "my-project",
-                        "mlflow_tracking_url": "http://mlflow.api.merlin.dev",
+                        "mlflow_tracking_url": "http://mlflow.api.dev",
                         "created_at": "{created_at}",
                         "updated_at": "{updated_at}"
                       }}]""",
@@ -32,13 +32,12 @@ def test_get_project(mock_url, mock_oauth, use_google_oauth):
     p = m.get_project("my-project")
 
     assert responses.calls[-1].request.method == "GET"
-    assert responses.calls[-1].request.url == "/api/v1/projects?name=my-project"
-    assert responses.calls[-1].request.host == "merlin.dev"
+    assert responses.calls[-1].request.url == "/v1/projects?name=my-project"
+    assert responses.calls[-1].request.host == "127.0.0.1"
 
     assert p.id == 0
     assert p.name == "my-project"
-    assert p.mlflow_tracking_url == "http://mlflow.api.merlin.dev"
-    assert p.url == mock_url
+    assert p.mlflow_tracking_url == "http://mlflow.api.dev"
     assert isinstance(p.created_at, datetime.datetime)
     assert isinstance(p.updated_at, datetime.datetime)
 
