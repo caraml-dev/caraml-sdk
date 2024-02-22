@@ -13,12 +13,11 @@
 # limitations under the License.
 
 import warnings
-from sys import version_info
-from typing import List
-
 import urllib3
-from caraml_auth.id_token_credentials import get_default_id_token_credentials
+import mlflow
 
+from sys import version_info
+from typing import List, Optional
 from mlp.client import (
     ApiClient,
     Configuration,
@@ -28,12 +27,20 @@ from mlp.client import (
     
 )
 from mlp.version import VERSION
-
+from caraml_auth.id_token_credentials import get_default_id_token_credentials
 from google.auth.transport.requests import Request
 from google.auth.transport.urllib3 import AuthorizedHttp
 
-from models.util import valid_name_check
+from common.utils import is_valid_project_name
 
+
+def require_active_project(f):
+    def wrap(*args, **kwargs):
+        if not args[0].active_project:
+            raise Exception("Active project isn't set, use set_project(...) to set it")
+        return f(*args, **kwargs)
+
+    return wrap
 
 class MLPClient:
     def __init__(self, mlp_url: str, use_google_oauth: bool = True, caraml_sdk_version: str = ""):
@@ -60,27 +67,36 @@ class MLPClient:
 
     @property
     def url(self):
-        return self._merlin_url
+        return self._mlp_url
+    
+    @property
+    def active_project(self) -> Optional[Project]:
+        return self._project
 
+    @active_project.setter
+    def active_project(self, project):
+        mlflow.tracking.set_tracking_uri(project.mlflow_tracking_url)
+        self._project = project
 
-    def list_project(self) -> List[Project]:
+    def set_project(self, project_name: str):
         """
-        List project in the connected MLP server
-
-        :return: list of Project
+        Set this session's active projects
         """
-        p_list = self._project_api.projects_get()
-        result = []
-        for p in p_list:
-            result.append(Project(p, self.url, self._api_client))
-        return result
+        self.active_project = self.get_project(project_name)
 
-    def get_or_create_project(self, project_name: str) -> Project:
-        warnings.warn(
-            "get_or_create_project is deprecated please use get_project",
-            category=DeprecationWarning,
-        )
-        return self.get_project(project_name)
+
+    def list_projects(self, name: Optional[str] = None) -> List[Project]:
+        """
+        List all projects, that the current user has access to
+
+        :param name: filter projects by name
+        :return: list of projects
+        """
+        kwargs = {}
+        if name:
+            kwargs["name"] = name
+        return self._project_api.v1_projects_get(**kwargs)
+
 
     def get_project(self, project_name: str) -> Project:
         """
@@ -90,7 +106,7 @@ class MLPClient:
         :param project_name: project name
         :return: project
         """
-        if not valid_name_check(project_name):
+        if not is_valid_project_name(project_name):
             raise ValueError(
                 """Your project/model name contains invalid characters.\
                     \nUse only the following characters\
@@ -100,17 +116,14 @@ class MLPClient:
                 """
             )
 
-        p_list = self._project_api.projects_get(name=project_name)
-        p = None
-        for prj in p_list:
-            if prj.name == project_name:
-                p = prj
+        projects = self.list_projects(name=project_name)
 
-        if p is None:
+        filtered = [p for p in projects if p.name == project_name][:1]
+        if not filtered:
             raise Exception(
                 f"{project_name} does not exist or you don't have access to the project. Please create new "
                 f"project using MLP console or ask the project's administrator to be able to access "
                 f"existing project."
             )
 
-        return Project(p, self.url, self._api_client)
+        return filtered[0]

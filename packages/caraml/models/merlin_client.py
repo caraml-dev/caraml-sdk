@@ -48,7 +48,7 @@ from models.model_schema import ModelSchema
 
 
 class MerlinClient:
-    def __init__(self, merlin_url: str, use_google_oauth: bool = True):
+    def __init__(self, merlin_url: str, use_google_oauth: bool = True, caraml_sdk_version: str = ""):
         self._merlin_url = merlin_url
         config = Configuration()
         config.host = self._merlin_url + "/v1"
@@ -63,8 +63,13 @@ class MerlinClient:
             self._api_client.rest_client.pool_manager = authorized_http
 
         python_version = f"{version_info.major}.{version_info.minor}.{version_info.micro}"  # capture user's python version
-        self._api_client.user_agent = f"merlin-sdk/{VERSION} python/{python_version}"
-        self._project_api = ProjectApi(self._api_client)
+        user_agent = f"merlin-sdk/{VERSION} python/{python_version}"
+        if caraml_sdk_version:
+            user_agent = f"caraml-sdk/{caraml_sdk_version} " + user_agent
+        self._api_client.user_agent = user_agent
+        
+        self._project_api = ProjectApi(self._api_client) #  Use mlp client instead.
+        
         self._model_api = ModelsApi(self._api_client)
         self._version_api = VersionApi(self._api_client)
         self._endpoint_api = EndpointApi(self._api_client)
