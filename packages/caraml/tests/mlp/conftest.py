@@ -29,7 +29,7 @@ def mock_url():
 @pytest.fixture
 def api_client(mock_url):
     config = Configuration()
-    config.host = mock_url + "/mlp/v1"
+    config.host = mock_url + "/"
     return ApiClient(config)
 
 

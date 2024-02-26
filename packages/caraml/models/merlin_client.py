@@ -38,7 +38,7 @@ from models.deployment_mode import DeploymentMode
 from models.endpoint import VersionEndpoint
 from models.environment import Environment
 from models.logger import Logger
-from models.model import Model, ModelType, ModelVersion, Project
+from models.model import Model, ModelType, ModelVersion
 from models.protocol import Protocol
 from models.resource_request import ResourceRequest
 from models.transformer import Transformer
@@ -46,9 +46,12 @@ from models.util import valid_name_check
 from models.version import VERSION
 from models.model_schema import ModelSchema
 
+from mlp.client.models import Project
+from mlp.mlp_client import MLPClient
+from common.utils import get_mlp_url
 
 class MerlinClient:
-    def __init__(self, merlin_url: str, use_google_oauth: bool = True, caraml_sdk_version: str = ""):
+    def __init__(self, merlin_url: str, use_google_oauth: bool = True, caraml_sdk_version: str = "", mlp_client: MLPClient = None):
         self._merlin_url = merlin_url
         config = Configuration()
         config.host = self._merlin_url + "/v1"
@@ -67,9 +70,14 @@ class MerlinClient:
         if caraml_sdk_version:
             user_agent = f"caraml-sdk/{caraml_sdk_version} " + user_agent
         self._api_client.user_agent = user_agent
-        
-        self._project_api = ProjectApi(self._api_client) #  Use mlp client instead.
-        
+
+        self._mlp_client = (
+            MLPClient(
+                get_mlp_url(self._merlin_url), caraml_sdk_version=caraml_sdk_version
+            )
+            if not mlp_client
+            else mlp_client
+        )
         self._model_api = ModelsApi(self._api_client)
         self._version_api = VersionApi(self._api_client)
         self._endpoint_api = EndpointApi(self._api_client)
@@ -122,18 +130,14 @@ class MerlinClient:
 
         :return: list of Project
         """
-        p_list = self._project_api.projects_get()
-        result = []
-        for p in p_list:
-            result.append(Project(p, self.url, self._api_client))
-        return result
+        return self._mlp_client.list_projects()
 
     def get_or_create_project(self, project_name: str) -> Project:
         warnings.warn(
             "get_or_create_project is deprecated please use get_project",
             category=DeprecationWarning,
         )
-        return self.get_project(project_name)
+        return self._mlp_client.get_project(project_name)
 
     def get_project(self, project_name: str) -> Project:
         """
@@ -143,30 +147,7 @@ class MerlinClient:
         :param project_name: project name
         :return: project
         """
-        if not valid_name_check(project_name):
-            raise ValueError(
-                """Your project/model name contains invalid characters.\
-                    \nUse only the following characters\
-                    \n- Characters: a-z (Lowercase ONLY)\
-                    \n- Numbers: 0-9\
-                    \n- Symbols: -
-                """
-            )
-
-        p_list = self._project_api.projects_get(name=project_name)
-        p = None
-        for prj in p_list:
-            if prj.name == project_name:
-                p = prj
-
-        if p is None:
-            raise Exception(
-                f"{project_name} does not exist or you don't have access to the project. Please create new "
-                f"project using MLP console or ask the project's administrator to be able to access "
-                f"existing project."
-            )
-
-        return Project(p, self.url, self._api_client)
+        return self._mlp_client.get_project(project_name)
 
     def get_model(self, model_name: str, project_name: str) -> Optional[Model]:
         """

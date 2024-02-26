@@ -5,7 +5,7 @@ from version import VERSION
 
 
 class CaraMLClient:
-    _mlp_url_prefix = "/mlp"
+    _mlp_url_prefix = "/"
     _models_url_prefix = "/merlin"
     _routers_url_prefix = "/turing"
 
