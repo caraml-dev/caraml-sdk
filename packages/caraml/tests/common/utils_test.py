@@ -20,7 +20,7 @@ def test_name_check():
 def test_get_mlp_url():
     inputs = ["http://console.ai.io/merlin/api", "http://merlin.dev/merlin/api", "http://console.ai/turing/api"]
 
-    outputs = ["http://console.ai.io/", "http://merlin.dev/", "http://console.ai/"]
+    outputs = ["http://console.ai.io", "http://merlin.dev", "http://console.ai"]
 
     for url, mlp_url in zip(inputs, outputs):
         assert get_mlp_url(url) == mlp_url
