@@ -50,8 +50,15 @@ from mlp.client.models import Project
 from mlp.mlp_client import MLPClient
 from common.utils import get_mlp_url
 
+
 class MerlinClient:
-    def __init__(self, merlin_url: str, use_google_oauth: bool = True, caraml_sdk_version: str = "", mlp_client: MLPClient = None):
+    def __init__(
+        self,
+        merlin_url: str,
+        use_google_oauth: bool = True,
+        caraml_sdk_version: str = "",
+        mlp_client: MLPClient = None,
+    ):
         self._merlin_url = merlin_url
         config = Configuration()
         config.host = self._merlin_url + "/v1"

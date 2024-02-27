@@ -33,7 +33,7 @@ responses = pytest.responses
 
 @pytest.fixture
 def mock_url():
-    return "http://merlin.dev/api"
+    return "http://merlin.dev/merlin/api"
 
 
 @pytest.fixture
@@ -88,7 +88,7 @@ def serialize_datetime(obj):
 def test_get_project(mock_url, mock_oauth, use_google_oauth):
     responses.add(
         "GET",
-        "/api/v1/projects",
+        "/v1/projects",
         body=f"""[{{
                         "id": 0,
                         "name": "my-project",
@@ -104,29 +104,18 @@ def test_get_project(mock_url, mock_oauth, use_google_oauth):
     p = m.get_project("my-project")
 
     assert responses.calls[-1].request.method == "GET"
-    assert responses.calls[-1].request.url == "/api/v1/projects?name=my-project"
+    assert responses.calls[-1].request.url == "/v1/projects?name=my-project"
     assert responses.calls[-1].request.host == "merlin.dev"
 
     assert p.id == 0
     assert p.name == "my-project"
     assert p.mlflow_tracking_url == "http://mlflow.api.merlin.dev"
-    assert p.url == mock_url
     assert isinstance(p.created_at, datetime.datetime)
     assert isinstance(p.updated_at, datetime.datetime)
 
 
-@responses.activate
-def test_create_invalid_project_name(
-    mock_url, api_client, mock_oauth, use_google_oauth
-):
-    project_name = "invalidProjectName"
-
-    client = MerlinClient(mock_url, use_google_oauth=use_google_oauth)
-
-    # Try to create project with invalid name. It must be fail
-    with pytest.raises(Exception):
-        assert client.get_project(project_name)
-
+# test case moved to mlp client. 
+# def test_create_invalid_project_name(mock_url, api_client, mock_oauth, use_google_oauth)
 
 @responses.activate
 def test_create_model(mock_url, api_client, mock_oauth, use_google_oauth):
@@ -139,14 +128,14 @@ def test_create_model(mock_url, api_client, mock_oauth, use_google_oauth):
 
     responses.add(
         "GET",
-        f"/api/v1/projects/{project_id}/models",
+        f"/merlin/api/v1/projects/{project_id}/models",
         body="[]",
         status=200,
         content_type="application/json",
     )
     responses.add(
         "POST",
-        f"/api/v1/projects/{project_id}/models",
+        f"/merlin/api/v1/projects/{project_id}/models",
         body=f"""{{
                         "id": 0,
                         "project_id": {project_id},
@@ -226,7 +215,7 @@ def test_get_model(mock_url, api_client, mock_oauth, use_google_oauth):
 
     responses.add(
         "GET",
-        f"/api/v1/projects/{project_id}/models",
+        f"/merlin/api/v1/projects/{project_id}/models",
         body=f"""[{{
                         "id": 1,
                         "project_id": {project_id},
@@ -244,7 +233,7 @@ def test_get_model(mock_url, api_client, mock_oauth, use_google_oauth):
 
     responses.add(
         "GET",
-        f"/api/v1/models/1/endpoints",
+        f"/merlin/api/v1/models/1/endpoints",
         body=json.dumps([mdl_endpoint_1.to_dict()], default=serialize_datetime),
         status=200,
         content_type="application/json",
@@ -295,7 +284,7 @@ def test_new_model_version(mock_url, api_client, mock_oauth, use_google_oauth):
 
     responses.add(
         "POST",
-        f"/api/v1/models/{model_id}/versions",
+        f"/merlin/api/v1/models/{model_id}/versions",
         body=f"""{{
                         "id": {version_id},
                         "model_id": {model_id},
@@ -350,7 +339,7 @@ def test_new_model_version(mock_url, api_client, mock_oauth, use_google_oauth):
 def test_list_environments(mock_url, api_client, mock_oauth, use_google_oauth):
     responses.add(
         "GET",
-        "/api/v1/environments",
+        "/merlin/api/v1/environments",
         body=json.dumps([env_1.to_dict(), env_2.to_dict()]),
         status=200,
         content_type="application/json",
@@ -371,7 +360,7 @@ def test_list_environments(mock_url, api_client, mock_oauth, use_google_oauth):
 def test_get_environment(mock_url, api_client, mock_oauth, use_google_oauth):
     responses.add(
         "GET",
-        "/api/v1/environments",
+        "/merlin/api/v1/environments",
         body=json.dumps([env_1.to_dict(), env_2.to_dict()]),
         status=200,
         content_type="application/json",
@@ -392,7 +381,7 @@ def test_get_environment(mock_url, api_client, mock_oauth, use_google_oauth):
 def test_get_default_environment(mock_url, api_client, mock_oauth, use_google_oauth):
     responses.add(
         "GET",
-        "/api/v1/environments",
+        "/merlin/api/v1/environments",
         body=json.dumps([env_1.to_dict(), env_2.to_dict()]),
         status=200,
         content_type="application/json",
@@ -408,7 +397,7 @@ def test_get_default_environment(mock_url, api_client, mock_oauth, use_google_oa
 
     responses.add(
         "GET",
-        "/api/v1/environments",
+        "/merlin/api/v1/environments",
         body=json.dumps([env_2.to_dict()]),
         status=200,
         content_type="application/json",
@@ -423,7 +412,7 @@ def test_get_default_environment(mock_url, api_client, mock_oauth, use_google_oa
     client = MerlinClient(mock_url, use_google_oauth=use_google_oauth)
     responses.add(
         "GET",
-        "/api/v1/environments",
+        "/merlin/api/v1/environments",
         body=json.dumps([env_2.to_dict()]),
         status=200,
         content_type="application/json",
