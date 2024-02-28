@@ -106,7 +106,8 @@ class TuringSession:
         """
         Set this session's active projects
         """
-        self.active_project = self.get_project_by_name(project_name)
+        self._mlp_client.set_project(project_name)
+        self.active_project = self._mlp_client.active_project
 
     def list_projects(self, name: Optional[str] = None) -> List[Project]:
         """
@@ -139,7 +140,6 @@ class TuringSession:
         List ensemblers
         """
         kwargs = {}
-        print(self.active_project, 'list ensembler')
         if ensembler_type:
             kwargs["type"] = ensembler_type.value
         if page:
