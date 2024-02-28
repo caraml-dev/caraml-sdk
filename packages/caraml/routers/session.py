@@ -80,7 +80,7 @@ class TuringSession:
         self._project = None
         self._mlp_client = (
             MLPClient(
-                get_mlp_url(host), caraml_sdk_version=caraml_sdk_version
+                get_mlp_url(host), use_google_oauth=use_google_oauth, caraml_sdk_version=caraml_sdk_version
             )
             if not mlp_client
             else mlp_client
@@ -115,7 +115,8 @@ class TuringSession:
         :param name: filter projects by name
         :return: list of projects
         """
-        return self._mlp_client.list_projects()
+        print('printed from list turing', name)
+        return self._mlp_client.list_projects(name)
 
     def get_project_by_name(self, project_name: str) -> Project:
         """
@@ -138,7 +139,7 @@ class TuringSession:
         List ensemblers
         """
         kwargs = {}
-
+        print(self.active_project, 'list ensembler')
         if ensembler_type:
             kwargs["type"] = ensembler_type.value
         if page:

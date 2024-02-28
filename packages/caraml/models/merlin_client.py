@@ -80,7 +80,7 @@ class MerlinClient:
 
         self._mlp_client = (
             MLPClient(
-                get_mlp_url(self._merlin_url), caraml_sdk_version=caraml_sdk_version
+                get_mlp_url(self._merlin_url), use_google_oauth=use_google_oauth, caraml_sdk_version=caraml_sdk_version
             )
             if not mlp_client
             else mlp_client

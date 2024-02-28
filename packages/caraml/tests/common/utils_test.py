@@ -6,9 +6,9 @@ import pytest
 
 @pytest.mark.unit
 def test_name_check():
-    invalid_names = ["test-name,", "test,name", "test.name"]
+    invalid_names = ["test-name,", "test,name", "test.name", "90project"]
 
-    valid_names = ["test-name", "testname", "abc2"]
+    valid_names = ["test-name", "testname", "abc2", "project_name"]
 
     for name in invalid_names:
         assert is_valid_project_name(name) is False
@@ -18,9 +18,17 @@ def test_name_check():
 
 @pytest.mark.unit
 def test_get_mlp_url():
-    inputs = ["http://console.ai.io/merlin/api", "http://merlin.dev/merlin/api", "http://console.ai/turing/api"]
+    inputs = ["http://console.ai.io/merlin/api", 
+              "http://merlin.dev/merlin/api",
+              "http://console.ai/turing/api",
+              "http://console.ai/turing",
+              "http://console.ai/merlin"]
 
-    outputs = ["http://console.ai.io", "http://merlin.dev", "http://console.ai"]
+    outputs = ["http://console.ai.io", 
+               "http://merlin.dev", 
+               "http://console.ai",
+               "http://console.ai",
+               "http://console.ai"]
 
     for url, mlp_url in zip(inputs, outputs):
         assert get_mlp_url(url) == mlp_url

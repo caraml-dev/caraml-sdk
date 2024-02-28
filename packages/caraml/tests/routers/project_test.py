@@ -4,6 +4,7 @@ from urllib3_mock import Responses
 
 from tests.routers.utils import json_serializer
 import routers as turing
+from mlp.client.models import Project
 
 
 responses = Responses("requests.packages.urllib3")
@@ -21,10 +22,11 @@ def test_list_projects(turing_api, projects, use_google_oauth):
     )
 
     turing.set_url(turing_api, use_google_oauth)
-    actual = turing.Project.list()
+
+    actual = turing.active_session.list_projects()
 
     assert len(actual) == len(projects)
-    assert all([isinstance(p, turing.Project) for p in actual])
+    assert all([isinstance(p, Project) for p in actual])
 
     for actual, expected in zip(actual, projects):
         assert actual.id == expected.id
@@ -33,5 +35,6 @@ def test_list_projects(turing_api, projects, use_google_oauth):
         assert actual.created_at == expected.created_at
         assert actual.updated_at == expected.updated_at
 
-    turing.Project.list(name="project_1")
-    assert responses.calls[1].request.url == "/v1/projects?name=project_1"
+    turing.active_session.list_projects(name="project_1")
+    print(responses.calls)
+    assert responses.calls[-1].request.url == "/v1/projects?name=project_1"
