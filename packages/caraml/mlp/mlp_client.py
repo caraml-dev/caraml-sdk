@@ -62,6 +62,8 @@ class MLPClient:
         if caraml_sdk_version:
             user_agent = f"caraml-sdk/{caraml_sdk_version} " + user_agent
         self._api_client.user_agent = user_agent
+        
+        self._project = None
         self._project_api = ProjectApi(self._api_client)
         self._secret_api = SecretApi(self._api_client)
 
