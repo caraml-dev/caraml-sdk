@@ -73,12 +73,12 @@ jobs:
           generator-tag: ${{ github.event.inputs.openapi_generator_version }}
           openapi-file: ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_schema }}
           config-file: ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_config }}
-          command-args: "--package-name ${{ github.event.inputs.module }}.client"
+          command-args: "--package-name caraml.${{ github.event.inputs.module }}.client"
 
       - name: Sync changes to ${{ github.event.inputs.module }}/client
         run: |
           rm -rf packages/caraml-sdk/caraml/${{ github.event.inputs.module }}/client
-          cp -r python-client/${{ github.event.inputs.module }}/client packages/caraml-sdk/caraml/${{ github.event.inputs.module }}
+          cp -r python-client/caraml/${{ github.event.inputs.module }}/client packages/caraml-sdk/caraml/${{ github.event.inputs.module }}
           echo 'VERSION = "${{ github.event.inputs.ref }}"' > packages/caraml-sdk/caraml/${{ github.event.inputs.module }}/version.py
           rm -rf ${{ github.event.inputs.module }}
           rm -rf python-client
