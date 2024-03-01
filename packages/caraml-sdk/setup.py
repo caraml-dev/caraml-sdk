@@ -20,7 +20,7 @@ with pathlib.Path("requirements.dev.txt").open() as dev_requirements_test:
     ]
 
 setuptools.setup(
-    name="caraml",
+    name="caraml-sdk",
     version=version,
     packages=setuptools.find_packages(),
     install_requires=requirements,
