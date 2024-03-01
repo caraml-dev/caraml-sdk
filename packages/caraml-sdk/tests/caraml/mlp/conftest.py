@@ -1,4 +1,3 @@
-
 import os
 
 import pytest
@@ -37,6 +36,7 @@ def api_client(mock_url):
 def mlflow_url():
     return "mlflow"
 
+
 @pytest.fixture
 def requests():
     retry_strategy = Retry(
@@ -62,6 +62,7 @@ def project(url, mlflow_url, api_client):
         updated_at="2019-08-29T08:13:12.377Z",
     )
     return Project(prj, url, api_client)
+
 
 @pytest.fixture
 def use_google_oauth():

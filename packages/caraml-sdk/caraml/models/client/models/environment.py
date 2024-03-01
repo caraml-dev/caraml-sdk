@@ -20,11 +20,11 @@ import json
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
-from models.client.models.gpu_config import GPUConfig
-from models.client.models.prediction_job_resource_request import (
+from caraml.models.client.models.gpu_config import GPUConfig
+from caraml.models.client.models.prediction_job_resource_request import (
     PredictionJobResourceRequest,
 )
-from models.client.models.resource_request import ResourceRequest
+from caraml.models.client.models.resource_request import ResourceRequest
 
 try:
     from typing import Self

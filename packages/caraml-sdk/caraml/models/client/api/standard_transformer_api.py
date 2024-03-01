@@ -25,16 +25,16 @@ except ImportError:
 
 from typing import Optional
 
-from models.client.models.standard_transformer_simulation_request import (
+from caraml.models.client.models.standard_transformer_simulation_request import (
     StandardTransformerSimulationRequest,
 )
-from models.client.models.standard_transformer_simulation_response import (
+from caraml.models.client.models.standard_transformer_simulation_response import (
     StandardTransformerSimulationResponse,
 )
 
-from models.client.api_client import ApiClient
-from models.client.api_response import ApiResponse
-from models.client.rest import RESTResponseType
+from caraml.models.client.api_client import ApiClient
+from caraml.models.client.api_response import ApiResponse
+from caraml.models.client.rest import RESTResponseType
 
 
 class StandardTransformerApi:

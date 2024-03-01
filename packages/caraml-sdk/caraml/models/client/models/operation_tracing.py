@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel
-from models.client.models.pipeline_tracing import PipelineTracing
+from caraml.models.client.models.pipeline_tracing import PipelineTracing
 
 try:
     from typing import Self

@@ -24,11 +24,11 @@ import tempfile
 from urllib.parse import quote
 from typing import Tuple, Optional, List
 
-from models.client.configuration import Configuration
-from models.client.api_response import ApiResponse
-import models.client.models
-from models.client import rest
-from models.client.exceptions import (
+from caraml.models.client.configuration import Configuration
+from caraml.models.client.api_response import ApiResponse
+import caraml.models.client.models
+from caraml.models.client import rest
+from caraml.models.client.exceptions import (
     ApiValueError,
     ApiException,
     BadRequestException,
@@ -408,7 +408,7 @@ class ApiClient:
             if klass in self.NATIVE_TYPES_MAPPING:
                 klass = self.NATIVE_TYPES_MAPPING[klass]
             else:
-                klass = getattr(models.client.models, klass)
+                klass = getattr(caraml.models.client.models, klass)
 
         if klass in self.PRIMITIVE_TYPES:
             return self.__deserialize_primitive(data, klass)

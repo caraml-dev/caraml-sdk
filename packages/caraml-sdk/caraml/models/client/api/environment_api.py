@@ -27,11 +27,11 @@ from pydantic import StrictStr
 
 from typing import List, Optional
 
-from models.client.models.environment import Environment
+from caraml.models.client.models.environment import Environment
 
-from models.client.api_client import ApiClient
-from models.client.api_response import ApiResponse
-from models.client.rest import RESTResponseType
+from caraml.models.client.api_client import ApiClient
+from caraml.models.client.api_response import ApiResponse
+from caraml.models.client.rest import RESTResponseType
 
 
 class EnvironmentApi:

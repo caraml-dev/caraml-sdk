@@ -19,7 +19,7 @@ import ssl
 
 import urllib3
 
-from models.client.exceptions import ApiException, ApiValueError
+from caraml.models.client.exceptions import ApiException, ApiValueError
 
 RESTResponseType = urllib3.HTTPResponse
 

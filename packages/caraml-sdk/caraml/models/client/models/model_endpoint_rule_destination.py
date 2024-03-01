@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr
-from models.client.models.version_endpoint import VersionEndpoint
+from caraml.models.client.models.version_endpoint import VersionEndpoint
 
 try:
     from typing import Self

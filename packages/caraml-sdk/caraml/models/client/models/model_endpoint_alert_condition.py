@@ -20,8 +20,10 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel, StrictBool, StrictFloat, StrictInt, StrictStr
-from models.client.models.alert_condition_metric_type import AlertConditionMetricType
-from models.client.models.alert_condition_severity import AlertConditionSeverity
+from caraml.models.client.models.alert_condition_metric_type import (
+    AlertConditionMetricType,
+)
+from caraml.models.client.models.alert_condition_severity import AlertConditionSeverity
 
 try:
     from typing import Self

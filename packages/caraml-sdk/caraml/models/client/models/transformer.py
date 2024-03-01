@@ -20,8 +20,8 @@ import json
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictBool, StrictStr
-from models.client.models.env_var import EnvVar
-from models.client.models.resource_request import ResourceRequest
+from caraml.models.client.models.env_var import EnvVar
+from caraml.models.client.models.resource_request import ResourceRequest
 
 try:
     from typing import Self

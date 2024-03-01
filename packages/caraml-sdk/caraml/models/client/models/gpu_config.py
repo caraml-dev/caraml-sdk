@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel, StrictFloat, StrictInt, StrictStr
-from models.client.models.gpu_toleration import GPUToleration
+from caraml.models.client.models.gpu_toleration import GPUToleration
 
 try:
     from typing import Self

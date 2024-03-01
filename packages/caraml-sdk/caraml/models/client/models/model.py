@@ -144,7 +144,7 @@ class Model(BaseModel):
         return _obj
 
 
-from models.client.models.model_endpoint import ModelEndpoint
+from caraml.models.client.models.model_endpoint import ModelEndpoint
 
 # TODO: Rewrite to not use raise_errors
 Model.model_rebuild(raise_errors=False)

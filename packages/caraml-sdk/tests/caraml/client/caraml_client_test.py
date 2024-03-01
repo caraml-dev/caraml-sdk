@@ -97,11 +97,11 @@ def test_caraml_client_all_methods(mock_url):
         for method_name in dir(client)
         if callable(getattr(client, method_name)) and not method_name.startswith("_")
     ]
-    
+
     for method in client_methods:
-        print(f'validating {method}')
+        print(f"validating {method}")
         _validate_method(client, method, check_string=CARAML_METHODS[method])
-    
+
 
 @pytest.mark.unit
 @responses.activate

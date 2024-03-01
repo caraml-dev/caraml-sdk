@@ -20,19 +20,21 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
-from models.client.models.prediction_job_config_bigquery_sink import (
+from caraml.models.client.models.prediction_job_config_bigquery_sink import (
     PredictionJobConfigBigquerySink,
 )
-from models.client.models.prediction_job_config_bigquery_source import (
+from caraml.models.client.models.prediction_job_config_bigquery_source import (
     PredictionJobConfigBigquerySource,
 )
-from models.client.models.prediction_job_config_gcs_sink import (
+from caraml.models.client.models.prediction_job_config_gcs_sink import (
     PredictionJobConfigGcsSink,
 )
-from models.client.models.prediction_job_config_gcs_source import (
+from caraml.models.client.models.prediction_job_config_gcs_source import (
     PredictionJobConfigGcsSource,
 )
-from models.client.models.prediction_job_config_model import PredictionJobConfigModel
+from caraml.models.client.models.prediction_job_config_model import (
+    PredictionJobConfigModel,
+)
 
 try:
     from typing import Self

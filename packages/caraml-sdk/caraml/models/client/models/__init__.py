@@ -14,82 +14,88 @@
 
 
 # import models into model package
-from models.client.models.alert_condition_metric_type import AlertConditionMetricType
-from models.client.models.alert_condition_severity import AlertConditionSeverity
-from models.client.models.autoscaling_policy import AutoscalingPolicy
-from models.client.models.binary_classification_output import BinaryClassificationOutput
-from models.client.models.config import Config
-from models.client.models.container import Container
-from models.client.models.custom_predictor import CustomPredictor
-from models.client.models.deployment_mode import DeploymentMode
-from models.client.models.endpoint_status import EndpointStatus
-from models.client.models.env_var import EnvVar
-from models.client.models.environment import Environment
-from models.client.models.file_format import FileFormat
-from models.client.models.gpu_config import GPUConfig
-from models.client.models.gpu_toleration import GPUToleration
-from models.client.models.label import Label
-from models.client.models.logger import Logger
-from models.client.models.logger_config import LoggerConfig
-from models.client.models.logger_mode import LoggerMode
-from models.client.models.metrics_type import MetricsType
-from models.client.models.mock_response import MockResponse
-from models.client.models.model import Model
-from models.client.models.model_endpoint import ModelEndpoint
-from models.client.models.model_endpoint_alert import ModelEndpointAlert
-from models.client.models.model_endpoint_alert_condition import (
+from caraml.models.client.models.alert_condition_metric_type import (
+    AlertConditionMetricType,
+)
+from caraml.models.client.models.alert_condition_severity import AlertConditionSeverity
+from caraml.models.client.models.autoscaling_policy import AutoscalingPolicy
+from caraml.models.client.models.binary_classification_output import (
+    BinaryClassificationOutput,
+)
+from caraml.models.client.models.config import Config
+from caraml.models.client.models.container import Container
+from caraml.models.client.models.custom_predictor import CustomPredictor
+from caraml.models.client.models.deployment_mode import DeploymentMode
+from caraml.models.client.models.endpoint_status import EndpointStatus
+from caraml.models.client.models.env_var import EnvVar
+from caraml.models.client.models.environment import Environment
+from caraml.models.client.models.file_format import FileFormat
+from caraml.models.client.models.gpu_config import GPUConfig
+from caraml.models.client.models.gpu_toleration import GPUToleration
+from caraml.models.client.models.label import Label
+from caraml.models.client.models.logger import Logger
+from caraml.models.client.models.logger_config import LoggerConfig
+from caraml.models.client.models.logger_mode import LoggerMode
+from caraml.models.client.models.metrics_type import MetricsType
+from caraml.models.client.models.mock_response import MockResponse
+from caraml.models.client.models.model import Model
+from caraml.models.client.models.model_endpoint import ModelEndpoint
+from caraml.models.client.models.model_endpoint_alert import ModelEndpointAlert
+from caraml.models.client.models.model_endpoint_alert_condition import (
     ModelEndpointAlertCondition,
 )
-from models.client.models.model_endpoint_rule import ModelEndpointRule
-from models.client.models.model_endpoint_rule_destination import (
+from caraml.models.client.models.model_endpoint_rule import ModelEndpointRule
+from caraml.models.client.models.model_endpoint_rule_destination import (
     ModelEndpointRuleDestination,
 )
-from models.client.models.model_prediction_config import ModelPredictionConfig
-from models.client.models.model_prediction_output import ModelPredictionOutput
-from models.client.models.model_prediction_output_class import (
+from caraml.models.client.models.model_prediction_config import ModelPredictionConfig
+from caraml.models.client.models.model_prediction_output import ModelPredictionOutput
+from caraml.models.client.models.model_prediction_output_class import (
     ModelPredictionOutputClass,
 )
-from models.client.models.model_schema import ModelSchema
-from models.client.models.operation_tracing import OperationTracing
-from models.client.models.pipeline_tracing import PipelineTracing
-from models.client.models.prediction_job import PredictionJob
-from models.client.models.prediction_job_config import PredictionJobConfig
-from models.client.models.prediction_job_config_bigquery_sink import (
+from caraml.models.client.models.model_schema import ModelSchema
+from caraml.models.client.models.operation_tracing import OperationTracing
+from caraml.models.client.models.pipeline_tracing import PipelineTracing
+from caraml.models.client.models.prediction_job import PredictionJob
+from caraml.models.client.models.prediction_job_config import PredictionJobConfig
+from caraml.models.client.models.prediction_job_config_bigquery_sink import (
     PredictionJobConfigBigquerySink,
 )
-from models.client.models.prediction_job_config_bigquery_source import (
+from caraml.models.client.models.prediction_job_config_bigquery_source import (
     PredictionJobConfigBigquerySource,
 )
-from models.client.models.prediction_job_config_gcs_sink import (
+from caraml.models.client.models.prediction_job_config_gcs_sink import (
     PredictionJobConfigGcsSink,
 )
-from models.client.models.prediction_job_config_gcs_source import (
+from caraml.models.client.models.prediction_job_config_gcs_source import (
     PredictionJobConfigGcsSource,
 )
-from models.client.models.prediction_job_config_model import PredictionJobConfigModel
-from models.client.models.prediction_job_config_model_result import (
+from caraml.models.client.models.prediction_job_config_model import (
+    PredictionJobConfigModel,
+)
+from caraml.models.client.models.prediction_job_config_model_result import (
     PredictionJobConfigModelResult,
 )
-from models.client.models.prediction_job_resource_request import (
+from caraml.models.client.models.prediction_job_resource_request import (
     PredictionJobResourceRequest,
 )
-from models.client.models.prediction_logger_config import PredictionLoggerConfig
-from models.client.models.project import Project
-from models.client.models.protocol import Protocol
-from models.client.models.ranking_output import RankingOutput
-from models.client.models.regression_output import RegressionOutput
-from models.client.models.resource_request import ResourceRequest
-from models.client.models.result_type import ResultType
-from models.client.models.save_mode import SaveMode
-from models.client.models.schema_spec import SchemaSpec
-from models.client.models.secret import Secret
-from models.client.models.standard_transformer_simulation_request import (
+from caraml.models.client.models.prediction_logger_config import PredictionLoggerConfig
+from caraml.models.client.models.project import Project
+from caraml.models.client.models.protocol import Protocol
+from caraml.models.client.models.ranking_output import RankingOutput
+from caraml.models.client.models.regression_output import RegressionOutput
+from caraml.models.client.models.resource_request import ResourceRequest
+from caraml.models.client.models.result_type import ResultType
+from caraml.models.client.models.save_mode import SaveMode
+from caraml.models.client.models.schema_spec import SchemaSpec
+from caraml.models.client.models.secret import Secret
+from caraml.models.client.models.standard_transformer_simulation_request import (
     StandardTransformerSimulationRequest,
 )
-from models.client.models.standard_transformer_simulation_response import (
+from caraml.models.client.models.standard_transformer_simulation_response import (
     StandardTransformerSimulationResponse,
 )
-from models.client.models.transformer import Transformer
-from models.client.models.value_type import ValueType
-from models.client.models.version import Version
-from models.client.models.version_endpoint import VersionEndpoint
+from caraml.models.client.models.transformer import Transformer
+from caraml.models.client.models.value_type import ValueType
+from caraml.models.client.models.version import Version
+from caraml.models.client.models.version_endpoint import VersionEndpoint

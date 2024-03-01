@@ -185,10 +185,10 @@ class RouterEnsemblerConfig(DataObject):
             self._docker_config = docker_config
         elif isinstance(docker_config, dict):
             openapi_docker_config = docker_config.copy()
-            openapi_docker_config["resource_request"] = (
-                routers.client.models.ResourceRequest(
-                    **openapi_docker_config["resource_request"]
-                )
+            openapi_docker_config[
+                "resource_request"
+            ] = routers.client.models.ResourceRequest(
+                **openapi_docker_config["resource_request"]
             )
             openapi_docker_config["autoscaling_policy"] = (
                 routers.client.models.AutoscalingPolicy(
@@ -217,10 +217,10 @@ class RouterEnsemblerConfig(DataObject):
             self._pyfunc_config = pyfunc_config
         elif isinstance(pyfunc_config, dict):
             openapi_pyfunc_config = pyfunc_config.copy()
-            openapi_pyfunc_config["resource_request"] = (
-                routers.client.models.ResourceRequest(
-                    **pyfunc_config["resource_request"]
-                )
+            openapi_pyfunc_config[
+                "resource_request"
+            ] = routers.client.models.ResourceRequest(
+                **pyfunc_config["resource_request"]
             )
             openapi_pyfunc_config["autoscaling_policy"] = (
                 routers.client.models.AutoscalingPolicy(

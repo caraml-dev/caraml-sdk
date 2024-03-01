@@ -27,11 +27,11 @@ from pydantic import StrictInt, StrictStr
 
 from typing import List, Optional
 
-from models.client.models.model_endpoint_alert import ModelEndpointAlert
+from caraml.models.client.models.model_endpoint_alert import ModelEndpointAlert
 
-from models.client.api_client import ApiClient
-from models.client.api_response import ApiResponse
-from models.client.rest import RESTResponseType
+from caraml.models.client.api_client import ApiClient
+from caraml.models.client.api_response import ApiResponse
+from caraml.models.client.rest import RESTResponseType
 
 
 class AlertApi:

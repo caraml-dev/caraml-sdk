@@ -27,12 +27,12 @@ from pydantic import StrictInt, StrictStr
 
 from typing import List, Optional
 
-from models.client.models.container import Container
-from models.client.models.prediction_job import PredictionJob
+from caraml.models.client.models.container import Container
+from caraml.models.client.models.prediction_job import PredictionJob
 
-from models.client.api_client import ApiClient
-from models.client.api_response import ApiResponse
-from models.client.rest import RESTResponseType
+from caraml.models.client.api_client import ApiClient
+from caraml.models.client.api_response import ApiResponse
+from caraml.models.client.rest import RESTResponseType
 
 
 class PredictionJobsApi:

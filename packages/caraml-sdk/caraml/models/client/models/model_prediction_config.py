@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel
-from models.client.models.mock_response import MockResponse
+from caraml.models.client.models.mock_response import MockResponse
 
 try:
     from typing import Self
