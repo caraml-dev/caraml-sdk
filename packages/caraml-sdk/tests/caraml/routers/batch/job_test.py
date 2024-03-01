@@ -2,7 +2,7 @@ import os
 import pytest
 from urllib3_mock import Responses
 
-from tests.routers.utils import utc_date
+from tests.caraml.routers.utils import utc_date
 import caraml.routers as turing
 import caraml.routers.batch
 import caraml.routers.batch.config

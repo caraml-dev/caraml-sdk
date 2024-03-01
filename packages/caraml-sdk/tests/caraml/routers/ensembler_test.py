@@ -7,7 +7,7 @@ import re
 from urllib3_mock import Responses
 
 
-from tests.routers import utils
+from tests.caraml.routers import utils
 import caraml.routers as turing
 import caraml.routers.client.models
 
@@ -69,7 +69,7 @@ def test_list_ensemblers(
 
     page = routers.client.models.EnsemblersPaginatedResults(
         results=generic_ensemblers,
-        paging=routers.client.models.PaginationPaging(total=1, page=1, pages=1),
+        paging=caraml.routers.client.models.PaginationPaging(total=1, page=1, pages=1),
     )
 
     responses.add(
@@ -128,12 +128,12 @@ def test_update_ensembler(
 
     page = routers.client.models.EnsemblersPaginatedResults(
         results=generic_ensemblers,
-        paging=routers.client.models.PaginationPaging(total=1, page=1, pages=1),
+        paging=caraml.routers.client.models.PaginationPaging(total=1, page=1, pages=1),
     )
 
     emptyJob = routers.client.models.EnsemblingJobPaginatedResults(
         results=[],
-        paging=routers.client.models.PaginationPaging(total=0, page=1, pages=1),
+        paging=caraml.routers.client.models.PaginationPaging(total=0, page=1, pages=1),
     )
 
     responses.add(
@@ -180,7 +180,7 @@ def test_update_ensembler(
         code_dir=[
             os.path.join(
                 os.path.dirname(os.path.realpath(__file__)),
-                "../../routers",
+                "../../../routers",
                 "samples/quickstart",
             )
         ],
@@ -203,7 +203,7 @@ def test_update_ensembler_existing_router_version(
 
     page = routers.client.models.EnsemblersPaginatedResults(
         results=generic_ensemblers,
-        paging=routers.client.models.PaginationPaging(total=1, page=1, pages=1),
+        paging=caraml.routers.client.models.PaginationPaging(total=1, page=1, pages=1),
     )
 
     responses.add(
@@ -255,7 +255,7 @@ def test_update_ensembler_existing_job(
 
     page = routers.client.models.EnsemblersPaginatedResults(
         results=generic_ensemblers,
-        paging=routers.client.models.PaginationPaging(total=1, page=1, pages=1),
+        paging=caraml.routers.client.models.PaginationPaging(total=1, page=1, pages=1),
     )
 
     responses.add(

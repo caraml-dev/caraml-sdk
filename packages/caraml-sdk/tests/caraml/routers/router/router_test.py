@@ -4,7 +4,7 @@ import caraml.routers as turing
 import pytest
 from urllib3_mock import Responses
 
-import tests.routers.utils as utils
+import tests.caraml.routers.utils as utils
 import caraml.routers.client.models
 from caraml.routers.router.config.router_version import RouterStatus
 
@@ -105,7 +105,7 @@ def test_create_router(
 
 @responses.activate
 @pytest.mark.parametrize(
-    "actual,expected", [pytest.param(1, routers.client.models.IdObject(id=1))]
+    "actual,expected", [pytest.param(1, caraml.routers.client.models.IdObject(id=1))]
 )
 def test_delete_router(turing_api, active_project, actual, expected, use_google_oauth):
     turing.set_url(turing_api, use_google_oauth)
@@ -212,7 +212,7 @@ def test_deploy_router(
 
     base_router = turing.Router.from_open_api(generic_router)
 
-    expected = routers.client.models.RouterIdAndVersion(router_id=1, version=1)
+    expected = caraml.routers.client.models.RouterIdAndVersion(router_id=1, version=1)
 
     responses.add(
         method="POST",
@@ -236,7 +236,7 @@ def test_undeploy_router(
 
     base_router = turing.Router.from_open_api(generic_router)
 
-    expected = routers.client.models.RouterIdObject(
+    expected = caraml.routers.client.models.RouterIdObject(
         router_id=1,
     )
 
@@ -360,7 +360,7 @@ def test_delete_version(turing_api, active_project, generic_router, use_google_o
 
     expected_router_id = 1
     expected_version = 1
-    expected = routers.client.models.RouterIdAndVersion(
+    expected = caraml.routers.client.models.RouterIdAndVersion(
         router_id=expected_router_id, version=expected_version
     )
 
@@ -386,7 +386,7 @@ def test_deploy_version(turing_api, active_project, generic_router, use_google_o
 
     expected_router_id = 1
     expected_version = 1
-    expected = routers.client.models.RouterIdAndVersion(
+    expected = caraml.routers.client.models.RouterIdAndVersion(
         router_id=expected_router_id, version=expected_version
     )
 
@@ -454,7 +454,7 @@ def test_wait_for_status(
     turing.set_project(active_project.name)
 
     base_router = turing.Router.from_open_api(generic_router)
-    generic_router.status = routers.client.models.RouterStatus("pending")
+    generic_router.status = caraml.routers.client.models.RouterStatus("pending")
 
     responses.add(
         method="GET",
@@ -489,7 +489,7 @@ def test_wait_for_version_status(
     turing.set_project(active_project.name)
 
     base_router = turing.Router.from_open_api(generic_router)
-    generic_router_version.status = routers.client.models.RouterVersionStatus("pending")
+    generic_router_version.status = caraml.routers.client.models.RouterVersionStatus("pending")
 
     responses.add(
         method="GET",

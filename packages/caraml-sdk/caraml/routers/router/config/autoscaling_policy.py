@@ -2,7 +2,7 @@ from dataclasses import dataclass, field
 from enum import Enum
 from typing import Union
 
-import caraml.routers.client.models
+from caraml.routers.client.models import AutoscalingPolicy
 from caraml.routers.client.model_utils import OpenApiModel
 
 
@@ -72,7 +72,7 @@ class AutoscalingPolicy:
         self._target = target
 
     def to_open_api(self) -> OpenApiModel:
-        return caraml.routers.client.models.AutoscalingPolicy(
+        return AutoscalingPolicy(
             metric=self.metric.value,
             target=self.target,
         )

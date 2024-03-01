@@ -1,4 +1,10 @@
-import caraml.routers.client.models
+from caraml.routers.client.models import (
+    ResultLoggerType,
+    BigQueryConfig,
+    KafkaConfig,
+    RouterVersionConfigLogConfig,
+    LogLevel
+)
 from enum import Enum
 from dataclasses import dataclass
 from typing import Optional, Dict, Union
@@ -12,7 +18,7 @@ class ResultLoggerType(Enum):
     KAFKA = "kafka"
 
     def to_open_api(self) -> OpenApiModel:
-        return caraml.routers.client.models.ResultLoggerType(self.value)
+        return ResultLoggerType(self.value)
 
 
 @dataclass
@@ -26,14 +32,14 @@ class LogConfig:
     """
 
     result_logger_type: ResultLoggerType
-    bigquery_config: caraml.routers.client.models.BigQueryConfig = None
-    kafka_config: caraml.routers.client.models.KafkaConfig = None
+    bigquery_config: BigQueryConfig = None
+    kafka_config: KafkaConfig = None
 
     def __init__(
         self,
         result_logger_type: ResultLoggerType,
-        bigquery_config: caraml.routers.client.models.BigQueryConfig = None,
-        kafka_config: caraml.routers.client.models.KafkaConfig = None,
+        bigquery_config: BigQueryConfig = None,
+        kafka_config: KafkaConfig = None,
         **kwargs,
     ):
         self.result_logger_type = result_logger_type
@@ -54,36 +60,32 @@ class LogConfig:
             self._result_logger_type = result_logger_type
 
     @property
-    def bigquery_config(self) -> caraml.routers.client.models.BigQueryConfig:
+    def bigquery_config(self) -> BigQueryConfig:
         return self._bigquery_config
 
     @bigquery_config.setter
     def bigquery_config(
-        self, bigquery_config: Union[routers.client.models.BigQueryConfig, Dict]
+        self, bigquery_config: Union[BigQueryConfig, Dict]
     ):
-        if isinstance(bigquery_config, caraml.routers.client.models.BigQueryConfig):
+        if isinstance(bigquery_config, BigQueryConfig):
             self._bigquery_config = bigquery_config
         elif isinstance(bigquery_config, dict):
-            self._bigquery_config = caraml.routers.client.models.BigQueryConfig(
-                **bigquery_config
-            )
+            self._bigquery_config = BigQueryConfig(**bigquery_config)
         else:
             self._bigquery_config = bigquery_config
 
     @property
-    def kafka_config(self) -> caraml.routers.client.models.KafkaConfig:
+    def kafka_config(self) -> KafkaConfig:
         return self._kafka_config
 
     @kafka_config.setter
     def kafka_config(
-        self, kafka_config: Union[routers.client.models.KafkaConfig, Dict]
+        self, kafka_config: Union[KafkaConfig, Dict]
     ):
-        if isinstance(kafka_config, caraml.routers.client.models.KafkaConfig):
+        if isinstance(kafka_config, KafkaConfig):
             self._kafka_config = kafka_config
         elif isinstance(kafka_config, dict):
-            self._kafka_config = caraml.routers.client.models.KafkaConfig(
-                **kafka_config
-            )
+            self._kafka_config = KafkaConfig(**kafka_config)
         else:
             self._kafka_config = kafka_config
 
@@ -96,7 +98,7 @@ class LogConfig:
         if self.kafka_config is not None:
             kwargs["kafka_config"] = self.kafka_config
 
-        return caraml.routers.client.models.RouterVersionConfigLogConfig(
+        return RouterVersionConfigLogConfig(
             result_logger_type=self.result_logger_type.to_open_api(), **kwargs
         )
 
@@ -173,7 +175,7 @@ class BigQueryLogConfig(LogConfig):
         self._batch_load = batch_load
 
     def to_open_api(self) -> OpenApiModel:
-        self.bigquery_config = caraml.routers.client.models.BigQueryConfig(
+        self.bigquery_config = BigQueryConfig(
             table=self.table,
             service_account_secret=self.service_account_secret,
             batch_load=self.batch_load,
@@ -234,7 +236,7 @@ class KafkaLogConfig(LogConfig):
         self._serialization_format = serialization_format
 
     def to_open_api(self) -> OpenApiModel:
-        self.kafka_config = caraml.routers.client.models.KafkaConfig(
+        self.kafka_config = KafkaConfig(
             brokers=self.brokers,
             topic=self.topic,
             serialization_format=self.serialization_format.value,
@@ -244,14 +246,14 @@ class KafkaLogConfig(LogConfig):
 
 @dataclass
 class RouterVersionLogConfig(LogConfig):
-    log_level: caraml.routers.client.models.LogLevel = None
+    log_level: LogLevel = None
     custom_metrics_enabled: bool = None
     fiber_debug_log_enabled: bool = None
     jaeger_enabled: bool = None
 
     def __init__(
         self,
-        log_level: caraml.routers.client.models.LogLevel = None,
+        log_level: LogLevel = None,
         custom_metrics_enabled: bool = None,
         fiber_debug_log_enabled: bool = None,
         jaeger_enabled: bool = None,

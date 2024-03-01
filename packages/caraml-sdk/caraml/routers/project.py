@@ -1,9 +1,9 @@
 from typing import Optional, List
-import caraml.routers.client.models
+from caraml.routers.client.models import Project
 from caraml.routers._base_types import ApiObject, ApiObjectSpec
 
 
-@ApiObjectSpec(routers.client.models.Project)
+@ApiObjectSpec(Project)
 class Project(ApiObject):
     """
     API entity for MLP Project

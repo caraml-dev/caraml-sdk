@@ -1,7 +1,7 @@
 import abc
 from enum import Enum
 from typing import Iterable, MutableMapping, Optional
-import caraml.routers.client.models
+from caraml.routers.client.models import BigQuerySinkConfig
 from caraml.routers.client.model_utils import OpenApiModel
 
 
@@ -17,7 +17,7 @@ class SaveMode(Enum):
     IGNORE = 3
 
     def to_open_api(self) -> OpenApiModel:
-        return caraml.routers.client.models.SaveMode(self.name)
+        return SaveMode(self.name)
 
 
 class EnsemblingJobSink:
@@ -92,10 +92,10 @@ class BigQuerySink(EnsemblingJobSink):
         return self._options
 
     def to_open_api(self) -> OpenApiModel:
-        return caraml.routers.client.models.BigQuerySink(
+        return BigQuerySink(
             save_mode=self._save_mode.to_open_api(),
             columns=self._columns,
-            bq_config=routers.client.models.BigQuerySinkConfig(
+            bq_config=BigQuerySinkConfig(
                 table=self.table,
                 staging_bucket=self.staging_bucket,
                 options=self.options,

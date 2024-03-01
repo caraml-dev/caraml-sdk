@@ -32,6 +32,7 @@ from caraml.routers.client.models import (
     Router,
     RouterDetails,
     RouterConfig,
+    RouterEvents,
     RouterVersion,
     RouterVersionConfig,
     EnsemblerId,
@@ -365,7 +366,7 @@ class TuringSession:
     @require_active_project
     def get_router_events(
         self, router_id: int
-    ) -> caraml.routers.client.models.RouterEvents:
+    ) -> RouterEvents:
         """
         Fetch deployment events associated with the router with the given router ID
         """

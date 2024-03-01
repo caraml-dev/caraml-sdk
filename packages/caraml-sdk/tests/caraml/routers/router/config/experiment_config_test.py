@@ -13,7 +13,7 @@ from caraml.routers.router.config.experiment_config import ExperimentConfig
                 "project_id": 102.0,
                 "variables": [{"test": 1}, {"count": 200, "id": "random_variable"}],
             },
-            routers.client.models.ExperimentConfig(
+            caraml.routers.client.models.ExperimentConfig(
                 type="nop",
                 config={
                     "project_id": 102,

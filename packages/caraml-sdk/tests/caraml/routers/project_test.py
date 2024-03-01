@@ -2,7 +2,7 @@ import json
 import pytest
 from urllib3_mock import Responses
 
-from tests.routers.utils import json_serializer
+from tests.caraml.routers.utils import json_serializer
 import caraml.routers as turing
 from caraml.mlp.client.models import Project
 

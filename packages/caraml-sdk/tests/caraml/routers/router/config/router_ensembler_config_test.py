@@ -566,12 +566,12 @@ def test_create_nop_router_ensembler_config_with_invalid_route(
                 "standard_config": EnsemblerStandardConfig(
                     fallback_response_route_id="route-1",
                     experiment_mappings=[
-                        routers.client.models.EnsemblerStandardConfigExperimentMappings(
+                        caraml.routers.client.models.EnsemblerStandardConfigExperimentMappings(
                             experiment="experiment-1",
                             route="route-1",
                             treatment="treatment-1",
                         ),
-                        routers.client.models.EnsemblerStandardConfigExperimentMappings(
+                        caraml.routers.client.models.EnsemblerStandardConfigExperimentMappings(
                             experiment="experiment-2",
                             route="route-2",
                             treatment="treatment-2",
@@ -600,17 +600,19 @@ def test_create_nop_router_ensembler_config_with_invalid_route(
             "docker",
             "generic_ensembler_docker_config",
             {
-                "docker_config": routers.client.models.EnsemblerDockerConfig(
-                    autoscaling_policy=routers.client.models.AutoscalingPolicy(
+                "docker_config": caraml.routers.client.models.EnsemblerDockerConfig(
+                    autoscaling_policy=caraml.routers.client.models.AutoscalingPolicy(
                         metric="memory", target="80"
                     ),
                     endpoint="http://localhost:5000/ensembler_endpoint",
                     env=[
-                        routers.client.models.EnvVar(name="env_name", value="env_val")
+                        caraml.routers.client.models.EnvVar(
+                            name="env_name", value="env_val"
+                        )
                     ],
                     image="test.io/just-a-test/turing-ensembler:0.0.0-build.0",
                     port=5120,
-                    resource_request=routers.client.models.ResourceRequest(
+                    resource_request=caraml.routers.client.models.ResourceRequest(
                         cpu_request="100m",
                         max_replica=3,
                         memory_request="512Mi",
@@ -626,16 +628,18 @@ def test_create_nop_router_ensembler_config_with_invalid_route(
             "pyfunc",
             "generic_ensembler_pyfunc_config",
             {
-                "pyfunc_config": routers.client.models.EnsemblerPyfuncConfig(
-                    autoscaling_policy=routers.client.models.AutoscalingPolicy(
+                "pyfunc_config": caraml.routers.client.models.EnsemblerPyfuncConfig(
+                    autoscaling_policy=caraml.routers.client.models.AutoscalingPolicy(
                         metric="concurrency", target="10"
                     ),
                     ensembler_id=11,
                     env=[
-                        routers.client.models.EnvVar(name="env_name", value="env_val")
+                        caraml.routers.client.models.EnvVar(
+                            name="env_name", value="env_val"
+                        )
                     ],
                     project_id=77,
-                    resource_request=routers.client.models.ResourceRequest(
+                    resource_request=caraml.routers.client.models.ResourceRequest(
                         cpu_request="100m",
                         max_replica=3,
                         memory_request="512Mi",

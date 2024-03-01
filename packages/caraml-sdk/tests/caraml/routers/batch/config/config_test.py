@@ -10,24 +10,24 @@ from caraml.routers.client.model.env_var import EnvVar
     "source,predictions,result_config,sink,expected_fn",
     [
         pytest.param(
-            routers.batch.config.source.BigQueryDataset(
+            caraml.routers.batch.config.source.BigQueryDataset(
                 table="project.table.dataset_1",
                 features=["feature_1", "feature_2", "feature_3"],
             ).join_on(columns=["feature_2", "feature_3"]),
             {
-                "model_a": routers.batch.config.source.BigQueryDataset(
+                "model_a": caraml.routers.batch.config.source.BigQueryDataset(
                     table="project.table.model_a_results",
                     features=["feature_2", "feature_3", "prediction"],
                 )
                 .join_on(["feature_2", "feature_3"])
                 .select(["prediction"])
             },
-            routers.batch.config.ResultConfig(
+            caraml.routers.batch.config.ResultConfig(
                 type=routers.batch.config.ResultType.FLOAT,
                 column_name="ensembling_result",
             ),
             (
-                routers.batch.config.sink.BigQuerySink(
+                caraml.routers.batch.config.sink.BigQuerySink(
                     table="project.table.ensembling_results",
                     staging_bucket="staging_bucket",
                     options={},
@@ -35,12 +35,12 @@ from caraml.routers.client.model.env_var import EnvVar
                 .select(["feature_1", "ensembling_result"])
                 .save_mode(routers.batch.config.sink.SaveMode.IGNORE)
             ),
-            lambda source, predictions, result_config, sink: routers.client.models.EnsemblingJobSpec(
+            lambda source, predictions, result_config, sink: caraml.routers.client.models.EnsemblingJobSpec(
                 source=source.to_open_api(),
                 predictions={
                     name: source.to_open_api() for name, source in predictions.items()
                 },
-                ensembler=routers.client.models.EnsemblingJobEnsemblerSpec(
+                ensembler=caraml.routers.client.models.EnsemblingJobEnsemblerSpec(
                     result=result_config.to_open_api()
                 ),
                 sink=sink.to_open_api(),
@@ -50,7 +50,7 @@ from caraml.routers.client.model.env_var import EnvVar
     ],
 )
 def test_job_spec(source, predictions, result_config, sink, expected_fn):
-    job_config = routers.batch.config.EnsemblingJobConfig(
+    job_config = caraml.routers.batch.config.EnsemblingJobConfig(
         source=source,
         predictions=predictions,
         result_config=result_config,
@@ -66,7 +66,7 @@ def test_job_spec(source, predictions, result_config, sink, expected_fn):
     [
         pytest.param(
             "service-account@gcp-project.iam.gserviceaccount.com",
-            routers.batch.config.ResourceRequest(
+            caraml.routers.batch.config.ResourceRequest(
                 driver_cpu_request="1",
                 driver_memory_request="1G",
                 executor_replica=5,
@@ -74,7 +74,7 @@ def test_job_spec(source, predictions, result_config, sink, expected_fn):
                 executor_memory_request="800M",
             ),
             {"SOME_VAR": "SOME_VALUE"},
-            lambda service_account, resource_request, env_vars: routers.client.models.EnsemblerInfraConfig(
+            lambda service_account, resource_request, env_vars: caraml.routers.client.models.EnsemblerInfraConfig(
                 service_account_name=service_account,
                 resources=resource_request,
                 env=[
@@ -87,7 +87,7 @@ def test_job_spec(source, predictions, result_config, sink, expected_fn):
             "service-account@gcp-project.iam.gserviceaccount.com",
             None,
             {"SOME_VAR": "SOME_VALUE"},
-            lambda service_account, resource_request, env_vars: routers.client.models.EnsemblerInfraConfig(
+            lambda service_account, resource_request, env_vars: caraml.routers.client.models.EnsemblerInfraConfig(
                 service_account_name=service_account,
                 resources=resource_request,
                 env=[
@@ -99,7 +99,7 @@ def test_job_spec(source, predictions, result_config, sink, expected_fn):
     ],
 )
 def test_infra_spec(service_account, resource_request, env_vars, expected_fn):
-    job_config = routers.batch.config.EnsemblingJobConfig(
+    job_config = caraml.routers.batch.config.EnsemblingJobConfig(
         source=None,
         predictions={},
         result_config=None,

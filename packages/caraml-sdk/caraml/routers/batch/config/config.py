@@ -1,12 +1,12 @@
 from enum import Enum
 from typing import Dict, Optional
-import caraml.routers.client.models
 from caraml.routers.client.model_utils import OpenApiModel
 from caraml.routers.client.model.env_var import EnvVar
-from .source import EnsemblingJobSource, EnsemblingJobPredictionSource
-from .sink import EnsemblingJobSink
+from caraml.routers.client.models import EnsemblingResources, EnsemblerInfraConfig, EnsemblingJobSpec, EnsemblingJobEnsemblerSpec, EnsemblingJobEnsemblerSpecResult, EnsemblingJobResultType
+from caraml.routers.batch.config.source import EnsemblingJobSource, EnsemblingJobPredictionSource
+from caraml.routers.batch.config.sink import EnsemblingJobSink
 
-ResourceRequest = caraml.routers.client.models.EnsemblingResources
+ResourceRequest = EnsemblingResources
 
 
 class ResultType(Enum):
@@ -18,7 +18,7 @@ class ResultType(Enum):
     ARRAY = 10
 
     def to_open_api(self) -> OpenApiModel:
-        return caraml.routers.client.models.EnsemblingJobResultType(self.name)
+        return EnsemblingJobResultType(self.name)
 
 
 class ResultConfig:
@@ -32,7 +32,7 @@ class ResultConfig:
         if self._item_type:
             kwargs["item_type"] = self._item_type.to_open_api()
 
-        return caraml.routers.client.models.EnsemblingJobEnsemblerSpecResult(**kwargs)
+        return EnsemblingJobEnsemblerSpecResult(**kwargs)
 
 
 class EnsemblingJobConfig:
@@ -98,26 +98,26 @@ class EnsemblingJobConfig:
     def resource_request(self) -> Optional["ResourceRequest"]:
         return self._resource_request
 
-    def job_spec(self) -> caraml.routers.client.models.EnsemblingJobSpec:
-        return caraml.routers.client.models.EnsemblingJobSpec(
+    def job_spec(self) -> EnsemblingJobSpec:
+        return EnsemblingJobSpec(
             source=self.source.to_open_api(),
             predictions={
                 name: source.to_open_api() for name, source in self.predictions.items()
             },
-            ensembler=routers.client.models.EnsemblingJobEnsemblerSpec(
+            ensembler = EnsemblingJobEnsemblerSpec(
                 result=self.result_config.to_open_api()
             ),
             sink=self.sink.to_open_api(),
         )
 
-    def infra_spec(self) -> caraml.routers.client.models.EnsemblerInfraConfig:
+    def infra_spec(self) -> EnsemblerInfraConfig:
         if self.env_vars is None:
             env_vars = []
         else:
             env_vars = [
                 EnvVar(name=name, value=value) for name, value in self.env_vars.items()
             ]
-        return caraml.routers.client.models.EnsemblerInfraConfig(
+        return EnsemblerInfraConfig(
             service_account_name=self.service_account,
             resources=self.resource_request,
             env=env_vars,

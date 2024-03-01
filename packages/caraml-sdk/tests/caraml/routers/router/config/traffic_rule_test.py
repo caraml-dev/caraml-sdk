@@ -14,8 +14,8 @@ import pytest
 @pytest.mark.parametrize(
     "field_source,expected",
     [
-        pytest.param("header", routers.client.models.FieldSource("header")),
-        pytest.param("payload", routers.client.models.FieldSource("payload")),
+        pytest.param("header", caraml.routers.client.models.FieldSource("header")),
+        pytest.param("payload", caraml.routers.client.models.FieldSource("payload")),
     ],
 )
 def test_create_field_source(field_source, expected):

@@ -12,7 +12,7 @@ import caraml.routers.client.models
             None,
             None,
             routers.client.models.BigQueryDataset(
-                bq_config=routers.client.models.BigQueryDatasetConfig(
+                bq_config=caraml.routers.client.models.BigQueryDatasetConfig(
                     table="project.table.dataset_1", features=["feature_1", "feature_2"]
                 )
             ),
@@ -24,7 +24,7 @@ import caraml.routers.client.models
             "SELECT * FROM `project.dataset.table`",
             {"viewsEnabled": "true", "materializationDataset": "my_dataset"},
             routers.client.models.BigQueryDataset(
-                bq_config=routers.client.models.BigQueryDatasetConfig(
+                bq_config=caraml.routers.client.models.BigQueryDatasetConfig(
                     query="SELECT * FROM `project.dataset.table`",
                     options={
                         "viewsEnabled": "true",

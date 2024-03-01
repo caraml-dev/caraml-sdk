@@ -14,10 +14,12 @@ from caraml.routers.router.config.log_config import (
 @pytest.mark.parametrize(
     "result_logger_type,expected",
     [
-        pytest.param("nop", routers.client.models.ResultLoggerType("nop")),
-        pytest.param("upi", routers.client.models.ResultLoggerType("upi")),
-        pytest.param("bigquery", routers.client.models.ResultLoggerType("bigquery")),
-        pytest.param("kafka", routers.client.models.ResultLoggerType("kafka")),
+        pytest.param("nop", caraml.routers.client.models.ResultLoggerType("nop")),
+        pytest.param("upi", caraml.routers.client.models.ResultLoggerType("upi")),
+        pytest.param(
+            "bigquery", caraml.routers.client.models.ResultLoggerType("bigquery")
+        ),
+        pytest.param("kafka", caraml.routers.client.models.ResultLoggerType("kafka")),
     ],
 )
 def test_create_result_logger_type(result_logger_type, expected):
@@ -32,20 +34,22 @@ def test_create_result_logger_type(result_logger_type, expected):
             ResultLoggerType.NOP,
             None,
             None,
-            routers.client.models.RouterVersionConfigLogConfig(
-                result_logger_type=routers.client.models.ResultLoggerType("nop"),
+            caraml.routers.client.models.RouterVersionConfigLogConfig(
+                result_logger_type=caraml.routers.client.models.ResultLoggerType("nop"),
             ),
         ),
         pytest.param(
             ResultLoggerType.BIGQUERY,
-            routers.client.models.BigQueryConfig(
+            caraml.routers.client.models.BigQueryConfig(
                 table="bigqueryproject.bigquerydataset.bigquerytable",
                 service_account_secret="my-little-secret",
             ),
             None,
-            routers.client.models.RouterVersionConfigLogConfig(
-                result_logger_type=routers.client.models.ResultLoggerType("bigquery"),
-                bigquery_config=routers.client.models.BigQueryConfig(
+            caraml.routers.client.models.RouterVersionConfigLogConfig(
+                result_logger_type=caraml.routers.client.models.ResultLoggerType(
+                    "bigquery"
+                ),
+                bigquery_config=caraml.routers.client.models.BigQueryConfig(
                     table="bigqueryproject.bigquerydataset.bigquerytable",
                     service_account_secret="my-little-secret",
                 ),
@@ -54,14 +58,16 @@ def test_create_result_logger_type(result_logger_type, expected):
         pytest.param(
             ResultLoggerType.KAFKA,
             None,
-            routers.client.models.KafkaConfig(
+            caraml.routers.client.models.KafkaConfig(
                 brokers="1.2.3.4:5678,9.0.1.2:3456",
                 topic="new_topics",
                 serialization_format="json",
             ),
-            routers.client.models.RouterVersionConfigLogConfig(
-                result_logger_type=routers.client.models.ResultLoggerType("kafka"),
-                kafka_config=routers.client.models.KafkaConfig(
+            caraml.routers.client.models.RouterVersionConfigLogConfig(
+                result_logger_type=caraml.routers.client.models.ResultLoggerType(
+                    "kafka"
+                ),
+                kafka_config=caraml.routers.client.models.KafkaConfig(
                     brokers="1.2.3.4:5678,9.0.1.2:3456",
                     topic="new_topics",
                     serialization_format="json",
@@ -88,9 +94,11 @@ def test_create_log_config_with_valid_params(
             "bigqueryproject.bigquerydataset.bigquerytable",
             "my-little-secret",
             None,
-            routers.client.models.RouterVersionConfigLogConfig(
-                result_logger_type=routers.client.models.ResultLoggerType("bigquery"),
-                bigquery_config=routers.client.models.BigQueryConfig(
+            caraml.routers.client.models.RouterVersionConfigLogConfig(
+                result_logger_type=caraml.routers.client.models.ResultLoggerType(
+                    "bigquery"
+                ),
+                bigquery_config=caraml.routers.client.models.BigQueryConfig(
                     table="bigqueryproject.bigquerydataset.bigquerytable",
                     service_account_secret="my-little-secret",
                     batch_load=None,
@@ -139,9 +147,11 @@ def test_create_bigquery_log_config_with_invalid_table(
             "1.2.3.4:5678,9.0.1.2:3456",
             "new_topics",
             KafkaConfigSerializationFormat.JSON,
-            routers.client.models.RouterVersionConfigLogConfig(
-                result_logger_type=routers.client.models.ResultLoggerType("kafka"),
-                kafka_config=routers.client.models.KafkaConfig(
+            caraml.routers.client.models.RouterVersionConfigLogConfig(
+                result_logger_type=caraml.routers.client.models.ResultLoggerType(
+                    "kafka"
+                ),
+                kafka_config=caraml.routers.client.models.KafkaConfig(
                     brokers="1.2.3.4:5678,9.0.1.2:3456",
                     topic="new_topics",
                     serialization_format="json",
@@ -152,9 +162,11 @@ def test_create_bigquery_log_config_with_invalid_table(
             "1.2.3.4:5678,9.0.1.2:3456",
             "new_topics",
             KafkaConfigSerializationFormat.PROTOBUF,
-            routers.client.models.RouterVersionConfigLogConfig(
-                result_logger_type=routers.client.models.ResultLoggerType("kafka"),
-                kafka_config=routers.client.models.KafkaConfig(
+            caraml.routers.client.models.RouterVersionConfigLogConfig(
+                result_logger_type=caraml.routers.client.models.ResultLoggerType(
+                    "kafka"
+                ),
+                kafka_config=caraml.routers.client.models.KafkaConfig(
                     brokers="1.2.3.4:5678,9.0.1.2:3456",
                     topic="new_topics",
                     serialization_format="protobuf",
@@ -230,7 +242,7 @@ def test_create_kafka_log_config_with_invalid_topic(
         pytest.param(
             ResultLoggerType.BIGQUERY,
             None,
-            routers.client.models.KafkaConfig(
+            caraml.routers.client.models.KafkaConfig(
                 brokers="1.2.3.4:5678,9.0.1.2:3456",
                 topic="new_topics",
                 serialization_format="json",
@@ -239,7 +251,7 @@ def test_create_kafka_log_config_with_invalid_topic(
         ),
         pytest.param(
             ResultLoggerType.KAFKA,
-            routers.client.models.BigQueryConfig(
+            caraml.routers.client.models.BigQueryConfig(
                 table="bigqueryproject.bigquerydataset.bigquerytable",
                 service_account_secret="my-little-secret",
             ),

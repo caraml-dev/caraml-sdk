@@ -27,9 +27,9 @@ from caraml.routers.router.config.router_ensembler_config import (
 from caraml.routers.router.config.common.env_var import EnvVar
 from caraml.routers.router.config.experiment_config import ExperimentConfig
 
-from tests.routers.fixtures.mlflow import mock_mlflow
-from tests.routers.fixtures.gcs import mock_gcs
-from tests.routers import utils
+from tests.caraml.routers.fixtures.mlflow import mock_mlflow
+from tests.caraml.routers.fixtures.gcs import mock_gcs
+from tests.caraml.routers import utils
 
 
 @pytest.fixture
@@ -44,7 +44,7 @@ def use_google_oauth() -> bool:
 
 @pytest.fixture
 def project():
-    return routers.client.models.Project(
+    return caraml.routers.client.models.Project(
         id=10,
         name=f"project_name",
         mlflow_tracking_url="http://localhost:5000",
@@ -69,7 +69,7 @@ def active_project(responses, project):
 @pytest.fixture
 def projects(num_projects):
     return [
-        routers.client.models.Project(
+        caraml.routers.client.models.Project(
             id=i,
             name=f"project_{i}",
             mlflow_tracking_url="http://localhost:5000",
@@ -83,7 +83,7 @@ def projects(num_projects):
 @pytest.fixture
 def generic_ensemblers(project, num_ensemblers):
     return [
-        routers.client.models.GenericEnsembler(
+        caraml.routers.client.models.GenericEnsembler(
             id=i,
             project_id=project.id,
             type=PyFuncEnsembler.TYPE,
@@ -104,10 +104,10 @@ def nop_router_ensembler_config():
 def standard_router_ensembler_config_with_experiment_mappings():
     return EnsemblerStandardConfig(
         experiment_mappings=[
-            routers.client.models.EnsemblerStandardConfigExperimentMappings(
+            caraml.routers.client.models.EnsemblerStandardConfigExperimentMappings(
                 experiment="experiment-1", treatment="treatment-1", route="route-1"
             ),
-            routers.client.models.EnsemblerStandardConfigExperimentMappings(
+            caraml.routers.client.models.EnsemblerStandardConfigExperimentMappings(
                 experiment="experiment-2", treatment="treatment-2", route="route-2"
             ),
         ],
@@ -191,7 +191,7 @@ def artifact_uri(bucket_name, experiment_id, run_id):
 
 @pytest.fixture
 def pyfunc_ensembler(project, ensembler_name, experiment_id, run_id, artifact_uri):
-    return routers.client.models.PyFuncEnsembler(
+    return caraml.routers.client.models.PyFuncEnsembler(
         id=1,
         project_id=project.id,
         type=PyFuncEnsembler.TYPE,
@@ -207,19 +207,19 @@ def pyfunc_ensembler(project, ensembler_name, experiment_id, run_id, artifact_ur
 
 @pytest.fixture
 def ensembling_job_config():
-    source = routers.batch.config.source.BigQueryDataset(
+    source = caraml.routers.batch.config.source.BigQueryDataset(
         table="project.dataset.features",
         features=["feature_1", "feature_2", "features_3"],
     ).join_on(columns=["feature_1"])
 
     predictions = {
-        "model_odd": routers.batch.config.source.BigQueryDataset(
+        "model_odd": caraml.routers.batch.config.source.BigQueryDataset(
             table="project.dataset.scores_model_odd",
             features=["feature_1", "prediction_score"],
         )
         .join_on(columns=["feature_1"])
         .select(columns=["prediction_score"]),
-        "model_even": routers.batch.config.source.BigQueryDataset(
+        "model_even": caraml.routers.batch.config.source.BigQueryDataset(
             query="""
                     SELECT feature_1, prediction_score
                     FROM `project.dataset.scores_model_even`
@@ -231,19 +231,19 @@ def ensembling_job_config():
         .select(columns=["prediction_score"]),
     }
 
-    result_config = routers.batch.config.ResultConfig(
+    result_config = caraml.routers.batch.config.ResultConfig(
         type=routers.batch.config.ResultType.INTEGER, column_name="prediction_result"
     )
 
     sink = (
-        routers.batch.config.sink.BigQuerySink(
+        caraml.routers.batch.config.sink.BigQuerySink(
             table="project.dataset.ensembling_results", staging_bucket="staging_bucket"
         )
         .save_mode(routers.batch.config.sink.SaveMode.OVERWRITE)
         .select(columns=["feature_1", "feature_2", "prediction_result"])
     )
 
-    resource_request = routers.batch.config.ResourceRequest(
+    resource_request = caraml.routers.batch.config.ResourceRequest(
         driver_cpu_request="1",
         driver_memory_request="1G",
         executor_replica=5,
@@ -251,7 +251,7 @@ def ensembling_job_config():
         executor_memory_request="800M",
     )
 
-    return routers.batch.config.EnsemblingJobConfig(
+    return caraml.routers.batch.config.EnsemblingJobConfig(
         source=source,
         predictions=predictions,
         result_config=result_config,
@@ -263,42 +263,42 @@ def ensembling_job_config():
 
 @pytest.fixture
 def generic_router_status():
-    return routers.client.models.RouterStatus(
+    return caraml.routers.client.models.RouterStatus(
         random.choice(["deployed", "undeployed", "failed", "pending"])
     )
 
 
 @pytest.fixture
 def generic_router_version_status():
-    return routers.client.models.RouterVersionStatus(
+    return caraml.routers.client.models.RouterVersionStatus(
         random.choice(["deployed", "undeployed", "failed", "pending"])
     )
 
 
 @pytest.fixture
 def generic_resource_request():
-    return routers.client.models.ResourceRequest(
+    return caraml.routers.client.models.ResourceRequest(
         min_replica=1, max_replica=3, cpu_request="100m", memory_request="512Mi"
     )
 
 
 @pytest.fixture
 def generic_log_level():
-    return routers.client.models.LogLevel(
+    return caraml.routers.client.models.LogLevel(
         random.choice(["DEBUG", "INFO", "WARN", "ERROR"])
     )
 
 
 @pytest.fixture
 def generic_result_logger_type():
-    return routers.client.models.ResultLoggerType(
+    return caraml.routers.client.models.ResultLoggerType(
         random.choice(["nop", "upi", "bigquery", "kafka"])
     )
 
 
 @pytest.fixture
 def generic_bigquery_config():
-    return routers.client.models.BigQueryConfig(
+    return caraml.routers.client.models.BigQueryConfig(
         table="bigqueryproject.bigquerydataset.bigquerytable",
         service_account_secret="my-little-secret",
     )
@@ -306,7 +306,7 @@ def generic_bigquery_config():
 
 @pytest.fixture
 def generic_kafka_config():
-    return routers.client.models.KafkaConfig(
+    return caraml.routers.client.models.KafkaConfig(
         brokers="1.2.3.4:5678,9.0.1.2:3456",
         topic="new_topics",
         serialization_format=random.choice(["json", "protobuf"]),
@@ -330,7 +330,9 @@ def log_config(
         custom_metrics_enabled=True,
         fiber_debug_log_enabled=True,
         jaeger_enabled=True,
-        result_logger_type=routers.client.models.ResultLoggerType(result_logger_type),
+        result_logger_type=caraml.routers.client.models.ResultLoggerType(
+            result_logger_type
+        ),
         bigquery_config=None,
         kafka_config=None,
     )
@@ -340,12 +342,12 @@ def log_config(
     elif request.param == "biggquery":
         params["bigquery_config"] = generic_bigquery_config
 
-    return routers.client.models.RouterVersionLogConfig(**params)
+    return caraml.routers.client.models.RouterVersionLogConfig(**params)
 
 
 @pytest.fixture
 def generic_route():
-    return routers.client.models.Route(
+    return caraml.routers.client.models.Route(
         id="model-a",
         type="PROXY",
         endpoint="http://predict_this.io/model-a",
@@ -355,7 +357,7 @@ def generic_route():
 
 @pytest.fixture
 def generic_route_grpc():
-    return routers.client.models.Route(
+    return caraml.routers.client.models.Route(
         id="model-a-grpc",
         type="PROXY",
         endpoint="grpc_host:80",
@@ -377,8 +379,8 @@ def generic_traffic_rule_condition(
 
 @pytest.fixture
 def generic_header_traffic_rule_condition():
-    return routers.client.models.TrafficRuleCondition(
-        field_source=routers.client.models.FieldSource("header"),
+    return caraml.routers.client.models.TrafficRuleCondition(
+        field_source=caraml.routers.client.models.FieldSource("header"),
         field="x-region",
         operator="in",
         values=["region-a", "region-b"],
@@ -387,8 +389,8 @@ def generic_header_traffic_rule_condition():
 
 @pytest.fixture
 def generic_payload_traffic_rule_condition():
-    return routers.client.models.TrafficRuleCondition(
-        field_source=routers.client.models.FieldSource("payload"),
+    return caraml.routers.client.models.TrafficRuleCondition(
+        field_source=caraml.routers.client.models.FieldSource("payload"),
         field="service_type.id",
         operator="in",
         values=["MyService", "YourService"],
@@ -401,7 +403,7 @@ def generic_traffic_rule(
     generic_payload_traffic_rule_condition,
     generic_route,
 ):
-    return routers.client.models.TrafficRule(
+    return caraml.routers.client.models.TrafficRule(
         name="generic-rule-name",
         conditions=[
             generic_header_traffic_rule_condition,
@@ -413,12 +415,12 @@ def generic_traffic_rule(
 
 @pytest.fixture
 def generic_ensembler_standard_config_with_experiment_mappings():
-    return routers.client.models.EnsemblerStandardConfig(
+    return caraml.routers.client.models.EnsemblerStandardConfig(
         experiment_mappings=[
-            routers.client.models.EnsemblerStandardConfigExperimentMappings(
+            caraml.routers.client.models.EnsemblerStandardConfigExperimentMappings(
                 experiment="experiment-1", treatment="treatment-1", route="route-1"
             ),
-            routers.client.models.EnsemblerStandardConfigExperimentMappings(
+            caraml.routers.client.models.EnsemblerStandardConfigExperimentMappings(
                 experiment="experiment-2", treatment="treatment-2", route="route-2"
             ),
         ],
@@ -428,26 +430,26 @@ def generic_ensembler_standard_config_with_experiment_mappings():
 
 @pytest.fixture
 def generic_ensembler_standard_config_with_route_name_path():
-    return routers.client.models.EnsemblerStandardConfig(
+    return caraml.routers.client.models.EnsemblerStandardConfig(
         route_name_path="route_name", lazy_routing=False
     )
 
 
 @pytest.fixture
 def generic_ensembler_standard_config_lazy_routing():
-    return routers.client.models.EnsemblerStandardConfig(
+    return caraml.routers.client.models.EnsemblerStandardConfig(
         route_name_path="route_name", lazy_routing=True
     )
 
 
 @pytest.fixture
 def generic_env_var():
-    return routers.client.models.EnvVar(name="env_name", value="env_val")
+    return caraml.routers.client.models.EnvVar(name="env_name", value="env_val")
 
 
 @pytest.fixture
 def generic_ensembler_docker_config(generic_resource_request, generic_env_var):
-    return routers.client.models.EnsemblerDockerConfig(
+    return caraml.routers.client.models.EnsemblerDockerConfig(
         image="test.io/just-a-test/turing-ensembler:0.0.0-build.0",
         resource_request=generic_resource_request,
         endpoint=f"http://localhost:5000/ensembler_endpoint",
@@ -455,7 +457,7 @@ def generic_ensembler_docker_config(generic_resource_request, generic_env_var):
         port=5120,
         env=[generic_env_var],
         service_account="secret-name-for-google-service-account",
-        autoscaling_policy=routers.client.models.AutoscalingPolicy(
+        autoscaling_policy=caraml.routers.client.models.AutoscalingPolicy(
             metric="memory", target="80"
         ),
     )
@@ -463,13 +465,13 @@ def generic_ensembler_docker_config(generic_resource_request, generic_env_var):
 
 @pytest.fixture
 def generic_ensembler_pyfunc_config(generic_resource_request, generic_env_var):
-    return routers.client.models.EnsemblerPyfuncConfig(
+    return caraml.routers.client.models.EnsemblerPyfuncConfig(
         project_id=77,
         ensembler_id=11,
         resource_request=generic_resource_request,
         timeout="500ms",
         env=[generic_env_var],
-        autoscaling_policy=routers.client.models.AutoscalingPolicy(
+        autoscaling_policy=caraml.routers.client.models.AutoscalingPolicy(
             metric="concurrency", target="10"
         ),
     )
@@ -483,7 +485,7 @@ def ensembler(
     generic_ensembler_pyfunc_config,
 ):
     ensembler_type = request.param
-    return routers.client.models.RouterEnsemblerConfig(
+    return caraml.routers.client.models.RouterEnsemblerConfig(
         type=ensembler_type,
         standard_config=generic_ensembler_standard_config_with_experiment_mappings,
         docker_config=generic_ensembler_docker_config,
@@ -497,7 +499,7 @@ def ensembler(
 def generic_standard_router_ensembler_config_with_experiment_mappings(
     generic_ensembler_standard_config_with_experiment_mappings,
 ):
-    return routers.client.models.RouterEnsemblerConfig(
+    return caraml.routers.client.models.RouterEnsemblerConfig(
         type="standard",
         standard_config=generic_ensembler_standard_config_with_experiment_mappings,
     )
@@ -507,7 +509,7 @@ def generic_standard_router_ensembler_config_with_experiment_mappings(
 def generic_standard_router_ensembler_config_with_route_name_path(
     generic_ensembler_standard_config_with_route_name_path,
 ):
-    return routers.client.models.RouterEnsemblerConfig(
+    return caraml.routers.client.models.RouterEnsemblerConfig(
         type="standard",
         standard_config=generic_ensembler_standard_config_with_route_name_path,
     )
@@ -517,7 +519,7 @@ def generic_standard_router_ensembler_config_with_route_name_path(
 def generic_standard_router_ensembler_config_lazy_routing(
     generic_ensembler_standard_config_lazy_routing,
 ):
-    return routers.client.models.RouterEnsemblerConfig(
+    return caraml.routers.client.models.RouterEnsemblerConfig(
         type="standard",
         standard_config=generic_ensembler_standard_config_lazy_routing,
     )
@@ -525,21 +527,21 @@ def generic_standard_router_ensembler_config_lazy_routing(
 
 @pytest.fixture
 def generic_docker_router_ensembler_config(generic_ensembler_docker_config):
-    return routers.client.models.RouterEnsemblerConfig(
+    return caraml.routers.client.models.RouterEnsemblerConfig(
         type="docker", docker_config=generic_ensembler_docker_config
     )
 
 
 @pytest.fixture
 def generic_pyfunc_router_ensembler_config(generic_ensembler_pyfunc_config):
-    return routers.client.models.RouterEnsemblerConfig(
+    return caraml.routers.client.models.RouterEnsemblerConfig(
         type="pyfunc", pyfunc_config=generic_ensembler_pyfunc_config
     )
 
 
 @pytest.fixture
 def generic_enricher(generic_resource_request, generic_env_var):
-    return routers.client.models.Enricher(
+    return caraml.routers.client.models.Enricher(
         id=1,
         image="test.io/just-a-test/turing-enricher:0.0.0-build.0",
         resource_request=generic_resource_request,
@@ -548,7 +550,7 @@ def generic_enricher(generic_resource_request, generic_env_var):
         port=5180,
         env=[generic_env_var],
         service_account="service-account",
-        autoscaling_policy=routers.client.models.AutoscalingPolicy(
+        autoscaling_policy=caraml.routers.client.models.AutoscalingPolicy(
             metric="rps", target="100"
         ),
     )
@@ -570,7 +572,9 @@ def experiment_config(request):
     else:
         config = None
 
-    return routers.client.models.ExperimentConfig(type=experiment_type, config=config)
+    return caraml.routers.client.models.ExperimentConfig(
+        type=experiment_type, config=config
+    )
 
 
 @pytest.fixture
@@ -584,11 +588,11 @@ def generic_router_version(
     ensembler,
     generic_enricher,
 ):
-    return routers.client.models.RouterVersion(
+    return caraml.routers.client.models.RouterVersion(
         id=2,
         created_at=datetime.now() + timedelta(seconds=20),
         updated_at=datetime.now() + timedelta(seconds=20),
-        router=routers.client.models.Router(
+        router=caraml.routers.client.models.Router(
             environment_name="test_env", name="test_router"
         ),
         version=1,
@@ -602,11 +606,11 @@ def generic_router_version(
         resource_request=generic_resource_request,
         timeout="100ms",
         log_config=log_config,
-        protocol=routers.client.models.Protocol("HTTP_JSON"),
+        protocol=caraml.routers.client.models.Protocol("HTTP_JSON"),
         ensembler=ensembler,
         monitoring_url="https://lookhere.io/",
         enricher=generic_enricher,
-        autoscaling_policy=routers.client.models.AutoscalingPolicy(
+        autoscaling_policy=caraml.routers.client.models.AutoscalingPolicy(
             metric="cpu", target="90"
         ),
     )
@@ -666,7 +670,7 @@ def generic_router_config(docker_router_ensembler_config):
 
 @pytest.fixture
 def generic_router(project, generic_router_status, generic_router_version):
-    return routers.client.models.RouterDetails(
+    return caraml.routers.client.models.RouterDetails(
         id=1,
         name="router-1",
         endpoint="http://localhost:5000/endpoint_1",
@@ -685,7 +689,7 @@ def generic_routers(
     project, num_routers, generic_router_status, generic_router_version
 ):
     return [
-        routers.client.models.RouterDetails(
+        caraml.routers.client.models.RouterDetails(
             id=i,
             name=f"router-{i}",
             endpoint=f"http://localhost:5000/endpoint_{i}",
@@ -703,9 +707,9 @@ def generic_routers(
 
 @pytest.fixture
 def generic_events():
-    return routers.client.models.RouterEvents(
+    return caraml.routers.client.models.RouterEvents(
         events=[
-            routers.client.models.Event(
+            caraml.routers.client.models.Event(
                 created_at=datetime.now(),
                 updated_at=datetime.now() + timedelta(seconds=1000),
                 event_type="info",
@@ -714,7 +718,7 @@ def generic_events():
                 stage="deployment success",
                 version=5,
             ),
-            routers.client.models.Event(
+            caraml.routers.client.models.Event(
                 created_at=datetime.now() + timedelta(seconds=1500),
                 updated_at=datetime.now() + timedelta(seconds=2500),
                 event_type="error",

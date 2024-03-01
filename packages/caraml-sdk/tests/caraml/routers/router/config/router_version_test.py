@@ -6,7 +6,7 @@ import caraml.routers as turing
 import caraml.routers.client.models
 from caraml.routers.router.config.router_version import RouterVersion
 
-from tests.routers import utils
+from tests.caraml.routers import utils
 
 responses = Responses("requests.packages.urllib3")
 

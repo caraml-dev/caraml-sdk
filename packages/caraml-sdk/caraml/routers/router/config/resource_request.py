@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import ClassVar
 
-import caraml.routers.client.models
+from caraml.routers.client.models import ResourceRequest
 from caraml.routers.client.model_utils import OpenApiModel
 
 
@@ -62,7 +62,7 @@ class ResourceRequest:
             )
 
     def to_open_api(self) -> OpenApiModel:
-        return caraml.routers.client.models.ResourceRequest(
+        return ResourceRequest(
             min_replica=self.min_replica,
             max_replica=self.max_replica,
             cpu_request=self.cpu_request,
