@@ -1,7 +1,7 @@
 # flake8: noqa
 
 # import apis into api package
-from mlp.client.api.application_api import ApplicationApi
-from mlp.client.api.project_api import ProjectApi
-from mlp.client.api.secret_api import SecretApi
-from mlp.client.api.secret_storage_api import SecretStorageApi
+from caraml.mlp.client.api.application_api import ApplicationApi
+from caraml.mlp.client.api.project_api import ProjectApi
+from caraml.mlp.client.api.secret_api import SecretApi
+from caraml.mlp.client.api.secret_storage_api import SecretStorageApi

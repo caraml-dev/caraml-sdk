@@ -14,14 +14,16 @@
 
 
 # import models into model package
-from mlp.client.models.application import Application
-from mlp.client.models.application_config import ApplicationConfig
-from mlp.client.models.application_config_navigation_inner import (
+from caraml.mlp.client.models.application import Application
+from caraml.mlp.client.models.application_config import ApplicationConfig
+from caraml.mlp.client.models.application_config_navigation_inner import (
     ApplicationConfigNavigationInner,
 )
-from mlp.client.models.label import Label
-from mlp.client.models.project import Project
-from mlp.client.models.secret import Secret
-from mlp.client.models.secret_storage import SecretStorage
-from mlp.client.models.secret_storage_config import SecretStorageConfig
-from mlp.client.models.vault_secret_storage_config import VaultSecretStorageConfig
+from caraml.mlp.client.models.label import Label
+from caraml.mlp.client.models.project import Project
+from caraml.mlp.client.models.secret import Secret
+from caraml.mlp.client.models.secret_storage import SecretStorage
+from caraml.mlp.client.models.secret_storage_config import SecretStorageConfig
+from caraml.mlp.client.models.vault_secret_storage_config import (
+    VaultSecretStorageConfig,
+)

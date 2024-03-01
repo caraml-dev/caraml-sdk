@@ -27,11 +27,11 @@ from pydantic import StrictInt
 
 from typing import List, Optional
 
-from mlp.client.models.secret_storage import SecretStorage
+from caraml.mlp.client.models.secret_storage import SecretStorage
 
-from mlp.client.api_client import ApiClient
-from mlp.client.api_response import ApiResponse
-from mlp.client.rest import RESTResponseType
+from caraml.mlp.client.api_client import ApiClient
+from caraml.mlp.client.api_response import ApiResponse
+from caraml.mlp.client.rest import RESTResponseType
 
 
 class SecretStorageApi:

@@ -20,7 +20,9 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel
-from mlp.client.models.vault_secret_storage_config import VaultSecretStorageConfig
+from caraml.mlp.client.models.vault_secret_storage_config import (
+    VaultSecretStorageConfig,
+)
 
 try:
     from typing import Self

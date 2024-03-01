@@ -19,7 +19,7 @@ import ssl
 
 import urllib3
 
-from mlp.client.exceptions import ApiException, ApiValueError
+from caraml.mlp.client.exceptions import ApiException, ApiValueError
 
 RESTResponseType = urllib3.HTTPResponse
 

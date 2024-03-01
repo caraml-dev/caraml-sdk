@@ -17,31 +17,33 @@
 __version__ = "1.0.0"
 
 # import apis into sdk package
-from mlp.client.api.application_api import ApplicationApi
-from mlp.client.api.project_api import ProjectApi
-from mlp.client.api.secret_api import SecretApi
-from mlp.client.api.secret_storage_api import SecretStorageApi
+from caraml.mlp.client.api.application_api import ApplicationApi
+from caraml.mlp.client.api.project_api import ProjectApi
+from caraml.mlp.client.api.secret_api import SecretApi
+from caraml.mlp.client.api.secret_storage_api import SecretStorageApi
 
 # import ApiClient
-from mlp.client.api_response import ApiResponse
-from mlp.client.api_client import ApiClient
-from mlp.client.configuration import Configuration
-from mlp.client.exceptions import OpenApiException
-from mlp.client.exceptions import ApiTypeError
-from mlp.client.exceptions import ApiValueError
-from mlp.client.exceptions import ApiKeyError
-from mlp.client.exceptions import ApiAttributeError
-from mlp.client.exceptions import ApiException
+from caraml.mlp.client.api_response import ApiResponse
+from caraml.mlp.client.api_client import ApiClient
+from caraml.mlp.client.configuration import Configuration
+from caraml.mlp.client.exceptions import OpenApiException
+from caraml.mlp.client.exceptions import ApiTypeError
+from caraml.mlp.client.exceptions import ApiValueError
+from caraml.mlp.client.exceptions import ApiKeyError
+from caraml.mlp.client.exceptions import ApiAttributeError
+from caraml.mlp.client.exceptions import ApiException
 
 # import models into sdk package
-from mlp.client.models.application import Application
-from mlp.client.models.application_config import ApplicationConfig
-from mlp.client.models.application_config_navigation_inner import (
+from caraml.mlp.client.models.application import Application
+from caraml.mlp.client.models.application_config import ApplicationConfig
+from caraml.mlp.client.models.application_config_navigation_inner import (
     ApplicationConfigNavigationInner,
 )
-from mlp.client.models.label import Label
-from mlp.client.models.project import Project
-from mlp.client.models.secret import Secret
-from mlp.client.models.secret_storage import SecretStorage
-from mlp.client.models.secret_storage_config import SecretStorageConfig
-from mlp.client.models.vault_secret_storage_config import VaultSecretStorageConfig
+from caraml.mlp.client.models.label import Label
+from caraml.mlp.client.models.project import Project
+from caraml.mlp.client.models.secret import Secret
+from caraml.mlp.client.models.secret_storage import SecretStorage
+from caraml.mlp.client.models.secret_storage_config import SecretStorageConfig
+from caraml.mlp.client.models.vault_secret_storage_config import (
+    VaultSecretStorageConfig,
+)

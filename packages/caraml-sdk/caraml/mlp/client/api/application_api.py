@@ -25,11 +25,11 @@ except ImportError:
 
 from typing import List
 
-from mlp.client.models.application import Application
+from caraml.mlp.client.models.application import Application
 
-from mlp.client.api_client import ApiClient
-from mlp.client.api_response import ApiResponse
-from mlp.client.rest import RESTResponseType
+from caraml.mlp.client.api_client import ApiClient
+from caraml.mlp.client.api_response import ApiResponse
+from caraml.mlp.client.rest import RESTResponseType
 
 
 class ApplicationApi:

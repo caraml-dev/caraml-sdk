@@ -20,7 +20,7 @@ import json
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr, field_validator
-from mlp.client.models.secret_storage_config import SecretStorageConfig
+from caraml.mlp.client.models.secret_storage_config import SecretStorageConfig
 
 try:
     from typing import Self
