@@ -27,7 +27,7 @@ on:
       openapi_config:
         required: true
         description: "openapi generator config file"
-        default: "openapi-sdk-codegen.yaml"      
+        default: "openapi-sdk-codegen.yaml"
   repository_dispatch:
 
 jobs:
@@ -82,10 +82,10 @@ jobs:
           echo 'VERSION = "${{ github.event.inputs.ref }}"' > packages/caraml-sdk/caraml/${{ github.event.inputs.module }}/version.py
           rm -rf ${{ github.event.inputs.module }}
           rm -rf python-client
-      
+
       - name: Lint ${{ github.event.inputs.module }}/client
         run: |
-          cd packages/caraml-sdk/caraml
+          cd packages/caraml-sdk
           make lint
 
       - name: Create Pull Request
