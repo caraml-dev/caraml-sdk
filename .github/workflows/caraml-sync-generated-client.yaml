@@ -77,15 +77,15 @@ jobs:
 
       - name: Sync changes to ${{ github.event.inputs.module }}/client
         run: |
-          rm -rf packages/caraml/${{ github.event.inputs.module }}/client
-          cp -r python-client/${{ github.event.inputs.module }}/client packages/caraml/${{ github.event.inputs.module }}
-          echo 'VERSION = "${{ github.event.inputs.ref }}"' > packages/caraml/${{ github.event.inputs.module }}/version.py
+          rm -rf packages/caraml-sdk/caraml/${{ github.event.inputs.module }}/client
+          cp -r python-client/${{ github.event.inputs.module }}/client packages/caraml-sdk/caraml/${{ github.event.inputs.module }}
+          echo 'VERSION = "${{ github.event.inputs.ref }}"' > packages/caraml-sdk/caraml/${{ github.event.inputs.module }}/version.py
           rm -rf ${{ github.event.inputs.module }}
           rm -rf python-client
       
       - name: Lint ${{ github.event.inputs.module }}/client
         run: |
-          cd packages/caraml
+          cd packages/caraml-sdk/caraml
           make lint
 
       - name: Create Pull Request
