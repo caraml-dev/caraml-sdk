@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
-from mlp.client.models.application_config_navigation_inner import (
+from caraml.mlp.client.models.application_config_navigation_inner import (
     ApplicationConfigNavigationInner,
 )
 

@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
-from mlp.client.models.application_config import ApplicationConfig
+from caraml.mlp.client.models.application_config import ApplicationConfig
 
 try:
     from typing import Self
