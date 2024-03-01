@@ -20,9 +20,9 @@ import json
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel, StrictInt, StrictStr
-from models.client.models.custom_predictor import CustomPredictor
-from models.client.models.model_schema import ModelSchema
-from models.client.models.version_endpoint import VersionEndpoint
+from caraml.models.client.models.custom_predictor import CustomPredictor
+from caraml.models.client.models.model_schema import ModelSchema
+from caraml.models.client.models.version_endpoint import VersionEndpoint
 
 try:
     from typing import Self

@@ -56,8 +56,8 @@ def test_predict():
 def test_list_ensemblers(
     turing_api, active_project, generic_ensemblers, use_google_oauth
 ):
-    # TODO: replace global active session in turing to pass this assert when 
-    #       running all tests. Else, the active project will be set for the global session object. 
+    # TODO: replace global active session in turing to pass this assert when
+    #       running all tests. Else, the active project will be set for the global session object.
     # with pytest.raises(
     #     Exception,
     #     match=re.escape("Active project isn't set, use set_project(...) to set it"),

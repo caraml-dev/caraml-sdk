@@ -20,7 +20,7 @@ import json
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr
-from models.client.models.label import Label
+from caraml.models.client.models.label import Label
 
 try:
     from typing import Self

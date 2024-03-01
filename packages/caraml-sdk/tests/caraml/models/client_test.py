@@ -114,8 +114,9 @@ def test_get_project(mock_url, mock_oauth, use_google_oauth):
     assert isinstance(p.updated_at, datetime.datetime)
 
 
-# test case moved to mlp client. 
+# test case moved to mlp client.
 # def test_create_invalid_project_name(mock_url, api_client, mock_oauth, use_google_oauth)
+
 
 @responses.activate
 def test_create_model(mock_url, api_client, mock_oauth, use_google_oauth):

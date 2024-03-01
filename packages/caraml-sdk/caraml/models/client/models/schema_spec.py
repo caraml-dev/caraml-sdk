@@ -20,8 +20,8 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
-from models.client.models.model_prediction_output import ModelPredictionOutput
-from models.client.models.value_type import ValueType
+from caraml.models.client.models.model_prediction_output import ModelPredictionOutput
+from caraml.models.client.models.value_type import ValueType
 
 try:
     from typing import Self

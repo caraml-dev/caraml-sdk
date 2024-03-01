@@ -20,8 +20,8 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel
-from models.client.models.model_prediction_config import ModelPredictionConfig
-from models.client.models.protocol import Protocol
+from caraml.models.client.models.model_prediction_config import ModelPredictionConfig
+from caraml.models.client.models.protocol import Protocol
 
 try:
     from typing import Self

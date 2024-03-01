@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr
-from models.client.models.model_endpoint_alert_condition import (
+from caraml.models.client.models.model_endpoint_alert_condition import (
     ModelEndpointAlertCondition,
 )
 

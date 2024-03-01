@@ -20,10 +20,10 @@ import json
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr
-from models.client.models.endpoint_status import EndpointStatus
-from models.client.models.environment import Environment
-from models.client.models.model_endpoint_rule import ModelEndpointRule
-from models.client.models.protocol import Protocol
+from caraml.models.client.models.endpoint_status import EndpointStatus
+from caraml.models.client.models.environment import Environment
+from caraml.models.client.models.model_endpoint_rule import ModelEndpointRule
+from caraml.models.client.models.protocol import Protocol
 
 try:
     from typing import Self
@@ -136,7 +136,7 @@ class ModelEndpoint(BaseModel):
         return _obj
 
 
-from models.client.models.model import Model
+from caraml.models.client.models.model import Model
 
 # TODO: Rewrite to not use raise_errors
 ModelEndpoint.model_rebuild(raise_errors=False)

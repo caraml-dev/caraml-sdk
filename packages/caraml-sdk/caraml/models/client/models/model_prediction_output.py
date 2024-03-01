@@ -20,9 +20,11 @@ import re  # noqa: F401
 
 from typing import Any, List, Optional
 from pydantic import BaseModel, Field, StrictStr, ValidationError, field_validator
-from models.client.models.binary_classification_output import BinaryClassificationOutput
-from models.client.models.ranking_output import RankingOutput
-from models.client.models.regression_output import RegressionOutput
+from caraml.models.client.models.binary_classification_output import (
+    BinaryClassificationOutput,
+)
+from caraml.models.client.models.ranking_output import RankingOutput
+from caraml.models.client.models.regression_output import RegressionOutput
 from typing import Union, Any, List, TYPE_CHECKING, Optional, Dict
 from typing_extensions import Literal
 from pydantic import StrictStr, Field

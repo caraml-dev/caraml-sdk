@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr, field_validator
-from models.client.models.prediction_job_config_model_result import (
+from caraml.models.client.models.prediction_job_config_model_result import (
     PredictionJobConfigModelResult,
 )
 

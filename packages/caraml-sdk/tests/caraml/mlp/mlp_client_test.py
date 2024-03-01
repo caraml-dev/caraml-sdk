@@ -1,4 +1,3 @@
-
 import datetime
 import pytest
 
@@ -44,9 +43,7 @@ def test_get_project(mock_url, mock_oauth, use_google_oauth):
 
 
 @responses.activate
-def test_get_invalid_project_name(
-    mock_url, api_client, mock_oauth, use_google_oauth
-):
+def test_get_invalid_project_name(mock_url, api_client, mock_oauth, use_google_oauth):
     project_name = "invalidProjectName"
 
     client = MLPClient(mock_url, use_google_oauth=use_google_oauth)
@@ -55,23 +52,28 @@ def test_get_invalid_project_name(
     with pytest.raises(Exception):
         assert client.get_project(project_name)
 
+
 @responses.activate
 def test_list_projects(mock_url, mock_oauth, use_google_oauth):
     projects = [
-        Project.from_dict({
-                        "id": 0,
-                        "name": "my-project",
-                        "mlflow_tracking_url": "http://mlflow.api.dev",
-                        "created_at": created_at,
-                        "updated_at": updated_at
-                      }),
-        Project.from_dict({
-                        "id": 1,
-                        "name": "my-project-1",
-                        "mlflow_tracking_url": "http://mlflow.api.dev",
-                        "created_at": created_at,
-                        "updated_at": updated_at
-                      })
+        Project.from_dict(
+            {
+                "id": 0,
+                "name": "my-project",
+                "mlflow_tracking_url": "http://mlflow.api.dev",
+                "created_at": created_at,
+                "updated_at": updated_at,
+            }
+        ),
+        Project.from_dict(
+            {
+                "id": 1,
+                "name": "my-project-1",
+                "mlflow_tracking_url": "http://mlflow.api.dev",
+                "created_at": created_at,
+                "updated_at": updated_at,
+            }
+        ),
     ]
     responses.add(
         method="GET",

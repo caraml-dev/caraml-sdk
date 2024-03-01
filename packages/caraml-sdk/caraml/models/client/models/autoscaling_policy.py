@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Union
 from pydantic import BaseModel, StrictFloat, StrictInt
-from models.client.models.metrics_type import MetricsType
+from caraml.models.client.models.metrics_type import MetricsType
 
 try:
     from typing import Self

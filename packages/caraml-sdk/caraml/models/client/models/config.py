@@ -20,12 +20,12 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
-from models.client.models.env_var import EnvVar
-from models.client.models.prediction_job_config import PredictionJobConfig
-from models.client.models.prediction_job_resource_request import (
+from caraml.models.client.models.env_var import EnvVar
+from caraml.models.client.models.prediction_job_config import PredictionJobConfig
+from caraml.models.client.models.prediction_job_resource_request import (
     PredictionJobResourceRequest,
 )
-from models.client.models.resource_request import ResourceRequest
+from caraml.models.client.models.resource_request import ResourceRequest
 
 try:
     from typing import Self

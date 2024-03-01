@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel
-from models.client.models.result_type import ResultType
+from caraml.models.client.models.result_type import ResultType
 
 try:
     from typing import Self

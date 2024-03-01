@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
-from models.client.models.model_prediction_output_class import (
+from caraml.models.client.models.model_prediction_output_class import (
     ModelPredictionOutputClass,
 )
 

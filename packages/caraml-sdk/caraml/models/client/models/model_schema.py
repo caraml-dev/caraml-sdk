@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt
-from models.client.models.schema_spec import SchemaSpec
+from caraml.models.client.models.schema_spec import SchemaSpec
 
 try:
     from typing import Self

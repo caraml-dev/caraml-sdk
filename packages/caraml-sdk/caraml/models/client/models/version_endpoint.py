@@ -20,15 +20,15 @@ import json
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictBool, StrictInt, StrictStr
-from models.client.models.autoscaling_policy import AutoscalingPolicy
-from models.client.models.deployment_mode import DeploymentMode
-from models.client.models.endpoint_status import EndpointStatus
-from models.client.models.env_var import EnvVar
-from models.client.models.environment import Environment
-from models.client.models.logger import Logger
-from models.client.models.protocol import Protocol
-from models.client.models.resource_request import ResourceRequest
-from models.client.models.transformer import Transformer
+from caraml.models.client.models.autoscaling_policy import AutoscalingPolicy
+from caraml.models.client.models.deployment_mode import DeploymentMode
+from caraml.models.client.models.endpoint_status import EndpointStatus
+from caraml.models.client.models.env_var import EnvVar
+from caraml.models.client.models.environment import Environment
+from caraml.models.client.models.logger import Logger
+from caraml.models.client.models.protocol import Protocol
+from caraml.models.client.models.resource_request import ResourceRequest
+from caraml.models.client.models.transformer import Transformer
 
 try:
     from typing import Self

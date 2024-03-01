@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictStr
-from models.client.models.save_mode import SaveMode
+from caraml.models.client.models.save_mode import SaveMode
 
 try:
     from typing import Self

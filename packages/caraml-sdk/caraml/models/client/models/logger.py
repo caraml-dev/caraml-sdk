@@ -20,8 +20,8 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel
-from models.client.models.logger_config import LoggerConfig
-from models.client.models.prediction_logger_config import PredictionLoggerConfig
+from caraml.models.client.models.logger_config import LoggerConfig
+from caraml.models.client.models.prediction_logger_config import PredictionLoggerConfig
 
 try:
     from typing import Self

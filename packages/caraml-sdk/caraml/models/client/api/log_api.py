@@ -28,9 +28,9 @@ from pydantic import StrictStr, field_validator
 from typing import Optional
 
 
-from models.client.api_client import ApiClient
-from models.client.api_response import ApiResponse
-from models.client.rest import RESTResponseType
+from caraml.models.client.api_client import ApiClient
+from caraml.models.client.api_response import ApiResponse
+from caraml.models.client.rest import RESTResponseType
 
 
 class LogApi:

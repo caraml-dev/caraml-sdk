@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List, Optional, Union
 from pydantic import BaseModel
-from models.client.models.operation_tracing import OperationTracing
+from caraml.models.client.models.operation_tracing import OperationTracing
 
 try:
     from typing import Self

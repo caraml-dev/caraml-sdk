@@ -20,7 +20,7 @@ import json
 
 from typing import Any, ClassVar, Dict, List
 from pydantic import BaseModel, StrictBool
-from models.client.models.logger_mode import LoggerMode
+from caraml.models.client.models.logger_mode import LoggerMode
 
 try:
     from typing import Self

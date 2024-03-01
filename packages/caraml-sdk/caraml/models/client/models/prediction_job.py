@@ -20,8 +20,8 @@ import json
 from datetime import datetime
 from typing import Any, ClassVar, Dict, List, Optional
 from pydantic import BaseModel, StrictInt, StrictStr
-from models.client.models.config import Config
-from models.client.models.environment import Environment
+from caraml.models.client.models.config import Config
+from caraml.models.client.models.environment import Environment
 
 try:
     from typing import Self
