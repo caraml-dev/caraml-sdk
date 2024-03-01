@@ -11,7 +11,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from routers.client.model_utils import (  # noqa: F401
+from caraml.routers.client.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,8 +28,8 @@ from routers.client.model_utils import (  # noqa: F401
 
 
 def lazy_import():
-    from routers.client.model.ensembling_resources import EnsemblingResources
-    from routers.client.model.env_var import EnvVar
+    from caraml.routers.client.model.ensembling_resources import EnsemblingResources
+    from caraml.routers.client.model.env_var import EnvVar
 
     globals()["EnsemblingResources"] = EnsemblingResources
     globals()["EnvVar"] = EnvVar

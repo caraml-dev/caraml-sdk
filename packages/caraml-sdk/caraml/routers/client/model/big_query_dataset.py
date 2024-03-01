@@ -11,7 +11,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from routers.client.model_utils import (  # noqa: F401
+from caraml.routers.client.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,9 +28,13 @@ from routers.client.model_utils import (  # noqa: F401
 
 
 def lazy_import():
-    from routers.client.model.big_query_dataset_all_of import BigQueryDatasetAllOf
-    from routers.client.model.big_query_dataset_config import BigQueryDatasetConfig
-    from routers.client.model.generic_dataset import GenericDataset
+    from caraml.routers.client.model.big_query_dataset_all_of import (
+        BigQueryDatasetAllOf,
+    )
+    from caraml.routers.client.model.big_query_dataset_config import (
+        BigQueryDatasetConfig,
+    )
+    from caraml.routers.client.model.generic_dataset import GenericDataset
 
     globals()["BigQueryDatasetAllOf"] = BigQueryDatasetAllOf
     globals()["BigQueryDatasetConfig"] = BigQueryDatasetConfig

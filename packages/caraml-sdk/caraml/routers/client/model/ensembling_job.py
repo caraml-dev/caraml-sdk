@@ -11,7 +11,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from routers.client.model_utils import (  # noqa: F401
+from caraml.routers.client.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,9 +28,9 @@ from routers.client.model_utils import (  # noqa: F401
 
 
 def lazy_import():
-    from routers.client.model.ensembler_config import EnsemblerConfig
-    from routers.client.model.ensembler_infra_config import EnsemblerInfraConfig
-    from routers.client.model.ensembler_job_status import EnsemblerJobStatus
+    from caraml.routers.client.model.ensembler_config import EnsemblerConfig
+    from caraml.routers.client.model.ensembler_infra_config import EnsemblerInfraConfig
+    from caraml.routers.client.model.ensembler_job_status import EnsemblerJobStatus
 
     globals()["EnsemblerConfig"] = EnsemblerConfig
     globals()["EnsemblerInfraConfig"] = EnsemblerInfraConfig

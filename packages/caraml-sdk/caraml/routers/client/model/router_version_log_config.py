@@ -11,7 +11,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from routers.client.model_utils import (  # noqa: F401
+from caraml.routers.client.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,10 +28,10 @@ from routers.client.model_utils import (  # noqa: F401
 
 
 def lazy_import():
-    from routers.client.model.big_query_config import BigQueryConfig
-    from routers.client.model.kafka_config import KafkaConfig
-    from routers.client.model.log_level import LogLevel
-    from routers.client.model.result_logger_type import ResultLoggerType
+    from caraml.routers.client.model.big_query_config import BigQueryConfig
+    from caraml.routers.client.model.kafka_config import KafkaConfig
+    from caraml.routers.client.model.log_level import LogLevel
+    from caraml.routers.client.model.result_logger_type import ResultLoggerType
 
     globals()["BigQueryConfig"] = BigQueryConfig
     globals()["KafkaConfig"] = KafkaConfig
