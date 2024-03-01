@@ -11,7 +11,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from routers.client.model_utils import (  # noqa: F401
+from caraml.routers.client.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,10 +28,10 @@ from routers.client.model_utils import (  # noqa: F401
 
 
 def lazy_import():
-    from routers.client.model.big_query_sink_all_of import BigQuerySinkAllOf
-    from routers.client.model.big_query_sink_config import BigQuerySinkConfig
-    from routers.client.model.generic_sink import GenericSink
-    from routers.client.model.save_mode import SaveMode
+    from caraml.routers.client.model.big_query_sink_all_of import BigQuerySinkAllOf
+    from caraml.routers.client.model.big_query_sink_config import BigQuerySinkConfig
+    from caraml.routers.client.model.generic_sink import GenericSink
+    from caraml.routers.client.model.save_mode import SaveMode
 
     globals()["BigQuerySinkAllOf"] = BigQuerySinkAllOf
     globals()["BigQuerySinkConfig"] = BigQuerySinkConfig

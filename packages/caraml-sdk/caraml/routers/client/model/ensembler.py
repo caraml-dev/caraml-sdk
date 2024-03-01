@@ -11,7 +11,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from routers.client.model_utils import (  # noqa: F401
+from caraml.routers.client.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,8 +28,8 @@ from routers.client.model_utils import (  # noqa: F401
 
 
 def lazy_import():
-    from routers.client.model.ensembler_type import EnsemblerType
-    from routers.client.model.py_func_ensembler import PyFuncEnsembler
+    from caraml.routers.client.model.ensembler_type import EnsemblerType
+    from caraml.routers.client.model.py_func_ensembler import PyFuncEnsembler
 
     globals()["EnsemblerType"] = EnsemblerType
     globals()["PyFuncEnsembler"] = PyFuncEnsembler

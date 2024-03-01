@@ -20,10 +20,10 @@ from urllib.parse import quote
 from urllib3.fields import RequestField
 
 
-from routers.client import rest
-from routers.client.configuration import Configuration
-from routers.client.exceptions import ApiTypeError, ApiValueError, ApiException
-from routers.client.model_utils import (
+from caraml.routers.client import rest
+from caraml.routers.client.configuration import Configuration
+from caraml.routers.client.exceptions import ApiTypeError, ApiValueError, ApiException
+from caraml.routers.client.model_utils import (
     ModelNormal,
     ModelSimple,
     ModelComposed,

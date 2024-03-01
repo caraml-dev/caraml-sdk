@@ -13,15 +13,15 @@
 __version__ = "1.0.0"
 
 # import ApiClient
-from routers.client.api_client import ApiClient
+from caraml.routers.client.api_client import ApiClient
 
 # import Configuration
-from routers.client.configuration import Configuration
+from caraml.routers.client.configuration import Configuration
 
 # import exceptions
-from routers.client.exceptions import OpenApiException
-from routers.client.exceptions import ApiAttributeError
-from routers.client.exceptions import ApiTypeError
-from routers.client.exceptions import ApiValueError
-from routers.client.exceptions import ApiKeyError
-from routers.client.exceptions import ApiException
+from caraml.routers.client.exceptions import OpenApiException
+from caraml.routers.client.exceptions import ApiAttributeError
+from caraml.routers.client.exceptions import ApiTypeError
+from caraml.routers.client.exceptions import ApiValueError
+from caraml.routers.client.exceptions import ApiKeyError
+from caraml.routers.client.exceptions import ApiException

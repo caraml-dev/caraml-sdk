@@ -11,8 +11,8 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from routers.client.api_client import ApiClient, Endpoint as _Endpoint
-from routers.client.model_utils import (  # noqa: F401
+from caraml.routers.client.api_client import ApiClient, Endpoint as _Endpoint
+from caraml.routers.client.model_utils import (  # noqa: F401
     check_allowed_values,
     check_validations,
     date,
@@ -21,12 +21,12 @@ from routers.client.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types,
 )
-from routers.client.model.ensembler_job_status import EnsemblerJobStatus
-from routers.client.model.ensembling_job import EnsemblingJob
-from routers.client.model.ensembling_job_paginated_results import (
+from caraml.routers.client.model.ensembler_job_status import EnsemblerJobStatus
+from caraml.routers.client.model.ensembling_job import EnsemblingJob
+from caraml.routers.client.model.ensembling_job_paginated_results import (
     EnsemblingJobPaginatedResults,
 )
-from routers.client.model.id_object import IdObject
+from caraml.routers.client.model.id_object import IdObject
 
 
 class EnsemblingJobApi(object):

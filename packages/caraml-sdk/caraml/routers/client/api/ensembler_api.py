@@ -11,8 +11,8 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from routers.client.api_client import ApiClient, Endpoint as _Endpoint
-from routers.client.model_utils import (  # noqa: F401
+from caraml.routers.client.api_client import ApiClient, Endpoint as _Endpoint
+from caraml.routers.client.model_utils import (  # noqa: F401
     check_allowed_values,
     check_validations,
     date,
@@ -21,10 +21,12 @@ from routers.client.model_utils import (  # noqa: F401
     none_type,
     validate_and_convert_types,
 )
-from routers.client.model.ensembler import Ensembler
-from routers.client.model.ensembler_type import EnsemblerType
-from routers.client.model.ensemblers_paginated_results import EnsemblersPaginatedResults
-from routers.client.model.id_object import IdObject
+from caraml.routers.client.model.ensembler import Ensembler
+from caraml.routers.client.model.ensembler_type import EnsemblerType
+from caraml.routers.client.model.ensemblers_paginated_results import (
+    EnsemblersPaginatedResults,
+)
+from caraml.routers.client.model.id_object import IdObject
 
 
 class EnsemblerApi(object):

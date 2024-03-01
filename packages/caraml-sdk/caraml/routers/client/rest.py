@@ -17,7 +17,7 @@ from urllib.parse import urlencode
 
 import urllib3
 
-from routers.client.exceptions import (
+from caraml.routers.client.exceptions import (
     ApiException,
     UnauthorizedException,
     ForbiddenException,

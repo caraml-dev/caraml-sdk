@@ -11,7 +11,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from routers.client.model_utils import (  # noqa: F401
+from caraml.routers.client.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,18 +28,20 @@ from routers.client.model_utils import (  # noqa: F401
 
 
 def lazy_import():
-    from routers.client.model.autoscaling_policy import AutoscalingPolicy
-    from routers.client.model.default_traffic_rule import DefaultTrafficRule
-    from routers.client.model.enricher import Enricher
-    from routers.client.model.experiment_config import ExperimentConfig
-    from routers.client.model.protocol import Protocol
-    from routers.client.model.resource_request import ResourceRequest
-    from routers.client.model.route import Route
-    from routers.client.model.router_ensembler_config import RouterEnsemblerConfig
-    from routers.client.model.router_version_config_log_config import (
+    from caraml.routers.client.model.autoscaling_policy import AutoscalingPolicy
+    from caraml.routers.client.model.default_traffic_rule import DefaultTrafficRule
+    from caraml.routers.client.model.enricher import Enricher
+    from caraml.routers.client.model.experiment_config import ExperimentConfig
+    from caraml.routers.client.model.protocol import Protocol
+    from caraml.routers.client.model.resource_request import ResourceRequest
+    from caraml.routers.client.model.route import Route
+    from caraml.routers.client.model.router_ensembler_config import (
+        RouterEnsemblerConfig,
+    )
+    from caraml.routers.client.model.router_version_config_log_config import (
         RouterVersionConfigLogConfig,
     )
-    from routers.client.model.traffic_rule import TrafficRule
+    from caraml.routers.client.model.traffic_rule import TrafficRule
 
     globals()["AutoscalingPolicy"] = AutoscalingPolicy
     globals()["DefaultTrafficRule"] = DefaultTrafficRule

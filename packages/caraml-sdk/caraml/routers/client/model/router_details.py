@@ -11,7 +11,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from routers.client.model_utils import (  # noqa: F401
+from caraml.routers.client.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,10 +28,10 @@ from routers.client.model_utils import (  # noqa: F401
 
 
 def lazy_import():
-    from routers.client.model.router import Router
-    from routers.client.model.router_details_all_of import RouterDetailsAllOf
-    from routers.client.model.router_status import RouterStatus
-    from routers.client.model.router_version import RouterVersion
+    from caraml.routers.client.model.router import Router
+    from caraml.routers.client.model.router_details_all_of import RouterDetailsAllOf
+    from caraml.routers.client.model.router_status import RouterStatus
+    from caraml.routers.client.model.router_version import RouterVersion
 
     globals()["Router"] = Router
     globals()["RouterDetailsAllOf"] = RouterDetailsAllOf

@@ -11,7 +11,7 @@
 import re  # noqa: F401
 import sys  # noqa: F401
 
-from routers.client.model_utils import (  # noqa: F401
+from caraml.routers.client.model_utils import (  # noqa: F401
     ApiTypeError,
     ModelComposed,
     ModelNormal,
@@ -28,11 +28,11 @@ from routers.client.model_utils import (  # noqa: F401
 
 
 def lazy_import():
-    from routers.client.model.dataset import Dataset
-    from routers.client.model.ensembling_job_prediction_source_all_of import (
+    from caraml.routers.client.model.dataset import Dataset
+    from caraml.routers.client.model.ensembling_job_prediction_source_all_of import (
         EnsemblingJobPredictionSourceAllOf,
     )
-    from routers.client.model.ensembling_job_source import EnsemblingJobSource
+    from caraml.routers.client.model.ensembling_job_source import EnsemblingJobSource
 
     globals()["Dataset"] = Dataset
     globals()["EnsemblingJobPredictionSourceAllOf"] = EnsemblingJobPredictionSourceAllOf
