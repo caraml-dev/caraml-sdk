@@ -1,7 +1,7 @@
 import pytest
-import routers.client.models
-from routers.client.exceptions import ApiValueError
-from routers.router.config.log_config import (
+import caraml.routers.client.models
+from caraml.routers.client.exceptions import ApiValueError
+from caraml.routers.router.config.log_config import (
     ResultLoggerType,
     LogConfig,
     BigQueryLogConfig,

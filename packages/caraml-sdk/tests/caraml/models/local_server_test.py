@@ -18,10 +18,10 @@ import socket
 import time
 from multiprocessing import Process
 
-import models as merlin
+import caraml.models as merlin
 import pytest
 import requests
-from models.model import ModelType
+from caraml.models.model import ModelType
 
 request_json = {"instances": [[2.8, 1.0, 6.8, 0.4], [3.1, 1.4, 4.5, 1.6]]}
 

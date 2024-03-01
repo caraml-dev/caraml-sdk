@@ -1,19 +1,19 @@
 import pytest
 
-from routers.router.config.route import (
+from caraml.routers.router.config.route import (
     Route,
     DuplicateRouteException,
     InvalidRouteException,
 )
-from routers.router.config.router_config import RouterConfig
-from routers.router.config.log_config import (
+from caraml.routers.router.config.router_config import RouterConfig
+from caraml.routers.router.config.log_config import (
     LogConfig,
     ResultLoggerType,
     InvalidResultLoggerTypeAndConfigCombination,
 )
-from routers.router.config.autoscaling_policy import DEFAULT_AUTOSCALING_POLICY
-from routers.router.config.resource_request import ResourceRequest
-from routers.router.config.router_ensembler_config import (
+from caraml.routers.router.config.autoscaling_policy import DEFAULT_AUTOSCALING_POLICY
+from caraml.routers.router.config.resource_request import ResourceRequest
+from caraml.routers.router.config.router_ensembler_config import (
     DockerRouterEnsemblerConfig,
     NopRouterEnsemblerConfig,
     StandardRouterEnsemblerConfig,
@@ -131,15 +131,17 @@ def test_set_router_config_base_ensembler(
     ensembler = RouterEnsemblerConfig(
         type=type,
         nop_config=None if nop_config is None else request.getfixturevalue(nop_config),
-        standard_config=None
-        if standard_config is None
-        else request.getfixturevalue(standard_config),
-        docker_config=None
-        if docker_config is None
-        else request.getfixturevalue(docker_config),
-        pyfunc_config=None
-        if pyfunc_config is None
-        else request.getfixturevalue(pyfunc_config),
+        standard_config=(
+            None
+            if standard_config is None
+            else request.getfixturevalue(standard_config)
+        ),
+        docker_config=(
+            None if docker_config is None else request.getfixturevalue(docker_config)
+        ),
+        pyfunc_config=(
+            None if pyfunc_config is None else request.getfixturevalue(pyfunc_config)
+        ),
     )
     actual.ensembler = ensembler
     assert isinstance(actual.ensembler, expected_class)

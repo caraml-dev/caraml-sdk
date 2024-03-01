@@ -1,9 +1,9 @@
 import pytest
-from routers.router.config.autoscaling_policy import DEFAULT_AUTOSCALING_POLICY
-from routers.router.config.enricher import Enricher
-from routers.router.config.common.env_var import EnvVar
-from routers.router.config.autoscaling_policy import AutoscalingPolicy
-from routers.router.config.resource_request import ResourceRequest
+from caraml.routers.router.config.autoscaling_policy import DEFAULT_AUTOSCALING_POLICY
+from caraml.routers.router.config.enricher import Enricher
+from caraml.routers.router.config.common.env_var import EnvVar
+from caraml.routers.router.config.autoscaling_policy import AutoscalingPolicy
+from caraml.routers.router.config.resource_request import ResourceRequest
 
 
 @pytest.mark.parametrize(

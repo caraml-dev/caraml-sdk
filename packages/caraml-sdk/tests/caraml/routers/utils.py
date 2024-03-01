@@ -1,8 +1,8 @@
 from datetime import date, datetime
 from dateutil.tz import tzutc
-from routers.client import model_utils
+from caraml.routers.client import model_utils
 
-import routers as turing
+import caraml.routers as turing
 
 
 def json_serializer(o):

@@ -17,23 +17,28 @@ import types
 from unittest.mock import patch
 import datetime
 
-import models.client as client
-import models.client as cl
-import models as merlin
+import caraml.models.client as client
+import caraml.models.client as cl
+import caraml.models as merlin
 import pytest
-from models import AutoscalingPolicy, DeploymentMode, MetricsType
-from models.autoscaling import (
+from caraml.models import AutoscalingPolicy, DeploymentMode, MetricsType
+from caraml.models.autoscaling import (
     RAW_DEPLOYMENT_DEFAULT_AUTOSCALING_POLICY,
     SERVERLESS_DEFAULT_AUTOSCALING_POLICY,
 )
-from models.batch.config import PredictionJobConfig, ResultType
-from models.batch.job import JobStatus
-from models.batch.sink import BigQuerySink, SaveMode
-from models.batch.source import BigQuerySource
-from models.endpoint import VersionEndpoint
-from models.model import ModelType
-from models.protocol import Protocol
-from models.model_schema import ModelSchema, InferenceSchema, ValueType, RankingOutput
+from caraml.models.batch.config import PredictionJobConfig, ResultType
+from caraml.models.batch.job import JobStatus
+from caraml.models.batch.sink import BigQuerySink, SaveMode
+from caraml.models.batch.source import BigQuerySource
+from caraml.models.endpoint import VersionEndpoint
+from caraml.models.model import ModelType
+from caraml.models.protocol import Protocol
+from caraml.models.model_schema import (
+    ModelSchema,
+    InferenceSchema,
+    ValueType,
+    RankingOutput,
+)
 from urllib3_mock import Responses
 
 responses = Responses("requests.packages.urllib3")
@@ -1016,8 +1021,8 @@ class TestModelVersion:
         )
         assert actual_req["config"]["service_account_name"] == "my-service-account"
 
-    @patch("models.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
-    @patch("models.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
+    @patch("caraml.models.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
+    @patch("caraml.models.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
     @responses.activate
     def test_create_prediction_job_with_retry_failed(self, version):
         job_1.status = "pending"
@@ -1066,8 +1071,8 @@ class TestModelVersion:
             assert j.name == job_1.name
             assert len(responses.calls) == 6
 
-    @patch("models.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
-    @patch("models.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
+    @patch("caraml.models.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
+    @patch("caraml.models.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
     @responses.activate
     def test_create_prediction_job_with_retry_success(self, version):
         job_1.status = "pending"
@@ -1169,8 +1174,8 @@ class TestModelVersion:
         # unpatch
         responses._find_match = types.MethodType(_find_match, responses)
 
-    @patch("models.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
-    @patch("models.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
+    @patch("caraml.models.model.DEFAULT_PREDICTION_JOB_DELAY", 0)
+    @patch("caraml.models.model.DEFAULT_PREDICTION_JOB_RETRY_DELAY", 0)
     @responses.activate
     def test_create_prediction_job_with_retry_pending_then_failed(self, version):
         job_1.status = "pending"
@@ -1763,6 +1768,6 @@ def test_process_conda_env():
     assert "python=3.7.*" in new_conda["dependencies"]
 
     # test file version
-    conda = "tests/models/pyfunc/env.yaml"
+    conda = "tests/caraml/models/pyfunc/env.yaml"
     new_conda = merlin.model._process_conda_env(conda_env=conda, python_version="3.7.*")
     assert "python=3.7.*" in new_conda["dependencies"]

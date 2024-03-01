@@ -7,8 +7,8 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 
 
-from mlp.client import ApiClient, Configuration
-from mlp.client.models import Project
+from caraml.mlp.client import ApiClient, Configuration
+from caraml.mlp.client.models import Project
 
 
 # From the documentation (https://docs.pytest.org/en/7.1.x/reference/reference.html#pytest.hookspec.pytest_configure):

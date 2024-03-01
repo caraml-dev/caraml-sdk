@@ -185,7 +185,7 @@ class Ensembler(ApiObject):
         :return: list of ensemblers
         """
 
-        response = routers.active_session.list_ensemblers(
+        response = caraml.routers.active_session.list_ensemblers(
             ensembler_type=ensembler_type, page=page, page_size=page_size
         )
         return [Ensembler.from_open_api(item) for item in response.results]
@@ -254,7 +254,7 @@ class PyFuncEnsembler(Ensembler):
     def _save(self):
         self.__dict__.update(
             PyFuncEnsembler.from_open_api(
-                routers.active_session.update_ensembler(self.to_open_api())
+                caraml.routers.active_session.update_ensembler(self.to_open_api())
             ).__dict__
         )
 
@@ -277,7 +277,7 @@ class PyFuncEnsembler(Ensembler):
             (or directories containing file dependencies). These files are prepended to the
             system path before the ensembler is loaded
         :param artifacts: (optional) dictionary of artifact that will be stored together
-            with the model. This will be passed to routers.ensembler.PyFunc.initialize().
+            with the model. This will be passed to caraml.routers.ensembler.PyFunc.initialize().
             Example: {"config" : "config/staging.yaml"}
         """
 
@@ -285,7 +285,7 @@ class PyFuncEnsembler(Ensembler):
         # This check is done in the SDK to prevent the creation of new mlflow run
 
         # check any active router version
-        relatedRouterVer = routers.Router.list_router_versions_with_filter(
+        relatedRouterVer = caraml.routers.Router.list_router_versions_with_filter(
             ensembler_id=self._id, status=[RouterStatus.PENDING], is_current=False
         )
         if len(relatedRouterVer) > 0:
@@ -313,7 +313,7 @@ class PyFuncEnsembler(Ensembler):
             self._name = name
 
         if ensembler_instance:
-            project_name = routers.active_session.active_project.name
+            project_name = caraml.routers.active_session.active_project.name
             mlflow.set_experiment(
                 experiment_name=self._experiment_name(project_name, self.name)
             )
@@ -358,7 +358,7 @@ class PyFuncEnsembler(Ensembler):
         :return: instance of pyfunc ensembler
         """
         return PyFuncEnsembler.from_open_api(
-            routers.active_session.get_ensembler(ensembler_id)
+            caraml.routers.active_session.get_ensembler(ensembler_id)
         )
 
     @classmethod
@@ -373,7 +373,7 @@ class PyFuncEnsembler(Ensembler):
 
         :return: list of pyfunc ensemblers
         """
-        response = routers.active_session.list_ensemblers(
+        response = caraml.routers.active_session.list_ensemblers(
             ensembler_type=PyFuncEnsembler.TYPE, page=page, page_size=page_size
         )
         return [PyFuncEnsembler.from_open_api(item) for item in response.results]
@@ -398,12 +398,12 @@ class PyFuncEnsembler(Ensembler):
             (or directories containing file dependencies). These files are prepended to the
             system path before the ensembler is loaded
         :param artifacts: dictionary of artifact that will be stored together with the model.
-            This will be passed to routers.ensembler.PyFunc.initialize().
+            This will be passed to caraml.routers.ensembler.PyFunc.initialize().
             Example: {"config" : "config/staging.yaml"}
 
         :return: saved instance of PyFuncEnsembler
         """
-        project_name = routers.active_session.active_project.name
+        project_name = caraml.routers.active_session.active_project.name
         mlflow.set_experiment(experiment_name=cls._experiment_name(project_name, name))
         conda_env, python_version = _process_conda_env(conda_env)
 
@@ -428,7 +428,7 @@ class PyFuncEnsembler(Ensembler):
         mlflow.end_run()
 
         return PyFuncEnsembler.from_open_api(
-            routers.active_session.create_ensembler(ensembler.to_open_api())
+            caraml.routers.active_session.create_ensembler(ensembler.to_open_api())
         )
 
     @classmethod
@@ -439,7 +439,9 @@ class PyFuncEnsembler(Ensembler):
         :param ensembler_id: ensembler's id. Ensembler must be on the active project
         :return: ensembler_id of the deleted ensembler
         """
-        return routers.active_session.delete_ensembler(ensembler_id=ensembler_id).id
+        return caraml.routers.active_session.delete_ensembler(
+            ensembler_id=ensembler_id
+        ).id
 
 
 def _process_conda_env(

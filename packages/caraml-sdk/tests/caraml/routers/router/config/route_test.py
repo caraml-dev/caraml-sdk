@@ -1,10 +1,10 @@
 import pytest
-from routers.router.config.route import (
+from caraml.routers.router.config.route import (
     MissingServiceMethodException,
     Route,
     InvalidUrlException,
 )
-from routers.router.config.router_config import RouterConfig, Protocol
+from caraml.routers.router.config.router_config import RouterConfig, Protocol
 
 
 @pytest.mark.parametrize(

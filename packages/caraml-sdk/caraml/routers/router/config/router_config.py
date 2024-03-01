@@ -40,7 +40,7 @@ class Protocol(Enum):
     HTTP = "HTTP_JSON"
 
     def to_open_api(self) -> OpenApiModel:
-        return routers.client.models.Protocol(self.value)
+        return caraml.routers.client.models.Protocol(self.value)
 
 
 @dataclass
@@ -367,7 +367,7 @@ class RouterConfig:
                 # The Turing API does not handle an ensembler type "nop" - it must be left unset.
                 del kwargs["ensembler"]
 
-        return routers.client.models.RouterConfig(
+        return caraml.routers.client.models.RouterConfig(
             environment_name=self.environment_name,
             name=self.name,
             config=routers.client.models.RouterVersionConfig(
@@ -397,7 +397,7 @@ class RouterConfig:
         for route in self.routes:
             if route.id == default_route_id:
                 return
-        raise routers.router.config.route.InvalidRouteException(
+        raise caraml.routers.router.config.route.InvalidRouteException(
             f"Default route id {default_route_id} is not registered in the routes."
         )
 
@@ -405,7 +405,7 @@ class RouterConfig:
         route_id_counter = Counter(route.id for route in self.routes)
         most_common_route_id, max_frequency = route_id_counter.most_common(n=1)[0]
         if max_frequency > 1:
-            raise routers.router.config.route.DuplicateRouteException(
+            raise caraml.routers.router.config.route.DuplicateRouteException(
                 f"Routes with duplicate ids are specified for this traffic rule. Duplicate id: {most_common_route_id}"
             )
 
@@ -415,7 +415,7 @@ class RouterConfig:
             isinstance(self.ensembler, NopRouterEnsemblerConfig)
             or isinstance(self.ensembler, StandardRouterEnsemblerConfig)
         ):
-            raise routers.router.config.router_ensembler_config.InvalidEnsemblerTypeException(
+            raise caraml.routers.router.config.router_ensembler_config.InvalidEnsemblerTypeException(
                 f"UPI router only supports no ensembler or standard ensembler."
             )
 

@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from models.validation import validate_model_dir
-from models.model import ModelType
+from caraml.models.validation import validate_model_dir
+from caraml.models.model import ModelType
 import pytest
 import re
 
@@ -23,28 +23,28 @@ import re
     [
         (
             ModelType.PYTORCH,
-            "tests/models/invalid-models/pytorch-model-invalid",
-            "tests/models/invalid-models/pytorch-model-invalid/config/config.properties is not found",
+            "tests/caraml/models/invalid-models/pytorch-model-invalid",
+            "tests/caraml/models/invalid-models/pytorch-model-invalid/config/config.properties is not found",
         ),
         (
             ModelType.TENSORFLOW,
-            "tests/models/invalid-models/tensorflow-model-invalid",
-            "tests/models/invalid-models/tensorflow-model-invalid/1/saved_model.pb is not found",
+            "tests/caraml/models/invalid-models/tensorflow-model-invalid",
+            "tests/caraml/models/invalid-models/tensorflow-model-invalid/1/saved_model.pb is not found",
         ),
         (
             ModelType.SKLEARN,
-            "tests/models/invalid-models/sklearn-model-invalid",
-            "['model.joblib'] is not found in tests/models/invalid-models/sklearn-model-invalid",
+            "tests/caraml/models/invalid-models/sklearn-model-invalid",
+            "['model.joblib'] is not found in tests/caraml/models/invalid-models/sklearn-model-invalid",
         ),
         (
             ModelType.XGBOOST,
-            "tests/models/invalid-models/xgboost-model-invalid",
-            "['model.bst'] is not found in tests/models/invalid-models/xgboost-model-invalid",
+            "tests/caraml/models/invalid-models/xgboost-model-invalid",
+            "['model.bst'] is not found in tests/caraml/models/invalid-models/xgboost-model-invalid",
         ),
         (
             ModelType.ONNX,
-            "tests/models/invalid-models/onnx-model-invalid",
-            "['model.onnx'] is not found in tests/models/invalid-models/onnx-model-invalid",
+            "tests/caraml/models/invalid-models/onnx-model-invalid",
+            "['model.onnx'] is not found in tests/caraml/models/invalid-models/onnx-model-invalid",
         ),
     ],
 )
@@ -57,11 +57,11 @@ def test_invalid_model_dir(model_type, model_dir, message):
 @pytest.mark.parametrize(
     "model_type,model_dir",
     [
-        (ModelType.PYTORCH, "tests/models/pytorch-model/pytorch-sample"),
-        (ModelType.TENSORFLOW, "tests/models/tensorflow-model"),
-        (ModelType.SKLEARN, "tests/models/sklearn-model"),
-        (ModelType.XGBOOST, "tests/models/xgboost-model"),
-        (ModelType.ONNX, "tests/models/onnx-model"),
+        (ModelType.PYTORCH, "tests/caraml/models/pytorch-model/pytorch-sample"),
+        (ModelType.TENSORFLOW, "tests/caraml/models/tensorflow-model"),
+        (ModelType.SKLEARN, "tests/caraml/models/sklearn-model"),
+        (ModelType.XGBOOST, "tests/caraml/models/xgboost-model"),
+        (ModelType.ONNX, "tests/caraml/models/onnx-model"),
     ],
 )
 @pytest.mark.unit

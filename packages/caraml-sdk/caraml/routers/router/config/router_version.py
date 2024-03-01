@@ -71,7 +71,7 @@ class RouterVersion(RouterConfig):
         :param router_id: router id of the router for which this router version will be created
         :return: the new router version
         """
-        version = routers.active_session.create_router_version(
+        version = caraml.routers.active_session.create_router_version(
             router_id=router_id, router_version_config=config.to_open_api().config
         )
         return RouterVersion(

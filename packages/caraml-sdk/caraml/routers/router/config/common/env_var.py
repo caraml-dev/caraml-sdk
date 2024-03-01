@@ -29,4 +29,4 @@ class EnvVar:
         self._value = value
 
     def to_open_api(self) -> OpenApiModel:
-        return routers.client.models.EnvVar(name=self.name, value=self.value)
+        return caraml.routers.client.models.EnvVar(name=self.name, value=self.value)

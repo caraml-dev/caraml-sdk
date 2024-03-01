@@ -32,5 +32,5 @@ class Project(ApiObject):
 
     @classmethod
     def list(cls, name: Optional[str] = None) -> List["Project"]:
-        response = routers.active_session.list_projects(name=name)
+        response = caraml.routers.active_session.list_projects(name=name)
         return [Project.from_open_api(item) for item in response]

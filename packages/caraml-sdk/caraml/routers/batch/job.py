@@ -94,7 +94,7 @@ class EnsemblingJob(ApiObject):
         """
         self.__dict__.update(
             EnsemblingJob.from_open_api(
-                routers.active_session.get_ensembling_job(job_id=self.id)
+                caraml.routers.active_session.get_ensembling_job(job_id=self.id)
             ).__dict__
         )
 
@@ -102,7 +102,7 @@ class EnsemblingJob(ApiObject):
         """
         Terminates this ensembling job
         """
-        routers.active_session.terminate_ensembling_job(job_id=self.id)
+        caraml.routers.active_session.terminate_ensembling_job(job_id=self.id)
         self.refresh()
 
     @classmethod
@@ -111,7 +111,7 @@ class EnsemblingJob(ApiObject):
         Fetch ensembling job by its ID
         """
         return EnsemblingJob.from_open_api(
-            routers.active_session.get_ensembling_job(job_id=job_id)
+            caraml.routers.active_session.get_ensembling_job(job_id=job_id)
         )
 
     @classmethod
@@ -123,20 +123,20 @@ class EnsemblingJob(ApiObject):
         :param config: configuration of ensembling job
         :return: instance of ensembling job
         """
-        job_config = routers.client.models.EnsemblerConfig(
+        job_config = caraml.routers.client.models.EnsemblerConfig(
             version=EnsemblingJob._VERSION,
             kind=routers.client.models.EnsemblerConfigKind(EnsemblingJob._KIND),
             spec=config.job_spec(),
         )
 
-        job = routers.client.models.EnsemblingJob(
+        job = caraml.routers.client.models.EnsemblingJob(
             ensembler_id=ensembler_id,
             infra_config=config.infra_spec(),
             job_config=job_config,
         )
 
         return EnsemblingJob.from_open_api(
-            routers.active_session.submit_ensembling_job(job=job)
+            caraml.routers.active_session.submit_ensembling_job(job=job)
         )
 
     @classmethod
@@ -159,10 +159,10 @@ class EnsemblingJob(ApiObject):
         mapped_statuses = None
         if status:
             mapped_statuses = [
-                routers.client.models.EnsemblerJobStatus(s.value) for s in status
+                caraml.routers.client.models.EnsemblerJobStatus(s.value) for s in status
             ]
 
-        response = routers.active_session.list_ensembling_jobs(
+        response = caraml.routers.active_session.list_ensembling_jobs(
             status=mapped_statuses,
             page=page,
             page_size=page_size,

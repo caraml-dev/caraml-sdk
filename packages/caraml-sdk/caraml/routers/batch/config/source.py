@@ -23,7 +23,7 @@ class EnsemblingJobSource:
         return self._join_on
 
     def to_open_api(self) -> OpenApiModel:
-        return routers.client.models.EnsemblingJobSource(
+        return caraml.routers.client.models.EnsemblingJobSource(
             dataset=self.dataset.to_open_api(), join_on=self.join_on
         )
 
@@ -51,7 +51,7 @@ class EnsemblingJobPredictionSource(EnsemblingJobSource):
         return self._columns
 
     def to_open_api(self) -> OpenApiModel:
-        return routers.client.models.EnsemblingJobPredictionSource(
+        return caraml.routers.client.models.EnsemblingJobPredictionSource(
             dataset=self.dataset.to_open_api(),
             join_on=self.join_on,
             columns=self.columns,
@@ -125,7 +125,7 @@ class BigQueryDataset(Dataset):
         return self._options
 
     def to_open_api(self) -> OpenApiModel:
-        return routers.client.models.BigQueryDataset(
+        return caraml.routers.client.models.BigQueryDataset(
             bq_config=routers.client.models.BigQueryDatasetConfig(**self.to_dict())
         )
 

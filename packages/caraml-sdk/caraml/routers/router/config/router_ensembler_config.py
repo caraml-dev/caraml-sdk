@@ -56,7 +56,7 @@ class EnsemblerStandardConfig:
     def experiment_mappings(
         self,
         experiment_mappings: List[
-            routers.client.models.EnsemblerStandardConfigExperimentMappings
+            caraml.routers.client.models.EnsemblerStandardConfigExperimentMappings
         ],
     ):
         self._experiment_mappings = experiment_mappings
@@ -92,7 +92,7 @@ class EnsemblerStandardConfig:
         if self.route_name_path is not None:
             kwargs["route_name_path"] = self.route_name_path
 
-        return routers.client.models.EnsemblerStandardConfig(
+        return caraml.routers.client.models.EnsemblerStandardConfig(
             lazy_routing=self.lazy_routing,
             **kwargs,
         )
@@ -113,8 +113,8 @@ class RouterEnsemblerConfig(DataObject):
     id: int = None
     nop_config: EnsemblerNopConfig = None
     standard_config: EnsemblerStandardConfig = None
-    docker_config: routers.client.models.EnsemblerDockerConfig = None
-    pyfunc_config: routers.client.models.EnsemblerPyfuncConfig = None
+    docker_config: caraml.routers.client.models.EnsemblerDockerConfig = None
+    pyfunc_config: caraml.routers.client.models.EnsemblerPyfuncConfig = None
 
     def __init__(
         self,
@@ -122,8 +122,8 @@ class RouterEnsemblerConfig(DataObject):
         id: int = None,
         nop_config: EnsemblerNopConfig = None,
         standard_config: EnsemblerStandardConfig = None,
-        docker_config: routers.client.models.EnsemblerDockerConfig = None,
-        pyfunc_config: routers.client.models.EnsemblerPyfuncConfig = None,
+        docker_config: caraml.routers.client.models.EnsemblerDockerConfig = None,
+        pyfunc_config: caraml.routers.client.models.EnsemblerPyfuncConfig = None,
         **kwargs,
     ):
         self.id = id
@@ -166,7 +166,7 @@ class RouterEnsemblerConfig(DataObject):
                 and standard_config["experiment_mappings"] is not None
             ):
                 openapi_standard_config["experiment_mappings"] = [
-                    routers.client.models.EnsemblerStandardConfigExperimentMappings(
+                    caraml.routers.client.models.EnsemblerStandardConfigExperimentMappings(
                         **mapping
                     )
                     for mapping in standard_config["experiment_mappings"]
@@ -176,64 +176,72 @@ class RouterEnsemblerConfig(DataObject):
             self._standard_config = standard_config
 
     @property
-    def docker_config(self) -> routers.client.models.EnsemblerDockerConfig:
+    def docker_config(self) -> caraml.routers.client.models.EnsemblerDockerConfig:
         return self._docker_config
 
     @docker_config.setter
-    def docker_config(self, docker_config: routers.client.models.EnsemblerDockerConfig):
-        if isinstance(docker_config, routers.client.models.EnsemblerDockerConfig):
+    def docker_config(
+        self, docker_config: caraml.routers.client.models.EnsemblerDockerConfig
+    ):
+        if isinstance(
+            docker_config, caraml.routers.client.models.EnsemblerDockerConfig
+        ):
             self._docker_config = docker_config
         elif isinstance(docker_config, dict):
             openapi_docker_config = docker_config.copy()
-            openapi_docker_config[
-                "resource_request"
-            ] = routers.client.models.ResourceRequest(
-                **openapi_docker_config["resource_request"]
+            openapi_docker_config["resource_request"] = (
+                caraml.routers.client.models.ResourceRequest(
+                    **openapi_docker_config["resource_request"]
+                )
             )
             openapi_docker_config["autoscaling_policy"] = (
-                routers.client.models.AutoscalingPolicy(
+                caraml.routers.client.models.AutoscalingPolicy(
                     **openapi_docker_config["autoscaling_policy"]
                 )
                 if "autoscaling_policy" in openapi_docker_config
                 else DEFAULT_AUTOSCALING_POLICY.to_open_api()
             )
             openapi_docker_config["env"] = [
-                routers.client.models.EnvVar(**env_var)
+                caraml.routers.client.models.EnvVar(**env_var)
                 for env_var in docker_config["env"]
             ]
-            self._docker_config = routers.client.models.EnsemblerDockerConfig(
+            self._docker_config = caraml.routers.client.models.EnsemblerDockerConfig(
                 **openapi_docker_config
             )
         else:
             self._docker_config = docker_config
 
     @property
-    def pyfunc_config(self) -> routers.client.models.EnsemblerPyfuncConfig:
+    def pyfunc_config(self) -> caraml.routers.client.models.EnsemblerPyfuncConfig:
         return self._pyfunc_config
 
     @pyfunc_config.setter
-    def pyfunc_config(self, pyfunc_config: routers.client.models.EnsemblerPyfuncConfig):
-        if isinstance(pyfunc_config, routers.client.models.EnsemblerPyfuncConfig):
+    def pyfunc_config(
+        self, pyfunc_config: caraml.routers.client.models.EnsemblerPyfuncConfig
+    ):
+        if isinstance(
+            pyfunc_config, caraml.routers.client.models.EnsemblerPyfuncConfig
+        ):
             self._pyfunc_config = pyfunc_config
         elif isinstance(pyfunc_config, dict):
             openapi_pyfunc_config = pyfunc_config.copy()
-            openapi_pyfunc_config[
-                "resource_request"
-            ] = routers.client.models.ResourceRequest(
-                **pyfunc_config["resource_request"]
+            openapi_pyfunc_config["resource_request"] = (
+                caraml.routers.client.models.ResourceRequest(
+                    **pyfunc_config["resource_request"]
+                )
             )
             openapi_pyfunc_config["autoscaling_policy"] = (
-                routers.client.models.AutoscalingPolicy(
+                caraml.routers.client.models.AutoscalingPolicy(
                     **openapi_pyfunc_config["autoscaling_policy"]
                 )
                 if "autoscaling_policy" in openapi_pyfunc_config
                 else DEFAULT_AUTOSCALING_POLICY.to_open_api()
             )
             openapi_pyfunc_config["env"] = [
-                routers.client.models.EnvVar(**env_var)
+                caraml.routers.client.models.EnvVar(**env_var)
                 for env_var in pyfunc_config["env"]
             ]
-            self._pyfunc_config = routers.client.models.EnsemblerPyfuncConfig(
+            self._pyfunc_config = caraml.routers.client.models.EnsemblerPyfuncConfig(
                 **openapi_pyfunc_config
             )
         else:
@@ -262,7 +270,9 @@ class RouterEnsemblerConfig(DataObject):
         if self.pyfunc_config is not None:
             kwargs["pyfunc_config"] = self.pyfunc_config
 
-        return routers.client.models.RouterEnsemblerConfig(type=self.type, **kwargs)
+        return caraml.routers.client.models.RouterEnsemblerConfig(
+            type=self.type, **kwargs
+        )
 
 
 @dataclass
@@ -344,7 +354,7 @@ class PyfuncRouterEnsemblerConfig(RouterEnsemblerConfig):
 
     @classmethod
     def from_config(
-        cls, config: routers.client.models.EnsemblerPyfuncConfig
+        cls, config: caraml.routers.client.models.EnsemblerPyfuncConfig
     ) -> "PyfuncRouterEnsemblerConfig":
         return cls(
             project_id=config.project_id,
@@ -370,7 +380,7 @@ class PyfuncRouterEnsemblerConfig(RouterEnsemblerConfig):
     def to_open_api(self) -> OpenApiModel:
         assert all(isinstance(env_var, EnvVar) for env_var in self.env)
 
-        self.pyfunc_config = routers.client.models.EnsemblerPyfuncConfig(
+        self.pyfunc_config = caraml.routers.client.models.EnsemblerPyfuncConfig(
             project_id=self.project_id,
             ensembler_id=self.ensembler_id,
             resource_request=self.resource_request.to_open_api(),
@@ -482,7 +492,7 @@ class DockerRouterEnsemblerConfig(RouterEnsemblerConfig):
 
     @classmethod
     def from_config(
-        cls, config: routers.client.models.EnsemblerDockerConfig
+        cls, config: caraml.routers.client.models.EnsemblerDockerConfig
     ) -> "DockerRouterEnsemblerConfig":
         return cls(
             image=config.image,
@@ -514,7 +524,7 @@ class DockerRouterEnsemblerConfig(RouterEnsemblerConfig):
         if self.service_account is not None:
             kwargs["service_account"] = self.service_account
 
-        self.docker_config = routers.client.models.EnsemblerDockerConfig(
+        self.docker_config = caraml.routers.client.models.EnsemblerDockerConfig(
             image=self.image,
             resource_request=self.resource_request.to_open_api(),
             autoscaling_policy=self.autoscaling_policy.to_open_api(),
@@ -618,7 +628,7 @@ class StandardRouterEnsemblerConfig(RouterEnsemblerConfig):
         self.standard_config = EnsemblerStandardConfig(
             experiment_mappings=(
                 [
-                    routers.client.models.EnsemblerStandardConfigExperimentMappings(
+                    caraml.routers.client.models.EnsemblerStandardConfigExperimentMappings(
                         **experiment_mapping
                     )
                     for experiment_mapping in self.experiment_mappings

@@ -17,7 +17,7 @@ class SaveMode(Enum):
     IGNORE = 3
 
     def to_open_api(self) -> OpenApiModel:
-        return routers.client.models.SaveMode(self.name)
+        return caraml.routers.client.models.SaveMode(self.name)
 
 
 class EnsemblingJobSink:
@@ -92,7 +92,7 @@ class BigQuerySink(EnsemblingJobSink):
         return self._options
 
     def to_open_api(self) -> OpenApiModel:
-        return routers.client.models.BigQuerySink(
+        return caraml.routers.client.models.BigQuerySink(
             save_mode=self._save_mode.to_open_api(),
             columns=self._columns,
             bq_config=routers.client.models.BigQuerySinkConfig(

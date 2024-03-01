@@ -85,7 +85,7 @@ class ApiObject(DataObject):
           Example:
 
           class Project(ApiObject):
-            _OPEN_API_SPEC = routers.client.models.Project
+            _OPEN_API_SPEC = caraml.routers.client.models.Project
         or
         - be annotated with ApiObjectSpec annotation
           Example:

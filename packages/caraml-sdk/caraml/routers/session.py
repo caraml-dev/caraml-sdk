@@ -363,7 +363,9 @@ class TuringSession:
         )
 
     @require_active_project
-    def get_router_events(self, router_id: int) -> routers.client.models.RouterEvents:
+    def get_router_events(
+        self, router_id: int
+    ) -> caraml.routers.client.models.RouterEvents:
         """
         Fetch deployment events associated with the router with the given router ID
         """

@@ -1,8 +1,8 @@
 import datetime
 import pytest
 
-from mlp.mlp_client import MLPClient
-from mlp.client.models import Project
+from caraml.mlp.mlp_client import MLPClient
+from caraml.mlp.client.models import Project
 
 # get global mock responses that configured in conftest
 responses = pytest.responses

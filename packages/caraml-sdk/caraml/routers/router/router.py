@@ -97,7 +97,7 @@ class Router(ApiObject):
 
         :return: list of routers
         """
-        response = routers.active_session.list_routers()
+        response = caraml.routers.active_session.list_routers()
         return [Router.from_open_api(item) for item in response]
 
     @classmethod
@@ -109,7 +109,9 @@ class Router(ApiObject):
         :return: instance of router created
         """
         return Router.from_open_api(
-            routers.active_session.create_router(router_config=config.to_open_api())
+            caraml.routers.active_session.create_router(
+                router_config=config.to_open_api()
+            )
         )
 
     @classmethod
@@ -120,7 +122,7 @@ class Router(ApiObject):
         :param router_id: router_id of the router to be deleted
         :return: router_id of the deleted router
         """
-        return routers.active_session.delete_router(router_id=router_id).id
+        return caraml.routers.active_session.delete_router(router_id=router_id).id
 
     @classmethod
     def get(cls, router_id: int) -> "Router":
@@ -131,7 +133,7 @@ class Router(ApiObject):
         :return: router with the corresponding id
         """
         return Router.from_open_api(
-            routers.active_session.get_router(router_id=router_id)
+            caraml.routers.active_session.get_router(router_id=router_id)
         )
 
     @classmethod
@@ -141,9 +143,10 @@ class Router(ApiObject):
         mapped_statuses = None
         if status:
             mapped_statuses = [
-                routers.client.models.RouterVersionStatus(s.value) for s in status
+                caraml.routers.client.models.RouterVersionStatus(s.value)
+                for s in status
             ]
-        response = routers.active_session.list_router_versions_with_filter(
+        response = caraml.routers.active_session.list_router_versions_with_filter(
             ensembler_id=ensembler_id, status=mapped_statuses, is_current=is_current
         )
         return response
@@ -157,7 +160,7 @@ class Router(ApiObject):
         """
         self._config = config
         updated_router = Router.from_open_api(
-            routers.active_session.update_router(
+            caraml.routers.active_session.update_router(
                 router_id=self.id, router_config=config.to_open_api()
             )
         )
@@ -179,7 +182,7 @@ class Router(ApiObject):
 
         :return: router_id and version of this router
         """
-        return routers.active_session.deploy_router(router_id=self.id).to_dict()
+        return caraml.routers.active_session.deploy_router(router_id=self.id).to_dict()
 
     def undeploy(self) -> Dict[str, int]:
         """
@@ -187,7 +190,9 @@ class Router(ApiObject):
 
         :return: router_id of this router
         """
-        return routers.active_session.undeploy_router(router_id=self.id).to_dict()
+        return caraml.routers.active_session.undeploy_router(
+            router_id=self.id
+        ).to_dict()
 
     def list_versions(self) -> List["RouterVersion"]:
         """
@@ -195,7 +200,7 @@ class Router(ApiObject):
 
         :return: list of router versions
         """
-        response = routers.active_session.list_router_versions(router_id=self.id)
+        response = caraml.routers.active_session.list_router_versions(router_id=self.id)
         return [
             RouterVersion(
                 environment_name=self.environment_name, name=self.name, **ver.to_dict()
@@ -209,7 +214,7 @@ class Router(ApiObject):
 
         :return: list of router versions
         """
-        version = routers.active_session.get_router_version(
+        version = caraml.routers.active_session.get_router_version(
             router_id=self.id, version=version
         )
         return RouterVersion(
@@ -223,7 +228,7 @@ class Router(ApiObject):
 
         :return: router_id and deleted version of this router
         """
-        return routers.active_session.delete_router_version(
+        return caraml.routers.active_session.delete_router_version(
             router_id=self.id, version=version
         ).to_dict()
 
@@ -233,7 +238,7 @@ class Router(ApiObject):
 
         :return: router_id and version of this router
         """
-        return routers.active_session.deploy_router_version(
+        return caraml.routers.active_session.deploy_router_version(
             router_id=self.id, version=version
         ).to_dict()
 
@@ -243,9 +248,9 @@ class Router(ApiObject):
 
         :return: list of events involving this router
         """
-        response = routers.active_session.get_router_events(router_id=self.id).get(
-            "events"
-        )
+        response = caraml.routers.active_session.get_router_events(
+            router_id=self.id
+        ).get("events")
         return [event for event in response] if response else []
 
     def wait_for_status(

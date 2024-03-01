@@ -21,9 +21,9 @@ from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from urllib3_mock import Responses
 
-import models.client as cl
-from models.client import ApiClient, Configuration
-from models.model import Model, ModelType, ModelVersion, Project
+import caraml.models.client as cl
+from caraml.models.client import ApiClient, Configuration
+from caraml.models.model import Model, ModelType, ModelVersion, Project
 
 
 # From the documentation (https://docs.pytest.org/en/7.1.x/reference/reference.html#pytest.hookspec.pytest_configure):

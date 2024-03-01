@@ -1,15 +1,15 @@
 import pytest
-import routers as turing
-import routers.client.models
-from routers.client.exceptions import ApiValueError
-from routers.router.config.common.env_var import EnvVar
-from routers.router.config.autoscaling_policy import (
+import caraml.routers as turing
+import caraml.routers.client.models
+from caraml.routers.client.exceptions import ApiValueError
+from caraml.routers.router.config.common.env_var import EnvVar
+from caraml.routers.router.config.autoscaling_policy import (
     AutoscalingPolicy,
     DEFAULT_AUTOSCALING_POLICY,
 )
-from routers.router.config.resource_request import ResourceRequest
-from routers.router.config.route import InvalidRouteException
-from routers.router.config.router_ensembler_config import (
+from caraml.routers.router.config.resource_request import ResourceRequest
+from caraml.routers.router.config.route import InvalidRouteException
+from caraml.routers.router.config.router_ensembler_config import (
     RouterEnsemblerConfig,
     EnsemblerNopConfig,
     NopRouterEnsemblerConfig,

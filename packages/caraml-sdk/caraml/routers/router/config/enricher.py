@@ -161,7 +161,7 @@ class Enricher:
         if self.service_account is not None:
             kwargs["service_account"] = self.service_account
 
-        return routers.client.models.Enricher(
+        return caraml.routers.client.models.Enricher(
             image=self.image,
             resource_request=self.resource_request.to_open_api(),
             autoscaling_policy=self.autoscaling_policy.to_open_api(),

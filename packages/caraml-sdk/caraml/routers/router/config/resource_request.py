@@ -62,7 +62,7 @@ class ResourceRequest:
             )
 
     def to_open_api(self) -> OpenApiModel:
-        return routers.client.models.ResourceRequest(
+        return caraml.routers.client.models.ResourceRequest(
             min_replica=self.min_replica,
             max_replica=self.max_replica,
             cpu_request=self.cpu_request,

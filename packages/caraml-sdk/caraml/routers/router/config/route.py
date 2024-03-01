@@ -82,7 +82,7 @@ class Route:
         if self.service_method is not None:
             kwargs["service_method"] = self.service_method
 
-        return routers.client.models.Route(
+        return caraml.routers.client.models.Route(
             id=self.id,
             type="PROXY",
             endpoint=self.endpoint,

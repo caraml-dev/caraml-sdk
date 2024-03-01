@@ -8,7 +8,7 @@ version:
 	@echo 'VERSION = "$(VERSION)"' > version.py
 	@echo "caraml-sdk version:" $(VERSION)
 
-.PHONY: lint
+.PHONY: lint #TODO: Add a arg here to take which dir's to lint
 lint:
 	@$(eval black_version=$(shell pip show black | grep Version | grep -oE '[0-9].*'))
 	@[ "${black_version}" == "22.6.0" ] || sh -c "pip install black==22.6.0"

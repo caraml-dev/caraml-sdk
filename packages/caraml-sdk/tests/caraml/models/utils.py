@@ -12,8 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-import models as merlin
-from models.endpoint import Status
+import caraml.models as merlin
+from caraml.models.endpoint import Status
 
 
 def undeploy_all_version():

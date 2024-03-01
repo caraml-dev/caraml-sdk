@@ -1,12 +1,12 @@
 import os
 import json
-import routers as turing
+import caraml.routers as turing
 import pytest
 from urllib3_mock import Responses
 
 import tests.routers.utils as utils
-import routers.client.models
-from routers.router.config.router_version import RouterStatus
+import caraml.routers.client.models
+from caraml.routers.router.config.router_version import RouterStatus
 
 
 responses = Responses("requests.packages.urllib3")

@@ -1,6 +1,6 @@
 import pytest
-from routers.client.exceptions import ApiValueError
-from routers.router.config.resource_request import (
+from caraml.routers.client.exceptions import ApiValueError
+from caraml.routers.router.config.resource_request import (
     ResourceRequest,
     InvalidReplicaCountException,
 )

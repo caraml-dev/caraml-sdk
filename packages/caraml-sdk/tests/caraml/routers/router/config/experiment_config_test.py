@@ -1,7 +1,7 @@
 import pytest
 
-import routers.client.models
-from routers.router.config.experiment_config import ExperimentConfig
+import caraml.routers.client.models
+from caraml.routers.router.config.experiment_config import ExperimentConfig
 
 
 @pytest.mark.parametrize(

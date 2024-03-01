@@ -8,8 +8,8 @@ from urllib3_mock import Responses
 
 
 from tests.routers import utils
-import routers as turing
-import routers.client.models
+import caraml.routers as turing
+import caraml.routers.client.models
 
 responses = Responses("requests.packages.urllib3")
 data_dir = os.path.join(os.path.dirname(__file__), "./testdata/api_responses")

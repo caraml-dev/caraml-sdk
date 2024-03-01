@@ -1,21 +1,21 @@
 import os
 import uuid
-from tests.models.utils import undeploy_all_version
+from tests.caraml.models.utils import undeploy_all_version
 from time import sleep
 from typing import List
 
 import grpc
-import models as merlin
+import caraml.models as merlin
 import pandas as pd
 import pytest
 import xgboost as xgb
 from caraml.upi.utils import df_to_table, table_to_df
 from caraml.upi.v1 import type_pb2, upi_pb2, upi_pb2_grpc, variable_pb2
-from models.deployment_mode import DeploymentMode
-from models.endpoint import Status
-from models.model import ModelType, PyFuncModel
-from models.protocol import Protocol
-from models.transformer import StandardTransformer
+from caraml.models.deployment_mode import DeploymentMode
+from caraml.models.endpoint import Status
+from caraml.models.model import ModelType, PyFuncModel
+from caraml.models.protocol import Protocol
+from caraml.models.transformer import StandardTransformer
 from sklearn.datasets import load_iris
 
 
@@ -86,8 +86,8 @@ def test_deploy(integration_test_url, project_name, use_google_oauth, requests):
 
         v.log_pyfunc_model(
             model_instance=IrisClassifier(),
-            conda_env="tests/models/pyfunc/env.yaml",
-            code_dir=["tests/models"],
+            conda_env="tests/caraml/models/pyfunc/env.yaml",
+            code_dir=["tests/caraml/models"],
             artifacts={"xgb_model": xgb_path},
         )
 
@@ -160,8 +160,8 @@ def test_serve_traffic(integration_test_url, project_name, use_google_oauth, req
 
         v.log_pyfunc_model(
             model_instance=IrisClassifier(),
-            conda_env="tests/models/pyfunc/env.yaml",
-            code_dir=["tests/models"],
+            conda_env="tests/caraml/models/pyfunc/env.yaml",
+            code_dir=["tests/caraml/models"],
             artifacts={"xgb_model": xgb_path},
         )
 
@@ -213,7 +213,7 @@ def validate_iris_upi(model, stub):
 
 
 def train_xgboost_model():
-    model_dir = "tests/models/pyfunc/"
+    model_dir = "tests/caraml/models/pyfunc/"
     BST_FILE = "model_1.bst"
 
     iris = load_iris()

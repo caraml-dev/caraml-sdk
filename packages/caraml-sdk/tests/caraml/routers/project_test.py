@@ -3,8 +3,8 @@ import pytest
 from urllib3_mock import Responses
 
 from tests.routers.utils import json_serializer
-import routers as turing
-from mlp.client.models import Project
+import caraml.routers as turing
+from caraml.mlp.client.models import Project
 
 
 responses = Responses("requests.packages.urllib3")

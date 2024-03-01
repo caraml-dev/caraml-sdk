@@ -39,4 +39,6 @@ class ExperimentConfig:
         else:
             config = self.config
 
-        return routers.client.models.ExperimentConfig(type=self.type, config=config)
+        return caraml.routers.client.models.ExperimentConfig(
+            type=self.type, config=config
+        )

@@ -2,9 +2,9 @@ import json
 import pytest
 from urllib3_mock import Responses
 
-import routers as turing
-import routers.client.models
-from routers.router.config.router_version import RouterVersion
+import caraml.routers as turing
+import caraml.routers.client.models
+from caraml.routers.router.config.router_version import RouterVersion
 
 from tests.routers import utils
 

@@ -16,7 +16,7 @@ class FieldSource(Enum):
     PREDICTION_CONTEXT = "prediction_context"
 
     def to_open_api(self) -> OpenApiModel:
-        return routers.client.models.FieldSource(self.value)
+        return caraml.routers.client.models.FieldSource(self.value)
 
 
 @dataclass
@@ -79,7 +79,7 @@ class TrafficRuleCondition:
         self._values = values
 
     def to_open_api(self) -> OpenApiModel:
-        return routers.client.models.TrafficRuleCondition(
+        return caraml.routers.client.models.TrafficRuleCondition(
             field_source=self.field_source.to_open_api(),
             field=self.field,
             operator=self.operator,
@@ -147,7 +147,7 @@ class DefaultTrafficRule:
     def to_open_api(self) -> OpenApiModel:
         self._verify_no_duplicate_routes()
 
-        return routers.client.models.DefaultTrafficRule(
+        return caraml.routers.client.models.DefaultTrafficRule(
             routes=self.routes,
         )
 
@@ -155,7 +155,7 @@ class DefaultTrafficRule:
         route_id_counter = Counter(self.routes)
         most_common_route_id, max_frequency = route_id_counter.most_common(n=1)[0]
         if max_frequency > 1:
-            raise routers.router.config.route.DuplicateRouteException(
+            raise caraml.routers.router.config.route.DuplicateRouteException(
                 f"Routes with duplicate ids are specified for this traffic rule. Duplicate id: {most_common_route_id}"
             )
 
@@ -175,9 +175,9 @@ class TrafficRule:
     routes: List[str]
 
     _name: str = dataclasses.field(init=False, repr=False)
-    _conditions: Union[
-        List[TrafficRuleCondition], List[Dict[str, List[str]]]
-    ] = dataclasses.field(init=False, repr=False)
+    _conditions: Union[List[TrafficRuleCondition], List[Dict[str, List[str]]]] = (
+        dataclasses.field(init=False, repr=False)
+    )
     _routes: List[str] = dataclasses.field(init=False, repr=False)
 
     @property
@@ -221,7 +221,7 @@ class TrafficRule:
     def to_open_api(self) -> OpenApiModel:
         self._verify_no_duplicate_routes()
 
-        return routers.client.models.TrafficRule(
+        return caraml.routers.client.models.TrafficRule(
             name=self.name,
             conditions=[
                 traffic_rule_condition.to_open_api()
@@ -234,6 +234,6 @@ class TrafficRule:
         route_id_counter = Counter(self.routes)
         most_common_route_id, max_frequency = route_id_counter.most_common(n=1)[0]
         if max_frequency > 1:
-            raise routers.router.config.route.DuplicateRouteException(
+            raise caraml.routers.router.config.route.DuplicateRouteException(
                 f"Routes with duplicate ids are specified for this traffic rule. Duplicate id: {most_common_route_id}"
             )

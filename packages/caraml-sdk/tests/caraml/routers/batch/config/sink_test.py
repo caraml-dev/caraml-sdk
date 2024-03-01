@@ -1,6 +1,6 @@
 import pytest
-import routers.batch.config.sink
-import routers.client.models
+import caraml.routers.batch.config.sink
+import caraml.routers.client.models
 
 
 @pytest.mark.parametrize(

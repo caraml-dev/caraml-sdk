@@ -14,7 +14,7 @@
 
 import pytest
 
-from models.batch.big_query_util import (
+from caraml.models.batch.big_query_util import (
     valid_column,
     valid_dataset,
     valid_table_name,

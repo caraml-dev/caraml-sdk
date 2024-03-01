@@ -5,27 +5,27 @@ import random
 from sys import version_info
 import uuid
 
-import routers as turing
-from routers.ensembler import PyFuncEnsembler
-import routers.client.models
-import routers.batch.config
-import routers.batch.config.source
-import routers.batch.config.sink
-from routers.router.config.route import Route
-from routers.router.config.router_config import RouterConfig, Protocol
-from routers.router.config.autoscaling_policy import AutoscalingPolicy
-from routers.router.config.traffic_rule import DefaultTrafficRule
-from routers.router.config.resource_request import ResourceRequest
-from routers.router.config.log_config import LogConfig, ResultLoggerType
-from routers.router.config.enricher import Enricher
-from routers.router.config.router_ensembler_config import (
+import caraml.routers as turing
+from caraml.routers.ensembler import PyFuncEnsembler
+import caraml.routers.client.models
+import caraml.routers.batch.config
+import caraml.routers.batch.config.source
+import caraml.routers.batch.config.sink
+from caraml.routers.router.config.route import Route
+from caraml.routers.router.config.router_config import RouterConfig, Protocol
+from caraml.routers.router.config.autoscaling_policy import AutoscalingPolicy
+from caraml.routers.router.config.traffic_rule import DefaultTrafficRule
+from caraml.routers.router.config.resource_request import ResourceRequest
+from caraml.routers.router.config.log_config import LogConfig, ResultLoggerType
+from caraml.routers.router.config.enricher import Enricher
+from caraml.routers.router.config.router_ensembler_config import (
     EnsemblerNopConfig,
     EnsemblerStandardConfig,
     DockerRouterEnsemblerConfig,
     PyfuncRouterEnsemblerConfig,
 )
-from routers.router.config.common.env_var import EnvVar
-from routers.router.config.experiment_config import ExperimentConfig
+from caraml.routers.router.config.common.env_var import EnvVar
+from caraml.routers.router.config.experiment_config import ExperimentConfig
 
 from tests.routers.fixtures.mlflow import mock_mlflow
 from tests.routers.fixtures.gcs import mock_gcs

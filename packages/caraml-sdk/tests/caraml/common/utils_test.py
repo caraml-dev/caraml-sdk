@@ -1,4 +1,4 @@
-from common.utils import is_valid_project_name, get_mlp_url
+from caraml.common.utils import is_valid_project_name, get_mlp_url
 
 import pytest
 

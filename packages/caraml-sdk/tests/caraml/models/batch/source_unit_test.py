@@ -14,7 +14,7 @@
 
 import pytest
 
-from models.batch.source import BigQuerySource
+from caraml.models.batch.source import BigQuerySource
 
 
 @pytest.mark.parametrize(

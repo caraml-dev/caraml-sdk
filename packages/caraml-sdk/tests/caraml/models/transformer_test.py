@@ -14,14 +14,14 @@
 
 import pytest
 import os
-from models.transformer import StandardTransformer, TransformerType
-from models.resource_request import ResourceRequest
+from caraml.models.transformer import StandardTransformer, TransformerType
+from caraml.models.resource_request import ResourceRequest
 
 
 @pytest.mark.unit
 def test_feast_enricher():
     transformer_config_path = os.path.join(
-        "tests/models/transformer", "feast_enricher.yaml"
+        "tests/caraml/models/transformer", "feast_enricher.yaml"
     )
     transformer = StandardTransformer(
         config_file=transformer_config_path, enabled=False
@@ -37,7 +37,7 @@ def test_feast_enricher():
 
 def test_feast_enricher_with_env_vars():
     transformer_config_path = os.path.join(
-        "tests/models/transformer", "feast_enricher.yaml"
+        "tests/caraml/models/transformer", "feast_enricher.yaml"
     )
     resource = ResourceRequest(
         min_replica=1, max_replica=2, cpu_request="100m", memory_request="128Mi"

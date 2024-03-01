@@ -1,5 +1,5 @@
 import pytest
-from routers.router.config.autoscaling_policy import (
+from caraml.routers.router.config.autoscaling_policy import (
     AutoscalingMetric,
     AutoscalingPolicy,
     DEFAULT_AUTOSCALING_POLICY,

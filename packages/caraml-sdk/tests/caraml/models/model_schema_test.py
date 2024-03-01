@@ -1,7 +1,7 @@
 import pytest
-import models.client as client
-from models.model_schema import ModelSchema
-from models.observability.inference import (
+import caraml.models.client as client
+from caraml.models.model_schema import ModelSchema
+from caraml.models.observability.inference import (
     InferenceSchema,
     ValueType,
     BinaryClassificationOutput,

@@ -1,6 +1,6 @@
-import routers.client.models
-from routers.router.config.route import DuplicateRouteException
-from routers.router.config.traffic_rule import (
+import caraml.routers.client.models
+from caraml.routers.router.config.route import DuplicateRouteException
+from caraml.routers.router.config.traffic_rule import (
     FieldSource,
     TrafficRuleCondition,
     HeaderTrafficRuleCondition,

@@ -72,7 +72,7 @@ class AutoscalingPolicy:
         self._target = target
 
     def to_open_api(self) -> OpenApiModel:
-        return routers.client.models.AutoscalingPolicy(
+        return caraml.routers.client.models.AutoscalingPolicy(
             metric=self.metric.value,
             target=self.target,
         )

@@ -1,9 +1,9 @@
 import pytest
-import routers.batch.config.source
-import routers.batch.config.sink
-import routers.client.models
+import caraml.routers.batch.config.source
+import caraml.routers.batch.config.sink
+import caraml.routers.client.models
 
-from routers.client.model.env_var import EnvVar
+from caraml.routers.client.model.env_var import EnvVar
 
 
 @pytest.mark.parametrize(
