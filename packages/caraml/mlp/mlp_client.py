@@ -102,7 +102,7 @@ class MLPClient:
 
     def get_project(self, project_name: str) -> Project:
         """
-        Get a project in Merlin and optionally assign list of readers and administrators.
+        Get a project from CaraML.
         The identity used for creating the project will be automatically included as project's administrators.
 
         :param project_name: project name

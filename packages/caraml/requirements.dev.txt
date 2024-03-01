@@ -11,6 +11,7 @@ mypy>=0.812
 pytest-cov
 pytest-dependency
 pytest-xdist
+pytest-mock
 pytest
 recursive-diff>=1.0.0
 requests
