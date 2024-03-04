@@ -15,6 +15,7 @@
 import warnings
 from sys import version_info
 from typing import Any, Dict, List, Optional
+import logging
 
 import urllib3
 from caraml_auth.id_token_credentials import get_default_id_token_credentials
@@ -38,7 +39,7 @@ from caraml.models.deployment_mode import DeploymentMode
 from caraml.models.endpoint import VersionEndpoint
 from caraml.models.environment import Environment
 from caraml.models.logger import Logger
-from caraml.models.model import Model, ModelType, ModelVersion
+from caraml.models.model import Project, Model, ModelType, ModelVersion
 from caraml.models.protocol import Protocol
 from caraml.models.resource_request import ResourceRequest
 from caraml.models.transformer import Transformer
@@ -46,10 +47,13 @@ from caraml.models.util import valid_name_check
 from caraml.models.version import VERSION
 from caraml.models.model_schema import ModelSchema
 
-from caraml.mlp.client.models import Project
+
+from caraml.mlp.client.models import Project as MLPProject
 from caraml.mlp.mlp_client import MLPClient
 from caraml.common.utils import get_mlp_url
 
+
+logger = logging.getLogger("merlin_client")
 
 class MerlinClient:
     def __init__(
@@ -139,14 +143,16 @@ class MerlinClient:
 
         :return: list of Project
         """
-        return self._mlp_client.list_projects()
+        projects = self._mlp_client.list_projects()
+        return [ Project(p, self.url, self._api_client) for p in projects]
 
     def get_or_create_project(self, project_name: str) -> Project:
         warnings.warn(
             "get_or_create_project is deprecated please use get_project",
             category=DeprecationWarning,
         )
-        return self._mlp_client.get_project(project_name)
+        p = self._mlp_client.get_project(project_name)
+        return Project(p, self.url, self._api_client)
 
     def get_project(self, project_name: str) -> Project:
         """
@@ -156,7 +162,8 @@ class MerlinClient:
         :param project_name: project name
         :return: project
         """
-        return self._mlp_client.get_project(project_name)
+        p = self._mlp_client.get_project(project_name)
+        return Project(p, self.url, self._api_client)
 
     def get_model(self, model_name: str, project_name: str) -> Optional[Model]:
         """

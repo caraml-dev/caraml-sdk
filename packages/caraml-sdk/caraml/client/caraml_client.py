@@ -2,10 +2,10 @@ from typing import List
 import urllib3
 import logging
 
-from version import VERSION as caraml_sdk_version
+from caraml.version import VERSION as caraml_sdk_version
 
 from caraml.models.merlin_client import MerlinClient as ModelsClient
-from caraml.routers.session import TuringSession as RoutersClient
+# from caraml.routers.session import TuringSession as RoutersClient
 from caraml.mlp.mlp_client import MLPClient
 
 
@@ -13,9 +13,9 @@ logger = logging.getLogger("caraml_client")
 
 
 class CaraMLClient:
-    _mlp_url_suffix = ""
-    _models_url_suffix = "/merlin/api"
-    _routers_url_suffix = "/turing/api"
+    _mlp_url_suffix = "/api"
+    _models_url_suffix = "/api/merlin"
+    _routers_url_suffix = "/api/turing"
 
     def __init__(self, caraml_url: str, use_google_oauth: bool = True):
         self._caraml_url = caraml_url
@@ -32,12 +32,12 @@ class CaraMLClient:
             caraml_sdk_version=caraml_sdk_version,
             mlp_client=self._mlp_client,
         )
-        self._routers_client = RoutersClient(
-            self._caraml_url + self._models_url_suffix,
-            use_google_oauth=use_google_oauth,
-            caraml_sdk_version=caraml_sdk_version,
-            mlp_client=self._mlp_client,
-        )
+        # self._routers_client = RoutersClient(
+        #     self._caraml_url + self._models_url_suffix,
+        #     use_google_oauth=use_google_oauth,
+        #     caraml_sdk_version=caraml_sdk_version,
+        #     mlp_client=self._mlp_client,
+        # )
 
         # Create a map to find and use all CaraML component methods to proxy to corresponding component.
         self._caraml_methods = {}
@@ -65,16 +65,16 @@ class CaraMLClient:
             f"Registered {len(self._models_methods)} from Models. methods: {self._models_methods}"
         )
 
-        self._routers_methods = [
-            method_name
-            for method_name in dir(self._routers_client)
-            if callable(getattr(self._routers_client, method_name))
-            and not method_name.startswith("_")
-        ]
-        self._add_caraml_methods(self._routers_methods, self._routers_client)
-        logger.debug(
-            f"Registered {len(self._routers_methods)} from Routers. methods: {self._routers_methods}"
-        )
+        # self._routers_methods = [
+        #     method_name
+        #     for method_name in dir(self._routers_client)
+        #     if callable(getattr(self._routers_client, method_name))
+        #     and not method_name.startswith("_")
+        # ]
+        # self._add_caraml_methods(self._routers_methods, self._routers_client)
+        # logger.debug(
+        #     f"Registered {len(self._routers_methods)} from Routers. methods: {self._routers_methods}"
+        # )
 
         for method_name, client in self._caraml_methods.items():
             self._create_caraml_methods(method_name, client)

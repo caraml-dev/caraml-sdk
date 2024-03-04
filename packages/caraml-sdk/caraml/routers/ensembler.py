@@ -9,6 +9,7 @@ import pandas
 import re
 import yaml
 
+import caraml
 import caraml.routers.client.models
 from caraml.routers.client.models import EnsemblerType, Ensembler, PyFuncEnsembler
 from caraml.routers._base_types import ApiObject, ApiObjectSpec

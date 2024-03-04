@@ -5,7 +5,7 @@ setup:
 .PHONY: version
 version:
 	$(eval VERSION=$(if $(OVERWRITE_VERSION),$(OVERWRITE_VERSION),$(shell ../../scripts/vertagen/vertagen.sh -p packages/caraml/ -y)))
-	@echo 'VERSION = "$(VERSION)"' > version.py
+	@echo 'VERSION = "$(VERSION)"' > caraml/version.py
 	@echo "caraml-sdk version:" $(VERSION)
 
 .PHONY: lint #TODO: Add a arg here to take which dir's to lint

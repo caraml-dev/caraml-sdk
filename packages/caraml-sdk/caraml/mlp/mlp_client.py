@@ -15,6 +15,7 @@
 import warnings
 import urllib3
 import mlflow
+import logging
 
 from sys import version_info
 from typing import List, Optional
@@ -26,6 +27,7 @@ from google.auth.transport.urllib3 import AuthorizedHttp
 
 from caraml.common.utils import is_valid_project_name
 
+logger = logging.getLogger("mlp_client")
 
 def require_active_project(f):
     def wrap(*args, **kwargs):

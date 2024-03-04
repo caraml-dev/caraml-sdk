@@ -2,7 +2,7 @@ import setuptools
 import pathlib
 import pkg_resources
 
-with pathlib.Path("version.py").open() as version_py:
+with pathlib.Path("caraml/version.py").open() as version_py:
     _locals = locals()
     exec(version_py.read(), globals(), _locals)
     version = _locals["VERSION"]

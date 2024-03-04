@@ -1,8 +1,8 @@
 import time
 import logging
+import caraml
 
 from typing import List, Dict, Optional
-
 from caraml.routers.client.models import (
     Router,
     Event,

@@ -16,7 +16,7 @@ updated_at = "2019-08-29T08:13:12.377Z"
 def test_get_project(mock_url, mock_oauth, use_google_oauth):
     responses.add(
         "GET",
-        "/v1/projects",
+        "/api/v1/projects",
         body=f"""[{{
                         "id": 0,
                         "name": "my-project",
@@ -32,7 +32,7 @@ def test_get_project(mock_url, mock_oauth, use_google_oauth):
     p = m.get_project("my-project")
 
     assert responses.calls[-1].request.method == "GET"
-    assert responses.calls[-1].request.url == "/v1/projects?name=my-project"
+    assert responses.calls[-1].request.url == "/api/v1/projects?name=my-project"
     assert responses.calls[-1].request.host == "127.0.0.1"
 
     assert p.id == 0
@@ -77,7 +77,7 @@ def test_list_projects(mock_url, mock_oauth, use_google_oauth):
     ]
     responses.add(
         method="GET",
-        url=f"/v1/projects",
+        url=f"/api/v1/projects",
         body=f"""[{{
                         "id": 0,
                         "name": "my-project",
@@ -110,4 +110,4 @@ def test_list_projects(mock_url, mock_oauth, use_google_oauth):
         assert actual.updated_at == expected.updated_at
 
     m.list_projects(name="project_1")
-    assert responses.calls[-1].request.url == "/v1/projects?name=project_1"
+    assert responses.calls[-1].request.url == "/api/v1/projects?name=project_1"
