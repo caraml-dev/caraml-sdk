@@ -100,4 +100,4 @@ jobs:
             repo: ${{ github.event.inputs.repository }}
             ref: ${{ github.event.inputs.ref }}
           branch: generate-caraml-client-sdk
-          base: caraml-sdk-commons
+          base: main
