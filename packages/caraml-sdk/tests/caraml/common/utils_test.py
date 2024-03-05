@@ -18,19 +18,19 @@ def test_name_check():
 @pytest.mark.unit
 def test_get_mlp_url():
     inputs = [
-        "http://console.ai.io/merlin/api",
-        "http://merlin.dev/merlin/api",
+        "http://console.ai.io/api/merlin",
+        "http://merlin.dev/api/merlin",
         "http://console.ai/turing/api",
         "http://console.ai/turing",
         "http://console.ai/merlin",
     ]
 
     outputs = [
-        "http://console.ai.io",
-        "http://merlin.dev",
-        "http://console.ai",
-        "http://console.ai",
-        "http://console.ai",
+        "http://console.ai.io/api",
+        "http://merlin.dev/api",
+        "http://console.ai/api",
+        "http://console.ai/api",
+        "http://console.ai/api",
     ]
 
     for url, mlp_url in zip(inputs, outputs):

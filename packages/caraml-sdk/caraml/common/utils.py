@@ -25,4 +25,4 @@ def get_mlp_url(url: str, scheme: str = "http") -> str:
     domain = parsed_url.netloc
     if parsed_url.scheme:
         scheme = parsed_url.scheme
-    return f"{scheme}://{domain}"
+    return f"{scheme}://{domain}/api"
