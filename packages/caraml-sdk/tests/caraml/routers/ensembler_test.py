@@ -67,7 +67,7 @@ def test_list_ensemblers(
     turing.set_url(turing_api, use_google_oauth)
     turing.set_project(active_project.name)
 
-    page = routers.client.models.EnsemblersPaginatedResults(
+    page = caraml.routers.client.models.EnsemblersPaginatedResults(
         results=generic_ensemblers,
         paging=caraml.routers.client.models.PaginationPaging(total=1, page=1, pages=1),
     )
@@ -126,12 +126,12 @@ def test_update_ensembler(
     turing.set_url(turing_api, use_google_oauth)
     turing.set_project(active_project.name)
 
-    page = routers.client.models.EnsemblersPaginatedResults(
+    page = caraml.routers.client.models.EnsemblersPaginatedResults(
         results=generic_ensemblers,
         paging=caraml.routers.client.models.PaginationPaging(total=1, page=1, pages=1),
     )
 
-    emptyJob = routers.client.models.EnsemblingJobPaginatedResults(
+    emptyJob = caraml.routers.client.models.EnsemblingJobPaginatedResults(
         results=[],
         paging=caraml.routers.client.models.PaginationPaging(total=0, page=1, pages=1),
     )
@@ -201,7 +201,7 @@ def test_update_ensembler_existing_router_version(
     turing.set_url(turing_api, use_google_oauth)
     turing.set_project(active_project.name)
 
-    page = routers.client.models.EnsemblersPaginatedResults(
+    page = caraml.routers.client.models.EnsemblersPaginatedResults(
         results=generic_ensemblers,
         paging=caraml.routers.client.models.PaginationPaging(total=1, page=1, pages=1),
     )
@@ -253,7 +253,7 @@ def test_update_ensembler_existing_job(
     turing.set_url(turing_api, use_google_oauth)
     turing.set_project(active_project.name)
 
-    page = routers.client.models.EnsemblersPaginatedResults(
+    page = caraml.routers.client.models.EnsemblersPaginatedResults(
         results=generic_ensemblers,
         paging=caraml.routers.client.models.PaginationPaging(total=1, page=1, pages=1),
     )
@@ -306,7 +306,7 @@ def test_update_ensembler_existing_job(
 
 @responses.activate
 @pytest.mark.parametrize(
-    "actual,expected", [pytest.param(1, routers.client.models.IdObject(id=1))]
+    "actual,expected", [pytest.param(1, caraml.routers.client.models.IdObject(id=1))]
 )
 @pytest.mark.parametrize("ensembler_name", ["ensembler_1"])
 @pytest.mark.usefixtures("mock_mlflow", "mock_gcs")

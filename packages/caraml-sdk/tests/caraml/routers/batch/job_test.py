@@ -38,7 +38,7 @@ def _responses():
         pytest.param(
             list_jobs_0000,
             [
-                routers.batch.EnsemblingJob(
+                caraml.routers.batch.EnsemblingJob(
                     id=11,
                     name="my-ensembler-updated: 2021-07-06T12:28:32+03:00",
                     ensembler_id=2,
@@ -48,11 +48,11 @@ def _responses():
                     created_at=utc_date("2021-07-06T12:28:32.850365Z"),
                     updated_at=utc_date("2021-07-06T13:28:56.252642Z"),
                 ),
-                routers.batch.EnsemblingJob(
+                caraml.routers.batch.EnsemblingJob(
                     id=17,
                     name="my-ensembler: 2021-07-06T23:44:30+03:00",
                     ensembler_id=3,
-                    status=routers.batch.EnsemblingJobStatus.FAILED_BUILDING,
+                    status=caraml.routers.batch.EnsemblingJobStatus.FAILED_BUILDING,
                     project_id=1,
                     error="failed building OCI image",
                     created_at=utc_date("2021-07-06T23:44:30.675673Z"),
@@ -72,18 +72,18 @@ def test_list_jobs(
     responses.add(
         method="GET",
         url=f"/v1/projects/{active_project.id}/jobs?"
-        f"status={routers.batch.EnsemblingJobStatus.PENDING.value}&"
-        f"status={routers.batch.EnsemblingJobStatus.RUNNING.value}",
+        f"status={caraml.routers.batch.EnsemblingJobStatus.PENDING.value}&"
+        f"status={caraml.routers.batch.EnsemblingJobStatus.RUNNING.value}",
         body=api_response,
         match_querystring=True,
         status=200,
         content_type="application/json",
     )
 
-    actual = routers.batch.EnsemblingJob.list(
+    actual = caraml.routers.batch.EnsemblingJob.list(
         status=[
-            routers.batch.EnsemblingJobStatus.PENDING,
-            routers.batch.EnsemblingJobStatus.RUNNING,
+            caraml.routers.batch.EnsemblingJobStatus.PENDING,
+            caraml.routers.batch.EnsemblingJobStatus.RUNNING,
         ]
     )
 
@@ -99,11 +99,11 @@ def test_list_jobs(
     [
         pytest.param(
             submit_job_0000,
-            routers.batch.EnsemblingJob(
+            caraml.routers.batch.EnsemblingJob(
                 id=1,
                 name="pyfunc-ensembler: 2021-07-06T00:00:00+03:00",
                 ensembler_id=2,
-                status=routers.batch.EnsemblingJobStatus.PENDING,
+                status=caraml.routers.batch.EnsemblingJobStatus.PENDING,
                 project_id=1,
                 error="",
                 created_at=utc_date("2021-07-06T12:28:32.850365Z"),
@@ -131,7 +131,7 @@ def test_submit_job(
         content_type="application/json",
     )
 
-    actual = routers.batch.job.EnsemblingJob.submit(
+    actual = caraml.routers.batch.job.EnsemblingJob.submit(
         ensembler_id=2,
         config=ensembling_job_config,
     )
@@ -144,22 +144,22 @@ def test_submit_job(
     [
         pytest.param(
             submit_job_0000,
-            routers.batch.EnsemblingJob(
+            caraml.routers.batch.EnsemblingJob(
                 id=1,
                 name="pyfunc-ensembler: 2021-07-06T00:00:00+03:00",
                 ensembler_id=2,
-                status=routers.batch.EnsemblingJobStatus.PENDING,
+                status=caraml.routers.batch.EnsemblingJobStatus.PENDING,
                 project_id=1,
                 error="",
                 created_at=utc_date("2021-07-06T12:28:32.850365Z"),
                 updated_at=utc_date("2021-07-06T13:28:56.252642Z"),
             ),
             get_job_0000,
-            routers.batch.EnsemblingJob(
+            caraml.routers.batch.EnsemblingJob(
                 id=1,
                 name="pyfunc-ensembler: 2021-07-06T00:00:00+03:00",
                 ensembler_id=2,
-                status=routers.batch.EnsemblingJobStatus.FAILED_BUILDING,
+                status=caraml.routers.batch.EnsemblingJobStatus.FAILED_BUILDING,
                 project_id=1,
                 error="timeout has occurred",
                 created_at=utc_date("2021-07-06T12:28:32.850365Z"),
@@ -188,7 +188,7 @@ def test_fetch_job(
         content_type="application/json",
     )
 
-    job = routers.batch.EnsemblingJob.get_by_id(expected.id)
+    job = caraml.routers.batch.EnsemblingJob.get_by_id(expected.id)
 
     assert job == expected
 
@@ -211,11 +211,11 @@ def test_fetch_job(
     "job, api_response_delete, api_response_get, expected",
     [
         pytest.param(
-            routers.batch.EnsemblingJob(
+            caraml.routers.batch.EnsemblingJob(
                 id=1,
                 name="ensembling-job",
                 ensembler_id=1,
-                status=routers.batch.EnsemblingJobStatus.RUNNING,
+                status=caraml.routers.batch.EnsemblingJobStatus.RUNNING,
                 project_id=1,
                 error="",
                 created_at=utc_date("2021-07-06T12:28:32.850365Z"),
@@ -223,11 +223,11 @@ def test_fetch_job(
             ),
             '{"id": 1}',
             get_job_0000,
-            routers.batch.EnsemblingJob(
+            caraml.routers.batch.EnsemblingJob(
                 id=1,
                 name="pyfunc-ensembler: 2021-07-06T00:00:00+03:00",
                 ensembler_id=2,
-                status=routers.batch.EnsemblingJobStatus.FAILED_BUILDING,
+                status=caraml.routers.batch.EnsemblingJobStatus.FAILED_BUILDING,
                 project_id=1,
                 error="timeout has occurred",
                 created_at=utc_date("2021-07-06T12:28:32.850365Z"),

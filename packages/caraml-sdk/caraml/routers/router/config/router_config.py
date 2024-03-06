@@ -8,8 +8,7 @@ from enum import Enum
 from caraml.routers.client.models import (
     Protocol,
     RouterConfig,
-    ResourceRequest,
-    RouterEnsemblerConfig,
+    RouterVersionConfig,
 )
 from caraml.routers.client.model_utils import OpenApiModel
 from caraml.routers.router.config.traffic_rule import DefaultTrafficRule
@@ -375,7 +374,7 @@ class RouterConfig:
         return RouterConfig(
             environment_name=self.environment_name,
             name=self.name,
-            config=caraml.routers.client.models.RouterVersionConfig(
+            config=RouterVersionConfig(
                 routes=[route.to_open_api() for route in self.routes],
                 autoscaling_policy=self.autoscaling_policy.to_open_api(),
                 experiment_engine=self.experiment_engine.to_open_api(),

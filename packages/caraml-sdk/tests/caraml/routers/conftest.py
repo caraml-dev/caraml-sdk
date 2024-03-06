@@ -57,7 +57,7 @@ def project():
 def active_project(responses, project):
     responses.add(
         method="GET",
-        url=f"/v1/projects?name={project.name}",
+        url=f"/api/v1/projects?name={project.name}",
         body=json.dumps([project], default=utils.json_serializer),
         match_querystring=True,
         status=200,

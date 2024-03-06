@@ -1,4 +1,5 @@
 import pytest
+import caraml
 import caraml.routers as turing
 import caraml.routers.client.models
 from caraml.routers.client.exceptions import ApiValueError

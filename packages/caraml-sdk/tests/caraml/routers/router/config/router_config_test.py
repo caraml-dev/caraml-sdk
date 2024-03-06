@@ -1,5 +1,5 @@
 import pytest
-
+import caraml
 from caraml.routers.router.config.route import (
     Route,
     DuplicateRouteException,

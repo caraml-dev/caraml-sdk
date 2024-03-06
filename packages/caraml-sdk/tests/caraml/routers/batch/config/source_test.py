@@ -1,6 +1,6 @@
 import pytest
 import caraml.routers.batch.config.source
-import caraml.routers.client.models
+from caraml.routers.client.models import BigQueryDataset, EnsemblingJobSource, EnsemblingJobPredictionSource, BigQueryDatasetConfig
 
 
 @pytest.mark.parametrize(
@@ -11,7 +11,7 @@ import caraml.routers.client.models
             ["feature_1", "feature_2"],
             None,
             None,
-            routers.client.models.BigQueryDataset(
+            BigQueryDataset(
                 bq_config=caraml.routers.client.models.BigQueryDatasetConfig(
                     table="project.table.dataset_1", features=["feature_1", "feature_2"]
                 )
@@ -23,8 +23,8 @@ import caraml.routers.client.models
             None,
             "SELECT * FROM `project.dataset.table`",
             {"viewsEnabled": "true", "materializationDataset": "my_dataset"},
-            routers.client.models.BigQueryDataset(
-                bq_config=caraml.routers.client.models.BigQueryDatasetConfig(
+            BigQueryDataset(
+                bq_config=BigQueryDatasetConfig(
                     query="SELECT * FROM `project.dataset.table`",
                     options={
                         "viewsEnabled": "true",
@@ -37,7 +37,7 @@ import caraml.routers.client.models
     ],
 )
 def test_bq_dataset(table, query, features, options, expected):
-    dataset = routers.batch.config.source.BigQueryDataset(
+    dataset = BigQueryDataset(
         table, features, query, options
     )
 
@@ -48,12 +48,12 @@ def test_bq_dataset(table, query, features, options, expected):
     "dataset,join_on,expected_fn",
     [
         pytest.param(
-            routers.batch.config.source.BigQueryDataset(
+            BigQueryDataset(
                 table="project.table.dataset_1",
                 features=["feature_1", "feature_2", "feature_3"],
             ),
             ["feature_2"],
-            lambda dataset, join_on: routers.client.models.EnsemblingJobSource(
+            lambda dataset, join_on: EnsemblingJobSource(
                 dataset=dataset.to_open_api(), join_on=join_on
             ),
             id="Initialize source from BQ dataset",
@@ -69,7 +69,7 @@ def test_bq_source(dataset, join_on, expected_fn):
     "source,prediction_columns,expected_fn",
     [
         pytest.param(
-            routers.batch.config.source.BigQueryDataset(
+            BigQueryDataset(
                 query="SELECT feature_2, feature_3, score FROM `project.dataset.table`",
                 options={
                     "viewsEnabled": "true",
@@ -77,7 +77,7 @@ def test_bq_source(dataset, join_on, expected_fn):
                 },
             ).join_on(columns=["feature_2", "feature_3"]),
             ["score"],
-            lambda source, prediction_columns: routers.client.models.EnsemblingJobPredictionSource(
+            lambda source, prediction_columns: EnsemblingJobPredictionSource(
                 dataset=source.dataset.to_open_api(),
                 join_on=source.join_on,
                 columns=prediction_columns,

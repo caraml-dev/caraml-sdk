@@ -1,4 +1,5 @@
 import pytest
+import caraml
 import caraml.routers.batch.config.source
 import caraml.routers.batch.config.sink
 import caraml.routers.client.models
@@ -23,7 +24,7 @@ from caraml.routers.client.model.env_var import EnvVar
                 .select(["prediction"])
             },
             caraml.routers.batch.config.ResultConfig(
-                type=routers.batch.config.ResultType.FLOAT,
+                type=caraml.routers.batch.config.ResultType.FLOAT,
                 column_name="ensembling_result",
             ),
             (
@@ -33,7 +34,7 @@ from caraml.routers.client.model.env_var import EnvVar
                     options={},
                 )
                 .select(["feature_1", "ensembling_result"])
-                .save_mode(routers.batch.config.sink.SaveMode.IGNORE)
+                .save_mode(caraml.routers.batch.config.sink.SaveMode.IGNORE)
             ),
             lambda source, predictions, result_config, sink: caraml.routers.client.models.EnsemblingJobSpec(
                 source=source.to_open_api(),
