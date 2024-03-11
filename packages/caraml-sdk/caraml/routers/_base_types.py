@@ -90,7 +90,7 @@ class ApiObject(DataObject):
         - be annotated with ApiObjectSpec annotation
           Example:
 
-          @ApiObjectSpec(routers.client.models.Project)
+          @ApiObjectSpec(caraml.routers.client.models.Project)
           class Project(ApiObject):
 
         :return: instance of respective openapi data-transfer object

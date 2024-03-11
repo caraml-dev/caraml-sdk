@@ -1,0 +1,1 @@
+from caraml.models.model_schema import *

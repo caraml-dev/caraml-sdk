@@ -1,14 +1,9 @@
 import time
 import logging
-import caraml
 
 from typing import List, Dict, Optional
-from caraml.routers.client.models import (
-    Router,
-    Event,
-    RouterVersionStatus,
 
-)
+import caraml.routers.client.models
 from caraml.routers._base_types import ApiObject, ApiObjectSpec
 from caraml.routers.router.config.router_config import RouterConfig
 from caraml.routers.router.config.router_version import RouterVersion, RouterStatus
@@ -26,7 +21,7 @@ ch.setFormatter(formatter)
 logger.addHandler(ch)
 
 
-@ApiObjectSpec(Router)
+@ApiObjectSpec(caraml.routers.client.models.Router)
 class Router(ApiObject):
     """
     API entity for Router
@@ -147,7 +142,10 @@ class Router(ApiObject):
     ) -> List["RouterVersion"]:
         mapped_statuses = None
         if status:
-            mapped_statuses = [RouterVersionStatus(s.value) for s in status]
+            mapped_statuses = [
+                caraml.routers.client.models.RouterVersionStatus(s.value)
+                for s in status
+            ]
         response = caraml.routers.active_session.list_router_versions_with_filter(
             ensembler_id=ensembler_id, status=mapped_statuses, is_current=is_current
         )
@@ -244,7 +242,7 @@ class Router(ApiObject):
             router_id=self.id, version=version
         ).to_dict()
 
-    def get_events(self) -> List[Event]:
+    def get_events(self) -> List[caraml.routers.client.models.Event]:
         """
         Fetch deployment events associated with the router
 

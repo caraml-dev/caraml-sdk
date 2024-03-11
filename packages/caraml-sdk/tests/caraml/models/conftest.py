@@ -13,13 +13,62 @@
 # limitations under the License.
 
 import os
-
 import mlflow
 import pytest
 import requests as requests_lib
 from requests.adapters import HTTPAdapter
 from requests.packages.urllib3.util.retry import Retry
 from urllib3_mock import Responses
+
+# import logging
+# logger = logging.getLogger('models-test')
+# logger.setLevel(logging.DEBUG)
+
+# import pathlib
+# import _pytest.pathlib
+
+
+# resolve_pkg_path_orig = _pytest.pathlib.resolve_package_path
+
+# # we consider all dirs in repo/ to be namespace packages
+# rootdir = pathlib.Path(__file__).parent.resolve()
+# namespace_pkg_dirs = [str(d) for d in rootdir.iterdir() if d.is_dir()]
+
+# logger.debug("patching ")
+# # patched method
+# def resolve_package_path(path):
+#     # call original lookup
+#     logger.debug(path, "aaaaaaaaa")
+#     result = resolve_pkg_path_orig(path)
+#     if result is not None:
+#         return result
+#     # original lookup failed, check if we are subdir of a namespace package
+#     # if yes, return the namespace package we belong to
+#     for parent in path.parents:
+#         if str(parent) in namespace_pkg_dirs:
+#             return parent
+#     best_sys_path = None
+#     # spkgpath = str(path)
+#     # for sysp in sys.path:
+#     #     if spkgpath.startswith(sysp):
+#     #         if not best_sys_path:
+#     #             best_sys_path = sysp
+#     #         elif len(best_sys_path) < len(sysp):
+#     #             best_sys_path = sysp
+#     # if best_sys_path:
+#     #     while str(path).startswith(best_sys_path) and not best_sys_path.startswith(str(path.dirpath())):
+#     #         best_sys_path = path.dirpath()
+#     return best_sys_path
+
+# # apply patch
+# # _pytest.pathlib.resolve_package_path = resolve_package_path
+
+# from importlib import import_module
+# import caraml
+
+# root_dir = sys.path.pop(0)
+# caraml.models.pyfunc.upi_pb2 = import_module("caraml.upi.v1").upi_pb2
+# sys.path.insert(0, root_dir)
 
 import caraml.models.client as cl
 from caraml.models.client import ApiClient, Configuration

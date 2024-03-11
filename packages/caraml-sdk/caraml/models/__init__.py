@@ -24,6 +24,8 @@ import caraml.models.autoscaling
 import caraml.models.deployment_mode
 import caraml.models.fluent
 import caraml.models.resource_request
+
+from caraml.models import pyfunc
 from caraml.models.version import VERSION as __version__
 
 import caraml.models as merlin

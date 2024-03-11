@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 from typing import Dict
 
-from caraml.routers.client.models import ExperimentConfig
+import caraml.routers.client.models
 from caraml.routers.client.model_utils import OpenApiModel
 
 
@@ -39,4 +39,6 @@ class ExperimentConfig:
         else:
             config = self.config
 
-        return ExperimentConfig(type=self.type, config=config)
+        return caraml.routers.client.models.ExperimentConfig(
+            type=self.type, config=config
+        )

@@ -1,9 +1,9 @@
-import caraml
 from enum import Enum
 from typing import List, Optional
-from caraml.routers.batch.config import EnsemblingJobConfig
+import caraml.routers.client.models
+from .config import EnsemblingJobConfig
 from caraml.routers._base_types import ApiObject, ApiObjectSpec
-from caraml.routers.client.models import EnsemblingJob, EnsemblerConfig, EnsemblerConfigKind, EnsemblerJobStatus
+
 
 class EnsemblingJobStatus(Enum):
     """
@@ -42,7 +42,7 @@ class EnsemblingJobStatus(Enum):
     FAILED_BUILDING = "failed_building"
 
 
-@ApiObjectSpec(EnsemblingJob)
+@ApiObjectSpec(caraml.routers.client.models.EnsemblingJob)
 class EnsemblingJob(ApiObject):
     """
     API entity that represents ensembling batch job
@@ -123,13 +123,13 @@ class EnsemblingJob(ApiObject):
         :param config: configuration of ensembling job
         :return: instance of ensembling job
         """
-        job_config = EnsemblerConfig(
-            version = EnsemblingJob._VERSION,
-            kind = EnsemblerConfigKind(EnsemblingJob._KIND),
-            spec = config.job_spec(),
+        job_config = caraml.routers.client.models.EnsemblerConfig(
+            version=EnsemblingJob._VERSION,
+            kind=caraml.routers.client.models.EnsemblerConfigKind(EnsemblingJob._KIND),
+            spec=config.job_spec(),
         )
 
-        job = EnsemblingJob(
+        job = caraml.routers.client.models.EnsemblingJob(
             ensembler_id=ensembler_id,
             infra_config=config.infra_spec(),
             job_config=job_config,
@@ -159,7 +159,7 @@ class EnsemblingJob(ApiObject):
         mapped_statuses = None
         if status:
             mapped_statuses = [
-                EnsemblerJobStatus(s.value) for s in status
+                caraml.routers.client.models.EnsemblerJobStatus(s.value) for s in status
             ]
 
         response = caraml.routers.active_session.list_ensembling_jobs(

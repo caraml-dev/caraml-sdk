@@ -232,14 +232,14 @@ def ensembling_job_config():
     }
 
     result_config = caraml.routers.batch.config.ResultConfig(
-        type=routers.batch.config.ResultType.INTEGER, column_name="prediction_result"
+        type=caraml.routers.batch.config.ResultType.INTEGER, column_name="prediction_result"
     )
 
     sink = (
         caraml.routers.batch.config.sink.BigQuerySink(
             table="project.dataset.ensembling_results", staging_bucket="staging_bucket"
         )
-        .save_mode(routers.batch.config.sink.SaveMode.OVERWRITE)
+        .save_mode(caraml.routers.batch.config.sink.SaveMode.OVERWRITE)
         .select(columns=["feature_1", "feature_2", "prediction_result"])
     )
 

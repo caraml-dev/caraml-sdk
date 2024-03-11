@@ -1,6 +1,6 @@
 import abc
 from typing import Iterable, MutableMapping, Optional
-from caraml.routers.client.models import BigQueryDatasetConfig
+import caraml.routers.client.models
 from caraml.routers._base_types import DataObject
 from caraml.routers.client.model_utils import OpenApiModel
 
@@ -23,7 +23,7 @@ class EnsemblingJobSource:
         return self._join_on
 
     def to_open_api(self) -> OpenApiModel:
-        return EnsemblingJobSource(
+        return caraml.routers.client.models.EnsemblingJobSource(
             dataset=self.dataset.to_open_api(), join_on=self.join_on
         )
 
@@ -51,7 +51,7 @@ class EnsemblingJobPredictionSource(EnsemblingJobSource):
         return self._columns
 
     def to_open_api(self) -> OpenApiModel:
-        return EnsemblingJobPredictionSource(
+        return caraml.routers.client.models.EnsemblingJobPredictionSource(
             dataset=self.dataset.to_open_api(),
             join_on=self.join_on,
             columns=self.columns,
@@ -125,8 +125,10 @@ class BigQueryDataset(Dataset):
         return self._options
 
     def to_open_api(self) -> OpenApiModel:
-        return BigQueryDataset(
-            bq_config=BigQueryDatasetConfig(**self.to_dict())
+        return caraml.routers.client.models.BigQueryDataset(
+            bq_config=caraml.routers.client.models.BigQueryDatasetConfig(
+                **self.to_dict()
+            )
         )
 
     def join_on(self, columns: Iterable[str]) -> "EnsemblingJobSource":

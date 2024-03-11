@@ -9,9 +9,8 @@ import pandas
 import re
 import yaml
 
-import caraml
 import caraml.routers.client.models
-from caraml.routers.client.models import EnsemblerType, Ensembler, PyFuncEnsembler
+from caraml.routers.client.models import EnsemblerType
 from caraml.routers._base_types import ApiObject, ApiObjectSpec
 from caraml.routers.batch import EnsemblingJob, EnsemblingJobStatus
 from caraml.routers.batch.config import EnsemblingJobConfig
@@ -143,7 +142,7 @@ class PyFunc(EnsemblerBase, mlflow.pyfunc.PythonModel, abc.ABC):
         return selected_columns
 
 
-@ApiObjectSpec(Ensembler)
+@ApiObjectSpec(caraml.routers.client.models.Ensembler)
 class Ensembler(ApiObject):
     """
     API entity for Ensembler
@@ -192,7 +191,7 @@ class Ensembler(ApiObject):
         return [Ensembler.from_open_api(item) for item in response.results]
 
 
-@ApiObjectSpec(PyFuncEnsembler)
+@ApiObjectSpec(caraml.routers.client.models.PyFuncEnsembler)
 class PyFuncEnsembler(Ensembler):
     """
     API entity for PyFuncEnsembler

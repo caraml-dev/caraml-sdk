@@ -1,4 +1,4 @@
-from caraml.routers.client.models import Route
+import caraml.routers.client.models
 from caraml.routers.client.model_utils import OpenApiModel
 from urllib.parse import urlparse
 from dataclasses import dataclass
@@ -82,7 +82,7 @@ class Route:
         if self.service_method is not None:
             kwargs["service_method"] = self.service_method
 
-        return Route(
+        return caraml.routers.client.models.Route(
             id=self.id,
             type="PROXY",
             endpoint=self.endpoint,

@@ -2,7 +2,7 @@ import os
 import caraml.routers as turing
 import caraml.routers.batch
 import caraml.routers.batch.config
-from samples.common import MyEnsembler
+from examples.common import MyEnsembler
 
 
 def main(turing_api: str, project: str):

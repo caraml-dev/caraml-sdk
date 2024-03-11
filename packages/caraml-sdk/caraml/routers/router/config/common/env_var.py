@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from caraml.routers.client.models import EnvVar
+import caraml.routers.client.models
 from caraml.routers.client.model_utils import OpenApiModel
 
 
@@ -29,4 +29,4 @@ class EnvVar:
         self._value = value
 
     def to_open_api(self) -> OpenApiModel:
-        return EnvVar(name=self.name, value=self.value)
+        return caraml.routers.client.models.EnvVar(name=self.name, value=self.value)

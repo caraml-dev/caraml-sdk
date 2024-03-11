@@ -1,4 +1,4 @@
-from caraml.routers.client.models import Enricher
+import caraml.routers.client.models
 from dataclasses import dataclass
 from typing import List, Union, Dict
 from caraml.routers.client.model_utils import OpenApiModel
@@ -161,7 +161,7 @@ class Enricher:
         if self.service_account is not None:
             kwargs["service_account"] = self.service_account
 
-        return Enricher(
+        return caraml.routers.client.models.Enricher(
             image=self.image,
             resource_request=self.resource_request.to_open_api(),
             autoscaling_policy=self.autoscaling_policy.to_open_api(),

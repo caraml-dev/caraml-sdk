@@ -5,11 +5,7 @@ from collections import Counter
 from dataclasses import dataclass
 from enum import Enum
 
-from caraml.routers.client.models import (
-    Protocol,
-    RouterConfig,
-    RouterVersionConfig,
-)
+import caraml.routers.client.models
 from caraml.routers.client.model_utils import OpenApiModel
 from caraml.routers.router.config.traffic_rule import DefaultTrafficRule
 from caraml.routers.router.config.route import Route
@@ -44,7 +40,7 @@ class Protocol(Enum):
     HTTP = "HTTP_JSON"
 
     def to_open_api(self) -> OpenApiModel:
-        return Protocol(self.value)
+        return caraml.routers.client.models.Protocol(self.value)
 
 
 @dataclass
@@ -371,10 +367,10 @@ class RouterConfig:
                 # The Turing API does not handle an ensembler type "nop" - it must be left unset.
                 del kwargs["ensembler"]
 
-        return RouterConfig(
+        return caraml.routers.client.models.RouterConfig(
             environment_name=self.environment_name,
             name=self.name,
-            config=RouterVersionConfig(
+            config=caraml.routers.client.models.RouterVersionConfig(
                 routes=[route.to_open_api() for route in self.routes],
                 autoscaling_policy=self.autoscaling_policy.to_open_api(),
                 experiment_engine=self.experiment_engine.to_open_api(),
