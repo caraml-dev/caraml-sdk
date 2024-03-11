@@ -1,5 +1,3 @@
-## TODO: Change this workflow to clone client and generate using open api generator to add it to specific client.
-
 # This workflow tries to pull generated clients' changes from given repo
 
 name: Remote Generated Client Sync
@@ -29,7 +27,7 @@ on:
       openapi_config:
         required: true
         description: "openapi generator config file"
-        default: "openapi-sdk-codegen.yaml"      
+        default: "openapi-sdk-codegen.yaml"
   repository_dispatch:
 
 jobs:
@@ -49,6 +47,24 @@ jobs:
           path: ${{ github.event.inputs.module }}
           ref: ${{ github.event.inputs.ref }}
 
+      - name: Add default openapi-config if file not exists
+        run: |
+          if ! [ -f ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_config }} ]; then
+            echo "OpenAPI config file doesn't exist, Generating a default config"          
+            touch ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_config }}
+            cat <<EOT >> ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_config }}
+            projectName: ${{ github.event.inputs.module }}-sdk
+            generateSourceCodeOnly: true
+            useOneOfDiscriminatorLookup: true
+            # Global Properties
+            globalProperties:
+              apiTests: false
+              modelTests: false
+              apiDocs: false
+              modelDocs: false
+          EOT
+          fi
+
       - name: Generate client code
         uses: openapi-generators/openapitools-generator-action@v1
         with:
@@ -57,15 +73,20 @@ jobs:
           generator-tag: ${{ github.event.inputs.openapi_generator_version }}
           openapi-file: ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_schema }}
           config-file: ${{ github.event.inputs.module }}/${{ github.event.inputs.openapi_config }}
-          command-args: "--package-name ${{ github.event.inputs.module }}.client"
+          command-args: "--package-name caraml.${{ github.event.inputs.module }}.client"
 
       - name: Sync changes to ${{ github.event.inputs.module }}/client
         run: |
-          rm -rf packages/caraml/${{ github.event.inputs.module }}/client
-          cp -r python-client/${{ github.event.inputs.module }}/client packages/caraml/${{ github.event.inputs.module }}
-          @echo 'APP_VERSION = "${{ github.event.inputs.ref }}"' > packages/caraml/${{ github.event.inputs.module }}/version.py
+          rm -rf packages/caraml-sdk/caraml/${{ github.event.inputs.module }}/client
+          cp -r python-client/caraml/${{ github.event.inputs.module }}/client packages/caraml-sdk/caraml/${{ github.event.inputs.module }}
+          echo 'VERSION = "${{ github.event.inputs.ref }}"' > packages/caraml-sdk/caraml/${{ github.event.inputs.module }}/version.py
           rm -rf ${{ github.event.inputs.module }}
           rm -rf python-client
+
+      - name: Lint ${{ github.event.inputs.module }}/client
+        run: |
+          cd packages/caraml-sdk
+          make lint
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v6

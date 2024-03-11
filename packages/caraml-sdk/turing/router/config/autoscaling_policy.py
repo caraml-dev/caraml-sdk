@@ -1,0 +1,1 @@
+from caraml.routers.router.config.autoscaling_policy import *

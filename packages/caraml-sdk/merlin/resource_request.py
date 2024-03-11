@@ -1,0 +1,1 @@
+from caraml.models.resource_request import *
